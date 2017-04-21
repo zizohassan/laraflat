@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Application\Controllers\Admin;
+
+use App\Application\Controllers\AbstractController;
+use App\Application\DataTables\GroupsDataTable;
+use App\Application\Model\Group;
+use App\Application\Repository\InterFaces\GroupInterface;
+use App\Application\Repository\InterFaces\UserInterface;
+use Yajra\Datatables\Request;
+use Alert;
+
+class GroupController extends AbstractController
+{
+    protected $userInterface;
+
+    protected $groupInterface;
+
+    public function __construct(Group $model , UserInterface $userInterface , GroupInterface $groupInterface)
+    {
+        parent::__construct($model);
+        $this->userInterface = $userInterface;
+        $this->groupInterface = $groupInterface;
+    }
+
+    public function index(GroupsDataTable $dataTable){
+        return $dataTable->render('admin.group.index');
+    }
+
+    public function show($id = null){
+        $data = $this->userInterface->getPermissions();
+        $data['roles_permission'] = $this->groupInterface->getPermissionById($id);
+        return $this->createOrEdit('admin.group.edit' , $id , $data);
+    }
+
+    public function store($id = null , \Illuminate\Http\Request $request){
+         return $this->storeOrUpdate($request , $id , 'admin/group');
+    }
+
+    public function getById($id){
+        $fields = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
+        return $this->createOrEdit('admin.group.show' , $id , ['fields' =>  $fields]);
+    }
+
+    public function destroy($id){
+        return $this->deleteItem($id , 'admin/group')->with('sucess' , 'Done Delete group From system');
+    }
+}

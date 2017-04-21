@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Application\Controllers\Admin;
+
+use App\Application\Controllers\AbstractController;
+use App\Application\DataTables\DummyDataTable;
+use App\Application\Model\DummyModel;
+use Yajra\Datatables\Request;
+use Alert;
+
+class DummyClass extends AbstractController
+{
+    public function __construct(DummyModel $model)
+    {
+        parent::__construct($model);
+    }
+
+    public function index(DummyDataTable $dataTable){
+        return $dataTable->render('admin.DummyView.index');
+    }
+
+    public function show($id = null){
+        return $this->createOrEdit('admin.DummyView.edit' , $id);
+    }
+
+    public function store($id = null , \Illuminate\Http\Request $request){
+         return $this->storeOrUpdate($request , $id , 'admin/DummyView');
+    }
+
+    public function getById($id){
+        $fields = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
+        return $this->createOrEdit('admin.DummyView.show' , $id , ['fields' =>  $fields]);
+    }
+
+    public function destroy($id){
+        return $this->deleteItem($id , 'admin/DummyView')->with('sucess' , 'Done Delete DummyView From system');
+    }
+}

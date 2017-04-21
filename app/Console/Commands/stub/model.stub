@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Application\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
+class DummyClass extends Model
+{
+
+  public $table = "DummyClass";
+
+  public $validation = [
+
+   ];
+
+   protected $fillable = [
+
+   ];
+
+
+}
