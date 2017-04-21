@@ -34,7 +34,7 @@ php artisan key:generate
   php artisan db:seed
 ```
 
-## start server
+## Start server
 
 
 ```
@@ -48,10 +48,16 @@ php artisan key:generate
   pass : admin
 ```
 
-## go to admin path
+## Go to admin path
 
 ```
   http://127.0.0.1:8000/admin/home
+```
+
+## Add New Model
+
+```
+    php artisan make:admin_model NameOfModel
 ```
 
 
