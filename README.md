@@ -2,7 +2,7 @@
 Advanced laravel system to build admin panel 
 
 
-## Download the files 
+## Download The Files 
 
 download all files
 
@@ -22,7 +22,7 @@ composer install
 php artisan key:generate
 ```
 
-## migrate
+## Migrate
 
 ```
   php artisan migrate
@@ -34,7 +34,7 @@ php artisan key:generate
   php artisan db:seed
 ```
 
-## Start server
+## Start Server
 
 
 ```
@@ -48,7 +48,7 @@ php artisan key:generate
   pass : admin
 ```
 
-## Go to admin path
+## Go To Admin Path
 
 ```
   http://127.0.0.1:8000/admin/home
