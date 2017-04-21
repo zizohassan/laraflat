@@ -38,11 +38,11 @@
                 <span>Icons</span>
             </a>
         </li>
-        <li>
+<!--         <li>
             <a href="{{ url('admin/docs') }}">
                 <span>docs</span>
             </a>
-        </li>
+        </li> -->
     </ul>
 </li>
 
