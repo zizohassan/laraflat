@@ -16,8 +16,10 @@ class PermissionsModel{
             if($role->permission->count() > 1){
                 $response = array_merge($response , $this->moreThanRole($action , $role->permission , $model)) ;
             }else{
-                $name = isset($role->permission->all()[0]->model) ? $role->permission->all()[0]->model : $role->slug;
-                $response[$name] =  $this->checkPermissions($action , $role->permission , $model);
+                if(isset($role->permission->first()->model)){
+                        $name = isset($role->permission->first()->model) ?  $role->permission->first()->model : $role->slug;
+                        $response[$name] =  $this->checkPermissions($action , $role->permission , $model);
+                }
             }
         }
         return empty($response) ? false : $response;
@@ -27,9 +29,10 @@ class PermissionsModel{
             $response = [];
             foreach($roles as $key => $role){
                     if(array_key_exists($role->model , $response)){
-                        $index = $role->model.'_'.$key;
+//                        $index = $role->model.'_'.$key;
+                        $index  = $role->model;
                     }else{
-                        $index  =$role->model;
+                        $index  = $role->model;
                     }
                     $response[$index] =  $this->checkPermissions($action , $role , $model , 'object');
             }
@@ -53,7 +56,6 @@ class PermissionsModel{
                 } else{
                     $array['actions'] = $this->checkAction($permission , $action);
                 }
-
             }else{
                 $array[$permission->model] = false;
             }
@@ -83,14 +85,14 @@ class PermissionsModel{
 
     protected function getUserPermissions($user , $model){
         $permissions = $user->with(['permission' => function ($query) use  ($model) {
-            return  $query->whereIn('model', $this->returnArray($model));
+            return  $query->whereIn('model', $this->returnArray($model))->orderBy('id' , 'desc');
         }])->first();
         return $permissions->permission;
     }
 
     protected function getGroupPermissions($user , $model){
         $permissions = Group::where('id' , $user->group_id)->with(['permission' => function ($query) use  ($model) {
-            return  $query->whereIn('model', $this->returnArray($model));
+            return  $query->whereIn('model', $this->returnArray($model))->orderBy('id' , 'desc');
         }])->first();
         return $permissions->permission;
     }
@@ -99,7 +101,7 @@ class PermissionsModel{
         $roles = $user->with('role')->first();
         $ids = $roles->role->pluck('id');
         $permissions = Role::whereIn('id' , $ids)->with(['permission' => function ($query) use  ($model) {
-            return  $query->whereIn('model', $this->returnArray($model));
+            return  $query->whereIn('model', $this->returnArray($model))->orderBy('id' , 'desc');
         }])->get();
         return $permissions;
     }
@@ -108,7 +110,7 @@ class PermissionsModel{
         $roles = Group::where('id' , $user->group_id)->with('role')->first();
         $ids = $roles->role->pluck('id');
         $permissions = Role::whereIn('id' , $ids)->with(['permission' => function ($query) use  ($model) {
-            return  $query->whereIn('model', $this->returnArray($model));
+            return  $query->whereIn('model', $this->returnArray($model))->orderBy('id' , 'desc');
             }])->get();
         return $permissions;
     }
