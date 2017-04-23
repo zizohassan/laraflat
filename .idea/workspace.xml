@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c491c7f-0b22-4ebd-a22c-09234fe89577" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php" afterPath="$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php" />
-    </list>
+    <list default="true" id="7c491c7f-0b22-4ebd-a22c-09234fe89577" name="Default" comment="" />
     <ignored path="Interfaces.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -45,8 +43,8 @@
       <file leaf-file-name="MakeAdminModel.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.871612">
-              <caret line="183" column="57" selection-start-line="183" selection-start-column="57" selection-end-line="183" selection-end-column="57" />
+            <state vertical-scroll-proportion="-0.6690442">
+              <caret line="171" column="36" selection-start-line="0" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -465,7 +463,7 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="37" />
+      <option name="time" value="38" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -875,8 +873,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.871612">
-          <caret line="183" column="57" selection-start-line="183" selection-start-column="57" selection-end-line="183" selection-end-column="57" />
+        <state vertical-scroll-proportion="-0.6690442">
+          <caret line="171" column="36" selection-start-line="0" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
           <folding />
         </state>
       </provider>
