@@ -50,7 +50,7 @@ class MakeAdminModel extends GeneratorCommand
 
     protected function addItemtoMenue(){
         $name = strtolower($this->getNameInput());
-        $path = $this->getPath('Application\\views\\admin\\layout\\menu.blade');
+        $path = $this->getPath('Application\\views\\Admin\\layout\\menu.blade');
         $this->line('Done append item  to menu file at Application  .');
         $this->files->append($path, $this->buildMenu( $name  , __DIR__.'/stub/menu.stub'));
     }
@@ -63,7 +63,7 @@ class MakeAdminModel extends GeneratorCommand
 
     protected function appendRoutes(){
         $name = strtolower($this->getNameInput());
-        $path = $this->getPath('Application\\routes\\admin');
+        $path = $this->getPath('Application\\routes\\Admin');
         $this->line('Done append routes to route file at Application route  admin .');
         $this->files->append($path, $this->buildRoute( $name  , __DIR__.'/stub/routes.stub'));
     }
@@ -113,7 +113,7 @@ class MakeAdminModel extends GeneratorCommand
         $dataTableName = $this->getNameInput().'sDataTable';
         $modelName= $this->getNameInput();
         $viewName = strtolower($this->getNameInput());
-        $path = $this->getPath('Application\\Controllers\\admin\\'.$this->getNameInput().'Controller');
+        $path = $this->getPath('Application\\Controllers\\Admin\\'.$this->getNameInput().'Controller');
         $this->line('Done create Controller  at Application controller admin '.$this->getNameInput() .'Controller .');
         $this->files->put($path, $this->buildClassController( $name , $controllerName , $dataTableName , $modelName , $viewName, __DIR__.'/stub/controller.stub'));
 
@@ -155,8 +155,8 @@ class MakeAdminModel extends GeneratorCommand
     }
 
     protected function createViews(){
-        $path = app_path().'/Application/views/admin/' . strtolower($this->getNameInput());
-        $pathButton = app_path().'/Application/views/admin/' . strtolower($this->getNameInput()).'/buttons';
+        $path = app_path().'/Application/views/Admin/' . strtolower($this->getNameInput());
+        $pathButton = app_path().'/Application/views/Admin/' . strtolower($this->getNameInput()).'/buttons';
 
         if(!file_exists($path)){
             File::makeDirectory($path, $mode = 0777, true, true);
@@ -174,14 +174,14 @@ class MakeAdminModel extends GeneratorCommand
 
     protected function CreateOnView($view ){
         $name = strtolower($this->getNameInput());
-        $path = $this->getPath('Application\\views\\admin\\'.strtolower($this->getNameInput()).'\\'.$view.'.blade');
+        $path = $this->getPath('Application\\views\\Admin\\'.strtolower($this->getNameInput()).'\\'.$view.'.blade');
         $this->line('Done create view at Application view admin .');
         $this->files->put($path, $this->buildView( $name , __DIR__.'/stub/adminViews/'.$view.'.stub'));
     }
 
     protected function CreateButton($view ){
         $name = strtolower($this->getNameInput());
-        $path = $this->getPath('Application\\views\\admin\\'.strtolower($this->getNameInput()).'\\buttons\\'.$view.'.blade');
+        $path = $this->getPath('Application\\views\\Admin\\'.strtolower($this->getNameInput()).'\\buttons\\'.$view.'.blade');
         $this->line('Done create action button view at Application view admin '.$this->getNameInput() .' button');
         $this->files->put($path, $this->buildView( $name , __DIR__.'/stub/adminViews/buttons/'.$view.'.stub'));
     }

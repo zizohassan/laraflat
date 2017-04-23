@@ -2,42 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c491c7f-0b22-4ebd-a22c-09234fe89577" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Application/Helpers/setting.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Application/views/admin/setting/script/image.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Application/views/admin/setting/script/text.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Application/views/admin/setting/script/textarea.blade.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/15823_1491889812.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/40002_1492520034.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/40972_1491909554.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/45136_1491922392.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/46967_1491923548.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/51536_1492519821.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/54160_1492520066.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/59653_1491993107.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/60305_1491918486.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/61943_1491889715.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/66951_1491889503.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/72739_1491909555.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/72898_1491889538.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/75270_1492519582.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/77570_1491889592.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/88733_1491918868.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/89937_1492519765.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/92663_1491889611.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" afterPath="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Helpers/arrays.php" afterPath="$PROJECT_DIR$/app/Application/Helpers/arrays.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Helpers/uploadFiles.php" afterPath="$PROJECT_DIR$/app/Application/Helpers/uploadFiles.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/routes/admin.php" afterPath="$PROJECT_DIR$/app/Application/routes/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/routes/web.php" afterPath="$PROJECT_DIR$/app/Application/routes/web.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/layout/app.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/layout/app.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/layout/menu.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/layout/menu.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/GroupWithRole.php" afterPath="$PROJECT_DIR$/database/seeds/GroupWithRole.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/PermissionWithRole.php" afterPath="$PROJECT_DIR$/database/seeds/PermissionWithRole.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/Permissions.php" afterPath="$PROJECT_DIR$/database/seeds/Permissions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/Roles.php" afterPath="$PROJECT_DIR$/database/seeds/Roles.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php" afterPath="$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php" />
     </list>
     <ignored path="Interfaces.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,11 +32,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="setting.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="setting.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Application/Helpers/setting.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.1598579">
+            <state vertical-scroll-proportion="-3.2142856">
               <caret line="3" column="87" selection-start-line="3" selection-start-column="87" selection-end-line="3" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MakeAdminModel.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.25677603">
+              <caret line="9" column="15" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -100,7 +75,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/database/migrations/2014_04_11_141239_create_roles_table.php" />
         <option value="$PROJECT_DIR$/app/Application/Controllers/admin/UserController.php" />
         <option value="$PROJECT_DIR$/app/Application/Controllers/Admin/UserController.php" />
         <option value="$PROJECT_DIR$/app/Application/PermissionTraits/PermissionsModel.php" />
@@ -151,6 +125,7 @@
         <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/layout/app.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/Helpers/setting.php" />
+        <option value="$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php" />
       </list>
     </option>
   </component>
@@ -167,8 +142,8 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="735" />
+    <option name="width" value="1500" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -242,11 +217,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="Console" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -264,63 +235,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
+              <option name="myItemId" value="Console" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laraflat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laraflat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
+              <option name="myItemId" value="Commands" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -436,12 +355,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="735" extended-state="6" />
+    <frame x="0" y="23" width="1500" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="eSnippet Pro" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27625203" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2345679" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -511,13 +430,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Contracts/Auth/Factory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07050529">
-          <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/PermissionMiddleware.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8108108">
@@ -915,8 +827,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Application/Helpers/setting.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1598579">
+        <state vertical-scroll-proportion="-3.2142856">
           <caret line="3" column="87" selection-start-line="3" selection-start-column="87" selection-end-line="3" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25677603">
+          <caret line="9" column="15" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="15" />
           <folding />
         </state>
       </provider>
