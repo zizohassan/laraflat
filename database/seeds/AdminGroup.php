@@ -16,5 +16,10 @@ class AdminGroup extends Seeder
             'slug'=> 'admin',
             'description'=> 'Access to User , permission , role , groups roles',
         ]);
+        DB::table('groups')->insert([
+            'name' => 'User',
+            'slug'=> 'user',
+            'description'=> 'User group',
+        ]);
     }
 }
