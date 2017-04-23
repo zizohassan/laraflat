@@ -19,7 +19,7 @@ class AdminGroup extends Seeder
         DB::table('groups')->insert([
             'name' => 'User',
             'slug'=> 'user',
-            'description'=> 'User group',
+            'description'=> 'User group ',
         ]);
     }
 }

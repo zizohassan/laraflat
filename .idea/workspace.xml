@@ -46,7 +46,7 @@
         <entry file="file://$PROJECT_DIR$/database/seeds/AdminGroup.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.73357016">
-              <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+              <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -766,7 +766,7 @@
     <entry file="file://$PROJECT_DIR$/database/seeds/AdminGroup.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.73357016">
-          <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+          <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
           <folding />
         </state>
       </provider>
