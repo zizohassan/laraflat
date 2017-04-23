@@ -1,12 +1,4 @@
 <?php
-    Route::get('icons' , function(){
-        return view('admin.layout.static.icons');
-    });
-
-    Route::get('docs' , function(){
-        return view('vendor.apidoc.index');
-    });
-
     #### user control
     Route::get('user' , 'UserController@index');
     Route::get('user/item/{id?}' , 'UserController@show');
@@ -35,3 +27,10 @@
 
     #### home control
     Route::get('home' , 'HomeController@index');
+
+    #### setting control
+    Route::get('setting' , 'SettingController@index');
+    Route::get('setting/item/{id?}' , 'SettingController@show');
+    Route::post('setting/item/{id?}' , 'SettingController@store');
+    Route::get('setting/{id}/delete' , 'SettingController@destroy');
+    Route::get('setting/{id}/view' , 'SettingController@getById');

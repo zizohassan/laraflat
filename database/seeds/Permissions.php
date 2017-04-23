@@ -51,5 +51,15 @@ class Permissions extends Seeder
             'action_delete'=>  'on',
             'action_view'=>  'on',
         ]);
+        DB::table('permissions')->insert([
+            'name' => 'Setting',
+            'slug'=> 'setting',
+            'description'=> 'Full Access to all setting model',
+            'model'=> 'setting',
+            'action_add'=> 'on',
+            'action_edit'=>  'on',
+            'action_delete'=>  'on',
+            'action_view'=>  'on',
+        ]);
     }
 }

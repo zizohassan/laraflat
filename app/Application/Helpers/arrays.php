@@ -8,6 +8,15 @@ function status(){
     ];
 }
 
+function setting_type(){
+    return [
+        'text' => 'Text',
+        'textarea' => 'Textarea',
+        'image' => 'Image'
+    ];
+
+}
+
 function type(){
     return [
         'Main' => 'Main',

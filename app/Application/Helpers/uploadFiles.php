@@ -6,7 +6,8 @@ function getFileFieldsName(){
         'file',
         'photo',
         'logo',
-        'attached'
+        'attached',
+        'body_setting'
     ];
 }
 

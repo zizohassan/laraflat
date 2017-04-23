@@ -7,7 +7,7 @@
     <title>
         @yield('title')
         |
-        LARAFLAT
+        {{ getSetting('siteTitle') }}
     </title>
     <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">

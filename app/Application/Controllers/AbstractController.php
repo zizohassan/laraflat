@@ -121,15 +121,18 @@ abstract class AbstractController extends  Controller{
     }
 
     public function uploadFile($request , $field){
-        $destinationPath = env('UPLOAD_PATH');
-        $extension = $request->file($field)->getClientOriginalExtension();
-        $fileName = rand(11111,99999).'_'.time().'.'.$extension;
-        if($request->file($field)->move($destinationPath  , $fileName)){
-            $request = $request->except($field);
-            $request[$field] = $fileName;
-            return $request;
+        if($request->file($field) != null){
+            $destinationPath = env('UPLOAD_PATH');
+            $extension = $request->file($field)->getClientOriginalExtension();
+            $fileName = rand(11111,99999).'_'.time().'.'.$extension;
+            if($request->file($field)->move($destinationPath  , $fileName)){
+                $request = $request->except($field);
+                $request[$field] = $fileName;
+                return $request;
+            }
+            return false;
         }
-        return false;
+        return $request->all();
     }
 
 

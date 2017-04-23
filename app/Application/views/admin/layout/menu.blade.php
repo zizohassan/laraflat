@@ -43,6 +43,11 @@
                 <span>docs</span>
             </a>
         </li>
+        <li>
+            <a href="{{ url('admin/setting') }}">
+                <span>Setting</span>
+            </a>
+        </li>
     </ul>
 </li>
 
