@@ -11,13 +11,11 @@ class PermissionMiddleware
 {
     protected $router;
     protected $permissionsModel;
-
     public function __construct(Router $router , PermissionsModel $permissionsModel)
     {
         $this->router = $router;
         $this->permissionsModel  = $permissionsModel;
     }
-
     public function handle($request, Closure $next)
     {
             $user = Auth::user();
@@ -33,7 +31,6 @@ class PermissionMiddleware
             }
             return redirect(env('DENY_URL_PERMISSION'));
     }
-
     protected function getAction($method , $array , $id){
         if(is_array($array)){
             if(count($array) > 1){
@@ -48,7 +45,6 @@ class PermissionMiddleware
         }
         return false;
     }
-
     protected function getMethod($method , $id){
         $array  = $this->actionsWithMethods();
         if(array_key_exists($method , $array)){
@@ -56,7 +52,6 @@ class PermissionMiddleware
         }
         return false;
     }
-
     protected function actionsWithMethods(){
         return [
             'show' =>  [
@@ -78,7 +73,4 @@ class PermissionMiddleware
             ]
         ];
     }
-
-
-
 }
