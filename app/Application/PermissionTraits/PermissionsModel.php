@@ -119,8 +119,8 @@ class PermissionsModel{
         $checkGroupRoles = $this->checkRolePermission($action , $this->getGroupRoles($user , $model) , $model);
         $checkUserRoles = $this->checkRolePermission($action , $this->getUserRoles($user , $model) ,$model);
         return collect([
-                $checkGroupPermission,
                 $checkGroupRoles,
+                $checkGroupPermission,
                 $checkUserRoles,
                 $checkUserPermission,
             ])->collapse()->all();
