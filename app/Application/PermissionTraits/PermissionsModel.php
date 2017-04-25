@@ -29,7 +29,6 @@ class PermissionsModel{
             $response = [];
             foreach($roles as $key => $role){
                     if(array_key_exists($role->model , $response)){
-//                        $index = $role->model.'_'.$key;
                         $index  = $role->model;
                     }else{
                         $index  = $role->model;
@@ -130,85 +129,17 @@ class PermissionsModel{
         $checkUserPermission = $this->checkPermissions($action , $this->getUserPermissions($user , $model) , $model , 'object' , true);
         $checkGroupRoles = $this->checkRolePermission($action , $this->getGroupRoles($user , $model) , $model);
         $checkUserRoles = $this->checkRolePermission($action , $this->getUserRoles($user , $model) ,$model);
-        return [
-            'GroupPermissions' => $checkGroupPermission,
-            'UserPermissions' => $checkUserPermission,
-            'GroupRoles' => $checkGroupRoles,
-            'UserRoles' => $checkUserRoles
-        ];
+        return collect([
+                $checkGroupPermission,
+                $checkGroupRoles,
+                $checkUserRoles,
+                $checkUserPermission,
+            ])->collapse()->all();
     }
 
-    public function canGroupAdd($user  , $model , $action = 'add'){
-        $per = $this->assignModelActionToGroup($user  , $model , $action);
-        return $per != null ? $per : false;
-    }
-
-    public function canGroupEdit($user  , $model , $action = 'edit'){
-        $per = $this->assignModelActionToGroup($user  , $model , $action);
-        return $per != null ? $per : false;
-    }
-
-    public function canGroupDelete($user  , $model , $action = 'delete'){
-        $per = $this->assignModelActionToGroup($user  , $model , $action);
-        return $per != null ? $per : false;
-    }
-
-    public function canGroupView($user  , $model , $action = 'view'){
-        $per = $this->assignModelActionToGroup($user  , $model , $action);
-        return $per != null ? $per : false;
-    }
-
-    public function canUserAdd($user , $model , $action = "add"){
-         $per = $this->assignModelActionToUser($user  , $model , $action);
-         return $per != null ? $per : false;
-    }
-
-    public function canUserEdit($user , $model , $action = "edit"){
-        $per = $this->assignModelActionToUser($user  , $model , $action);
-        return $per != null ? $per : false;
-    }
-
-    public function canUserDelete($user , $model , $action = "delete"){
-        $per = $this->assignModelActionToUser($user  , $model , $action);
-        return $per != null ? $per : false;
-    }
-
-    public function canUserView($user , $model , $action = "view"){
-        $per = $this->assignModelActionToUser($user  , $model , $action);
-        return $per != null ? $per : false;
-    }
-
-    protected function assignModelActionToUser($user ,$model , $action){
-        $can = $this->can($user ,$action ,$model);
-        if($can['UserPermissions'][$model]['actions'][$action] != false){
-            return $can['UserPermissions'][$model]['actions'][$action];
-        }
-        return $can['UserRoles'][$model]['actions'][$action];
-    }
-
-    protected function assignModelActionToGroup($user ,$model , $action){
-        $can = $this->can($user ,$action ,$model);
-        if($can['GroupPermissions'][$model]['actions'][$action] != false){
-            return $can['GroupPermissions'][$model]['actions'][$action];
-        }
-       return $can['GroupRoles'][$model]['actions'][$action];
-    }
-
-    public function canUserGroup($user , $model , $action ){
-        $can = $this->can($user ,$action ,$model);
-        if($can['GroupPermissions'][$model]['actions'][$action] != false){
-            return $can['GroupPermissions'][$model]['actions'][$action];
-        }
-        if($can['GroupRoles'][$model]['actions'][$action] != false){
-            return $can['GroupRoles'][$model]['actions'][$action];
-        }
-        if($can['UserPermissions'][$model]['actions'][$action] != false){
-            return $can['UserPermissions'][$model]['actions'][$action];
-        }
-        if($can['UserRoles'][$model]['actions'][$action] != false){
-            return $can['UserRoles'][$model]['actions'][$action];
-        }
-        return false;
+    public function canUser($user , $action , $model){
+        $per = $this->can($user , $action , $model);
+        return isset($per[$model]['actions'][$action]) ? $per[$model]['actions'][$action] : false;
     }
 
 }

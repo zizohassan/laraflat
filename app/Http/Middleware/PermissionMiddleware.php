@@ -16,7 +16,6 @@ class PermissionMiddleware
     {
         $this->router = $router;
         $this->permissionsModel  = $permissionsModel;
-
     }
 
     public function handle($request, Closure $next)
@@ -29,7 +28,7 @@ class PermissionMiddleware
             if($action === false){
                 return redirect(env('DENY_URL_PERMISSION'));
             }
-            if($this->permissionsModel->canUserGroup($user ,$model ,$action)){
+           if($this->permissionsModel->canUser($user  ,$action, $model)){
                 return $next($request);
             }
             return redirect(env('DENY_URL_PERMISSION'));
