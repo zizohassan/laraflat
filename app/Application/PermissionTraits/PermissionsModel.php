@@ -9,7 +9,6 @@ use App\Application\Model\User;
 use Illuminate\Database\Eloquent\Model;
 
 class PermissionsModel{
-
     protected function checkRolePermission($action , $roles , $model = null){
         $response = [];
         foreach($roles as $role){
@@ -24,7 +23,6 @@ class PermissionsModel{
         }
         return empty($response) ? false : $response;
     }
-
     protected function moreThanRole($action , $roles , $model = null){
             $response = [];
             foreach($roles as $key => $role){
@@ -37,7 +35,6 @@ class PermissionsModel{
             }
             return empty($response) ? false : $response;
     }
-
     protected function checkPermissions($action , $permissions , $model  ,  $type = 'array' , $role = false){
         if(count($permissions) == 0 && $type == 'array'){
             return false;
@@ -61,7 +58,6 @@ class PermissionsModel{
         }
         return count($array) == 0 ? false :  $array;
     }
-
     protected function checkAction($permission , $actions){
         $response = [];
         foreach($this->actionArray() as $action){
@@ -81,21 +77,18 @@ class PermissionsModel{
         }
         return count($response) == 0 ? false  : $response;
     }
-
     protected function getUserPermissions($user , $model){
         $permissions = $user->with(['permission' => function ($query) use  ($model) {
             return  $query->whereIn('model', $this->returnArray($model))->orderBy('id' , 'desc');
         }])->first();
         return $permissions->permission;
     }
-
     protected function getGroupPermissions($user , $model){
         $permissions = Group::where('id' , $user->group_id)->with(['permission' => function ($query) use  ($model) {
             return  $query->whereIn('model', $this->returnArray($model))->orderBy('id' , 'desc');
         }])->first();
         return $permissions->permission;
     }
-
     protected function getUserRoles($user , $model){
         $roles = $user->with('role')->first();
         $ids = $roles->role->pluck('id');
@@ -104,7 +97,6 @@ class PermissionsModel{
         }])->get();
         return $permissions;
     }
-
     protected function getGroupRoles($user , $model){
         $roles = Group::where('id' , $user->group_id)->with('role')->first();
         $ids = $roles->role->pluck('id');
@@ -113,17 +105,14 @@ class PermissionsModel{
             }])->get();
         return $permissions;
     }
-
     protected function returnArray($array){
         return is_array($array) ? $array : [$array];
     }
-
     protected function actionArray(){
         return [
             'add' ,'edit' , 'view' , 'delete'
         ];
     }
-
     public function can($user , $action , $model){
         $checkGroupPermission = $this->checkPermissions($action , $this->getGroupPermissions($user , $model) , $model , 'object' , true);
         $checkUserPermission = $this->checkPermissions($action , $this->getUserPermissions($user , $model) , $model , 'object' , true);
@@ -136,10 +125,8 @@ class PermissionsModel{
                 $checkUserPermission,
             ])->collapse()->all();
     }
-
     public function canUser($user , $action , $model){
         $per = $this->can($user , $action , $model);
         return isset($per[$model]['actions'][$action]) ? $per[$model]['actions'][$action] : false;
     }
-
 }
