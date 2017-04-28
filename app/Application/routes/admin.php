@@ -5,7 +5,6 @@
     Route::post('user/item/{id?}' , 'UserController@store');
     Route::get('user/{id}/delete' , 'UserController@destroy');
     Route::get('user/{id}/view' , 'UserController@getById');
-
     #### group control
     Route::get('group' , 'GroupController@index');
     Route::get('group/item/{id?}' , 'GroupController@show');
@@ -24,13 +23,23 @@
     Route::post('permission/item/{id?}' , 'PermissionController@store');
     Route::get('permission/{id}/delete' , 'PermissionController@destroy');
     Route::get('permission/{id}/view' , 'PermissionController@getById');
-
     #### home control
     Route::get('home' , 'HomeController@index');
-
     #### setting control
     Route::get('setting' , 'SettingController@index');
     Route::get('setting/item/{id?}' , 'SettingController@show');
     Route::post('setting/item/{id?}' , 'SettingController@store');
     Route::get('setting/{id}/delete' , 'SettingController@destroy');
     Route::get('setting/{id}/view' , 'SettingController@getById');
+    #### menu control
+    Route::get('menu' , 'MenuController@index');
+    Route::get('menu/item/{id?}' , 'MenuController@show');
+    Route::post('menu/item/{id?}' , 'MenuController@store');
+    Route::get('menu/{id}/delete' , 'MenuController@destroy');
+    Route::get('menu/{id}/view' , 'MenuController@getById');
+    Route::post('update/menuItem' , 'MenuController@menuItem');
+    Route::post('addNewItemToMenu' , 'MenuController@addNewItemToMenu');
+    Route::get('deleteMenuItem/{id}' , 'MenuController@deleteMenuItem');
+    Route::get('getItemInfo/{id}' , 'MenuController@getItemInfo');
+    Route::post('updateOneMenuItem' , 'MenuController@updateOneMenuItem');
+

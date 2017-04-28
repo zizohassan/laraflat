@@ -51,7 +51,7 @@ abstract class AbstractEloquent{
 
     public function createNew($array){
         $newArray = $this->filterColumn($array);
-        $this->model->create($newArray);
+        return $this->model->create($newArray);
     }
 
     public function filterColumn($array){

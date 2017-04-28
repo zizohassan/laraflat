@@ -69,7 +69,7 @@
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
             <a class="navbar-brand" href="{{ url('/admin/home') }}">
-                LARAFLAT
+                {{ getSetting('siteTitle')  }}
             </a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -134,7 +134,7 @@
         <!-- Footer -->
         <div class="legal">
             <div class="copyright">
-                &copy; 2016 <a href="javascript:void(0);">LARAFLAT</a>.
+                &copy; 2017 <a href="javascript:void(0);">{{ getSetting('siteTitle')  }}</a>.
             </div>
             <div class="version">
                 <b>Version: </b> 1.0.4
@@ -153,7 +153,6 @@
 
 {{ Html::script('admin/js/jquery.min.js') }}
 {{ Html::script('admin/js/jquery-ui.min.js') }}
-{{ Html::script('admin/js/jquery.min.js') }}
 {{ Html::script('admin/plugins/bootstrap/js/bootstrap.js') }}
 {{ Html::script('admin/plugins/bootstrap-select/js/bootstrap-select.js') }}
 {{ Html::script('admin/plugins/jquery-slimscroll/jquery.slimscroll.js') }}

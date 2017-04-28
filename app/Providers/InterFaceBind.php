@@ -24,5 +24,9 @@ class InterFaceBind extends ServiceProvider
             'App\Application\Repository\InterFaces\HomeInterface',
             'App\Application\Repository\Eloquent\HomeEloquent'
         );
+        $this->app->bind(
+            'App\Application\Repository\InterFaces\MenuInterface',
+            'App\Application\Repository\Eloquent\MenuEloquent'
+        );
     }
 }

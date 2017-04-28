@@ -5,6 +5,7 @@ function getAllTables(){
 
 function getModels(){
     $array  = getListOfFiles(app_path()."/Application/Model");
+    $array = removeFromArray($array , removeNotPermissionTable());
     return rename_keys($array , $array);
 //    $array = array_map("getTableName" , getAllTables());
 //    $array = removeFromArray($array , removeNotPermissionTable());
@@ -12,16 +13,7 @@ function getModels(){
 }
 function removeNotPermissionTable(){
     return [
-        'migrations',
-        'password_resets',
-        'permissions',
-        'permission_role',
-        'permission_user',
-        'roles',
-        'role_user',
-        'group_role',
-        'groups',
-        'permission_group'
+      'item'
     ];
 }
 

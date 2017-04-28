@@ -25,6 +25,15 @@ function type(){
 }
 
 
+function menuTarget(){
+    return [
+        'blank' => 'blank',
+        'self' => 'self'
+    ];
+}
+
+
+
 function permissionType(){
     return [
         'on' => 'On',

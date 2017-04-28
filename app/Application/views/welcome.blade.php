@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
     <head>
@@ -49,7 +50,13 @@
                 font-size: 84px;
             }
 
-            .links > a {
+            .links ul {
+                list-style: none;
+            }
+            .links ul > li{
+                float: left;
+            }
+            .links ul > li > a {
                 color: #636b6f;
                 padding: 0 25px;
                 font-size: 12px;
@@ -61,6 +68,7 @@
 
             .m-b-md {
                 margin-bottom: 30px;
+                text-transform: uppercase;
             }
         </style>
     </head>
@@ -79,13 +87,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    {{ getSetting('siteTitle')  }}
                 </div>
                     @include('layouts.messages')
                 <div class="links">
-                    <a href="https://5dmat-web.com">5dmat-web</a>
-                    <a href="https://streamlab.com">StreamLab</a>
-                    <a href="https://laraflat.com">LaraFlat</a>
+                    {!!  menu() !!}
                 </div>
             </div>
         </div>

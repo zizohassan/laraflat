@@ -70,6 +70,21 @@ class PermissionMiddleware
             ],
             'destroy' => [
                 'delete'
+            ],
+            'menuItem' =>[
+                'add'
+            ],
+            'addNewItemToMenu' =>[
+                'add'
+            ],
+            'deleteMenuItem' => [
+                'delete'
+            ],
+            'getItemInfo' => [
+                'edit'
+            ],
+            'updateOneMenuItem' => [
+                'edit'
             ]
         ];
     }

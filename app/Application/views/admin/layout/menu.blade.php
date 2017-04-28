@@ -48,7 +48,13 @@
                 <span>Setting</span>
             </a>
         </li>
+        <li>
+            <a href="{{ url('admin/menu') }}">
+                <span>Menu</span>
+            </a>
+        </li>
     </ul>
 </li>
+
 
 

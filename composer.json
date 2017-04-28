@@ -29,7 +29,8 @@
             "app/Application/Helpers/arrays.php",
             "app/Application/Helpers/model.php",
             "app/Application/Helpers/uploadFiles.php",
-            "app/Application/Helpers/setting.php"
+            "app/Application/Helpers/setting.php",
+            "app/Application/Helpers/menu.php"
         ]
     },
     "autoload-dev": {

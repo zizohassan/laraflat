@@ -40,5 +40,11 @@ class Roles extends Seeder
             'slug'=> 'setting',
             'description'=> 'Add , edit , delete , view role to model setting',
         ]);
+
+        DB::table('roles')->insert([
+            'name' => 'Menu',
+            'slug'=> 'menu',
+            'description'=> 'Add , edit , delete , view role to model Menu',
+        ]);
     }
 }
