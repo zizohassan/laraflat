@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
 
-  public $table = "Menu";
+  public $table = "menu";
 
   public $validation = [
         'name' => 'required'
