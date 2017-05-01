@@ -18,25 +18,27 @@ function menu($name = 'Main' , $main = 'ul' , $mClass = '' , $sclass ='' , $smcl
 }
 function getMenu($name){
     $array = [];
-    foreach(get($name)  as $main){
-        foreach($main as $m){
-            if($m->parent_id == 0){
-                $array[$m->id ] = ['item' => menuArray($m)];
-            }else{
-                if(array_key_exists($m->parent_id , $array)){
-                    if(array_key_exists('sub', $array[$m->parent_id])){
-                        $array[$m->parent_id]['sub'] =  array_merge([menuArray($m)] , $array[$m->parent_id]['sub']);
+    foreach(get($name)  as $mainKey => $main){
+            foreach($main as $m){
+                if($mainKey == 0){
+                    $array[$m->id] = ['item' => menuArray($m)];
+                }else{
+                    if(array_key_exists($m->parent_id , $array)){
+                        if(array_key_exists('sub', $array[$m->parent_id])){
+                            $array[$m->parent_id]['sub'] =  array_merge( $array[$m->parent_id]['sub'], [menuArray($m)]);
+                        }else{
+                            $array[$m->parent_id] =  array_merge($array[$m->parent_id] , ['sub' => [menuArray($m)]]);
+                        }
                     }else{
-                        $array[$m->parent_id] =  array_merge($array[$m->parent_id] , ['sub' => [menuArray($m)]]);
+                        $array[$m->id] = ['item' => menuArray($m)];
                     }
-                }
             }
         }
     }
     return $array;
 }
 function get($name){
-    return \App\Application\Model\Menu::where('name' , $name)->with(['item' => function($query){
+     return \App\Application\Model\Menu::where('name' , $name)->with(['item' => function($query){
         return $query->orderBy('order' , 'asc');
     }])->first()->item->groupBy('parent_id');
 }
@@ -47,6 +49,8 @@ function menuArray($main){
             'link' => $main->link,
             'type' => $main->type,
             'id' => $main->id,
+            'order' => $main->order,
+            'parent_id' => $main->order,
     ];
 }
 function extractHtml($main){

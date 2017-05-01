@@ -119,15 +119,7 @@
         <div class="menu">
             <ul class="list">
                 <li class="header">MAIN NAVIGATION</li>
-                <li class="active">
-                    <a href="{{ url('/admin/home') }}">
-                        <i class="material-icons">home</i>
-                        <span>Home</span>
-                    </a>
-                </li>
-
-            @include('admin.layout.menu')
-
+                @include('admin.layout.menu')
             </ul>
         </div>
         <!-- #Menu -->

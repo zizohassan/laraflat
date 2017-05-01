@@ -1,60 +1,27 @@
-<li>
-    <a href="javascript:void(0);" class="menu-toggle">
-        <i class="material-icons">account_circle</i>
-        <span>Users</span>
-    </a>
-    <ul class="ml-menu"  >
-        <li>
-            <a href="{{ url('admin/user') }}">
-                <span>User</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ url('admin/group') }}">
-                <span>Group</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ url('admin/role') }}">
-                <span>Role</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ url('admin/permission') }}">
-                <span>Permission</span>
-            </a>
-        </li>
-    </ul>
-</li>
-<li>
-    <a href="javascript:void(0);" class="menu-toggle">
-        <i class="material-icons">insert_emoticon</i>
-        <span>Setting</span>
-    </a>
 
-    <ul class="ml-menu" style="display: none;">
-        <li>
-            <a  href="{{ url('admin/icons') }}">
-                <span>Icons</span>
+@foreach(getMenu('Admin') as $admin)
+    <li>
+        @if(array_key_exists('item' , $admin))
+            <a href="{{ array_key_exists('sub' , $admin) ? 'javascript:void(0);' : url($admin['item']['link']) }}" class="{{ array_key_exists('sub' , $admin) ? 'menu-toggle' : '' }}">
+                {!! $admin['item']['icon'] !!}
+                <span>
+                    {{ $admin['item']['name'] }}
+                </span>
             </a>
-        </li>
-        <li>
-            <a href="{{ url('admin/docs') }}">
-                <span>docs</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ url('admin/setting') }}">
-                <span>Setting</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ url('admin/menu') }}">
-                <span>Menu</span>
-            </a>
-        </li>
-    </ul>
-</li>
-
-
-
+        @endif
+        @if(array_key_exists('sub' , $admin))
+            <ul class="ml-menu">
+                @foreach($admin['sub']  as $sub)
+                    <li>
+                        <a href="{{ url($sub['link']) }}" target="{{ $sub['type'] }}" class=" waves-effect waves-block">
+                            {!! $sub['icon'] !!}
+                            <span>
+                                 {{ $sub['name'] }}
+                            </span>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
+    </li>
+@endforeach

@@ -12,6 +12,9 @@ class AddMenu extends Seeder
     public function run()
     {
         DB::table('menu')->insert([
+            'name' => 'Admin',
+        ]);
+        DB::table('menu')->insert([
             'name' => 'Main',
         ]);
     }
