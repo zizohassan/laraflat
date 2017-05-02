@@ -2,29 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c491c7f-0b22-4ebd-a22c-09234fe89577" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" afterPath="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Helpers/uploadFiles.php" afterPath="$PROJECT_DIR$/app/Application/Helpers/uploadFiles.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/Group.php" afterPath="$PROJECT_DIR$/app/Application/Model/Group.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/Item.php" afterPath="$PROJECT_DIR$/app/Application/Model/Item.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/Menu.php" afterPath="$PROJECT_DIR$/app/Application/Model/Menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/Permission.php" afterPath="$PROJECT_DIR$/app/Application/Model/Permission.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/Role.php" afterPath="$PROJECT_DIR$/app/Application/Model/Role.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/Setting.php" afterPath="$PROJECT_DIR$/app/Application/Model/Setting.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/User.php" afterPath="$PROJECT_DIR$/app/Application/Model/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Repository/Eloquent/UserEloquent.php" afterPath="$PROJECT_DIR$/app/Application/Repository/Eloquent/UserEloquent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/routes/admin.php" afterPath="$PROJECT_DIR$/app/Application/routes/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/menu/helper/scripts.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/menu/helper/scripts.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/setting/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/setting/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php" afterPath="$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/stub/model.stub" afterPath="$PROJECT_DIR$/app/Console/Commands/stub/model.stub" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Providers/InterFaceBind.php" afterPath="$PROJECT_DIR$/app/Providers/InterFaceBind.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/AddItemsToMenu.php" afterPath="$PROJECT_DIR$/database/seeds/AddItemsToMenu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/GroupWithRole.php" afterPath="$PROJECT_DIR$/database/seeds/GroupWithRole.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/PermissionWithRole.php" afterPath="$PROJECT_DIR$/database/seeds/PermissionWithRole.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/Permissions.php" afterPath="$PROJECT_DIR$/database/seeds/Permissions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/Roles.php" afterPath="$PROJECT_DIR$/database/seeds/Roles.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/page/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/page/edit.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/page/show.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/page/show.blade.php" />
     </list>
     <ignored path="Interfaces.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,41 +33,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AddPage.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/seeds/AddPage.php">
+      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Application/views/admin/page/show.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.642857">
-              <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+            <state vertical-scroll-proportion="-12.857142">
+              <caret line="23" column="129" selection-start-line="23" selection-start-column="129" selection-end-line="23" selection-end-column="129" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseSeeder.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <file leaf-file-name="Page.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Application/Model/Page.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40690506">
-              <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+            <state vertical-scroll-proportion="-20.892857">
+              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2017_05_01_230723_create_pages_table.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2017_05_01_230723_create_pages_table.php">
+      <file leaf-file-name="edit.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Application/views/admin/page/edit.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.071428">
-              <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="22" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddItemsToMenu.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/seeds/AddItemsToMenu.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.428571">
-              <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="64" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.55487055">
+              <caret line="64" column="99" selection-start-line="64" selection-start-column="99" selection-end-line="64" selection-end-column="99" />
               <folding />
             </state>
           </provider>
@@ -107,7 +76,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Application/views/admin/menu/show.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/Helpers/model.php" />
         <option value="$PROJECT_DIR$/app/Application/Helpers/arrays.php" />
         <option value="$PROJECT_DIR$/app/Application/Repository/Eloquent/AbstractEloquent.php" />
@@ -138,13 +106,11 @@
         <option value="$PROJECT_DIR$/database/migrations/2017_05_01_230723_create_pages_table.php" />
         <option value="$PROJECT_DIR$/app/Application/DataTables/PagesDataTable.php" />
         <option value="$PROJECT_DIR$/app/Application/Helpers/uploadFiles.php" />
-        <option value="$PROJECT_DIR$/app/Application/views/admin/page/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/setting/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Providers/InterFaceBind.php" />
         <option value="$PROJECT_DIR$/app/Application/Repository/InterFaces/PageInterface.php" />
         <option value="$PROJECT_DIR$/app/Application/Repository/Eloquent/PageEloquent.php" />
         <option value="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" />
-        <option value="$PROJECT_DIR$/app/Application/Model/Page.php" />
         <option value="$PROJECT_DIR$/app/Application/Model/Group.php" />
         <option value="$PROJECT_DIR$/app/Application/Model/Item.php" />
         <option value="$PROJECT_DIR$/app/Application/Model/Menu.php" />
@@ -158,6 +124,9 @@
         <option value="$PROJECT_DIR$/app/Console/Commands/stub/model.stub" />
         <option value="$PROJECT_DIR$/database/seeds/AddPage.php" />
         <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+        <option value="$PROJECT_DIR$/app/Application/views/admin/page/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/Application/Model/Page.php" />
+        <option value="$PROJECT_DIR$/app/Application/views/admin/page/edit.blade.php" />
       </list>
     </option>
   </component>
@@ -231,43 +200,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laraflat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="seeds" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laraflat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -282,6 +215,88 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Interfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laraflat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Interfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laraflat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="page" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Interfaces" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="laraflat" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -450,14 +465,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/menu/helper/li.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18495685">
-          <caret line="5" column="137" selection-start-line="5" selection-start-column="137" selection-end-line="5" selection-end-column="137" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Application/views/admin/menu/helper/dropSection.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14796548">
@@ -660,14 +667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/page/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.785714">
-          <caret line="61" column="80" selection-start-line="61" selection-start-column="80" selection-end-line="61" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Application/views/admin/setting/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.928572">
@@ -726,14 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.55487055">
           <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application/Model/Page.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48212084">
-          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -834,34 +825,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2017_05_01_230723_create_pages_table.php">
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.071428">
-          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="22" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.92478424">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/AddItemsToMenu.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2017_05_01_230723_create_pages_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.428571">
-          <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="64" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.55487055">
+          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="22" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/AddPage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.642857">
+        <state vertical-scroll-proportion="0.85080147">
           <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+    <entry file="file://$PROJECT_DIR$/database/seeds/AddItemsToMenu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40690506">
-          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.2219482">
+          <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="64" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/page/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.857142">
+          <caret line="23" column="129" selection-start-line="23" selection-start-column="129" selection-end-line="23" selection-end-column="129" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/Model/Page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.892857">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/page/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55487055">
+          <caret line="64" column="99" selection-start-line="64" selection-start-column="99" selection-end-line="64" selection-end-column="99" />
           <folding />
         </state>
       </provider>

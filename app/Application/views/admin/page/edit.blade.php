@@ -62,7 +62,7 @@
                         <img src="{{ url('/'.env('UPLOAD_PATH').'/'.$item->image) }}" class="img-responsive thumbnail" alt="">
                         <br>
                     @endif    
-                    <input type="file" name="image" class="">
+                    <input type="file" name="image" class="" {{ !isset($item) ? "required='required'" : '' }}>
                 </div>
             </div>
 

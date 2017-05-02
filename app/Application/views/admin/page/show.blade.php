@@ -11,7 +11,7 @@
             @php
                 $fields = rename_keys(
                      removeFromArray($data['fields'] , ['id']) ,
-                     ['UserName']
+                ['Page title' , 'Page slug' , 'Page Content' , 'Page Status' , 'Page date' , 'Page Image']
                 );
             @endphp
                  @foreach($fields as $key =>  $field)
@@ -21,7 +21,7 @@
                             @if($type == 'File')
                                 <td> <a href="{{ url(env('UPLOAD_PATH').'/'.$item[$field]) }}">{{ $item[$field] }}</a></td>
                             @elseif($type == 'Image')
-                                <td> <img src="{{ url(env('UPLOAD_PATH').'/'.$item[$field]) }}" /></td>
+                                <td> <img src="{{ url(env('UPLOAD_PATH').'/'.$item[$field]) }}" class="img-responsive thumbnail" /></td>
                             @else
                                  <td>{!!  nl2br($item[$field])  !!}</td>
                             @endif
