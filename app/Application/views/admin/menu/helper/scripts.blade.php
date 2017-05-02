@@ -46,6 +46,7 @@
         var icon = $('#itemIcon').val();
         var link = $('#itemLink').val();
         var type = $('#type').val();
+        type = type == '' ? 'self' : type;
         var data = {
             id:id,
             name:name,
