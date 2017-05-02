@@ -9,13 +9,15 @@ class Menu extends Model
 
   public $table = "menu";
 
-  public $validation = [
-        'name' => 'required'
-  ];
-
   protected $fillable = [
         'name'
   ];
+
+  public function   validation ($id){
+    return [
+        'name' => 'required|unique:menu,name,'.$id
+    ];
+  }
 
   public $timestamps = false;
 

@@ -24,10 +24,10 @@
                 $('#itemName').val(json.name);
                 $('#itemIcon').val(json.icon);
                 $('#itemLink').val(json.link);
-                $("#type").val(json.type);
+                $("#type").val(json.type == undefined ? 'self' : json.type).change();
                 $('#menu_id').val(json.id);
                 $('#actionBtn').attr('onclick' , 'UpdateItem();return false;');
-                $('#actionBtn').html('Edit Item');
+                $('#actionBtn').html('Save Item');
             });
         }else{
             clearFields();

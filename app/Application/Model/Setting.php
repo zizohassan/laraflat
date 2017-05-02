@@ -9,11 +9,13 @@ class Setting extends Model
 
   public $table = "setting";
 
-  public $validation = [
-        'name' => 'required',
-        'type' => 'required',
-        'body_setting' => 'required'
-   ];
+  public function   validation ($id){
+        return [
+            'name' => 'required|unique:setting,name,'.$id,
+            'type' => 'required',
+            'body_setting' => 'required'
+        ];
+  }
 
    protected $fillable = [
         'name' ,'type' , 'body_setting'

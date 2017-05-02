@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Application\Model\Item;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Console\GeneratorCommand;
@@ -37,15 +38,14 @@ class MakeAdminModel extends GeneratorCommand
      */
     public function fire()
     {
-
+            $this->ImportMenuTable();
+            $this->createModel();
             $this->createDataTable();
             $this->createController();
-            $this->createModel();
             $this->createViews();
             $this->appendRoutes();
-            $this->addItemtoMenue();
             $this->createMigration();
-
+//           $this->addItemtoMenue();
     }
 
     protected function addItemtoMenue(){
@@ -53,6 +53,20 @@ class MakeAdminModel extends GeneratorCommand
         $path = $this->getPath('Application\\views\\admin\\layout\\menu.blade');
         $this->line('Done append item  to menu file at Application  .');
         $this->files->append($path, $this->buildMenu( $name  , __DIR__.'/stub/menu.stub'));
+    }
+
+    protected function ImportMenuTable(){
+        $name = $this->getNameInput();
+        $order = Item::count();
+        $menu = new Item();
+        $menu->name = $name;
+        $menu->link  = '/admin/'.strtolower($name);
+        $menu->parent_id  = 0;
+        $menu->menu_id  = 1;
+        $menu->order = $order+1;
+        $menu->type = '';
+        $menu->save();
+        $this->line('Done Add Item to menu table  .');
     }
 
     protected function buildMenu($name  , $stub ){

@@ -43,6 +43,17 @@ class AddItemsToMenu extends Seeder
         ]);
 
 
+        DB::table('items')->insert([
+            'name' => 'Pages',
+            'link' => '/admin/page',
+            'type' => '',
+            'parent_id' => 0,
+            'menu_id' => 1,
+            'order' => 4,
+            'icon' => '<i class="material-icons">find_in_page</i>'
+        ]);
+
+
 
         DB::table('items')->insert([
             'name' => 'User',

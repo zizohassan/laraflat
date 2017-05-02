@@ -8,18 +8,18 @@ class Permission extends Model
 {
 
   public $table = "permissions";
-
-  public $validation = [
-        'name' => 'required',
-        'slug' => 'required',
-        'model' => 'required'
-   ];
-
-   protected $fillable = [
-        'name' , 'slug' , 'action_add' , 'action_edit', 'action_view', 'action_delete' , 'model' , 'description'
-   ];
-
   public $timestamps = false;
+  protected $fillable = [
+        'name' , 'slug' , 'action_add' , 'action_edit', 'action_view', 'action_delete' , 'model' , 'description'
+  ];
+
+  public function   validation ($id){
+        return [
+            'name' => 'required',
+            'model' => 'required',
+            'slug' => 'required|unique:permissions,slug,'.$id
+        ];
+  }
 
   public function user(){
         return $this->belongsToMany('App\Application\Model\User', 'permission_user');

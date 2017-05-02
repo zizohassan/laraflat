@@ -43,3 +43,10 @@
     Route::get('getItemInfo/{id}' , 'MenuController@getItemInfo');
     Route::post('updateOneMenuItem' , 'MenuController@updateOneMenuItem');
 
+
+    #### page control
+    Route::get('page' , 'PageController@index');
+    Route::get('page/item/{id?}' , 'PageController@show');
+    Route::post('page/item/{id?}' , 'PageController@store');
+    Route::get('page/{id}/delete' , 'PageController@destroy');
+    Route::get('page/{id}/view' , 'PageController@getById');

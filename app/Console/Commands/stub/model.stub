@@ -9,13 +9,14 @@ class DummyClass extends Model
 
   public $table = "DummyClass";
 
-  public $validation = [
-
-   ];
 
    protected $fillable = [
 
    ];
 
+   public function validation($id){
+        return [
+        ];
+   }
 
 }

@@ -31,7 +31,7 @@ abstract class AbstractController extends  Controller{
     }
 
     public function storeOrUpdate(Request $request , $id = null , $callback = true){
-        $validation =  $this->itemValidation($request->all());
+        $validation =  $this->itemValidation($request->all() , $id);
         if($validation !== true){
             return redirect()->back()->with(['errors' => $validation]);
         }
@@ -48,8 +48,8 @@ abstract class AbstractController extends  Controller{
         return $this->updateItem($request , $item , $callback , $id);
     }
 
-    public function itemValidation($array){
-        $valid = Validator::make($array,$this->model->validation);
+    public function itemValidation($array , $id){
+        $valid = Validator::make($array,$this->model->validation($id));
         if($valid->fails()){
             return $valid->errors();
         }

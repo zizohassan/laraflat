@@ -18,7 +18,6 @@ class UserEloquent extends AbstractEloquent implements UserInterface{
 
     public function checkRequest($id , $request){
         $request = $this->encryptPassword($id , $request);
-        $request = $this->checkEmail($id , $request);
         return $request;
     }
 
@@ -37,15 +36,6 @@ class UserEloquent extends AbstractEloquent implements UserInterface{
         return $request;
     }
 
-    protected function checkEmail($id , $request){
-        if($id !== null && $request->has('email')){
-            if($this->model->find($id)->email == $request->email){
-                $request->offsetUnset('email');
-                 return $request;
-            }
-        }
-        return $request;
-    }
 
     public function getPermissions()
     {

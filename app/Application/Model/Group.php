@@ -10,14 +10,18 @@ class Group extends Model
   public $table = "groups";
   public $timestamps = false;
 
-  public $validation = [
-        'name' =>'required',
-        'slug' => 'required'
-   ];
 
    protected $fillable = [
         'name' , 'slug' , 'description'
    ];
+
+
+    public function   validation ($id){
+       return [
+           'name' =>'required',
+           'slug' => 'required|unique:groups,slug,'.$id
+       ];
+    }
 
 
   public function user(){

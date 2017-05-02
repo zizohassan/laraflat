@@ -11,6 +11,7 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">
+                    <label for="">Setting Name</label>
                     <input type="text" name="name" id="name" class="form-control" value="{{ isset($item) ? $item->name : '' }}"/>
                 </div>
             </div>
@@ -19,9 +20,9 @@
 
                 <div class="form-group">
                     <div class="">
-                        <label for="">Permission Roles</label>
+                        <label for="">Setting type</label>
                         @php $type = isset($item) ? $item->type : null @endphp
-                        {!! Form::select('type' , setting_type() , $type  , ['id' => 'setting_type'] ) !!}
+                        {!! Form::select('type' , setting_type() , $type  , ['id' => 'setting_type'  , 'class' => 'form-control'] ) !!}
                     </div>
                 </div>
 
@@ -38,7 +39,7 @@
                         @elseif($item->type == 'image')
                             <div class="form-group">
                                 <div class="form-line">
-                                    <img src="{{ url('/'.env('UPLOAD_PATH').'/'.$item->body_setting) }}" />
+                                    <img src="{{ url('/'.env('UPLOAD_PATH').'/'.$item->body_setting) }}" class="img-responsive thumbnail" />
                                     <input type="file" name="body_setting">
                                 </div>
                             </div>
