@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "laraflat/laraflat",
+    "description": "The easy laravel admin panel",
+    "keywords": ["adminpanel", "laravel" , "laraflat"],
     "license": "MIT",
     "type": "project",
     "require": {
