@@ -87,7 +87,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ getSetting('siteTitle')  }}
+                    <img src="{{ url('/admin/images/logo.png') }}" alt="{{ getSetting('siteTitle')  }}">
                 </div>
                     @include('layouts.messages')
                 <div class="links">

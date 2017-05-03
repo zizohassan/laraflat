@@ -130,7 +130,7 @@
                 &copy; 2017 <a href="javascript:void(0);">{{ getSetting('siteTitle')  }}</a>.
             </div>
             <div class="version">
-                <b>Version: </b> 1.0.4
+                <b>Version: </b> 1.0
             </div>
         </div>
         <!-- #Footer -->

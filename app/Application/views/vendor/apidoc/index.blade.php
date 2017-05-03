@@ -25,7 +25,9 @@
       </span>
 </a>
 <div class="tocify-wrapper">
-    <img src="images/logo.png" />
+    <div style="text-align: center;margin-top: 10px">
+        <img src="{{ url('/') }}/admin/images/logo.png"  width="100"/>
+    </div>
     <div class="lang-selector">
         <a href="#" data-language-name="bash">bash</a>
         <a href="#" data-language-name="javascript">javascript</a>
@@ -37,7 +39,12 @@
     <div id="toc">
     </div>
     <ul class="toc-footer">
-        <li><a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a></li>
+        <li><a href='https://laraflat.com/'>
+                LaraFlat
+            </a></li>
+        <li><a href='https://5dmat-web.com'>
+                5dmat-web
+            </a></li>
     </ul>
 </div>
 <div class="page-wrapper">
