@@ -13,7 +13,8 @@ function getModels(){
 }
 function removeNotPermissionTable(){
     return [
-      'item'
+      'item',
+       'user_info'
     ];
 }
 

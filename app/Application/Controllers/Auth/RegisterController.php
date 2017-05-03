@@ -5,6 +5,7 @@ namespace App\Application\Controllers\Auth;
 
 use App\Application\Controllers\Controller;
 use App\Application\Model\User;
+use App\Application\Model\UserInfo;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -65,11 +66,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+       return  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'group_id' => env('DEFAULT_GROUP')
         ]);
+
     }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $data  = extractUserInfo($user->id);
+        UserInfo::create($data);
+        return redirect($this->redirectPath());
+
+    }
+
+
 }

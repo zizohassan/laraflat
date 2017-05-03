@@ -10,6 +10,7 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "mpociot/laravel-apidoc-generator": "^2.0",
+        "torann/geoip": "^1.0",
         "uxweb/sweet-alert": "^1.4",
         "yajra/laravel-datatables-oracle": "~6.0"
     },
@@ -30,7 +31,8 @@
             "app/Application/Helpers/model.php",
             "app/Application/Helpers/uploadFiles.php",
             "app/Application/Helpers/setting.php",
-            "app/Application/Helpers/menu.php"
+            "app/Application/Helpers/menu.php",
+            "app/Application/Helpers/user.php"
         ]
     },
     "autoload-dev": {

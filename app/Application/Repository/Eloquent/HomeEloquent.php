@@ -9,8 +9,9 @@ use App\Application\Model\Permission;
 use App\Application\Model\Role;
 use App\Application\Model\Setting;
 use App\Application\Model\User;
+use App\Application\Model\UserInfo;
 use App\Application\Repository\InterFaces\HomeInterface;
-
+use Illuminate\Support\Facades\DB;
 
 
 class HomeEloquent extends AbstractEloquent implements HomeInterface{
@@ -22,6 +23,11 @@ class HomeEloquent extends AbstractEloquent implements HomeInterface{
 
     public function getData(){
         $lastRegisterUser= $this->model->with('group')->limit(10)->orderBy('id' , 'desc')->get();
+        $chartInfo = UserInfo::select('country', DB::raw('count(*) as total'))
+            ->groupBy('country')
+            ->get();
+        $country = $chartInfo->pluck('country')->toJson();
+        $count = $chartInfo->pluck('total')->toJson();
         return [
             'userCount' => $this->model->count(),
             'groupCount' => Group::count(),
@@ -32,6 +38,8 @@ class HomeEloquent extends AbstractEloquent implements HomeInterface{
             'menus' => Menu::count() ,
             'setting' => Setting::count(),
             'logs' => Log::count(),
+            'country' => $country,
+            'count' => $count,
             'log' => Log::with('user')->limit(10)->orderBy('id' , 'desc')->get(),
         ];
     }
