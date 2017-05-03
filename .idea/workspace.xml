@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c491c7f-0b22-4ebd-a22c-09234fe89577" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/menu/helper/scripts.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/menu/helper/scripts.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php" />
     </list>
     <ignored path="Interfaces.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,31 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="scripts.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Application/views/admin/menu/helper/scripts.blade.php">
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.42780748">
-              <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="edit.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Application/views/admin/menu/edit.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.75">
-              <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="model.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Application/views/admin/menu/helper/model.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="6.428571">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.42067736">
+              <caret line="156" column="99" selection-start-line="156" selection-start-column="99" selection-end-line="156" selection-end-column="99" />
               <folding />
             </state>
           </provider>
@@ -121,11 +101,11 @@
         <option value="$PROJECT_DIR$/app/Application/views/admin/layout/form.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/log/show.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/Repository/Eloquent/HomeEloquent.php" />
-        <option value="$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/views/welcome.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/layout/app.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/views/vendor/apidoc/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/menu/helper/scripts.blade.php" />
+        <option value="$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php" />
       </list>
     </option>
   </component>
@@ -277,41 +257,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laraflat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="helper" />
+              <option name="myItemId" value="home" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -866,25 +812,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09447415">
-          <caret line="125" column="49" selection-start-line="125" selection-start-column="49" selection-end-line="125" selection-end-column="49" />
-          <folding>
-            <element signature="e#142#732#0#HTML" expanded="false" />
-            <element signature="e#745#1327#0#HTML" expanded="false" />
-            <element signature="e#1340#1949#0#HTML" expanded="false" />
-            <element signature="e#1962#2550#0#HTML" expanded="false" />
-            <element signature="e#2563#3149#0#HTML" expanded="false" />
-            <element signature="e#3162#3734#0#HTML" expanded="false" />
-            <element signature="e#3747#4328#0#HTML" expanded="false" />
-            <element signature="e#4341#4917#0#HTML" expanded="false" />
-            <element signature="e#4408#4898#0#HTML" expanded="false" />
-            <element signature="e#7318#8085#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Application/views/admin/layout/header.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14438502">
@@ -906,7 +833,7 @@
         <state vertical-scroll-proportion="0.7860963">
           <caret line="109" column="102" selection-start-line="109" selection-start-column="102" selection-end-line="109" selection-end-column="102" />
           <folding>
-            <element signature="n#style#0;n#form#0;n#ul#0;n#div#2;n#div#1;n#div#0;n#aside#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#ul#0;n#div#2;n#div#1;n#div#0;n#aside#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -915,15 +842,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.50187266">
           <caret line="44" column="42" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Application/views/admin/menu/helper/model.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.428571">
+        <state vertical-scroll-proportion="-0.32085562">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -931,7 +856,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Application/views/admin/menu/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.75">
+        <state vertical-scroll-proportion="0.037433155">
           <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
           <folding />
         </state>
@@ -941,6 +866,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.42780748">
           <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42067736">
+          <caret line="156" column="99" selection-start-line="156" selection-start-column="99" selection-end-line="156" selection-end-column="99" />
           <folding />
         </state>
       </provider>

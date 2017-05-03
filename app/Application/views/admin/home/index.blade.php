@@ -154,11 +154,12 @@
                     <ul class="dashboard-stat-list align-left">
                         @foreach($data['log'] as $Log)
                             <li>
-                                #{{ $Log->user->name }}
-                                <span class="pull-right align-left">
-                                            <b>{{ $Log->model }}</b> : {{ $Log->action }}
-
-                                        </span>
+                                <a href="{{ url('admin/log/'.$Log->id.'/view') }}" class="col-white">
+                                    #{{ $Log->user->name }}
+                                    <span class="pull-right align-left">
+                                         <b>{{ $Log->model }}</b> : {{ $Log->action }}
+                                    </span>
+                                </a>
                             </li>
                         @endforeach
                     </ul>
