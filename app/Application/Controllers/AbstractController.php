@@ -2,19 +2,23 @@
 
 namespace App\Application\Controllers;
 
+use App\Application\Model\Log;
 use App\Application\Model\User;
 use App\Application\PermissionTraits\PermissionControl;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
 abstract class AbstractController extends  Controller{
 
     public $model;
+    protected  $log;
 
     public function __construct(Model $model)
     {
         $this->model = $model;
+        $this->log = new Log();
     }
 
     public function GetAll($view , $with = [] , $paginate = 30){
@@ -24,8 +28,13 @@ abstract class AbstractController extends  Controller{
 
     public function createOrEdit($view , $id = null , $data = ['']){
         if($id == null){
+            $this->createLog('Visit Create Page' , 'Success');
             return view($view , compact('data'));
         }
+        $dataLog = [
+            'Edit Id' => [$id]
+        ];
+        $this->createLog('Visit Edit Page' , 'Success' , json_encode($dataLog));
         $item = $this->model->where('id' , $id)->first();
         return view($view , compact('item' , 'data'));
     }
@@ -51,6 +60,11 @@ abstract class AbstractController extends  Controller{
     public function itemValidation($array , $id){
         $valid = Validator::make($array,$this->model->validation($id));
         if($valid->fails()){
+            if($id != null){
+                $this->createLog('Update' , 'Error' , json_encode($valid->errors()));
+            }else{
+                $this->createLog('Create' , 'Error' , json_encode($valid->errors()));
+            }
             return $valid->errors();
         }
         return true;
@@ -58,6 +72,12 @@ abstract class AbstractController extends  Controller{
 
     public function storeItem($array  , $callback){
         $new = $this->model->create($array);
+        if($this->model->getTable() != 'logs') {
+            $dataLog = [
+                'New id' => [$new->id]
+            ];
+            $this->createLog('Create', 'Success', json_encode($dataLog));
+        }
         $this->saveRolePermission($array , $new);
         if($callback !== true){
             return redirect($callback);
@@ -67,6 +87,12 @@ abstract class AbstractController extends  Controller{
 
     public function updateItem($array , $item , $callback , $id){
        $update = $item->update($array);
+        if($this->model->getTable() != 'logs') {
+            $dataLog = [
+                'Updated id' => [$id]
+            ];
+            $this->createLog('Update', 'Success', json_encode($dataLog));
+        }
         $this->saveRolePermission($array , null , $id);
         if($update){
             if($callback !== true){
@@ -109,9 +135,21 @@ abstract class AbstractController extends  Controller{
         $item = $this->model->find($id);
         $item = $item ? $item : null;
         if($item == null){
+            if($this->model->getTable() != 'logs') {
+                $dataLog = [
+                    'Updated id' => [$id]
+                ];
+                $this->createLog('Delete', 'Error', json_encode($dataLog));
+            }
             return redirect(404);
         }
         if($item->delete()){
+           if($this->model->getTable() != 'logs'){
+               $dataLog = [
+                   'Updated id' => [$id]
+               ];
+               $this->createLog('Delete' , 'Success' , json_encode($dataLog));
+           }
             if($callBack != null){
                 return redirect($callBack);
             }
@@ -139,6 +177,17 @@ abstract class AbstractController extends  Controller{
 
     protected function checkIfArray($request){
         return is_array($request) ? $request : [$request];
+    }
+
+    protected function createLog($action , $status , $messages = ''){
+        $data = [
+            'action' => $action,
+            'model' => $this->model->getTable(),
+            'status' => $status,
+            'user_id' => auth()->user()->id,
+            'messages' => $messages
+        ];
+        $this->log->create($data);
     }
 
 

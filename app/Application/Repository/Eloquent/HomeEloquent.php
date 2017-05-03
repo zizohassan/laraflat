@@ -2,8 +2,12 @@
 namespace App\Application\Repository\Eloquent;
 
 use App\Application\Model\Group;
+use App\Application\Model\Log;
+use App\Application\Model\Menu;
+use App\Application\Model\Page;
 use App\Application\Model\Permission;
 use App\Application\Model\Role;
+use App\Application\Model\Setting;
 use App\Application\Model\User;
 use App\Application\Repository\InterFaces\HomeInterface;
 
@@ -23,7 +27,12 @@ class HomeEloquent extends AbstractEloquent implements HomeInterface{
             'groupCount' => Group::count(),
             'permissionsCount' => Permission::count(),
             'roleCount' => Role::count(),
-            'lastRegisterUser' => $lastRegisterUser
+            'lastRegisterUser' => $lastRegisterUser ,
+            'pages' => Page::count() ,
+            'menus' => Menu::count() ,
+            'setting' => Setting::count(),
+            'logs' => Log::count(),
+            'log' => Log::with('user')->limit(10)->orderBy('id' , 'desc')->get(),
         ];
     }
 

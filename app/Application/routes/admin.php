@@ -50,3 +50,9 @@
     Route::post('page/item/{id?}' , 'PageController@store');
     Route::get('page/{id}/delete' , 'PageController@destroy');
     Route::get('page/{id}/view' , 'PageController@getById');
+    #### log control
+    Route::get('log' , 'LogController@index');
+    Route::get('log/item/{id?}' , 'LogController@show');
+    Route::post('log/item/{id?}' , 'LogController@store');
+    Route::get('log/{id}/delete' , 'LogController@destroy');
+    Route::get('log/{id}/view' , 'LogController@getById');

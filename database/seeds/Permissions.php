@@ -82,5 +82,16 @@ class Permissions extends Seeder
             'action_delete'=>  'on',
             'action_view'=>  'on',
         ]);
+
+        DB::table('permissions')->insert([
+            'name' => 'Log',
+            'slug'=> 'log',
+            'description'=> 'Full Access to all setting log',
+            'model'=> 'log',
+            'action_add'=> 'on',
+            'action_edit'=>  'on',
+            'action_delete'=>  'on',
+            'action_view'=>  'on',
+        ]);
     }
 }
