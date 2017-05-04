@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c491c7f-0b22-4ebd-a22c-09234fe89577" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Application/Helpers/user.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Application/Model/UserInfo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.env" afterPath="$PROJECT_DIR$/.env" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Controllers/Auth/LoginController.php" afterPath="$PROJECT_DIR$/app/Application/Controllers/Auth/LoginController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Controllers/Auth/RegisterController.php" afterPath="$PROJECT_DIR$/app/Application/Controllers/Auth/RegisterController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Helpers/model.php" afterPath="$PROJECT_DIR$/app/Application/Helpers/model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/User.php" afterPath="$PROJECT_DIR$/app/Application/Model/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Repository/Eloquent/HomeEloquent.php" afterPath="$PROJECT_DIR$/app/Application/Repository/Eloquent/HomeEloquent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" afterPath="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" />
     </list>
     <ignored path="Interfaces.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,33 +32,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AuthenticatesUsers.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php">
+      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.857142">
-              <caret line="112" column="4" selection-start-line="112" selection-start-column="4" selection-end-line="115" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Application/Controllers/Auth/LoginController.php">
+      <file leaf-file-name="AbstractController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Application/Controllers/AbstractController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30728242">
-              <caret line="43" column="99" selection-start-line="43" selection-start-column="99" selection-end-line="43" selection-end-column="99" />
-              <folding>
-                <element signature="e#52#95#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Application/Helpers/user.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.0714285">
-              <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.053285968">
+              <caret line="152" column="5" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -113,7 +89,6 @@
         <option value="$PROJECT_DIR$/app/Application/Model/Log.php" />
         <option value="$PROJECT_DIR$/app/Application/DataTables/LogsDataTable.php" />
         <option value="$PROJECT_DIR$/app/Application/Controllers/Admin/LogController.php" />
-        <option value="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/layout/breadcrumb.blade.php" />
         <option value="$PROJECT_DIR$/database/seeds/AdminUser.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/log/index.blade.php" />
@@ -129,7 +104,6 @@
         <option value="$PROJECT_DIR$/config/geoip.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/vendor/torann/geoip/src/helpers.php" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/database/migrations/2017_05_03_173351_create_user_info_table.php" />
         <option value="$PROJECT_DIR$/app/Application/Model/UserInfo.php" />
         <option value="$PROJECT_DIR$/app/Application/Model/User.php" />
@@ -140,6 +114,8 @@
         <option value="$PROJECT_DIR$/app/Application/Repository/Eloquent/HomeEloquent.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/Controllers/Auth/LoginController.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" />
       </list>
     </option>
   </component>
@@ -232,24 +208,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laraflat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="Application" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -272,7 +230,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Helpers" />
+              <option name="myItemId" value="Controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -568,13 +526,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application/Controllers/AbstractController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.32085562">
-          <caret line="36" column="47" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/AdminUser.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.01604278">
@@ -698,14 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5204263">
           <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30456853">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -834,21 +777,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/Controllers/Auth/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.2912967">
+          <caret line="43" column="99" selection-start-line="43" selection-start-column="99" selection-end-line="43" selection-end-column="99" />
+          <folding>
+            <element signature="e#52#95#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.857142">
+        <state vertical-scroll-proportion="0.6394316">
           <caret line="112" column="4" selection-start-line="112" selection-start-column="4" selection-end-line="115" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application/Controllers/Auth/LoginController.php">
+    <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30728242">
-          <caret line="43" column="99" selection-start-line="43" selection-start-column="99" selection-end-line="43" selection-end-column="99" />
-          <folding>
-            <element signature="e#52#95#0#PHP" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/Controllers/AbstractController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.053285968">
+          <caret line="152" column="5" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
