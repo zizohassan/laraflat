@@ -9,7 +9,7 @@ download all files
 ## Install with Composer
 
 ```
-    composer create-project laraflat/laraflat  --prefer-dist  ProjectName --stability=dev
+composer create-project laraflat/laraflat  --prefer-dist  ProjectName --stability=dev
 ```
 
 ## Requirements
@@ -21,9 +21,6 @@ PHP Curl extension
 
 now type this line on your console
 
-```
-composer install
-```
 ```
 php artisan key:generate
 ```
