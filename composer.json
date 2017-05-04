@@ -4,8 +4,6 @@
     "keywords": ["adminpanel", "laravel" , "laraflat"],
     "license": "MIT",
     "type": "project",
-    "minimum-stability": "stable",
-    "prefer-stable": true,
     "require": {
         "php": ">=5.6.4",
         "intervention/image": "^2.3",
