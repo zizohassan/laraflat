@@ -18,7 +18,7 @@ class CreateItemTable extends Migration
             $table->string('name')->unique();
             $table->string('link');
             $table->string('type' , '6');
-            $table->string('icon' , '50')->nullable();
+            $table->string('icon' , '100')->nullable();
             $table->integer('parent_id');
             $table->integer('order');
             $table->integer('menu_id')->unsigned();
