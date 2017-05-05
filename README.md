@@ -15,7 +15,13 @@ composer create-project laraflat/laraflat  --prefer-dist  ProjectName --stabilit
 ## Requirements
 
 PHP >= 5.6.4 , 
-PHP Curl extension 
+PHP Curl extension <br>
+You Must check if you have 
+
+```
+extension=php_zip.dll
+```
+And Enable in php first
 
 ## Install  The Dependencies
 

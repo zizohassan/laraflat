@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c491c7f-0b22-4ebd-a22c-09234fe89577" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/routes/admin.php" afterPath="$PROJECT_DIR$/app/Application/routes/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/AdminMiddleware.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/AdminMiddleware.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/AddItemsToMenu.php" afterPath="$PROJECT_DIR$/database/seeds/AddItemsToMenu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/GroupWithRole.php" afterPath="$PROJECT_DIR$/database/seeds/GroupWithRole.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/PermissionWithRole.php" afterPath="$PROJECT_DIR$/database/seeds/PermissionWithRole.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/Permissions.php" afterPath="$PROJECT_DIR$/database/seeds/Permissions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/Roles.php" afterPath="$PROJECT_DIR$/database/seeds/Roles.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="Interfaces.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,39 +32,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider editor-type-id="MarkdownFxPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor vertical-scroll-proportion="0.6179775">
+                <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="AddItemsToMenu.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/seeds/AddItemsToMenu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.535714">
+            <state vertical-scroll-proportion="-14.214286">
               <caret line="31" column="75" selection-start-line="31" selection-start-column="75" selection-end-line="31" selection-end-column="75" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Permissions.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/seeds/Permissions.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.75">
-              <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
-              <folding>
-                <element signature="e#222#523#1#PHP" expanded="false" />
-                <element signature="e#567#872#1#PHP" expanded="false" />
-                <element signature="e#916#1216#1#PHP" expanded="false" />
-                <element signature="e#1260#1585#1#PHP" expanded="false" />
-                <element signature="e#1629#1942#1#PHP" expanded="false" />
-                <element signature="e#1986#2289#1#PHP" expanded="false" />
-                <element signature="e#2334#2637#1#PHP" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Categorie.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Application/Model/Categorie.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44919786">
-              <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -105,7 +86,6 @@
         <option value="$PROJECT_DIR$/app/Application/Model/User.php" />
         <option value="$PROJECT_DIR$/app/Application/Helpers/model.php" />
         <option value="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/app/Application/Helpers/user.php" />
         <option value="$PROJECT_DIR$/app/Application/Controllers/Auth/LoginController.php" />
         <option value="$PROJECT_DIR$/app/Application/Controllers/Auth/RegisterController.php" />
@@ -141,6 +121,7 @@
         <option value="$PROJECT_DIR$/database/seeds/AddItemsToMenu.php" />
         <option value="$PROJECT_DIR$/database/seeds/Permissions.php" />
         <option value="$PROJECT_DIR$/app/Application/Model/Categorie.php" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -203,60 +184,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laraflat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laraflat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="laraflat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -271,7 +198,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../admin/videos" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
-    <property name="SearchEverywhereHistoryKey" value="app&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/config/app.php&#10;app.php&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/config/app.php&#10;admin&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/routes/admin.php&#10;admi&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/routes/admin.php&#10;route&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/vendor/laravel/framework/src/Illuminate/Routing/Route.php&#10;abst&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Controllers/AbstractController.php&#10;Men&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Repository/InterFaces/MenuInterface.php&#10;admin.&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/routes/admin.php&#10;route.&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/vendor/laravel/framework/src/Illuminate/Routing/Route.php&#10;app.&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/views/admin/layout/app.blade.php&#10;kern&#9;FILE&#9;file:///Users/apple/Desktop/backpack/19-4-2017/app/Http/Kernel.php&#10;vis&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/routes/visitor.php&#10;User&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/User.php&#10;Permiss&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Permission.php&#10;role&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Role.php&#10;UserEl&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Repository/Eloquent/UserEloquent.php&#10;per&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Permission.php&#10;Role&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Role.php&#10;Roles&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Roles.php&#10;men&#9;FILE&#9;file://C:/Users/Abdel Aziz Hassan/Desktop/Interfaces/app/Application/views/admin/layout/menu.blade.php" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/database/seeds/AddItemsToMenu.php&#10;app&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/config/app.php&#10;app.php&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/config/app.php&#10;admin&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/routes/admin.php&#10;admi&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/routes/admin.php&#10;route&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/vendor/laravel/framework/src/Illuminate/Routing/Route.php&#10;abst&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Controllers/AbstractController.php&#10;Men&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Repository/InterFaces/MenuInterface.php&#10;admin.&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/routes/admin.php&#10;route.&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/vendor/laravel/framework/src/Illuminate/Routing/Route.php&#10;app.&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/views/admin/layout/app.blade.php&#10;kern&#9;FILE&#9;file:///Users/apple/Desktop/backpack/19-4-2017/app/Http/Kernel.php&#10;vis&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/routes/visitor.php&#10;User&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/User.php&#10;Permiss&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Permission.php&#10;role&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Role.php&#10;UserEl&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Repository/Eloquent/UserEloquent.php&#10;per&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Permission.php&#10;Role&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Role.php&#10;Roles&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Roles.php&#10;men&#9;FILE&#9;file://C:/Users/Abdel Aziz Hassan/Desktop/Interfaces/app/Application/views/admin/layout/menu.blade.php" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
@@ -456,19 +383,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.0714285">
           <caret line="152" column="5" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownFxPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor vertical-scroll-proportion="-1.8768656">
-            <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -828,17 +742,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/seeds/AddItemsToMenu.php">
+    <entry file="file://$PROJECT_DIR$/app/Application/Model/Categorie.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.535714">
-          <caret line="31" column="75" selection-start-line="31" selection-start-column="75" selection-end-line="31" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.44919786">
+          <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/Permissions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.75">
+        <state vertical-scroll-proportion="0.8360071">
           <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
           <folding>
             <element signature="e#222#523#1#PHP" expanded="false" />
@@ -852,11 +766,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application/Model/Categorie.php">
+    <entry file="file://$PROJECT_DIR$/database/seeds/AddItemsToMenu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44919786">
-          <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+        <state vertical-scroll-proportion="-14.214286">
+          <caret line="31" column="75" selection-start-line="31" selection-start-column="75" selection-end-line="31" selection-end-column="75" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownFxPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor vertical-scroll-proportion="0.6179775">
+            <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
