@@ -95,5 +95,6 @@
                 </div>
             </div>
         </div>
-    </body>
+    {!! Links::track(true) !!}
+</body>
 </html>

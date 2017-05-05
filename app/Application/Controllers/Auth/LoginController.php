@@ -41,10 +41,6 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        $foundUser = UserInfo::where('user_id' , $user->id)->where('ip' , getClientIps())->first();
-        if(!$foundUser){
-            $data = extractUserInfo($user->id);
-            UserInfo::create($data);
-        }
+
     }
 }

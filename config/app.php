@@ -167,7 +167,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-         \Torann\GeoIP\GeoIPServiceProvider::class,
+
 
 
         /*
@@ -180,6 +180,9 @@ return [
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        ConsoleTVs\Links\LinksServiceProvider::class,
+
+
 
 
 
@@ -246,7 +249,10 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
+        'Links' => ConsoleTVs\Links\Facades\Links::class,
+
+
+
 
 
 

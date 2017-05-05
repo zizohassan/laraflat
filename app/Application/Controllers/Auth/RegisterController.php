@@ -89,9 +89,7 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-        $data  = extractUserInfo($user->id);
-        UserInfo::create($data);
-        return redirect($this->redirectPath());
+
 
     }
 

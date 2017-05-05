@@ -16,5 +16,6 @@ class AddSetting extends Seeder
             'type'=> 'text',
             'body_setting' => 'LaraFlat'
         ]);
+
     }
 }

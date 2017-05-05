@@ -6,11 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "consoletvs/links": "^1.0",
         "intervention/image": "^2.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "mpociot/laravel-apidoc-generator": "^2.0",
-        "torann/geoip": "^1.0",
         "uxweb/sweet-alert": "^1.4",
         "yajra/laravel-datatables-oracle": "~6.0"
     },

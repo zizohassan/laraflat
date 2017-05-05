@@ -65,6 +65,20 @@ class AddItemsToMenu extends Seeder
         ]);
 
 
+        DB::table('items')->insert([
+            'name' => 'Statistics',
+            'link' => '/admin/links',
+            'type' => '',
+            'parent_id' => 0,
+            'menu_id' => 1,
+            'order' => 6   ,
+            'icon' => '<i class="material-icons">insert_chart</i>'
+        ]);
+
+
+
+
+
 
         DB::table('items')->insert([
             'name' => 'User',

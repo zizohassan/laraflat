@@ -24,7 +24,7 @@
     Route::get('permission/{id}/delete' , 'PermissionController@destroy');
     Route::get('permission/{id}/view' , 'PermissionController@getById');
     #### home control
-    Route::get('home' , 'HomeController@index');
+    Route::get('home/{pages?}/{limit?}' , 'HomeController@index');
     #### setting control
     Route::get('setting' , 'SettingController@index');
     Route::get('setting/item/{id?}' , 'SettingController@show');

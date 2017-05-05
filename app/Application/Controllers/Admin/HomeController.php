@@ -19,8 +19,8 @@ class HomeController extends AbstractController
         $this->homeInterface = $homeInterface;
     }
 
-    public function index(){
-        $data = $this->homeInterface->getData();
+    public function index($pages = null , $limit = null){
+        $data = $this->homeInterface->getData($pages , $limit);
         return view('admin.home.index' ,compact('data'));
     }
 
