@@ -24,6 +24,7 @@ now type this line on your console
 ```
 composer install
 ```
+```
 php artisan key:generate
 ```
 
