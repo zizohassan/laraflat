@@ -23,12 +23,22 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
+           'name' => 'Categories',
+           'link' => '/admin/categorie',
+           'type' => '',
+           'parent_id' => 0,
+           'menu_id' => 1,
+           'order' => 2,
+           'icon' => '<i class="material-icons">control_point_duplicate</i>'
+        ]);
+
+        DB::table('items')->insert([
             'name' => 'Users',
             'link' => '/admin/users',
             'type' => '',
             'parent_id' => 0,
             'menu_id' => 1,
-            'order' => 2,
+            'order' => 3,
             'icon' => '<i class="material-icons">account_circle</i>'
         ]);
 
@@ -38,7 +48,7 @@ class AddItemsToMenu extends Seeder
             'type' => '',
             'parent_id' => 0,
             'menu_id' => 1,
-            'order' => 3,
+            'order' => 4,
             'icon' => '<i class="material-icons">insert_emoticon</i>'
         ]);
 
@@ -49,7 +59,7 @@ class AddItemsToMenu extends Seeder
             'type' => '',
             'parent_id' => 0,
             'menu_id' => 1,
-            'order' => 4,
+            'order' => 5,
             'icon' => '<i class="material-icons">find_in_page</i>'
         ]);
 
@@ -60,7 +70,7 @@ class AddItemsToMenu extends Seeder
             'type' => '',
             'parent_id' => 0,
             'menu_id' => 1,
-            'order' => 5    ,
+            'order' => 6    ,
             'icon' => '<i class="material-icons">info</i>'
         ]);
 
@@ -71,7 +81,7 @@ class AddItemsToMenu extends Seeder
             'type' => '',
             'parent_id' => 0,
             'menu_id' => 1,
-            'order' => 6   ,
+            'order' => 7   ,
             'icon' => '<i class="material-icons">insert_chart</i>'
         ]);
 
@@ -84,7 +94,7 @@ class AddItemsToMenu extends Seeder
             'name' => 'User',
             'link' => '/admin/user',
             'type' => '',
-            'parent_id' => 2,
+            'parent_id' => 3,
             'menu_id' => 1,
             'order' => 1
         ]);
@@ -95,7 +105,7 @@ class AddItemsToMenu extends Seeder
             'name' => 'Group',
             'link' => '/admin/group',
             'type' => '',
-            'parent_id' => 2,
+            'parent_id' => 3,
             'menu_id' => 1,
             'order' => 2,
         ]);
@@ -106,7 +116,7 @@ class AddItemsToMenu extends Seeder
             'name' => 'Role',
             'link' => '/admin/role',
             'type' => '',
-            'parent_id' => 2,
+            'parent_id' => 3,
             'menu_id' => 1,
             'order' => 3,
         ]);
@@ -115,7 +125,7 @@ class AddItemsToMenu extends Seeder
             'name' => 'Permission',
             'link' => '/admin/permission',
             'type' => '',
-            'parent_id' => 2,
+            'parent_id' => 3,
             'menu_id' => 1,
             'order' => 4,
         ]);
@@ -124,7 +134,7 @@ class AddItemsToMenu extends Seeder
             'name' => 'Icons',
             'link' => '/admin/icons',
             'type' => '',
-            'parent_id' => 3,
+            'parent_id' => 4,
             'menu_id' => 1,
             'order' => 1,
         ]);
@@ -134,7 +144,7 @@ class AddItemsToMenu extends Seeder
             'name' => 'Docs',
             'link' => '/admin/docs',
             'type' => '',
-            'parent_id' => 3,
+            'parent_id' => 4,
             'menu_id' => 1,
             'order' => 2,
         ]);
@@ -144,7 +154,7 @@ class AddItemsToMenu extends Seeder
             'name' => 'Setting',
             'link' => '/admin/setting',
             'type' => '',
-            'parent_id' => 3,
+            'parent_id' => 4,
             'menu_id' => 1,
             'order' => 3,
         ]);
@@ -155,7 +165,7 @@ class AddItemsToMenu extends Seeder
             'name' => 'Menu',
             'link' => '/admin/menu',
             'type' => '',
-            'parent_id' => 3,
+            'parent_id' => 4,
             'menu_id' => 1,
             'order' => 4,
         ]);

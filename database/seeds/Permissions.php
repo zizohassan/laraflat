@@ -93,5 +93,16 @@ class Permissions extends Seeder
             'action_delete'=>  'on',
             'action_view'=>  'on',
         ]);
+
+        DB::table('permissions')->insert([
+            'name' => 'Categories',
+            'slug'=> 'Categories',
+            'description'=> 'Full Access to all setting Categories',
+            'model'=> 'categorie',
+            'action_add'=> 'on',
+            'action_edit'=>  'on',
+            'action_delete'=>  'on',
+            'action_view'=>  'on',
+        ]);
     }
 }

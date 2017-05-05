@@ -43,5 +43,9 @@ class GroupWithRole extends Seeder
             'group_id' => 1,
             'role_id'=> 8,
         ]);
+        DB::table('group_role')->insert([
+            'group_id' => 1,
+            'role_id'=> 9,
+        ]);
     }
 }

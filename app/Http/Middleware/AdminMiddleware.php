@@ -16,6 +16,9 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if(!Auth::check()){
+            return redirect('/login');
+        }
         if(Auth::user()->group_id !== 1)
         {
             return redirect('/');

@@ -58,5 +58,11 @@ class Roles extends Seeder
             'slug'=> 'log',
             'description'=> 'Add , edit , delete , view role to model Log',
         ]);
+
+        DB::table('roles')->insert([
+            'name' => 'Categories',
+            'slug'=> 'Categories',
+            'description'=> 'Add , edit , delete , view role to model Categories',
+        ]);
     }
 }

@@ -56,3 +56,9 @@
     Route::post('log/item/{id?}' , 'LogController@store');
     Route::get('log/{id}/delete' , 'LogController@destroy');
     Route::get('log/{id}/view' , 'LogController@getById');
+    #### categorie control
+    Route::get('categorie' , 'CategorieController@index');
+    Route::get('categorie/item/{id?}' , 'CategorieController@show');
+    Route::post('categorie/item/{id?}' , 'CategorieController@store');
+    Route::get('categorie/{id}/delete' , 'CategorieController@destroy');
+    Route::get('categorie/{id}/view' , 'CategorieController@getById');
