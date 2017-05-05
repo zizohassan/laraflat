@@ -21,8 +21,10 @@ You Must check if you have
 ```
 extension=php_zip.dll
 ```
-And Enable in php first
-
+And Enable in php first , check this links
+<a href="http://pecl.php.net/package/zip/1.12.4/windows">Zip Dll</a><a href="http://stackoverflow.com/questions/17606433/php-zip-dll-is-missing-from-php-5-5-for-windows">
+ Stackoverflow
+ </a>
 ## Install  The Dependencies
 
 now type this line on your console
