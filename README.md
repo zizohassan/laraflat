@@ -15,20 +15,14 @@ composer create-project laraflat/laraflat  --prefer-dist  ProjectName --stabilit
 ## Requirements
 
 PHP >= 5.6.4 , 
-PHP Curl extension <br>
-You Must check if you have 
+PHP Curl extension 
 
-```
-extension=php_zip.dll
-```
-And Enable in php first , check this links
-<a href="http://pecl.php.net/package/zip/1.12.4/windows">Zip Dll</a><a href="http://stackoverflow.com/questions/17606433/php-zip-dll-is-missing-from-php-5-5-for-windows">
- Stackoverflow
- </a>
 ## Install  The Dependencies
 
 now type this line on your console
 
+```
+composer install
 ```
 php artisan key:generate
 ```
