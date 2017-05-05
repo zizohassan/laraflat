@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c491c7f-0b22-4ebd-a22c-09234fe89577" name="Default" comment="" />
+    <list default="true" id="7c491c7f-0b22-4ebd-a22c-09234fe89577" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+    </list>
     <ignored path="Interfaces.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -30,11 +32,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HomeEloquent.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomeEloquent.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Application/Repository/Eloquent/HomeEloquent.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5882353">
+            <state vertical-scroll-proportion="-11.785714">
               <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="composer.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33707866">
+              <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -93,7 +105,6 @@
         <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/app/Application/views/welcome.blade.php" />
         <option value="$PROJECT_DIR$/vendor/consoletvs/links/src/Controllers/LinksController.php" />
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/database/seeds/AddSetting.php" />
         <option value="$PROJECT_DIR$/vendor/consoletvs/links/src/Views/template.blade.php" />
         <option value="$PROJECT_DIR$/vendor/consoletvs/links/src/Middleware/LinksMiddleware.php" />
@@ -104,6 +115,7 @@
         <option value="$PROJECT_DIR$/config/links.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/layout/apps.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/Repository/Eloquent/HomeEloquent.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
       </list>
     </option>
   </component>
@@ -634,13 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.285714">
-          <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/AddSetting.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5187166">
@@ -780,8 +785,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Application/Repository/Eloquent/HomeEloquent.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5882353">
+        <state vertical-scroll-proportion="-11.785714">
           <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33707866">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
           <folding />
         </state>
       </provider>
