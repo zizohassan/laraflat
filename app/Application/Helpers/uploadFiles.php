@@ -47,7 +47,6 @@ function getExtention($fileName){
 
 
 function checkIfFiledFile($array){
-
     foreach($array as $key => $file){
         if(in_array($key , getFileFieldsName())){
             return $key;

@@ -165,8 +165,24 @@
 {{ Html::script('admin/js/jquery.dataTables.min.js') }}
 {{ Html::script('admin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js') }}
 {{ Html::script('js/sweetalert.min.js') }}
+<script type="application/javascript">
+    function deleteThisItem(e){
+        var link = $(e).data('link');
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this Item Again!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+            },
+            function(){
+                    window.location = link;
+            });
+    }
+</script>
 @include('sweet::alert')
-
 @yield('script')
 </body>
 

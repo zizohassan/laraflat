@@ -154,16 +154,32 @@ abstract class AbstractController extends  Controller{
     public function uploadFile($request , $field){
         if($request->file($field) != null){
             $destinationPath = env('UPLOAD_PATH');
-            $extension = $request->file($field)->getClientOriginalExtension();
-            $fileName = rand(11111,99999).'_'.time().'.'.$extension;
-            if($request->file($field)->move($destinationPath  , $fileName)){
-                $request = $request->except($field);
-                $request[$field] = $fileName;
+            $all = [];
+            $imageName = '';
+            if(is_array($request->file($field))){
+                foreach($request->file($field)  as $file){
+                    $all[] = $this->uploadFileOrMultiUpload($file , $destinationPath);
+                }
+            }else{
+               $imageName = $this->uploadFileOrMultiUpload($request->file($field) , $destinationPath);
+            }
+            $request = $request->except($field);
+            if(count($all) > 0){
+                $request[$field] = json_encode($all);
                 return $request;
             }
-            return false;
+            $request[$field] = $imageName;
+            return $request;
         }
         return $request->all();
+    }
+
+    protected function uploadFileOrMultiUpload($image , $destinationPath){
+        $extension = $image->getClientOriginalExtension();
+        $fileName = rand(11111,99999).'_'.time().'.'.$extension;
+        if($image->move($destinationPath  , $fileName)){
+            return $fileName ;
+        }
     }
 
 
