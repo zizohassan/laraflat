@@ -23,7 +23,7 @@ class PermissionMiddleware
             $method = $this->router->getRoutes()->match($request)->getActionMethod();
             $model = strtolower(class_basename($this->router->getRoutes()->match($request)->getController()->model));
             $action = $this->getMethod($method , $id);
-            if($action === false){
+           if($action === false){
                 return redirect(env('DENY_URL_PERMISSION'));
             }
            if($this->permissionsModel->canUser($user  ,$action, $model)){
@@ -85,6 +85,12 @@ class PermissionMiddleware
             ],
             'updateOneMenuItem' => [
                 'edit'
+            ],
+            'apiDocs' =>[
+                'add'
+             ],
+            'icons' =>[
+                'add'
             ]
         ];
     }

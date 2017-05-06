@@ -1,17 +1,24 @@
 @extends('admin.layout.app')
 
 @section('title')
-    page View
+    {{ adminTrans('page' , 'page') }}  {{ adminTrans('curd' , 'view') }}
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => 'page' , 'action' => 'View' ])
+    @component('admin.layout.form'  , ['title' => adminTrans('page' , 'page') , 'model' => 'page' , 'action' => 'View' ])
 
         <table class="table table-bordered table-responsive table-striped">
             @php
                 $fields = rename_keys(
                      removeFromArray($data['fields'] , ['id']) ,
-                ['Page title' , 'Page slug' , 'Page Content' , 'Page Status' , 'Page date' , 'Page Image']
+                [
+                    adminTrans('page' , 'title') ,
+                    adminTrans('page' , 'slug') ,
+                    adminTrans('page' , 'body') ,
+                    adminTrans('page' , 'status'),
+                    adminTrans('page' , 'date') ,
+                    adminTrans('page' , 'image')
+                ]
                 );
             @endphp
                  @foreach($fields as $key =>  $field)
@@ -23,7 +30,12 @@
                             @elseif($type == 'Image')
                                 <td> <img src="{{ url(env('UPLOAD_PATH').'/'.$item[$field]) }}" class="img-responsive thumbnail"  width="200"/></td>
                             @else
-                                 <td>{!!  nl2br($item[$field])  !!}</td>
+                                @if($field == 'title' || $field == 'body')
+                                    <td>{!!  getDefaultValueKey(nl2br($item[$field]))  !!}</td>
+                                 @else
+                                    <td>{!!  nl2br($item[$field])  !!}</td>
+                                 @endif
+
                             @endif
                         </tr>
                     @endforeach

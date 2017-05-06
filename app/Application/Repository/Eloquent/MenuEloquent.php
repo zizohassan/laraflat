@@ -23,12 +23,20 @@ class MenuEloquent extends AbstractEloquent implements MenuInterface{
     }
 
     public function updateOneMenuItem($request){
-        $update = $this->item->find($request->id);;
-        $update->name = $request->name;
+        $update = $this->item->find($request->id);
+        $name = $this->extractNameArray($request->name);
+        $update->name = encodeJson($name);
         $update->icon = $request->icon;
         $update->link = $request->link;
         $update->type = $request->type;
         $update->save();
+    }
+    protected function extractNameArray($name){
+        $array =  [];
+        foreach($name as $n){
+            $array[$n['key']] = $n['value'];
+        }
+        return $array;
     }
 
     public function updateMenuItems($request){
@@ -52,12 +60,13 @@ class MenuEloquent extends AbstractEloquent implements MenuInterface{
     }
 
     public function addNewItemToMenu($request){
-        $valid = Validator::make($request->all(),$this->item->validation);
+        $valid = Validator::make($request->all(),$this->item->validation(null));
         if($valid->fails()){
             SweetAlert::error( 'Be sure the name is unique', 'Error');
             return redirect()->back();
         }
-       $this->item->create($request->all());
+       $array =  transformArray($request->all());
+       $this->item->create($array);
         SweetAlert::success("Done Add Item to Menu" , 'Done');
         return redirect()->back();
     }

@@ -3,9 +3,9 @@
     <li>
         @if(array_key_exists('item' , $admin))
             <a href="{{ array_key_exists('sub' , $admin) ? 'javascript:void(0);' : url($admin['item']['link']) }}" class="{{ array_key_exists('sub' , $admin) ? 'menu-toggle' : '' }}">
-                {!! $admin['item']['icon'] !!}
+                {!! $admin['item']['icon'] != null ? $admin['item']['icon']:  '' !!}
                 <span>
-                    {{ $admin['item']['name'] }}
+                    {{ getDefaultValueKey($admin['item']['name']) }}
                 </span>
             </a>
         @endif
@@ -14,9 +14,9 @@
                 @foreach($admin['sub']  as $sub)
                     <li>
                         <a href="{{ url($sub['link']) }}" target="{{ $sub['type'] }}" class=" waves-effect waves-block">
-                            {!! $sub['icon'] !!}
+                            {!! $sub['icon'] != null ? $sub['icon']:  '' !!}
                             <span>
-                                 {{ $sub['name'] }}
+                                 {{ getDefaultValueKey($sub['name']) }}
                             </span>
                         </a>
                     </li>

@@ -19,6 +19,7 @@ class PagesDataTable extends DataTable
              ->addColumn('edit', 'admin.page.buttons.edit')
              ->addColumn('delete', 'admin.page.buttons.delete')
              ->addColumn('view', 'admin.page.buttons.view')
+            ->addColumn('title', 'admin.page.buttons.langcol')
              ->make(true);
     }
     /**
@@ -52,37 +53,52 @@ class PagesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'title',
-            'status',
-            'date',
-             [
-                  'name' => 'view',
-                  'data' => 'view',
-                  'title' => ' View  ',
-                  'exportable' => false,
-                  'printable' => false,
-                  'searchable' => false,
-                  'orderable' => false,
-             ],
-             [
-                  'name' => 'edit',
-                  'data' => 'edit',
-                  'title' => '  Edit  ',
-                  'exportable' => false,
-                  'printable' => false,
-                  'searchable' => false,
-                  'orderable' => false,
-             ],
-             [
-                   'name' => 'delete',
-                   'data' => 'delete',
-                   'title' => ' Delete  ',
-                   'exportable' => false,
-                   'printable' => false,
-                   'searchable' => false,
-                   'orderable' => false,
-             ],
+            [
+                'name' => "id",
+                'data' => 'id',
+                'title' => adminTrans('curd' , 'id'),
+            ],
+            [
+                'name' => "title",
+                'data' => 'title',
+            ],
+            [
+                'name' => "status",
+                'data' => 'status',
+                'title' => adminTrans('page' , 'status'),
+            ],
+            [
+                'name' => "date",
+                'data' => 'date',
+                'title' => adminTrans('page' , 'date'),
+            ],
+            [
+                'name' => "view",
+                'data' => 'view',
+                'title' => adminTrans('curd' , 'view'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
+            [
+                'name' => 'edit',
+                'data' => 'edit',
+                'title' => adminTrans('curd' , 'edit'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => adminTrans('curd' , 'delete'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
 
         ];
     }

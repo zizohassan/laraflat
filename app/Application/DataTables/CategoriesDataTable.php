@@ -19,6 +19,7 @@ class CategoriesDataTable extends DataTable
              ->addColumn('edit', 'admin.categorie.buttons.edit')
              ->addColumn('delete', 'admin.categorie.buttons.delete')
              ->addColumn('view', 'admin.categorie.buttons.view')
+            ->addColumn('name', 'admin.categorie.buttons.langcol')
              ->make(true);
     }
     /**
@@ -52,12 +53,20 @@ class CategoriesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'name',
+            [
+                'name' => "id",
+                'data' => 'id',
+                'title' => adminTrans('curd' , 'id'),
+            ],
+            [
+                'name' => "name",
+                'data' => 'name',
+            ],
+
              [
-                  'name' => 'view',
+                  'name' => "view",
                   'data' => 'view',
-                  'title' => ' View  ',
+                  'title' => adminTrans('curd' , 'view'),
                   'exportable' => false,
                   'printable' => false,
                   'searchable' => false,
@@ -66,7 +75,7 @@ class CategoriesDataTable extends DataTable
              [
                   'name' => 'edit',
                   'data' => 'edit',
-                  'title' => '  Edit  ',
+                  'title' => adminTrans('curd' , 'edit'),
                   'exportable' => false,
                   'printable' => false,
                   'searchable' => false,
@@ -75,7 +84,7 @@ class CategoriesDataTable extends DataTable
              [
                    'name' => 'delete',
                    'data' => 'delete',
-                   'title' => ' Delete  ',
+                   'title' => adminTrans('curd' , 'delete'),
                    'exportable' => false,
                    'printable' => false,
                    'searchable' => false,

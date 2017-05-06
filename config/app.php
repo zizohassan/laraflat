@@ -181,6 +181,7 @@ return [
         Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         ConsoleTVs\Links\LinksServiceProvider::class,
+         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
 
 
@@ -250,6 +251,8 @@ return [
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Links' => ConsoleTVs\Links\Facades\Links::class,
+        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+
 
 
 

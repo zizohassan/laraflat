@@ -13,7 +13,7 @@ class Item extends Model
     ];
     public function   validation ($id){
         return [
-            'name' =>'required|unique:items,name,'.$id,
+            'name*name' =>'required|unique:items,name,'.$id,
             'link' => 'required',
             'type' => 'required',
             'parent_id' => 'required',

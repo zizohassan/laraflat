@@ -1,11 +1,11 @@
 @extends('admin.layout.app')
 
 @section('title')
-    categorie Control
+    {{ adminTrans('categorie' , 'Category') }} {{ adminTrans('home' , 'control') }}
 @endsection
 
 @section('content')
-    @include('admin.layout.table' , ['title' => 'categorie' , 'table' => $dataTable->table() ])
+    @include('admin.layout.table' , ['title' => adminTrans('categorie' , 'Category') , 'model' => 'categorie' , 'table' => $dataTable->table() ])
 @endsection
 
 @section('script')

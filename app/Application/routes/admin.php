@@ -1,4 +1,6 @@
 <?php
+    Route::get('icons' , 'HomeController@icons');
+    Route::get('docs' , 'HomeController@apiDocs');
     #### user control
     Route::get('user' , 'UserController@index');
     Route::get('user/item/{id?}' , 'UserController@show');

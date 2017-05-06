@@ -50,13 +50,13 @@
                 font-size: 84px;
             }
 
-            .links ul {
+            .links ul , .links {
                 list-style: none;
             }
-            .links ul > li{
+            .links ul > li , .links li {
                 float: left;
             }
-            .links ul > li > a {
+            .links ul > li > a , .links li > a{
                 color: #636b6f;
                 padding: 0 25px;
                 font-size: 12px;
@@ -75,14 +75,22 @@
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
-                <div class="top-right links">
+                <ul class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <li><a href="{{ url('/home') }}">Home</a></li>
                     @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{ url('/register') }}">Register</a></li>
                     @endif
-                </div>
+                    <li><a href="{{ url('/page/'.$page->slug) }}">{{ getDefaultValueKey($page->title) }}</a></li>
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <li>
+                                <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                            </li>
+                    @endforeach
+                </ul>
             @endif
 
             <div class="content">

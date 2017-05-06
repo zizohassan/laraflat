@@ -6,6 +6,7 @@ use App\Application\Model\Item;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Console\GeneratorCommand;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Symfony\Component\Console\Input\InputOption;
 
 class MakeAdminModel extends GeneratorCommand
@@ -38,6 +39,7 @@ class MakeAdminModel extends GeneratorCommand
      */
     public function fire()
     {
+            $this->addlanguageFile();
             $this->ImportMenuTable();
             $this->createModel();
             $this->createDataTable();
@@ -45,8 +47,10 @@ class MakeAdminModel extends GeneratorCommand
             $this->createViews();
             $this->appendRoutes();
             $this->createMigration();
+
 //           $this->addItemtoMenue();
     }
+
 
     protected function addItemtoMenue(){
         $name = strtolower($this->getNameInput());
@@ -59,7 +63,7 @@ class MakeAdminModel extends GeneratorCommand
         $name = $this->getNameInput();
         $order = Item::count();
         $menu = new Item();
-        $menu->name = $name;
+        $menu->name = encodeJson(['en' => $name , 'ar' => '']);
         $menu->link  = '/admin/'.strtolower($name);
         $menu->parent_id  = 0;
         $menu->menu_id  = 1;
@@ -105,6 +109,25 @@ class MakeAdminModel extends GeneratorCommand
         $this->line('Done create Datatable class  at Application DataTables  '.$this->getNameInput() .'sDatatable .');
         $this->files->put($path, $this->buildDataTable( $name ,  $nameDatatable  , __DIR__.'/stub/datatable.stub'));
     }
+
+
+    protected function addlanguageFile(){
+        $name = strtolower($this->getNameInput());
+        $locales  = LaravelLocalization::getSupportedLocales();
+        foreach($locales as $key => $locale){
+            $this->line('Create  '.$locale['name'] .' Language file .');
+            $path = base_path('resources/lang/'.$key.'/'.$name.'.php');
+            $this->files->put($path , $this->buildlang($name  , __DIR__.'/stub/lang.stub'));
+        }
+       return 'Done';
+    }
+
+
+    protected function buildlang($name   , $stub ){
+        $stub = $this->files->get($stub);
+        return $this->replaceView( $stub, 'DUMMYKEY',$name);
+    }
+
 
     protected function buildDataTable($name  , $nameDatatable  , $stub ){
         $stub = $this->files->get($stub);
@@ -184,6 +207,7 @@ class MakeAdminModel extends GeneratorCommand
         $this->CreateButton('edit');
         $this->CreateButton('delete');
         $this->CreateButton('view');
+        $this->CreateButton('langcol');
     }
 
     protected function CreateOnView($view ){

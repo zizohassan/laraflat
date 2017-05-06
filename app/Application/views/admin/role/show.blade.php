@@ -1,17 +1,22 @@
 @extends('admin.layout.app')
 
 @section('title')
-    role View
+    {{  adminTrans('role' , 'role') }}     {{  adminTrans('curd' , 'view') }}
+
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => 'role' , 'action' => 'View' ])
+    @component('admin.layout.form' , ['title' => adminTrans('role' , 'role') , 'model' => 'role' , 'action' => adminTrans('curd' , 'view') ])
 
         <table class="table table-bordered table-responsive table-striped">
             @php
                 $fields = rename_keys(
                      removeFromArray($data['fields'] , ['id']) ,
-                     ['Role Name' , 'Role Slug'  , 'Role Description' ]
+                     [
+                            adminTrans('role' , 'name'),
+                            adminTrans('role' , 'slug'),
+                            adminTrans('role' , 'des')
+                    ]
                 );
             @endphp
                  @foreach($fields as $key =>  $field)

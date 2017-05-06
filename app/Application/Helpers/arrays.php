@@ -3,32 +3,32 @@
 
 function status(){
     return [
-        'Active' => 'Active',
-        'Deactive' => 'Deactive'
+        'Active' => adminTrans('home' ,'Active'),
+        'Deactive' => adminTrans('home' ,'Deactive'),
     ];
 }
 
 function setting_type(){
     return [
-        'text' => 'Text',
-        'textarea' => 'Textarea',
-        'image' => 'Image'
+        'text' => adminTrans('home' ,'text'),
+        'textarea' => adminTrans('home' ,'textarea'),
+        'image' => adminTrans('home' ,'image'),
     ];
 
 }
 
 function type(){
     return [
-        'Main' => 'Main',
-        'Sub' => 'Sub'
+        'Main' => adminTrans('home' ,'main'),
+        'Sub' => adminTrans('home' ,'sub'),
     ];
 }
 
 
 function menuTarget(){
     return [
-        'blank' => 'blank',
-        'self' => 'self'
+        'blank' => adminTrans('home' ,'blank'),
+        'self' => adminTrans('home' ,'self'),
     ];
 }
 
@@ -36,8 +36,8 @@ function menuTarget(){
 
 function permissionType(){
     return [
-        'on' => 'On',
-        'off' => 'Off'
+        'on' => adminTrans('home' ,'on'),
+        'off' => adminTrans('home' ,'off'),
     ];
 }
 

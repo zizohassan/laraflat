@@ -1,0 +1,251 @@
+@font-face {
+    font-family: 'droid-sans';
+    src: url('../fonts/droid-sans.ttf');
+}
+
+.ar {
+    font-family: 'droid-sans' !important;
+}
+
+#leftsidebar{
+    right:0;
+    left:auto;
+}
+section.content {
+    margin: 100px 315px 0 15px;
+}
+.user-info{
+    direction: rtl;
+}
+
+.sidebar .user-info .info-container .user-helper-dropdown{
+    left:0;
+    right: auto;
+}
+
+.dropdown-menu.pull-right{
+    left:0;
+    right: auto;
+}
+.sidebar .menu .list{
+    padding-right: 0;
+    padding-left: auto;
+}
+.menu{
+    direction: rtl;
+}
+
+.dropdown-menu{
+    text-align: right;
+}
+.dropdown-menu ul.menu {
+    padding-right: 0;
+}
+.dropdown-menu > li > a i.material-icons {
+    float: right;
+    margin-left: 7px;
+    margin-right: 0px;
+}
+
+.sidebar .menu .list a span{
+    margin: 7px 7px 7px 0px;
+}
+.dropdown-menu ul.menu .menu-info {
+    right: 5px;
+    left: 0px;
+}
+.dropdown-menu ul.menu.tasks h4 small {
+    float: left;
+}
+.ls-closed .sidebar {
+    margin-left: 0px;
+    margin-right: -300px;
+}
+.ls-closed section.content {
+    margin-right: 15px;
+    margin-left: 0px;
+}
+
+.overlay-open .sidebar {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.info-box{
+    direction: rtl;
+}
+
+.card {
+    direction: rtl;
+}
+.dashboard-stat-list{
+    padding-right:0px;
+    padding-left: auto;
+}
+
+.panel-switch-btn{
+    left: 20px;
+    right: auto;
+}
+li > ul > li > ul.ml-menu {
+    padding-right: 20px;
+}
+
+.sidebar .menu .list .menu-toggle:after, .sidebar .menu .list .menu-toggle:before {
+    left: 17px;
+    right: auto;
+}
+
+.card .header .header-dropdown {
+    left: 15px;
+    right: auto;
+}
+
+.info-box.hover-expand-effect:after {
+    right: 80px;
+    left: auto;
+}
+
+.block-header {
+    direction: rtl;
+}
+
+.sidebar .menu .list .ml-menu li.active a.toggled:not(.menu-toggle):before {
+    content: '\E314';
+}
+
+.info-box-2.hover-expand-effect:after,
+.info-box-3.hover-expand-effect:after,
+.info-box-4.hover-expand-effect:after{
+    right: 0;
+    left: auto;
+}
+
+.demo-icon-container .demo-google-material-icon {
+    text-align: right;
+}
+.demo-icon-container .demo-google-material-icon .icon-name {
+    right: 7px;
+    left: auto;
+}
+
+.list-group {
+    padding-right: 0;
+}
+
+.list-group-item > .badge {
+    float: left;
+}
+
+button.list-group-item {
+    text-align: right;
+}
+
+.media-right {
+    padding-right: 10px;
+}
+
+.media-left {
+    padding-left: 10px;
+}
+
+.modal-dialog {
+    direction: rtl;
+}
+
+.progress-bar {
+    float:right;
+}
+
+.nav-tabs {
+    padding-left:40px;
+    padding-right:0px;
+}
+.nav-tabs li {
+    float:right;
+}
+.sidebar .menu .list .ml-menu li.active a.toggled:not(.menu-toggle){
+    margin-right: 5px;
+    margin-left: 0px;
+}
+
+.form-group .form-line .form-label {
+    right: 0;
+    left: auto;
+}
+
+.input-group .input-group-addon {
+    padding-right: 0;
+}
+
+.wizard.vertical > .steps {
+    float: right;
+}
+
+.wizard > .steps > ul > li {
+    float: right;
+}
+
+.table thead tr th tr {
+    text-align: right;
+}
+
+.table tbody tr td, .table tbody tr th {
+    text-align: right;
+}
+
+.table thead tr th {
+    text-align: right;
+}
+
+tfoot tr th {
+    text-align: right;
+}
+
+.alert {
+    text-align: right;
+}
+
+[type="checkbox"] + label {
+    padding-left: 0px;
+    padding-right: 26px;
+}
+
+[type="checkbox"]:checked + label:before {
+    left: auto;
+    right: 13px;
+}
+
+[type="checkbox"] + label:before, [type="checkbox"]:not(.filled-in) + label:after {
+    right: 0;
+    left: auto;
+}
+
+[type="checkbox"].filled-in + label:before, [type="checkbox"].filled-in + label:after {
+    right: 0;
+    left: auto;
+}
+[type="checkbox"].filled-in:checked + label:before {
+    right: 11px;
+    left: auto;
+}
+
+[type="checkbox"].filled-in:not(:checked) + label:before{
+    right: 11px;
+    left: auto;
+}
+
+[type="radio"] + label:before, [type="radio"] + label:after {
+    right: 0;
+    left: auto;
+}
+
+[type="radio"]:checked + label {
+    padding-right: 26px;
+    padding-left: 0;
+}
+
+[type="radio"]:not(:checked) + label {
+    padding-right: 26px;
+    padding-left: 0;
+}

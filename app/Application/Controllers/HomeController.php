@@ -4,6 +4,7 @@ namespace App\Application\Controllers;
 
 
 
+use App\Application\Model\Page;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['getPageBySlug' , 'welcome']);
     }
 
     /**
@@ -25,6 +26,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('website.home');
+    }
+
+    public function getPageBySlug($slug){
+        $page = Page::where('slug' , $slug)->first();
+        if($page){
+            return view('website.page' , compact('page'));
+        }
+        return redirect('404');
+    }
+
+    public function welcome(){
+        $page = Page::select('title' , 'slug')->where('slug' , 'about_us')->first();
+        return view('website.welcome' , compact('page'));
     }
 }

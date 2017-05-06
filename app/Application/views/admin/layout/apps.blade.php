@@ -105,6 +105,14 @@
                     <ul class="dropdown-menu pull-right">
                         <li><a href="{{ url('/admin/user/item/'.auth()->user()->id) }}"><i class="material-icons">person</i>Profile</a></li>
                         <li role="seperator" class="divider"></li>
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <li>
+                                <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                                    {{ $properties['native'] }}
+                                </a>
+                            </li>
+                        @endforeach
+                        <li role="seperator" class="divider"></li>
                         <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="material-icons">input</i>Sign Out</a></li>

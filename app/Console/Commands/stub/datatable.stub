@@ -19,6 +19,7 @@ class DummyDatatable extends DataTable
              ->addColumn('edit', 'admin.DummyModelSmall.buttons.edit')
              ->addColumn('delete', 'admin.DummyModelSmall.buttons.delete')
              ->addColumn('view', 'admin.DummyModelSmall.buttons.view')
+             ->addColumn('view', 'admin.DummyModelSmall.buttons.langcol')
              ->make(true);
     }
     /**
@@ -52,12 +53,21 @@ class DummyDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'created_at',
+              [
+                  'name' => "id",
+                  'data' => 'id',
+                  'title' => adminTrans('curd' , 'id'),
+             ],
+             [
+                'name' => "name",
+                'data' => 'name',
+                'title' => 'name',
+             ],
+
              [
                   'name' => 'view',
                   'data' => 'view',
-                  'title' => ' View  ',
+                  'title' => adminTrans('curd' , 'view'),
                   'exportable' => false,
                   'printable' => false,
                   'searchable' => false,
@@ -66,7 +76,7 @@ class DummyDatatable extends DataTable
              [
                   'name' => 'edit',
                   'data' => 'edit',
-                  'title' => '  Edit  ',
+                  'title' =>  adminTrans('curd' , 'edit'),
                   'exportable' => false,
                   'printable' => false,
                   'searchable' => false,
@@ -75,7 +85,7 @@ class DummyDatatable extends DataTable
              [
                    'name' => 'delete',
                    'data' => 'delete',
-                   'title' => ' Delete  ',
+                   'title' => adminTrans('curd' , 'delete'),
                    'exportable' => false,
                    'printable' => false,
                    'searchable' => false,

@@ -1,16 +1,16 @@
 @extends('admin.layout.app')
 
 @section('title')
-    log View
+    {{ adminTrans('log' , 'log') }} {{ adminTrans('curd' , 'view') }}
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => 'log' , 'action' => 'View' , 'button' => false ])
+    @component('admin.layout.form' , ['title' => adminTrans('log' , 'log') , 'model' => 'log' , 'action' => adminTrans('curd' , 'view') , 'button' => false ])
         <table class="table table-bordered table-responsive table-striped">
             @php
                 $fields = rename_keys(
                      removeFromArray($data['fields'] , ['id']) ,
-                     ['Log Action' , 'Log Table' , 'Log Status' , 'Error Messages' , 'User ID' ,  'Created At' , 'Last Update']
+                     [ adminTrans('log' , 'action') ,  adminTrans('log' , 'model') ,  adminTrans('log' , 'status') , adminTrans('log' , 'message') , adminTrans('log' , 'user_id')  ,   adminTrans('log' , 'created_at') , adminTrans('log' , 'last_update') ]
                 );
             @endphp
                  @foreach($fields as $key =>  $field)

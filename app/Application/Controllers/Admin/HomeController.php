@@ -24,4 +24,12 @@ class HomeController extends AbstractController
         return view('admin.home.index' ,compact('data'));
     }
 
+    public function icons(){
+        return view('admin.layout.static.icons');
+    }
+
+    public function apiDocs(){
+        return view('vendor.apidoc.index');
+    }
+
 }

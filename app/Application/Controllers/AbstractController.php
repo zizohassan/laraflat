@@ -69,7 +69,8 @@ abstract class AbstractController extends  Controller{
         return true;
     }
     public function storeItem($array  , $callback){
-        $new = $this->model->create($array);
+        $encodeArray = transformArray($array);
+        $new = $this->model->create($encodeArray);
         if($this->model->getTable() != 'logs') {
             $dataLog = [
                 'New id' => [$new->id]
@@ -82,8 +83,10 @@ abstract class AbstractController extends  Controller{
         }
         return $new;
     }
+
     public function updateItem($array , $item , $callback , $id){
-       $update = $item->update($array);
+        $encodeArray = transformArray($array);
+       $update = $item->update($encodeArray);
         if($this->model->getTable() != 'logs') {
             $dataLog = [
                 'Updated id' => [$id]

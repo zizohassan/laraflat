@@ -1,17 +1,26 @@
 @extends('admin.layout.app')
 
 @section('title')
-    permission View
+    {{ adminTrans('permission' , 'permission') }}   {{ adminTrans('curd' , 'view') }}
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => 'permission' , 'action' => 'View' ])
+    @component('admin.layout.form' , ['title' => adminTrans('permission' , 'permission') , 'model' => 'permission' , 'action' => adminTrans('curd' , 'view') ])
 
         <table class="table table-bordered table-responsive table-striped">
             @php
                 $fields = rename_keys(
                      removeFromArray($data['fields'] , ['id']) ,
-                     ['Permission Name','Permission Slug','Permission Description' , 'Permission Model' , 'Permission Add' , 'Permission edit' , 'Permission view' , 'Permission Delete']
+                     [
+                           adminTrans('permission' , 'name') ,
+                            adminTrans('permission' , 'slug') ,
+                            adminTrans('permission' , 'des') ,
+                            adminTrans('permission' , 'model') ,
+                            adminTrans('permission' , 'action_add') ,
+                            adminTrans('permission' , 'action_edit') ,
+                            adminTrans('permission' , 'action_view') ,
+                            adminTrans('permission' , 'action_delete') ,
+                    ]
                 );
             @endphp
                  @foreach($fields as $key =>  $field)

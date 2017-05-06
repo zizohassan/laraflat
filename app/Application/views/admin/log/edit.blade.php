@@ -1,13 +1,14 @@
 @extends('admin.layout.app')
 
 @section('title')
-    log {{  isset($item) ? ucfirst('edit') : ucfirst('add') }}
+    {{ adminTrans('log' , 'log') }}
+    {{  isset($item) ? adminTrans('curd' , 'edit')  : adminTrans('curd' , 'add')  }}
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => 'log' , 'action' => isset($item) ? 'edit' : 'add' ])
+    @component('admin.layout.form' , ['title' => adminTrans('log' , 'log') , 'action' => isset($item) ? adminTrans('curd' , 'edit')  : adminTrans('curd' , 'add')  ])
         @include('admin.layout.messages')
-        <form action="{{ url('admin/log/item') }}/{{ isset($item) ? $item->id : '' }}" method="post" enctype="multipart/form-data">
+        <form action="{{ concatenateLangToUrl('admin/log/item') }}/{{ isset($item) ? $item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">
@@ -18,7 +19,7 @@
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default" >
                     <i class="material-icons">check_circle</i>
-                    save log
+                    {{ adminTrans('home' , 'save') }} {{ adminTrans('log' , 'log') }}
                 </button>
             </div>
         </form>

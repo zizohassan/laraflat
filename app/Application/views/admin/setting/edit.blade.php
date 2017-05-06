@@ -1,17 +1,17 @@
 @extends('admin.layout.app')
 
 @section('title')
-    setting {{  isset($item) ? ucfirst('edit') : ucfirst('add') }}
+    {{ adminTrans('setting' , 'setting') }} {{  isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') }}
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => 'setting' , 'action' => isset($item) ? 'edit' : 'add' ])
+    @component('admin.layout.form' , ['title' => adminTrans('setting' , 'setting') , 'model' => 'setting' , 'action' => isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') ])
         @include('admin.layout.messages')
-        <form action="{{ url('admin/setting/item') }}/{{ isset($item) ? $item->id : '' }}" method="post" enctype="multipart/form-data">
+        <form action="{{ concatenateLangToUrl('admin/setting/item') }}/{{ isset($item) ? $item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">
-                    <label for="">Setting Name</label>
+                    <label for="">{{ adminTrans('setting' , 'name') }}</label>
                     <input type="text" name="name" id="name" class="form-control" value="{{ isset($item) ? $item->name : '' }}"/>
                 </div>
             </div>
@@ -20,7 +20,7 @@
 
                 <div class="form-group">
                     <div class="">
-                        <label for="">Setting type</label>
+                        <label for="">{{ adminTrans('setting' , 'type') }}</label>
                         @php $type = isset($item) ? $item->type : null @endphp
                         {!! Form::select('type' , setting_type() , $type  , ['id' => 'setting_type'  , 'class' => 'form-control'] ) !!}
                     </div>
@@ -59,7 +59,7 @@
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default" >
                     <i class="material-icons">check_circle</i>
-                    save setting
+                    {{ adminTrans('home' , 'save') }}   {{ adminTrans('setting' , 'setting') }}
                 </button>
             </div>
         </form>

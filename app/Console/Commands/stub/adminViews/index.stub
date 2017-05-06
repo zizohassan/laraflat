@@ -1,11 +1,11 @@
 @extends('admin.layout.app')
 
 @section('title')
-    DummyView Control
+     {{ adminTrans('DummyView' , 'DummyView') }} {{ adminTrans('home' , 'control') }}
 @endsection
 
 @section('content')
-    @include('admin.layout.table' , ['title' => 'DummyView' , 'table' => $dataTable->table() ])
+    @include('admin.layout.table' , ['title' => adminTrans('DummyView' , 'DummyView') , 'model' => 'DummyView' , 'table' => $dataTable->table() ])
 @endsection
 
 @section('script')

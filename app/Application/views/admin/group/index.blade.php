@@ -1,11 +1,11 @@
 @extends('admin.layout.app')
 
 @section('title')
-    group Control
+    {{  adminTrans('group' , 'group')}} {{ adminTrans('home' , 'control') }}
 @endsection
 
 @section('content')
-    @include('admin.layout.table' , ['title' => 'group' , 'table' => $dataTable->table() ])
+    @include('admin.layout.table' , ['title' =>  adminTrans('group' , 'group'), 'model'=>'group', 'table' => $dataTable->table() ])
 @endsection
 
 @section('script')

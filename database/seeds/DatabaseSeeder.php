@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminUser::class);
         $this->call(AddSetting::class);
         $this->call(AddMenu::class);
-        $this->call(AddItemsToMenu::class);
         $this->call(AddPage::class);
+        $this->call(AddItemsToMenu::class);
     }
 }

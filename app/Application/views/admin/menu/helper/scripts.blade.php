@@ -2,7 +2,7 @@
 {{ Html::script('admin/js/pages/ui/modals.js') }}
 {{ Html::script('admin/plugins/bootstrap-notify/bootstrap-notify.js') }}
 <script>
-    var url = "{{ url('admin/update/menuItem')  }}";
+    var url = "{{ concatenateLangToUrl('admin/update/menuItem')  }}";
     var id = "{{ $item->id }}";
     var _token = "{{ csrf_token() }}";
     $('.dd').nestable({
@@ -20,21 +20,25 @@
         clearFields();
         if($(evt.relatedTarget).data('url') && $(evt.relatedTarget).data('id')){
             var id = $(evt.relatedTarget).data('id');
-            $.get("{{ url('admin/getItemInfo/') }}/"+id , function(result){
+            $.get("{{ concatenateLangToUrl('admin/getItemInfo/') }}/"+id , function(result){
                 var json = JSON.parse(result);
-                $('#itemName').val(json.name);
+                var names = JSON.parse(json.name);
+                console.log(names);
+                @foreach(getAvLang() as $K => $L)
+                    $('#{{ 'name_'.$K }}').val(names.{{ $K }});
+                @endforeach
                 $('#itemIcon').val(json.icon);
                 $('#itemLink').val(json.link);
                 $("#type").val(json.type == undefined || json.type ==  '' ? 'self' : json.type).change();
                 $('#menu_id').val(json.id);
                 $('#actionBtn').attr('onclick' , 'UpdateItem();return false;');
-                $('#actionBtn').html('Save Item');
+                $('#actionBtn').html('{{ adminTrans('menu', 'save_item') }}');
             });
         }else{
             clearFields();
             $('#actionBtn').removeAttr('onclick');
             $('#menu_id').val({{$item->id}});
-            $('#actionBtn').html('Add Item');
+            $('#actionBtn').html('{{ adminTrans('menu', 'add_item') }}');
         }
     });
     function clearFields(){
@@ -43,7 +47,12 @@
     function UpdateItem(){
         $(this).preventDefault;
         var id = $('#menu_id').val();
-        var name = $('#itemName').val();
+        var name = [];
+        $('input.ItemName').each( function () {
+            var key  =  $(this).data('key');
+            var value = $(this).val();
+            name.push({key:key , value:value});
+        });
         var icon = $('#itemIcon').val();
         var link = $('#itemLink').val();
         var type = $('#type').val();
@@ -56,8 +65,10 @@
             type:type,
             _token:"{{ csrf_token() }}"
         };
-        $.post("{{ url('admin/updateOneMenuItem/') }}/",data, function(result){
+        $.post("{{ concatenateLangToUrl('admin/updateOneMenuItem/') }}/",data, function(result){
             showNotification('<strong>Saving</strong> You have been update this item!');
+            $('#defaultModal').modal('hide');
+
         });
     }
 
@@ -66,8 +77,6 @@
             allow_dismiss: true ,
             timer: 1000 ,
             type: 'success',
-//            showProgressbar: true,
-//            progress: 20,
             placement: {
                 from: "bottom",
                 align: "right"

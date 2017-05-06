@@ -58,7 +58,7 @@ function extractHtml($main){
     if($main['icon'] != ''){
         $out .= $main['icon'];
     }
-    $out .=$main['name'];
+    $out .= getDefaultValueKey($main['name']);
     $out .='</a>';
     return $out;
 }

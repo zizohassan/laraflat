@@ -11,6 +11,7 @@
         "intervention/image": "^2.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "mcamara/laravel-localization": "^1.2",
         "mpociot/laravel-apidoc-generator": "^2.0",
         "uxweb/sweet-alert": "^1.4",
         "yajra/laravel-datatables-oracle": "~6.0"
@@ -33,7 +34,8 @@
             "app/Application/Helpers/uploadFiles.php",
             "app/Application/Helpers/setting.php",
             "app/Application/Helpers/menu.php",
-            "app/Application/Helpers/user.php"
+            "app/Application/Helpers/user.php",
+            "app/Application/Helpers/lang.php"
         ]
     },
     "autoload-dev": {

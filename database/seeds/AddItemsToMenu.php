@@ -13,7 +13,7 @@ class AddItemsToMenu extends Seeder
     {
 
         DB::table('items')->insert([
-            'name' => 'Home',
+            'name' =>encodeJson( ['ar' => ' الرئيسية ' , 'en' => 'Home']),
             'link' => '/admin/home',
             'type' => '',
             'parent_id' => 0,
@@ -23,7 +23,7 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
-           'name' => 'Categories',
+           'name' =>encodeJson( ['ar' => 'الاقسام', 'en' => 'Categories']),
            'link' => '/admin/categorie',
            'type' => '',
            'parent_id' => 0,
@@ -33,7 +33,7 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
-            'name' => 'Users',
+            'name' =>encodeJson( ['ar' => '  المستخدمين ' , 'en' => 'User']),
             'link' => '/admin/users',
             'type' => '',
             'parent_id' => 0,
@@ -43,7 +43,7 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
-            'name' => 'Settings',
+            'name' =>encodeJson( ['ar' => ' اعدادت الموقع ' , 'en' => 'Setting']),
             'link' => '/admin/settings',
             'type' => '',
             'parent_id' => 0,
@@ -54,7 +54,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' => 'Pages',
+            'name' =>encodeJson( ['ar' => ' الصفحات ', 'en' => 'Page']),
             'link' => '/admin/page',
             'type' => '',
             'parent_id' => 0,
@@ -65,7 +65,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' => 'Log',
+            'name' =>encodeJson( ['ar' => ' سجل البينات ' , 'en' => 'Logs']),
             'link' => '/admin/log',
             'type' => '',
             'parent_id' => 0,
@@ -76,7 +76,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' => 'Statistics',
+            'name' =>encodeJson( ['ar' => ' الاحصائيات '  , 'en' => 'Statistics']),
             'link' => '/admin/links',
             'type' => '',
             'parent_id' => 0,
@@ -91,7 +91,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' => 'User',
+            'name' =>encodeJson( ['ar' => ' المستخدمين ' , 'en' => "Users"]),
             'link' => '/admin/user',
             'type' => '',
             'parent_id' => 3,
@@ -102,7 +102,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' => 'Group',
+            'name' =>encodeJson( ['ar' => ' جروبات الاعضاء ', 'en' => 'Groups']),
             'link' => '/admin/group',
             'type' => '',
             'parent_id' => 3,
@@ -113,7 +113,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' => 'Role',
+            'name' =>encodeJson( ['ar' => ' قوانين الاستخدام ' , 'en' => 'Roles']),
             'link' => '/admin/role',
             'type' => '',
             'parent_id' => 3,
@@ -122,7 +122,7 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
-            'name' => 'Permission',
+            'name' =>encodeJson( ['ar' =>  ' التصاريح ' , 'en' => 'Permissions']),
             'link' => '/admin/permission',
             'type' => '',
             'parent_id' => 3,
@@ -131,7 +131,7 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
-            'name' => 'Icons',
+            'name' =>encodeJson( ['ar' => ' ايقونات الموقع '  , 'en' => 'Icons']),
             'link' => '/admin/icons',
             'type' => '',
             'parent_id' => 4,
@@ -141,7 +141,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' => 'Docs',
+            'name' =>encodeJson( ['ar' =>   '  التوثيق ', 'en' => 'Docs']),
             'link' => '/admin/docs',
             'type' => '',
             'parent_id' => 4,
@@ -151,7 +151,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' => 'Setting',
+            'name' =>encodeJson( ['ar' => ' اعدادت الموقع ' , 'en' => 'Settings']),
             'link' => '/admin/setting',
             'type' => '',
             'parent_id' => 4,
@@ -162,7 +162,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' => 'Menu',
+            'name' =>encodeJson( ['ar' =>  ' القوائم ' , 'en' => 'Menu']),
             'link' => '/admin/menu',
             'type' => '',
             'parent_id' => 4,
@@ -173,7 +173,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' => 'LaraFlat',
+            'name' =>encodeJson( ['ar' =>' لارافلات ' , 'en' => "laraFalt"]),
             'link' => 'https://laraflat.com/',
             'type' => 'blank',
             'parent_id' => 0,
@@ -181,7 +181,8 @@ class AddItemsToMenu extends Seeder
             'order' => 1,
         ]);
         DB::table('items')->insert([
-            'name' => '5dmat-web',
+
+            'name' =>encodeJson( ['ar' => ' خدمات ويب ', 'en' => '5dmat-web']),
             'link' => 'https://5dmat-web.com/',
             'type' => 'blank',
             'parent_id' => 0,
@@ -189,7 +190,7 @@ class AddItemsToMenu extends Seeder
             'order' => 2
         ]);
         DB::table('items')->insert([
-            'name' => 'StreamLab',
+            'name' =>encodeJson( ['ar' => ' ستريم لاب ' , 'en' => 'StreamLab']),
             'link' => 'https://streamlab.io/',
             'type' => 'blank',
             'parent_id' => 0,

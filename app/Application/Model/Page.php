@@ -17,8 +17,8 @@ class Page extends Model
 
     public function   validation ($id){
          return  [
-            'title' => 'required',
-            'body' => 'required|min:20',
+            'title.*' => 'required|max:90',
+            'body.*' => 'required|min:20',
             'date' => 'required',
             'status' => 'required',
             'image' => 'image',

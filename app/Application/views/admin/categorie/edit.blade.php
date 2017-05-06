@@ -1,24 +1,21 @@
 @extends('admin.layout.app')
 
 @section('title')
-    category {{  isset($item) ? ucfirst('edit') : ucfirst('add') }}
+     {{ adminTrans('categorie' , 'Category') }} {{  isset($item) ? adminTrans('home' , 'edit') : adminTrans('home','add') }}
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => 'categorie' , 'action' => isset($item) ? 'edit' : 'add' ])
+    @component('admin.layout.form' , ['title' =>  adminTrans('categorie' , 'Category') , 'model' => 'categorie' , 'action' => isset($item) ? adminTrans('home' , 'edit') : adminTrans('home','add') ])
         @include('admin.layout.messages')
-        <form action="{{ url('admin/categorie/item') }}/{{ isset($item) ? $item->id : '' }}" method="post" enctype="multipart/form-data">
+        <form action="{{ concatenateLangToUrl('admin/categorie/item') }}/{{ isset($item) ? $item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <div class="form-group">
-                <div class="form-line">
-                    <input type="text" name="name" id="name" class="form-control" value="{{ isset($item) ? $item->name : '' }}"/>
-                </div>
-            </div>
+
+            {!! extractFiled('name' , isset($item->name) ? $item->name : null) !!}
 
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default" >
                     <i class="material-icons">check_circle</i>
-                    save category
+                    {{ adminTrans('home' , 'save') }} {{ adminTrans('categorie' , 'Category') }}
                 </button>
             </div>
         </form>

@@ -51,29 +51,50 @@ class LogsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'model',
-            'action',
-            'status',
-            'created_at',
-             [
-                  'name' => 'view',
-                  'data' => 'view',
-                  'title' => ' View  ',
-                  'exportable' => false,
-                  'printable' => false,
-                  'searchable' => false,
-                  'orderable' => false,
-             ],
-             [
-                   'name' => 'delete',
-                   'data' => 'delete',
-                   'title' => ' Delete  ',
-                   'exportable' => false,
-                   'printable' => false,
-                   'searchable' => false,
-                   'orderable' => false,
-             ],
+            [
+                'name' => "id",
+                'data' => 'id',
+                'title' => adminTrans('curd' , 'id'),
+            ],
+            [
+                'name' => "model",
+                'data' => 'model',
+                'title' => adminTrans('log' , 'model'),
+            ],
+            [
+                'name' => "action",
+                'data' => 'action',
+                'title' => adminTrans('log' , 'action'),
+            ],
+            [
+                'name' => "status",
+                'data' => 'status',
+                'title' => adminTrans('log' , 'status'),
+            ],
+            [
+                'name' => "created_at",
+                'data' => 'created_at',
+                'title' => adminTrans('log' , 'created_at'),
+            ],
+            [
+                'name' => "view",
+                'data' => 'view',
+                'title' => adminTrans('curd' , 'view'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
+
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => adminTrans('curd' , 'delete'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
 
         ];
     }

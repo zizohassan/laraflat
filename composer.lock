@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "da5954b333c8246f7644618fd729f729",
-    "content-hash": "6808199a8222a8875700a90301e70947",
+    "hash": "b5321e929560cf6c094f5fa22dd57bf3",
+    "content-hash": "cd1c23ba7d858f088c754942554df5e0",
     "packages": [
         {
             "name": "consoletvs/charts",
@@ -1186,6 +1186,55 @@
                 "laravel"
             ],
             "time": "2017-04-23 18:15:08"
+        },
+        {
+            "name": "mcamara/laravel-localization",
+            "version": "v1.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mcamara/laravel-localization.git",
+                "reference": "29f9ea25bbb97888aa4e0c0e36787b0f80b9920f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mcamara/laravel-localization/zipball/29f9ea25bbb97888aa4e0c0e36787b0f80b9920f",
+                "reference": "29f9ea25bbb97888aa4e0c0e36787b0f80b9920f",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "~5.2",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "orchestra/testbench-browser-kit": "~3.4",
+                "phpunit/phpunit": "5.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [],
+                "psr-0": {
+                    "Mcamara\\LaravelLocalization": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Cámara",
+                    "email": "mcamara88@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easy localization for Laravel",
+            "homepage": "https://github.com/mcamara/laravel-localization",
+            "keywords": [
+                "laravel",
+                "localization",
+                "php"
+            ],
+            "time": "2017-04-25 15:27:29"
         },
         {
             "name": "mnapoli/front-yaml",

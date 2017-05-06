@@ -52,40 +52,69 @@ class PermissionsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
-            'slug',
-            'action_add',
-            'action_edit',
-            'action_delete',
-            'action_view',
-            'model',
-             [
-                  'name' => 'view',
-                  'data' => 'view',
-                  'title' => ' View  ',
-                  'exportable' => false,
-                  'printable' => false,
-                  'searchable' => false,
-                  'orderable' => false,
-             ],
-             [
-                  'name' => 'edit',
-                  'data' => 'edit',
-                  'title' => '  Edit  ',
-                  'exportable' => false,
-                  'printable' => false,
-                  'searchable' => false,
-                  'orderable' => false,
-             ],
-             [
-                   'name' => 'delete',
-                   'data' => 'delete',
-                   'title' => ' Delete  ',
-                   'exportable' => false,
-                   'printable' => false,
-                   'searchable' => false,
-                   'orderable' => false,
-             ],
+            [
+                'name' => "id",
+                'data' => 'id',
+                'title' => adminTrans('curd' , 'id'),
+            ],
+            [
+                'name' => "slug",
+                'data' => 'slug',
+                'title' => adminTrans('permission' , 'slug'),
+            ],
+            [
+                'name' => "action_add",
+                'data' => 'action_add',
+                'title' => adminTrans('permission' , 'action_add'),
+            ],
+            [
+                'name' => "action_edit",
+                'data' => 'action_edit',
+                'title' => adminTrans('permission' , 'action_edit'),
+            ],
+            [
+                'name' => "action_delete",
+                'data' => 'action_delete',
+                'title' => adminTrans('permission' , 'action_delete'),
+            ],
+            [
+                'name' => "action_view",
+                'data' => 'action_view',
+                'title' => adminTrans('permission' , 'action_view'),
+            ],
+            [
+                'name' => "model",
+                'data' => 'model',
+                'title' => adminTrans('permission' , 'model'),
+            ],
+            [
+                'name' => "view",
+                'data' => 'view',
+                'title' => adminTrans('curd' , 'view'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
+            [
+                'name' => 'edit',
+                'data' => 'edit',
+                'title' => adminTrans('curd' , 'edit'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => adminTrans('curd' , 'delete'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
+
 
         ];
     }

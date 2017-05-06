@@ -1,3 +1,4 @@
+{{ extractFiled() }}
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,9 @@
     {{ Html::style('admin/plugins/animate-css/animate.css') }}
     {{ Html::style('admin/plugins/morrisjs/morris.css') }}
     {{ Html::style('admin/css/style.css') }}
+    @if(LaravelLocalization::getCurrentLocaleDirection() == 'rtl')
+        {{ Html::style('admin/css/rtl/rtl.css') }}
+    @endif
     {{ Html::style('admin/css/themes/all-themes.css') }}
     {{ Html::style('admin/plugins/multi-select/css/multi-select.css') }}
     {{ Html::style('admin/plugins/bootstrap-select/css/bootstrap-select.css') }}
@@ -103,11 +107,19 @@
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
-                        <li><a href="{{ url('/admin/user/item/'.auth()->user()->id) }}"><i class="material-icons">person</i>Profile</a></li>
+                        <li><a href="{{ url('/admin/user/item/'.auth()->user()->id) }}"><i class="material-icons">person</i>{{ adminTrans('home' ,'profile') }}</a></li>
+                        <li role="seperator" class="divider"></li>
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <li>
+                                    <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                                        {{ $properties['native'] }}
+                                    </a>
+                                </li>
+                            @endforeach
                         <li role="seperator" class="divider"></li>
                         <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="material-icons">input</i>Sign Out</a></li>
+                                                     document.getElementById('logout-form').submit();"><i class="material-icons">input</i>{{ adminTrans('home' ,'sign_out') }}</a></li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
@@ -119,7 +131,7 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
-                <li class="header">MAIN NAVIGATION</li>
+                <li class="header">{{ adminTrans('home'  , 'MAIN_NAVIGATION') }}</li>
                 @include('admin.layout.menu')
             </ul>
         </div>

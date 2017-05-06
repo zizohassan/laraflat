@@ -1,12 +1,7 @@
 <?php
 
-Route::get('/', function(){
-    return view('welcome');
-});
+Route::get('/', 'HomeController@welcome');
 
-Route::get('/user', 'TestController@index');
-Route::get('/user/item/{id?}', 'TestController@store');
-Route::get('user/{id}/delete', 'TestController@delete');
-
+Route::get('/page/{slug}', 'HomeController@getPageBySlug');
 
 Auth::routes();
