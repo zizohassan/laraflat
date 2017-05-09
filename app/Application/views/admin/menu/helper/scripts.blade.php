@@ -46,29 +46,10 @@
     }
     function UpdateItem(){
         $(this).preventDefault;
-        var id = $('#menu_id').val();
-        var name = [];
-        $('input.ItemName').each( function () {
-            var key  =  $(this).data('key');
-            var value = $(this).val();
-            name.push({key:key , value:value});
-        });
-        var icon = $('#itemIcon').val();
-        var link = $('#itemLink').val();
-        var type = $('#type').val();
-        type = type == '' ? 'self' : type;
-        var data = {
-            id:id,
-            name:name,
-            icon:icon,
-            link:link,
-            type:type,
-            _token:"{{ csrf_token() }}"
-        };
+        var data = $('.saveMenus').serialize();
         $.post("{{ concatenateLangToUrl('admin/updateOneMenuItem/') }}/",data, function(result){
             showNotification('<strong>Saving</strong> You have been update this item!');
             $('#defaultModal').modal('hide');
-
         });
     }
 

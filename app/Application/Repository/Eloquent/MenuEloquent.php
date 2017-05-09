@@ -23,7 +23,7 @@ class MenuEloquent extends AbstractEloquent implements MenuInterface{
     }
 
     public function updateOneMenuItem($request){
-        $update = $this->item->find($request->id);
+        $update = $this->item->find($request->menu_id);
         $name = $this->extractNameArray($request->name);
         $update->name = encodeJson($name);
         $update->icon = $request->icon;
@@ -33,8 +33,8 @@ class MenuEloquent extends AbstractEloquent implements MenuInterface{
     }
     protected function extractNameArray($name){
         $array =  [];
-        foreach($name as $n){
-            $array[$n['key']] = $n['value'];
+        foreach($name as $key => $n){
+            $array[$key] = $n;
         }
         return $array;
     }

@@ -1,6 +1,6 @@
 <div class="header">
     <h2>
-        {{ ucfirst($title) }}  {{ isset($action) ? ucfirst($action) : adminTrans('home' , 'control') }}
+        {{ isset($action) ? ucfirst($action) : adminTrans('home' , 'control') }}  {{ ucfirst($title) }}
     </h2>
    @if($button == true)
         <ul class="header-dropdown m-r--5">

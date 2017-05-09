@@ -1,4 +1,3 @@
-{{ extractFiled() }}
 <!DOCTYPE html>
 <html>
 <head>

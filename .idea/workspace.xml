@@ -2,112 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c491c7f-0b22-4ebd-a22c-09234fe89577" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Application/Helpers/lang.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Application/views/admin/categorie/buttons/langcol.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Application/views/admin/page/buttons/langcol.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Application/views/website/page.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Console/Commands/stub/adminViews/buttons/langcol.stub" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Console/Commands/stub/lang.stub" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/admin/css/rtl/rtl.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/categorie.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/curd.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/group.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/home.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/log.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/menu.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/page.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/permission.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/role.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/setting.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/ar/user.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/categorie.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/curd.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/group.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/home.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/log.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/menu.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/page.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/permission.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/role.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/setting.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/lang/en/user.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/38943_1494025746.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/files/88380_1494025692.png" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Application/views/home.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/website/home.blade.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/Application/views/welcome.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/website/welcome.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" afterPath="$PROJECT_DIR$/app/Application/Controllers/AbstractController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Controllers/Admin/HomeController.php" afterPath="$PROJECT_DIR$/app/Application/Controllers/Admin/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Controllers/HomeController.php" afterPath="$PROJECT_DIR$/app/Application/Controllers/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/DataTables/CategoriesDataTable.php" afterPath="$PROJECT_DIR$/app/Application/DataTables/CategoriesDataTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/DataTables/GroupsDataTable.php" afterPath="$PROJECT_DIR$/app/Application/DataTables/GroupsDataTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/DataTables/LogsDataTable.php" afterPath="$PROJECT_DIR$/app/Application/DataTables/LogsDataTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/DataTables/MenusDataTable.php" afterPath="$PROJECT_DIR$/app/Application/DataTables/MenusDataTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/DataTables/PagesDataTable.php" afterPath="$PROJECT_DIR$/app/Application/DataTables/PagesDataTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/DataTables/PermissionsDataTable.php" afterPath="$PROJECT_DIR$/app/Application/DataTables/PermissionsDataTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/DataTables/RolesDataTable.php" afterPath="$PROJECT_DIR$/app/Application/DataTables/RolesDataTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/DataTables/SettingsDataTable.php" afterPath="$PROJECT_DIR$/app/Application/DataTables/SettingsDataTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/DataTables/UserDataTable.php" afterPath="$PROJECT_DIR$/app/Application/DataTables/UserDataTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Helpers/arrays.php" afterPath="$PROJECT_DIR$/app/Application/Helpers/arrays.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Helpers/menu.php" afterPath="$PROJECT_DIR$/app/Application/Helpers/menu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Helpers/user.php" afterPath="$PROJECT_DIR$/app/Application/Helpers/user.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/Categorie.php" afterPath="$PROJECT_DIR$/app/Application/Model/Categorie.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/Item.php" afterPath="$PROJECT_DIR$/app/Application/Model/Item.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Model/Page.php" afterPath="$PROJECT_DIR$/app/Application/Model/Page.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Helpers/lang.php" afterPath="$PROJECT_DIR$/app/Application/Helpers/lang.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/Repository/Eloquent/MenuEloquent.php" afterPath="$PROJECT_DIR$/app/Application/Repository/Eloquent/MenuEloquent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/routes/admin.php" afterPath="$PROJECT_DIR$/app/Application/routes/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/routes/visitor.php" afterPath="$PROJECT_DIR$/app/Application/routes/visitor.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/routes/web.php" afterPath="$PROJECT_DIR$/app/Application/routes/web.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/categorie/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/categorie/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/categorie/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/categorie/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/categorie/show.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/categorie/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/group/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/group/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/group/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/group/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/group/show.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/group/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/home/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/layout/app.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/layout/app.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/layout/apps.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/layout/apps.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/layout/breadcrumb.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/layout/breadcrumb.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/layout/form.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/layout/form.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/layout/header.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/layout/header.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/layout/menu.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/layout/menu.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/log/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/log/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/log/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/log/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/log/show.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/log/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/menu/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/menu/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/menu/helper/li.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/menu/helper/li.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/menu/helper/model.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/menu/helper/model.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/menu/helper/scripts.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/menu/helper/scripts.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/menu/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/menu/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/menu/show.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/menu/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/page/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/page/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/page/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/page/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/page/show.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/page/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/permission/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/permission/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/permission/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/permission/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/permission/show.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/permission/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/role/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/role/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/role/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/role/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/role/show.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/role/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/setting/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/setting/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/setting/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/setting/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/setting/show.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/setting/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/user/edit.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/user/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/user/index.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/user/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application/views/admin/user/show.blade.php" afterPath="$PROJECT_DIR$/app/Application/views/admin/user/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php" afterPath="$PROJECT_DIR$/app/Console/Commands/MakeAdminModel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/stub/adminViews/edit.stub" afterPath="$PROJECT_DIR$/app/Console/Commands/stub/adminViews/edit.stub" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/stub/adminViews/index.stub" afterPath="$PROJECT_DIR$/app/Console/Commands/stub/adminViews/index.stub" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/stub/adminViews/show.stub" afterPath="$PROJECT_DIR$/app/Console/Commands/stub/adminViews/show.stub" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/stub/datatable.stub" afterPath="$PROJECT_DIR$/app/Console/Commands/stub/datatable.stub" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Kernel.php" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Middleware/PermissionMiddleware.php" afterPath="$PROJECT_DIR$/app/Http/Middleware/PermissionMiddleware.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/AddItemsToMenu.php" afterPath="$PROJECT_DIR$/database/seeds/AddItemsToMenu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/AddPage.php" afterPath="$PROJECT_DIR$/database/seeds/AddPage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
     </list>
     <ignored path="Interfaces.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -136,7 +36,18 @@
     <favorites_list name="Interfaces" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="header.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Application/views/admin/layout/header.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.040852576">
+              <caret line="2" column="81" selection-start-line="2" selection-start-column="81" selection-end-line="2" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -149,11 +60,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/lang/en/page.php" />
-        <option value="$PROJECT_DIR$/resources/lang/ar/page.php" />
-        <option value="$PROJECT_DIR$/resources/lang/en/home.php" />
-        <option value="$PROJECT_DIR$/resources/lang/ar/home.php" />
-        <option value="$PROJECT_DIR$/resources/lang/en/permission.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/permission/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Application/views/admin/permission/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/lang/ar/permission.php" />
@@ -200,6 +106,11 @@
         <option value="$PROJECT_DIR$/app/Application/Controllers/Admin/HomeController.php" />
         <option value="$PROJECT_DIR$/app/Application/routes/admin.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/PermissionMiddleware.php" />
+        <option value="$PROJECT_DIR$/app/Application/Repository/Eloquent/MenuEloquent.php" />
+        <option value="$PROJECT_DIR$/app/Application/views/admin/menu/helper/scripts.blade.php" />
+        <option value="$PROJECT_DIR$/app/Application/Helpers/lang.php" />
+        <option value="$PROJECT_DIR$/app/Application/views/admin/layout/app.blade.php" />
+        <option value="$PROJECT_DIR$/app/Application/views/admin/layout/header.blade.php" />
       </list>
     </option>
   </component>
@@ -215,7 +126,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="248" />
+    <option name="x" value="247" />
     <option name="y" value="1073" />
     <option name="width" value="1280" />
     <option name="height" value="735" />
@@ -245,6 +156,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -265,8 +178,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -274,7 +185,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Middleware/ProjectName" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="SearchEverywhereHistoryKey" value="lang&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Helpers/lang.php&#10;array&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Helpers/arrays.php&#10;arr&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Helpers/arrays.php&#10;lan&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Helpers/lang.php&#10;web.php&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/routes/web.php&#10;cont&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Controllers/AbstractController.php&#10;rtl&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/public/admin/css/rtl/rtl.css&#10;app&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/views/admin/layout/app.blade.php&#10;app.php&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/config/app.php&#10;admin&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/routes/admin.php&#10;admi&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/routes/admin.php&#10;route&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/vendor/laravel/framework/src/Illuminate/Routing/Route.php&#10;abst&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Controllers/AbstractController.php&#10;Men&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/Repository/InterFaces/MenuInterface.php&#10;admin.&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/routes/admin.php&#10;route.&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/vendor/laravel/framework/src/Illuminate/Routing/Route.php&#10;app.&#9;FILE&#9;file:///Users/apple/Desktop/git/laraflat/app/Application/views/admin/layout/app.blade.php&#10;kern&#9;FILE&#9;file:///Users/apple/Desktop/backpack/19-4-2017/app/Http/Kernel.php&#10;vis&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/routes/visitor.php&#10;User&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/User.php&#10;Permiss&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Permission.php&#10;role&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Role.php&#10;UserEl&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Repository/Eloquent/UserEloquent.php&#10;per&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Permission.php&#10;Role&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Role.php&#10;Roles&#9;FILE&#9;file:///Users/apple/Desktop/backpack/Interfaces/Interfaces/app/Application/Model/Roles.php&#10;men&#9;FILE&#9;file://C:/Users/Abdel Aziz Hassan/Desktop/Interfaces/app/Application/views/admin/layout/menu.blade.php" />
@@ -377,12 +288,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="248" y="1073" width="1280" height="735" extended-state="6" />
+    <frame x="247" y="1073" width="1280" height="735" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="eSnippet Pro" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28432956" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28836834" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -452,35 +363,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/lang/ar/role.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21390374">
-          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/lang/en/role.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32085562">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/role/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48128343">
-          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Application/views/admin/role/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16042781">
           <caret line="3" column="34" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -488,7 +374,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16042781">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -496,7 +381,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26737967">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -504,7 +388,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26737967">
           <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -512,7 +395,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.96256685">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -520,7 +402,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16042781">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="83" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -528,7 +409,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16042781">
           <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -536,7 +416,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.1604278">
           <caret line="61" column="48" selection-start-line="61" selection-start-column="48" selection-end-line="61" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -544,7 +423,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2142856">
           <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -552,7 +430,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2142856">
           <caret line="3" column="33" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -564,27 +441,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/layout/apps.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32085562">
-          <caret line="106" column="66" selection-start-line="106" selection-start-column="66" selection-end-line="106" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/charts.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/layout/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21390374">
-          <caret line="111" column="28" selection-start-line="111" selection-start-column="28" selection-end-line="117" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -592,7 +452,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5721925">
           <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -600,7 +459,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.142857">
           <caret line="2" column="128" selection-start-line="2" selection-start-column="128" selection-end-line="2" selection-end-column="128" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -608,7 +466,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0160428">
           <caret line="19" column="71" selection-start-line="19" selection-start-column="71" selection-end-line="19" selection-end-column="71" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -616,7 +473,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.642858">
           <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -624,7 +480,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37433156">
           <caret line="7" column="127" selection-start-line="7" selection-start-column="127" selection-end-line="7" selection-end-column="127" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -632,7 +487,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.42780748">
           <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -640,7 +494,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -648,7 +501,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32085562">
           <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -656,7 +508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.42780748">
           <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -664,7 +515,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5882353">
           <caret line="11" column="95" selection-start-line="11" selection-start-column="95" selection-end-line="11" selection-end-column="95" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -672,7 +522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5882353">
           <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -680,37 +529,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5882353">
           <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Application/Helpers/lang.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.0">
-          <caret line="21" column="80" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="80" />
-          <folding>
-            <marker date="1494083251000" expanded="true" signature="1317:1702" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1375" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1481" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1497" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1498" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1563" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1564" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1565" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1590" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1604" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1605" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1625" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1626" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1357:1683" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1924:2313" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1964:2000" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1964:2025" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1964:2186" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1964:2217" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1964:2229" placeholder="..." />
-            <marker date="1494083251000" expanded="true" signature="1964:2294" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -718,7 +536,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37433156">
           <caret line="12" column="34" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -726,7 +543,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.142857">
           <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -734,7 +550,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.571428">
           <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -742,7 +557,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.607142">
           <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -750,7 +564,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="28" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -758,7 +571,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5882353">
           <caret line="62" column="33" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -766,7 +578,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.285714">
           <caret line="62" column="34" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -774,7 +585,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7647059">
           <caret line="35" column="65" selection-start-line="35" selection-start-column="65" selection-end-line="35" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -782,7 +592,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.53475934">
           <caret line="21" column="145" selection-start-line="21" selection-start-column="145" selection-end-line="21" selection-end-column="145" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -798,7 +607,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5187166">
           <caret line="314" column="33" selection-start-line="314" selection-start-column="33" selection-end-line="314" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -806,7 +614,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -814,7 +621,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5882353">
           <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="61" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -822,7 +628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.053475935">
           <caret line="1" column="41" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -830,7 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16042781">
           <caret line="79" column="19" selection-start-line="79" selection-start-column="17" selection-end-line="79" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -838,7 +642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="84" column="47" selection-start-line="84" selection-start-column="47" selection-end-line="84" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -846,7 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.10695187">
           <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -854,9 +656,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7326203">
           <caret line="40" column="72" selection-start-line="40" selection-start-column="72" selection-end-line="40" selection-end-column="72" />
-          <folding>
-            <element signature="e#49#80#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -864,7 +663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.928572">
           <caret line="30" column="27" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -880,6 +678,53 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.053475935">
           <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/Repository/Eloquent/MenuEloquent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/menu/helper/scripts.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3197158">
+          <caret line="6" column="32" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/Helpers/lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.222025">
+          <caret line="98" column="1" selection-start-line="98" selection-start-column="1" selection-end-line="98" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/layout/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/layout/apps.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.6483126">
+          <caret line="106" column="66" selection-start-line="106" selection-start-column="66" selection-end-line="106" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Application/views/admin/layout/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.040852576">
+          <caret line="2" column="81" selection-start-line="2" selection-start-column="81" selection-end-line="2" selection-end-column="81" />
           <folding />
         </state>
       </provider>

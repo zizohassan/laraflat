@@ -19,12 +19,12 @@ function getAvLang(){
       return \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getSupportedLocales();
 }
 
-function extractFiled( $name = 'name' , $value = null , $type = 'text'   ,$class = '',  $rows = 8){
+function extractFiled( $name = 'name' , $value = null , $type = 'text' , $transeFile = null  ,$class = '',  $rows = 8){
       $lang  = getAvLang();
       if($type == 'text'){
-            return extractTextFiled($lang , $name , $class , $value );
+            return extractTextFiled($lang , $name , $class , $value , $transeFile );
       }elseif($type == 'textarea'){
-            return extractTexArea($lang , $name , $rows , $class , $value);
+            return extractTexArea($lang , $name , $rows , $class , $value , $transeFile);
       }
 }
 
@@ -36,31 +36,53 @@ function getDefaultValueKey($value){
       return isset(json_decode($value)->$deflan) ? json_decode($value)->$deflan  : null;
 }
 
-function extractTextFiled ($lang , $name ,  $class = '' , $value){
-      $out = '';
-      foreach($lang as $key => $ln){
-            $out .= '<br>
-            <div class="form-group">
-                <div class="form-line">
-                    <label for="name">'.$name.' '.$ln['native'].'</label>
-                    <input type="text" data-key="'.$key.'" name="'.$name.'['.$key.']" placeholder="'.$name.' '.$ln['native'].'" id="'.$name.'_'.$key.'" class="form-control '. $class .'" value="'.getLangValue($value , $key).'" />
-                </div>
-            </div>';
+function extractTextFiled ($lang , $name ,  $class = '' , $value , $transeFile = null){
+      $title  = $transeFile != null ? adminTrans($transeFile , $name)  : $name;
+      $out = '<ul class="nav nav-tabs tab-nav-right" role="tablist">';
+      $i = 0;
+      foreach ($lang as $l){
+            $active = $i == 0 ? 'active' : '';
+            $out .= ' <li role="presentation" class="'.$active.'"><a href="#'.$name.$l['regional'].'" data-toggle="tab" aria-expanded="false">'.$title.' '.$l['native'].'</a></li>';
+            $i++;
       }
+      $i = 0;
+      $out .= '</ul><div class="tab-content">';
+      foreach($lang as $key => $ln){
+            $active = $i == 0 ? 'active' : '';
+            $out .= '<div role="tabpanel" class="tab-pane fade '.$active.' in" id="'.$name.$ln['regional'].'">';
+            $out .= '<div class="form-group">';
+            $out .= '<div class="form-line">';
+            $out .= '<input type="text" data-key="'.$key.'" name="'.$name.'['.$key.']" placeholder="'.$title.' '.$ln['native'].'" id="'.$name.'_'.$key.'" class="form-control '. $class .'" value="'.getLangValue($value , $key).'" />';
+            $out .= '</div>';
+            $out .= '</div></div>';
+            $i++;
+      }
+      $out .='</div>';
       return $out;
 }
 
-function extractTexArea($lang , $name , $rows=8 , $class = '' , $value){
-      $out = '';
-      foreach($lang as $key => $ln){
-            $out .= '<br>
-            <div class="form-group">
-                <div class="form-line">
-                <label for="name">'.$name.' '.$ln['native'].'</label>
-                    <textarea  name="'.$name.'['.$key.']" data-key="'.$key.'" placeholder="'.$name.' '.$ln['native'].'"  id="'.$name.'_'.$key.'" rows="'.$rows.'" class="form-control '.$class.'">'.getLangValue($value , $key).'</textarea>
-                </div>
-            </div>';
+function extractTexArea($lang , $name , $rows=8 , $class = '' , $value ,  $transeFile = null){
+      $title  = $transeFile != null ? adminTrans($transeFile , $name)  : $name;
+      $out = '<ul class="nav nav-tabs tab-nav-right" role="tablist">';
+      $i = 0;
+      foreach ($lang as $l){
+            $active = $i == 0 ? 'active' : '';
+            $out .= ' <li role="presentation" class="'.$active.'"><a href="#'.$name.$l['regional'].'" data-toggle="tab" aria-expanded="false">'.$title.' '.$l['native'].'</a></li>';
+            $i++;
       }
+      $i = 0;
+      $out .= '</ul><div class="tab-content">';
+      foreach($lang as $key => $ln){
+            $active = $i == 0 ? 'active' : '';
+            $out .= '<div role="tabpanel" class="tab-pane fade '.$active.' in" id="'.$name.$ln['regional'].'">';
+            $out .= '<div class="form-group">';
+            $out .= '<div class="form-line">';
+            $out .= '<textarea  name="'.$name.'['.$key.']" data-key="'.$key.'" placeholder="'.$title.' '.$ln['native'].'"  id="'.$name.'_'.$key.'" rows="'.$rows.'" class="form-control '.$class.'">'.getLangValue($value , $key).'</textarea>';
+            $out .= '</div>';
+            $out .= ' </div></div>';
+            $i++;
+      }
+      $out .='</div>';
       return $out;
 }
 
