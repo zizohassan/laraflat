@@ -29,11 +29,11 @@ function extractFiled( $name = 'name' , $value = null , $type = 'text' , $transe
 }
 
 function getLangValue($value  , $key  ){
-      return isset(json_decode($value)->$key) ? json_decode($value)->$key : null;
+      return isset(json_decode($value)->$key) ? json_decode($value)->$key : $value;
 }
 function getDefaultValueKey($value){
       $deflan = getCurrentLang();
-      return isset(json_decode($value)->$deflan) ? json_decode($value)->$deflan  : null;
+      return isset(json_decode($value)->$deflan) ? json_decode($value)->$deflan  : $value;
 }
 
 function extractTextFiled ($lang , $name ,  $class = '' , $value , $transeFile = null){
