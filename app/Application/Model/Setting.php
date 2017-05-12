@@ -17,6 +17,14 @@ class Setting extends Model
         ];
   }
 
+    public function   updateValidation ($id){
+        return [
+            'name' => 'required|unique:setting,name,'.$id,
+            'type' => 'required',
+            'body_setting' => 'required'
+        ];
+    }
+
    protected $fillable = [
         'name' ,'type' , 'body_setting'
    ];

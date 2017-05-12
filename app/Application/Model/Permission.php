@@ -21,6 +21,14 @@ class Permission extends Model
         ];
   }
 
+    public function   updateValidation ($id){
+        return [
+            'name' => 'required',
+            'model' => 'required',
+            'slug' => 'required|unique:permissions,slug,'.$id
+        ];
+    }
+
   public function user(){
         return $this->belongsToMany('App\Application\Model\User', 'permission_user');
   }

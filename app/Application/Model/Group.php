@@ -23,6 +23,13 @@ class Group extends Model
        ];
     }
 
+    public function   updateValidation ($id){
+        return [
+            'name' =>'required',
+            'slug' => 'required|unique:groups,slug,'.$id
+        ];
+    }
+
 
   public function user(){
         return $this->hasMany('App\Application\Model\User', 'group_id');

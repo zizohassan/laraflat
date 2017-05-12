@@ -22,6 +22,13 @@ class Role extends Model
         ];
   }
 
+    public function   updateValidation ($id){
+        return [
+            'name' =>'required',
+            'slug' => 'required|unique:roles,slug,'.$id
+        ];
+    }
+
 
 
   public function user(){

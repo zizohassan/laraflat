@@ -57,7 +57,11 @@ abstract class AbstractController extends  Controller{
     }
 
     public function itemValidation($array , $id){
-        $valid = Validator::make($array,$this->model->validation($id));
+        if($id == null){
+            $valid = Validator::make($array,$this->model->validation($id));
+        }else{
+            $valid = Validator::make($array,$this->model->updateValidation($id));
+        }
         if($valid->fails()){
             if($id != null){
                 $this->createLog('Update' , 'Error' , json_encode($valid->errors()));

@@ -19,4 +19,10 @@ class DummyClass extends Model
         ];
    }
 
+   public function updateValidation($id){
+           return [
+                
+           ];
+   }
+
 }

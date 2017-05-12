@@ -35,6 +35,13 @@ class User extends Authenticatable
         ];
     }
 
+    public function   updateValidation ($id){
+        return [
+            'name' => 'required|min:4|max:40',
+            'email' => 'email|unique:users,email,'.$id,
+            'password' => 'required'
+        ];
+    }
     public function permission(){
         return $this->belongsToMany('App\Application\Model\Permission' , 'permission_user');
     }

@@ -21,4 +21,10 @@ class Categorie extends Model
         ];
    }
 
+   public function updateValidation($id){
+        return [
+            'name.*' => 'required|max:90'
+        ];
+   }
+
 }

@@ -20,6 +20,12 @@ class Log extends Model
         ];
    }
 
+    public function updateValidation($id){
+        return [
+
+        ];
+    }
+
    public function user(){
        return $this->belongsTo('App\Application\Model\User' , 'user_id');
    }

@@ -21,6 +21,16 @@ class Item extends Model
             'order' => 'required'
         ];
     }
+    public function   updateValidation ($id){
+        return [
+            'name*name' =>'required|unique:items,name,'.$id,
+            'link' => 'required',
+            'type' => 'required',
+            'parent_id' => 'required',
+            'menu_id' =>'required',
+            'order' => 'required'
+        ];
+    }
     public function menu(){
         return $this->belongsTo('App\Menu' , 'menu_id');
     }

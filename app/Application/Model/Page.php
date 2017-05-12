@@ -26,4 +26,16 @@ class Page extends Model
            ];
     }
 
+    public function   updateValidation ($id){
+        return  [
+            'title.*' => 'required|max:90',
+            'body.*' => 'required|min:20',
+            'date' => 'required',
+            'status' => 'required',
+            'image' => 'image',
+            'slug' => "required|unique:pages,slug,".$id
+        ];
+    }
+
+
 }

@@ -18,6 +18,11 @@ class Menu extends Model
         'name' => 'required|unique:menu,name,'.$id
     ];
   }
+  public function   updateValidation ($id){
+    return [
+        'name' => 'required|unique:menu,name,'.$id
+    ];
+  }
 
   public $timestamps = false;
 
