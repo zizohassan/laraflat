@@ -11,7 +11,7 @@
 @section('content')
     @component('admin.layout.form' , ['title' => adminTrans('menu' , 'menu') , 'model' => 'menu' , 'action' => isset($item) ? adminTrans('curd' , 'edit'): adminTrans('curd' , 'add') ])
         @include('admin.layout.messages')
-        <form action="{{ concatenateLangToUrl('admin/menu/item') }}/{{ isset($item) ? $item->id : '' }}" method="post" enctype="multipart/form-data">
+        <form action="{{ concatenateLangToUrl('admin/menu/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">

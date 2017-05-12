@@ -7,7 +7,7 @@
 @section('content')
     @component('admin.layout.form' , ['title' =>  adminTrans('categorie' , 'Category') , 'model' => 'categorie' , 'action' => isset($item) ? adminTrans('home' , 'edit') : adminTrans('home','add') ])
         @include('admin.layout.messages')
-        <form action="{{ concatenateLangToUrl('admin/categorie/item') }}/{{ isset($item) ? $item->id : '' }}" method="post" enctype="multipart/form-data">
+        <form action="{{ concatenateLangToUrl('admin/categorie/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
 
             {!! extractFiled('name' , isset($item->name) ? $item->name : null) !!}

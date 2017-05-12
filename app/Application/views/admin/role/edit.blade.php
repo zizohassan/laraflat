@@ -7,7 +7,7 @@
 @section('content')
     @component('admin.layout.form' , ['title' => adminTrans('role' , 'role')  , 'model' => 'role' , 'action' => isset($item) ? adminTrans('curd' , 'edit')  : adminTrans('curd' , 'add')  ])
         @include('admin.layout.messages')
-        <form action="{{ concatenateLangToUrl('admin/role/item') }}/{{ isset($item) ? $item->id : '' }}" method="post" enctype="multipart/form-data">
+        <form action="{{ concatenateLangToUrl('admin/role/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">
