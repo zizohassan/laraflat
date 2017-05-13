@@ -10,7 +10,7 @@
         <form action="{{ concatenateLangToUrl('admin/categorie/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
 
-            {!! extractFiled('name' , isset($item->name) ? $item->name : null) !!}
+            {!! extractFiled('name' , isset($item->name) ? $item->name : null , 'text' , 'categorie') !!}
 
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default" >

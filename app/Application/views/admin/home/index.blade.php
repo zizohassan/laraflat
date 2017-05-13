@@ -126,7 +126,7 @@
                                 <th>#</th>
                                 <th>{{ adminTrans('home' ,'username') }}</th>
                                 <th>{{ adminTrans('home' ,'created_at') }}</th>
-                                <th>{{ adminTrans('home' ,'action') }}</th>
+                                <th>{{ adminTrans('curd' ,'edit') }}</th>
                             </tr>
                             </thead>
                             <tbody>

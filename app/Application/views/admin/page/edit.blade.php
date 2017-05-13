@@ -14,7 +14,7 @@
         <form action="{{ concatenateLangToUrl('admin/page/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
 
-            {!! extractFiled('title' , isset($item->title) ? $item->title : null) !!}
+            {!! extractFiled('title' , isset($item->title) ? $item->title : null , 'text' , 'page') !!}
 
 
             <div class="form-group">
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            {!! extractFiled('body' , isset($item->body) ? $item->body : null , 'textarea' , 'tinymce' ) !!}
+            {!! extractFiled('body' , isset($item->body) ? $item->body : null , 'textarea' , 'page' , 'tinymce' ) !!}
 
             <div class="form-group">
                 <div class="">

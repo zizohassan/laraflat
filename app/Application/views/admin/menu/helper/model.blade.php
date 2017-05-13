@@ -10,6 +10,7 @@
                 </div>
                 <div class="modal-body">
                   {!! extractFiled('name' , null , $type = 'text' , 'ItemName') !!}
+
                     <div class="form-group">
                         <div class="form-line">
                             <input type="text" name="link" id="itemLink" placeholder="{{ adminTrans('menu' , 'item_link') }}" class="form-control" />
