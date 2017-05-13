@@ -97,3 +97,13 @@ function transformArray($array){
       }
       return $newArray;
 }
+
+function transformSelect($array){
+      $newArray = [];
+      if(count($array) > 0){
+            foreach($array as $key => $value){
+                  $newArray[$key] = getDefaultValueKey($value);
+            }
+      }
+      return $newArray;
+}
