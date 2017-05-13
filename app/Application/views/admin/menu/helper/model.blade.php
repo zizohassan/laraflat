@@ -1,5 +1,5 @@
 <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
-    <form method="post" action="{{ concatenateLangToUrl('admin/addNewItemToMenu') }}">
+    <form method="post" class="saveMenus" action="{{ concatenateLangToUrl('admin/addNewItemToMenu') }}">
         {{ csrf_field() }}
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -9,7 +9,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                  {!! extractFiled('name' , null , $type = 'text' , 'ItemName') !!}
+                    {!! extractFiled('name' , null , $type = 'text' , 'ItemName') !!}
 
                     <div class="form-group">
                         <div class="form-line">
