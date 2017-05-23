@@ -30,6 +30,11 @@
     {{ Html::style('css/sweetalert.css') }}
     {{ Html::style('admin/plugins/tinymce/plugins/elfinder/css/elfinder.full.css') }}
     @yield('style')
+    <style>
+        .card .header .header-dropdown{
+            top:10px;
+        }
+    </style>
 
 </head>
 
