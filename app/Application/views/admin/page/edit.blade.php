@@ -14,17 +14,17 @@
         <form action="{{ concatenateLangToUrl('admin/page/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
 
-            {!! extractFiled('title' , isset($item->title) ? $item->title : null , 'text' , 'page') !!}
+            {!! extractFiled('title' , isset($item->title) ? $item->title : old('title') , 'text' , 'page') !!}
 
 
             <div class="form-group">
                 <div class="form-line">
                     <label for="">{{ adminTrans('page' , 'slug') }}</label>
-                    <input type="text" name="slug" id="slug" placeholder="{{ adminTrans('page' , 'slug') }}" class="form-control" value="{{ isset($item) ? $item->slug : '' }}"/>
+                    <input type="text" name="slug" id="slug" placeholder="{{ adminTrans('page' , 'slug') }}" class="form-control" value="{{ isset($item) ? $item->slug : old('slug') }}"/>
                 </div>
             </div>
 
-            {!! extractFiled('body' , isset($item->body) ? $item->body : null , 'textarea' , 'page' , 'tinymce' ) !!}
+            {!! extractFiled('body' , isset($item->body) ? $item->body : old('body') , 'textarea' , 'page' , 'tinymce' ) !!}
 
             <div class="form-group">
                 <div class="">
@@ -37,7 +37,7 @@
             <div class="form-group">
                 <div class="form-line">
                     <label for="">{{ adminTrans('page' , 'date') }}</label>
-                    <input type="text" name="date" class="datepicker form-control" value="{{ isset($item) ? $item->date : '' }}">
+                    <input type="text" name="date" class="datepicker form-control" value="{{ isset($item) ? $item->date : old('date') }}">
                 </div>
             </div>
 

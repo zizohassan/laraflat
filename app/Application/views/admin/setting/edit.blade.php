@@ -12,7 +12,7 @@
             <div class="form-group">
                 <div class="form-line">
                     <label for="">{{ adminTrans('setting' , 'name') }}</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ isset($item) ? $item->name : '' }}"/>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ isset($item) ? $item->name : old('name')}}"/>
                 </div>
             </div>
 

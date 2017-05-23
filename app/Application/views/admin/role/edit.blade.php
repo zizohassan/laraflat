@@ -11,18 +11,18 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">
-                    <input type="text" name="name" id="name" placeholder="{{ adminTrans('role' , 'name') }}" class="form-control" value="{{ isset($item) ? $item->name : '' }}"/>
+                    <input type="text" name="name" id="name" placeholder="{{ adminTrans('role' , 'name') }}" class="form-control" value="{{ isset($item) ? $item->name : old('name') }}"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="form-line">
-                    <input type="text" name="slug" id="name" placeholder="{{ adminTrans('role' , 'slug') }}" class="form-control" value="{{ isset($item) ? $item->slug : '' }}"/>
+                    <input type="text" name="slug" id="name" placeholder="{{ adminTrans('role' , 'slug') }}" class="form-control" value="{{ isset($item) ? $item->slug : old('slug') }}"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-line">
-                    <textarea  name="description" id="description" placeholder="{{ adminTrans('role' , 'des') }}" class="form-control">{{ isset($item) ? $item->description : '' }}</textarea>
+                    <textarea  name="description" id="description" placeholder="{{ adminTrans('role' , 'des') }}" class="form-control">{{ isset($item) ? $item->description : old('description') }}</textarea>
                 </div>
             </div>
 

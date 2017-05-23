@@ -63,7 +63,7 @@ class MakeAdminModel extends GeneratorCommand
         $name = $this->getNameInput();
         $order = Item::count();
         $menu = new Item();
-        $menu->name = encodeJson(['en' => $name , 'ar' => '']);
+        $menu->name = encodeJson(['en' => $name , 'ar' => $name]);
         $menu->link  = '/admin/'.strtolower($name);
         $menu->parent_id  = 0;
         $menu->menu_id  = 1;

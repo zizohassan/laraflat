@@ -15,7 +15,7 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">
-                    <input type="text" name="name" id="name" class="form-control" placeholder="{{ adminTrans('menu'  , 'name') }}" value="{{ isset($item) ? $item->name : '' }}"/>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="{{ adminTrans('menu'  , 'name') }}" value="{{ isset($item) ? $item->name : old('name') }}"/>
                 </div>
             </div>
             @if(isset($item))

@@ -15,12 +15,12 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">
-                    <input type="text" name="name" id="name" placeholder="{{ adminTrans('user' , 'username') }}" class="form-control" value="{{ isset($item) ? $item->name : '' }}"/>
+                    <input type="text" name="name" id="name" placeholder="{{ adminTrans('user' , 'name') }}" class="form-control" value="{{ isset($item) ? $item->name : old('name') }}"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-line">
-                     <input type="email" name="email" id="email" {{ isset($item) ? '' : 'required' }} placeholder="{{ adminTrans('user' , 'email') }}"  class="form-control" value="{{ isset($item) ? $item->email : '' }}"/>
+                     <input type="email" name="email" id="email" {{ isset($item) ? '' : 'required' }} placeholder="{{ adminTrans('user' , 'email') }}"  class="form-control" value="{{ isset($item) ? $item->email : old('email')  }}"/>
                  </div>
             </div>
             <div class="form-group">

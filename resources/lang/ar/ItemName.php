@@ -1,4 +1,4 @@
 <?php
 return[
-    'name' => 'Item Name'
+    'name' => 'اسم العنصر'
 ];
