@@ -6,16 +6,12 @@ Advanced laravel system to build admin panel
 
 download all files
 
-## Install with Composer
-
-```
-composer create-project laraflat/laraflat  --prefer-dist  ProjectName --stability=dev
-```
 
 ## Requirements
 
 PHP >= 5.6.4 , 
 PHP Curl extension 
+
 
 ## Install  The Dependencies
 
