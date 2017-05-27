@@ -26,14 +26,6 @@ composer install
 php artisan key:generate
 ```
 
-## OR from composer
-
-just excute this command
-
-```
-composer create-project laraflat/laraflat:dev-master
-
-```
 
 ## Migrate
 
