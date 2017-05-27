@@ -2,15 +2,17 @@
 Advanced laravel system to build admin panel 
 
 
-## Download The Files 
-
-download all files
-
 
 ## Requirements
 
 PHP >= 5.6.4 , 
 PHP Curl extension 
+
+
+## Download The Files 
+
+download all files
+
 
 
 ## Install  The Dependencies
@@ -22,6 +24,15 @@ composer install
 ```
 ```
 php artisan key:generate
+```
+
+## OR from composer
+
+just excute this command
+
+```
+composer create-project laraflat/laraflat:dev-master
+
 ```
 
 ## Migrate
