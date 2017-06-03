@@ -19,7 +19,7 @@ class DummyDatatable extends DataTable
              ->addColumn('edit', 'admin.DummyModelSmall.buttons.edit')
              ->addColumn('delete', 'admin.DummyModelSmall.buttons.delete')
              ->addColumn('view', 'admin.DummyModelSmall.buttons.view')
-             ->addColumn('view', 'admin.DummyModelSmall.buttons.langcol')
+             ->addColumn('name', 'admin.DummyModelSmall.buttons.langcol')
              ->make(true);
     }
     /**
@@ -43,7 +43,10 @@ class DummyDatatable extends DataTable
     {
         return $this->builder()
                     ->columns($this->getColumns())
-                    ->parameters($this->getBuilderParameters());
+                    ->parameters([
+                        'dom'          => 'Bfrtip',
+                        'buttons'      => ['excel', 'print', 'reset', 'reload'],
+                   ]);
     }
     /**
      * Get columns.

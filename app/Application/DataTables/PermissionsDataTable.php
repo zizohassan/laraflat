@@ -42,7 +42,10 @@ class PermissionsDataTable extends DataTable
     {
         return $this->builder()
                     ->columns($this->getColumns())
-                    ->parameters($this->getBuilderParameters());
+                    ->parameters([
+                        'dom'          => 'Bfrtip',
+                        'buttons'      => ['excel', 'print', 'reset', 'reload'],
+                    ]);
     }
     /**
      * Get columns.
