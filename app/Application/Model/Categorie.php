@@ -9,10 +9,8 @@ class Categorie extends Model
 
   public $table = "categories";
 
-  public $timestamps = false;
-
    protected $fillable = [
-        'name'
+        'name' , 'created_at' , 'updated_at'
    ];
 
    public function validation($id){

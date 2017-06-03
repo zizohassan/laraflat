@@ -8,7 +8,7 @@ class Permission extends Model
 {
 
   public $table = "permissions";
-  public $timestamps = false;
+
   protected $fillable = [
         'name' , 'slug' , 'action_add' , 'action_edit', 'action_view', 'action_delete' , 'model' , 'description'
   ];

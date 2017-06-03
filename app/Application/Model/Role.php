@@ -9,8 +9,6 @@ class Role extends Model
 
   public $table = "roles";
 
-  public $timestamps = false;
-
    protected $fillable = [
         'name' , 'slug' , 'description'
    ];

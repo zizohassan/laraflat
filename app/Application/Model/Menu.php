@@ -24,7 +24,6 @@ class Menu extends Model
     ];
   }
 
-  public $timestamps = false;
 
   public function item(){
      return $this->hasMany('App\Application\Model\Item');

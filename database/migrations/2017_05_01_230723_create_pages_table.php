@@ -21,6 +21,7 @@ class CreatePagesTable extends Migration
             $table->string('status' , '10');
             $table->string('date' , 12);
             $table->string('image');
+            $table->timestamps();
         });
     }
 

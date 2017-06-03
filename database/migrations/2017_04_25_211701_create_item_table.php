@@ -23,6 +23,7 @@ class CreateItemTable extends Migration
             $table->integer('order');
             $table->integer('menu_id')->unsigned();
             $table->foreign('menu_id')->references('id')->on('menu')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

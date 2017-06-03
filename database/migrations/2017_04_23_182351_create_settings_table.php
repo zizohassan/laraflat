@@ -18,6 +18,7 @@ class CreateSettingsTable extends Migration
             $table->string('name');
             $table->string('type' , 30);
             $table->string('body_setting' , 1000);
+            $table->timestamps();
         });
     }
 

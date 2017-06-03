@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     public $table = "items";
-    public $timestamps = false;
+
     protected $fillable = [
         'name' , 'link' , 'type', 'parent_id', 'menu_id', 'order','icon'
     ];

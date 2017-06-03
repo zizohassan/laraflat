@@ -29,7 +29,5 @@ class Setting extends Model
         'name' ,'type' , 'body_setting'
    ];
 
-    public $timestamps = false;
-
 
 }

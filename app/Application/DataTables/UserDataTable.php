@@ -42,12 +42,20 @@ class UserDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-                    ->columns($this->getColumns())
-                    ->parameters([
-                        'dom'          => 'Bfrtip',
-                        'buttons'      => ['excel', 'print', 'reset', 'reload'],
-                    ]);
+        $html =  $this->builder()
+            ->columns($this->getColumns())
+            ->parameters([
+                'dom'          => 'Bfrtip',
+                'buttons'      => ['excel', 'print', 'reset', 'reload']
+            ]);
+        if(getCurrentLang() == 'ar'){
+            $html = $html->parameters([
+                'language' => [
+                    'url' => url('/vendor/datatables/arabic.json')
+                ]
+            ]);
+        }
+        return $html;
     }
 
     /**

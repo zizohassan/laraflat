@@ -20,6 +20,7 @@ class CreatePermissionsTable extends Migration
             $table->string('action_edit' , 3);
             $table->string('action_delete' , 3);
             $table->string('action_view' , 3);
+            $table->timestamps();
         });
     }
     /**

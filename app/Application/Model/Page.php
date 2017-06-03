@@ -9,7 +9,7 @@ class Page extends Model
 
   public $table = "pages";
 
-  public $timestamps = false;
+
 
    protected $fillable = [
         'title' , 'body' , 'date' , 'slug' , 'status','image'

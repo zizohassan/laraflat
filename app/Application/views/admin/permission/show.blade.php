@@ -10,7 +10,7 @@
         <table class="table table-bordered table-responsive table-striped">
             @php
                 $fields = rename_keys(
-                     removeFromArray($data['fields'] , ['id']) ,
+                     removeFromArray($data['fields'] , ['id' , 'created_at' , 'updated_at']) ,
                      [
                            adminTrans('permission' , 'name') ,
                             adminTrans('permission' , 'slug') ,
