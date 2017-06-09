@@ -107,3 +107,16 @@ function transformSelect($array){
       }
       return $newArray;
 }
+
+function getDir(){
+      return \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocaleDirection();
+}
+function getDirection(){
+      $cD = getDir();
+      return $cD == 'rtl' ? 'right' : 'left';
+}
+
+function getReverseDirection(){
+      $cD = getDir();
+      return $cD == 'rtl' ? 'left' : 'right';
+}
