@@ -16,6 +16,11 @@ class AddSetting extends Seeder
             'type'=> 'text',
             'body_setting' => 'LaraFlat'
         ]);
+          DB::table('setting')->insert([
+          'name' => 'LoginUsername',
+          'type'=> 'text',
+          'body_setting' => 'email'
+      ]);
 
     }
 }
