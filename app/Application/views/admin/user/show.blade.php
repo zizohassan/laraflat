@@ -13,6 +13,7 @@
                 removeFromArray($data['fields'] , ['id' , 'remember_token' , 'password' , 'updated_at']) ,
             [
                 adminTrans('user' , 'name') ,
+                adminTrans('user' , 'username'),
                 adminTrans('user' , 'email'),
                 adminTrans('user' , 'group'),
                 adminTrans('user' , 'created_at'),
