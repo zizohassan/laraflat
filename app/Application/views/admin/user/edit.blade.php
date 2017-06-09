@@ -13,18 +13,27 @@
         @include('admin.layout.messages')
         <form action="{{ concatenateLangToUrl('admin/user/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post">
             {{ csrf_field() }}
-            <div class="form-group">
+           <div class="form-group">
                 <div class="form-line">
+                  <label for="name">{{ adminTrans('user' , 'name') }}</label>
                     <input type="text" name="name" id="name" placeholder="{{ adminTrans('user' , 'name') }}" class="form-control" value="{{ isset($item) ? $item->name : old('name') }}"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-line">
+                  <label for="username">{{ adminTrans('user' , 'username') }}</label>
+                    <input type="text" name="username" id="username" placeholder="{{ adminTrans('user' , 'username') }}" class="form-control" value="{{ isset($item) ? $item->username : old('name') }}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-line">
+                  <label for="email">{{ adminTrans('user' , 'email') }}</label>
                      <input type="email" name="email" id="email" {{ isset($item) ? '' : 'required' }} placeholder="{{ adminTrans('user' , 'email') }}"  class="form-control" value="{{ isset($item) ? $item->email : old('email')  }}"/>
                  </div>
             </div>
             <div class="form-group">
                 <div class="form-line">
+                  <label for="password">{{ adminTrans('user' , 'password') }}</label>
                     <input type="password" name="password" id="password" placeholder="{{ adminTrans('user' , 'password') }}"    class="form-control"/>
                 </div>
             </div>
