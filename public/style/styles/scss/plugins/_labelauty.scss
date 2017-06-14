@@ -1,0 +1,32 @@
+/* $labelauty
+ ------------------------------------------*/
+
+input.labelauty + label {
+  padding: .5625rem .625rem;
+  color: $text-color;
+  background-color: $brand-default;
+  @include rounded($border-radius-base);
+}
+
+input.labelauty:not(:checked):not([disabled]) + label:hover {
+  background-color: darken($brand-default, 2%);
+}
+
+input.labelauty:checked + label {
+  color: white;
+  background-color: $brand-primary;
+}
+
+input.labelauty:checked:not([disabled]) + label:hover {
+  background-color: darken($brand-primary, 5%);
+}
+
+input.btn-block + label {
+  display: block;
+  width: 100%;
+}
+
+input.to-labelauty-icon + label {
+  display: inline-block;
+  margin-right: .3125rem;
+}

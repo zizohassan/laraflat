@@ -1,11 +1,11 @@
-@extends('admin.layout.app')
+@extends(layoutExtend())
 
 @section('title')
     {{  adminTrans('role' , 'role') }}     {{  adminTrans('home' , 'control') }}
 @endsection
 
 @section('content')
-    @include('admin.layout.table' , ['title' => adminTrans('role' , 'role')  ,'model' => 'role' , 'table' => $dataTable->table() ])
+    @include(layoutTable() , ['title' => adminTrans('role' , 'role')  ,'model' => 'role' , 'table' => $dataTable->table() ])
 @endsection
 
 @section('script')

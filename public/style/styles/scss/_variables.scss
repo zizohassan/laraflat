@@ -1,0 +1,221 @@
+$enable-flex:               false !default;
+$enable-rounded:            true !default;
+$enable-shadows:            false !default;
+$enable-gradients:          false !default;
+$enable-transitions:        false !default;
+$enable-hover-media-query:  false !default;
+$enable-grid-classes:       true !default;
+
+
+
+$grid-gutter-width: $gutter;
+$header-footer-height: ($header-height + $footer-height);
+$fontawesome-family-icon:       FontAwesome;
+$timeline-border-color:          #ffffff;
+// Bootstrap variables... For more information refer to the variables.less file that comes with Bootstrap 3
+$grid-columns:              12;
+$gray-base:                     #000;
+$gray-darker:                   lighten($gray-base, 13.5%); // #222
+$gray-dark:                     lighten($gray-base, 20%);   // #333
+$gray:                          lighten($gray-base, 33.5%); // #555
+$gray-light:                    lighten($gray-base, 46.7%); // #777
+$gray-lighter:                  lighten($gray-base, 93.5%); // #eee
+
+$font-size-large:               ceil(($font-size-base * 1.38));
+$font-size-small:               ceil(($font-size-base * 0.9));
+
+$line-height-base:              1.53846153846154;
+$line-height-computed:          floor(($font-size-base * $line-height-base));
+
+$padding-base:                  1rem;
+$padding-base-vertical:         0.375rem;
+$padding-base-horizontal:       $padding-base;
+
+$padding-large-vertical:        0.625rem;
+$padding-large-horizontal:      1rem;
+
+$padding-small-vertical:        0.3125rem;
+$padding-small-horizontal:      0.625rem;
+
+$padding-xs-vertical:           0.0625rem;
+$padding-xs-horizontal:         0.3125rem;
+
+$line-height-large:             1.33;
+$line-height-small:             1.5;
+
+$table-cell-padding:            0.3125rem;
+$table-condensed-cell-padding:  0.25rem;
+$table-bg:                      transparent;
+$table-bg-accent:               lighten($border-color, 6%);
+$table-bg-hover:                $table-bg-accent;
+$table-bg-active:               $table-bg-hover;
+$table-border-color:            $border-color;
+
+$btn-box-shadow:                 inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075) !default;
+$btn-active-box-shadow:          inset 0 3px 5px rgba(0,0,0,.125) !default;
+
+$btn-default-color:              $text-color;
+$btn-default-bg:                 $brand-default;
+$btn-default-border:             #e2e1e1;
+
+$btn-primary-color:              white;
+$btn-primary-bg:                 $brand-primary;
+$btn-primary-border:             $btn-primary-bg;
+
+$btn-secondary-color:            $text-color !default;
+$btn-secondary-bg:               #fff !default;
+$btn-secondary-border:           $border-color !default;
+
+$btn-success-color:              white;
+$btn-success-bg:                 $brand-success;
+$btn-success-border:             $btn-success-bg;
+
+$btn-warning-color:              white;
+$btn-warning-bg:                 $brand-warning;
+$btn-warning-border:             $btn-warning-bg;
+
+$btn-danger-color:               white;
+$btn-danger-bg:                  $brand-danger;
+$btn-danger-border:              $btn-danger-bg;
+
+$btn-info-color:                 white;
+$btn-info-bg:                    $brand-info;
+$btn-info-border:                $btn-info-bg;
+
+$btn-link-disabled-color:        darken(white, 50%);;
+
+$input-color-placeholder:        lighten($text-color, 15%);
+$input-border:                   $border-color;
+$input-border-focus:             lighten($brand-primary, 12%);
+$input-group-addon-bg:           lighten($input-border, 1%);
+$input-group-addon-border-color: $input-border;
+
+$dropdown-border:                $border-color;
+$dropdown-divider-bg:            darken($dropdown-border, 5%);
+$dropdown-link-active-bg:        lighten($dropdown-border, 8%);
+$dropdown-link-color:            $text-color;
+$dropdown-link-hover-color:      white;
+$dropdown-link-hover-bg:         $dropdown-link-active-bg;
+
+$pagination-border:              $border-color;
+$pagination-hover-bg:            lighten($border-color, 5%);
+$pagination-active-bg:           $brand-primary;
+$pagination-active-border:       $pagination-active-bg;
+$pagination-active-color:        white;
+
+$breadcrumb-bg:                  transparent;
+$breadcrumb-separator:           '\f105';
+
+$tooltip-color:                  transparentize(black, 0.4);
+$tooltip-radius:                 $border-radius-base;
+
+$code-color:                     $text-color;
+
+$popover-header:                 #FAFBFD;
+$popover-border-color:           #C4D1DF;
+
+$panel-bg:                       white;
+$panel-inner-border:             lighten($border-color, 3%);
+$panel-border-radius:            $border-radius-base;
+$panel-footer-bg:                #fcfcfc;
+
+$panel-default-text:             $text-color;
+$panel-default-border:           $brand-default;
+$panel-default-heading-bg:       $brand-default;
+
+$panel-primary-text:             white;
+$panel-primary-border:           $brand-primary;
+$panel-primary-heading-bg:       $brand-primary;
+
+$panel-success-text:             $brand-white;
+$panel-success-border:           $brand-success;
+$panel-success-heading-bg:       $brand-success;
+
+$panel-warning-text:             $brand-white;
+$panel-warning-border:           $brand-warning;
+$panel-warning-heading-bg:       $brand-warning;
+
+$panel-danger-text:              $brand-white;
+$panel-danger-border:            $brand-danger;
+$panel-danger-heading-bg:        $brand-danger;
+
+$panel-info-text:                $brand-white;
+$panel-info-border:              $brand-info;
+$panel-info-heading-bg:          $brand-info;
+
+$alert-padding:                  $padding-base-horizontal;
+$alert-border-radius:            $border-radius-base;
+$alert-link-font-weight:         $font-weight-bold;
+
+$alert-success-bg:               lighten($brand-success, 30%);
+$alert-success-text:             darken($brand-success, 20%);
+$alert-success-border:           darken($alert-success-bg, 3%);
+
+$alert-info-bg:                  lighten($brand-info, 30%);
+$alert-info-text:                darken($brand-info, 20%);
+$alert-info-border:              darken($alert-info-bg, 3%);
+
+$alert-warning-bg:               lighten($brand-warning, 25%);
+$alert-warning-text:             darken($brand-warning, 15%);
+$alert-warning-border:           darken($alert-warning-bg, 3%);
+
+$alert-danger-bg:                lighten($brand-danger, 30%);
+$alert-danger-text:              darken($brand-danger, 20%);
+$alert-danger-border:            darken($alert-danger-bg, 3%);
+
+$label-default-bg:               $brand-default;
+$label-primary-bg:               $brand-primary;
+$label-success-bg:               $brand-success;
+$label-info-bg:                  $brand-info;
+$label-warning-bg:               $brand-warning;
+$label-danger-bg:                $brand-danger;
+$label-white-bg:                 $brand-white;
+
+$label-color:                    white;
+$label-link-hover-color:         white;
+
+$hr-border:                      $border-color;
+
+$zindex-header:                  1020;
+$zindex-dropdown:                1000;
+$zindex-brand-sm:                1020;
+$zindex-sidebar-panel:           1050;
+$zindex-chat:                    1100;
+$zindex-sub-menu:                1000;
+$zindex-modal:                   2020;
+$zindex-popup:                   $zindex-modal;
+$zindex-preloader:               3000;
+
+// Media queries breakpoints
+// --------------------------------------------------
+
+// Grid breakpoints
+//
+// Define the minimum and maximum dimensions at which your layout will change,
+// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+  // Extra small screen / phone
+  xs: 0,
+  // Small screen / phone
+  sm: 544px,
+  // Medium screen / tablet
+  md: 768px,
+  // Large screen / desktop
+  lg: 992px,
+  // Extra large screen / wide desktop
+  xl: 1200px
+) !default;
+
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+  sm: 576px,
+  md: 720px,
+  lg: 940px,
+  xl: 1140px
+) !default;
+

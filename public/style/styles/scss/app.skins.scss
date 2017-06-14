@@ -1,0 +1,27 @@
+@import "mixins/bi-app/bi-app-ltr";
+@import "app.variables";
+@import "variables";
+@import "mixins";
+@import "mixins/skin-generator";
+
+/* Sample header skins */
+
+.skin-1 {
+  @include header-variant($brand-success, rgba(255,255,255,.7), rgba(255,255,255,1));
+}
+
+.skin-2 {
+  @include header-variant($brand-info, rgba(255,255,255,.7), rgba(255,255,255,1));
+}
+
+.skin-3 {
+  @include header-variant($brand-warning, rgba(255,255,255,.7), rgba(255,255,255,1));
+}
+
+.skin-4 {
+  @include header-variant(white, $text-color, #000);
+  @include sidebar-variant($brand-dark, rgba(255,255,255,.8), #fff, $brand-dark, rgba(255,255,255,.7));
+  .sidebar-panel {
+    box-shadow: none;
+  }
+}

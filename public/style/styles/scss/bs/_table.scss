@@ -1,0 +1,134 @@
+/* $tables
+ ------------------------------------------*/
+
+.table {
+  border-radius: $border-radius-base;
+  th,
+  td {
+    padding-left: $padding-base;
+    padding-right: $padding-base;
+    border-color: $table-border-color;
+  }
+
+
+  thead th,
+  tfoot th {
+    border-bottom-width: 0;
+    border-color: $table-border-color;
+  }
+}
+
+.table-hover {
+  > tbody > tr:hover {
+    background-color: $table-bg-hover;
+  }
+}
+
+.table-striped {
+  > tbody > tr:nth-child(even) {
+    background-color: $table-bg-accent;
+  }
+}
+
+.table-bordered {
+  border-color: $table-border-color;
+  th,
+  td {
+    border-color: $table-border-color;
+        border-top: 0;
+        border-left: 0;
+        &:first-child {
+          border-left: 0;
+        }
+        &:last-child {
+          border-right: 0;
+        }
+  }
+
+  thead {
+    th,
+    td {
+      border-bottom-width: 1px;
+    }
+  }
+}
+
+
+.table-striped {
+  tbody tr:nth-of-type(odd) {
+    background-color: transparent;
+  }
+}
+
+.table-responsive {
+  overflow-x: visible;
+}
+
+table.dataTable {
+  border-collapse: collapse!important;
+}
+
+@include media-breakpoint-down(md) {
+  .table-responsive {
+    overflow-x: auto;
+    border-color: $border-color;
+    @include rounded($border-radius-base);
+    margin-bottom: 0;
+  }
+}
+
+@include table-row-variant(active, $brand-default);
+@include table-row-variant(success, $brand-success);
+@include table-row-variant(info, $brand-info);
+@include table-row-variant(warning, $brand-warning);
+@include table-row-variant(danger, $brand-danger);
+
+
+/* No More tables */
+
+@include media-breakpoint-down(md) {
+  /* Source:: http://elvery.net/demo/responsive-tables/#no-more-tables */
+  /* Force table to not be like tables anymore */
+  .no-more-tables table,
+  .no-more-tables thead,
+  .no-more-tables tbody,
+  .no-more-tables th,
+  .no-more-tables td,
+  .no-more-tables tr {
+    display: block;
+  }
+  /* Hide table headers (but not display: none;, for accessibility) */
+  .no-more-tables thead tr {
+    position: absolute;
+    top: -9999px;
+    @include left(-9999px);
+  }
+  .no-more-tables tr {
+    border: 0.0625rem solid $table-border-color;
+  }
+  .no-more-tables td {
+    position: relative;
+    @include padding-left(50%!important);
+    /* Behave  like a "row" */
+    border-top: 0!important;
+    border-bottom: 0.0625rem solid $table-border-color;
+    @include text-align(left);
+    white-space: normal;
+  }
+  .no-more-tables td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 0.375rem;
+    @include left(0.375rem);
+    @include padding-right(0.625rem);
+    width: 45%;
+    @include text-align(left);
+    white-space: nowrap;
+    font-weight: $font-weight-bold;
+  }
+  /* Label the data */
+  .no-more-tables td:before {
+    content: attr(data-title);
+  }
+}

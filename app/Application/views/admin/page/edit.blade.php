@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+@extends(layoutExtend())
 
 @section('title')
     {{ adminTrans('page' , 'page') }} {{  isset($item) ? adminTrans('curd' , 'edit'): adminTrans('curd' , 'add') }}
@@ -9,8 +9,8 @@
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => adminTrans('page' , 'page') ,'model' => 'page' , 'action' => isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') ])
-        @include('admin.layout.messages')
+    @component(layoutForm() , ['title' => adminTrans('page' , 'page') ,'model' => 'page' , 'action' => isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') ])
+    @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/page/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
 
@@ -65,7 +65,7 @@
     @endcomponent
 @endsection
 @section('script')
-    @include('admin.layout.helpers.tynic')
+    @include(layoutPath('layout.helpers.tynic'))
     {{ Html::script('/admin/plugins/momentjs/moment.js') }}
     {{ Html::script('/admin/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}
     <script>

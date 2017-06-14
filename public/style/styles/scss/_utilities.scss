@@ -1,0 +1,307 @@
+/* $Utilities Classes */
+
+$xxs: 2px;
+$xs: 5px;
+$sm: 10px;
+$md: 15px;
+$df: 1.25rem;
+$lg: 25px;
+$xlg: 30px;
+.inline {
+  display: inline-block;
+}
+.block {
+  display: block;
+}
+.l-h {
+  line-height: 24px;
+}
+
+/* Margins */
+
+.m-x-n {
+  margin-right: -$padding-base!important;
+  margin-left: -$padding-base!important;
+}
+
+.m-r-n {
+  margin-right: -$padding-base!important;
+}
+
+.m-l-n {
+  margin-left: -$padding-base!important;
+}
+
+.m-t-n {
+  margin-top: -$padding-base!important;
+}
+
+.m-b-n {
+  margin-bottom: -$padding-base!important;
+}
+
+//Gutter
+.m-x-n-g {
+  margin-right: -$gutter!important;
+  margin-left: -$gutter!important;
+}
+
+.m-r-n-g {
+  margin-right: -$gutter!important;
+}
+
+.m-l-n-g {
+  margin-left: -$gutter!important;
+}
+
+.m-t-n-g {
+  margin-top: -$gutter!important;
+}
+
+.m-b-n-g {
+  margin-bottom: -$gutter!important;
+}
+
+.m-a-xs {
+  margin: 0.5rem 0.5rem !important;
+}
+
+.m-t-xs {
+  margin-top: 0.5rem !important;
+}
+
+.m-r-xs {
+  margin-right: 0.5rem !important;
+}
+
+.m-b-xs {
+  margin-bottom: 0.5rem !important;
+}
+
+.m-l-xs {
+  margin-left: 0.5rem !important;
+}
+
+.m-x-xs {
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+}
+
+.m-y-xs {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.p-a-xs {
+  padding: 0.5rem 0.5rem !important;
+}
+
+.p-t-xs {
+  padding-top: 0.5rem !important;
+}
+
+.p-r-xs {
+  padding-right: 0.5rem !important;
+}
+
+.p-b-xs {
+  padding-bottom: 0.5rem !important;
+}
+
+.p-l-xs {
+  padding-left: 0.5rem !important;
+}
+
+.p-x-xs {
+  padding-right: 0.5rem !important;
+  padding-left: 0.5rem !important;
+}
+
+.p-y-xs {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+
+/* no background color*/
+
+.no-bg {
+  background-color: transparent!important;
+}
+
+.shadow {
+  @include box-shadow(0 0 5px rgba(0, 0, 0, .2));
+}
+
+.no-shadow {
+  @include box-shadow(none);
+}
+
+.v-align-middle,
+.align-middle td,
+td.align-middle {
+  vertical-align: middle!important;
+}
+
+
+/* Position */
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.lt {
+  left: 0;
+}
+
+.rt {
+  right: 0;
+}
+
+.bt {
+  bottom: 0;
+}
+
+.tp {
+  top: 0;
+}
+
+
+/* Radius */
+
+.no-radius {
+  @include rounded(0);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.round {
+  @include rounded($border-radius-base);
+}
+
+.circle {
+  @include rounded(50%);
+}
+
+.brtl {
+  border-top-left-radius: $border-radius-base;
+}
+
+.brtr {
+  border-top-right-radius: $border-radius-base;
+}
+
+.brbl {
+  border-bottom-left-radius: $border-radius-base;
+}
+
+.brbr {
+  border-bottom-right-radius: $border-radius-base;
+}
+
+.brlg {
+  @include rounded($border-radius-large!important);
+}
+
+
+/* Overflow */
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-visible {
+  overflow: visible;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+
+/* Borders */
+
+.no-border,
+.b-a-0 {
+  border: 0;
+}
+
+.b-a {
+  border: 1px solid $border-color;
+}
+
+.b-b {
+  border-bottom: 1px solid $border-color;
+}
+
+.b-t {
+  border-top: 1px solid $border-color;
+}
+
+.b-l {
+  border-left: 1px solid $border-color;
+}
+
+.b-r {
+  border-right: 1px solid $border-color;
+}
+
+.b-t-0 {
+  border-top: 0;
+}
+
+.b-r-0 {
+  border-right: 0;
+}
+
+.b-b-0 {
+  border-bottom: 0;
+}
+
+.b-l-0 {
+  border-left: 0;
+}
+
+
+/* border colors */
+
+.border-primary {
+  border-color: $brand-primary!important;
+}
+
+.border-default {
+  border-color: $brand-default!important;
+}
+
+.border-warning {
+  border-color: $brand-warning!important;
+}
+
+.border-success {
+  border-color: $brand-success!important;
+}
+
+.border-info {
+  border-color: $brand-info!important;
+}
+
+.border-white {
+  border-color: $brand-white!important;
+}
+
+.border-danger {
+  border-color: $brand-danger!important;
+}
+
+
+.text-overflow {
+      text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

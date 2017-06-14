@@ -1,0 +1,10 @@
+/* $breadcrumbs
+ ------------------------------------------*/
+
+.breadcrumb {
+  @include rounded($border-radius-base);
+  > li + li::before {
+    font-family: $fontawesome-family-icon;
+    content: '#{$breadcrumb-separator}';
+  }
+}

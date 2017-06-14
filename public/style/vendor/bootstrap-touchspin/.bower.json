@@ -1,0 +1,39 @@
+{
+  "name": "bootstrap-touchspin",
+  "version": "3.1.1",
+  "homepage": "http://www.virtuosoft.eu/code/bootstrap-touchspin/",
+  "authors": [
+    {
+      "name": "István Ujj-Mészáros",
+      "url": "https://github.com/istvan-ujjmeszaros"
+    }
+  ],
+  "description": "Bootstrap TouchSpin is a mobile and touch friendly input spinner component for Bootstrap 3.",
+  "dependencies": {
+    "jquery": ">=1.9.0",
+    "bootstrap": ">=3.0.0"
+  },
+  "license": "Apache License, Version 2.0",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "bootstrap",
+    "ui"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "3.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.1.1",
+    "commit": "22a89d22b6218cfb1abe368238b78ec5b442b7ef"
+  },
+  "_source": "https://github.com/istvan-ujjmeszaros/bootstrap-touchspin.git",
+  "_target": "~3.1.1",
+  "_originalSource": "bootstrap-touchspin"
+}

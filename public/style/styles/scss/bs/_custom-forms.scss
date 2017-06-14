@@ -1,0 +1,99 @@
+/* $c-forms
+ ------------------------------------------*/
+
+.custom-control-input {
+  color: $text-color;
+  &:checked ~ .custom-control-indicator {
+    background-color: $brand-primary;
+    @include box-shadow(none);
+  }
+  &:focus ~ .custom-control-indicator {
+    box-shadow: 0 0 0 .075rem #fff, 0 0 0 .15rem $brand-primary;
+  }
+  &:active ~ .custom-control-indicator {
+    background-color: $brand-primary;
+    @include box-shadow(none);
+  }
+}
+
+
+/*Indicator*/
+
+.custom-control-indicator {
+  top: 1px;
+  color: $text-color;
+  background-color: $brand-default;
+  @include box-shadow(0 0 0 .05rem rgba(0, 0, 0, .25));
+}
+
+
+/*Checkboxes*/
+
+.custom-checkbox {
+  .custom-control-indicator {
+    border-radius: $border-radius-base;
+  }
+}
+
+
+/*Select*/
+
+.custom-select {
+  color: $text-color;
+  border-color: $border-color;
+  @include padding(.534rem, 1.75rem, .534rem, .75rem);
+  @include rounded($border-radius-base);
+  &:focus {
+    border-color: $brand-primary;
+    @include box-shadow(none);
+  }
+}
+
+
+/*File*/
+
+.custom-file {
+  color: $text-color;
+  border-color: $border-color;
+  border-radius: $border-radius-base;
+  @include box-shadow(none);
+}
+
+.file-custom::before {
+  content: 'Browse';
+  color: $text-color;
+  border-color: $border-color;
+  border-radius: 0 $border-radius-base $border-radius-base 0;
+  background-color: $brand-default;
+}
+
+// Focus state
+.file input:focus ~ .file-custom {
+  @include box-shadow(0 0 0 .075rem #fff, 0 0 0 .15rem $brand-primary);
+}
+
+
+
+.custom-file {
+  color: $text-color;
+}
+
+.custom-file-control {
+  color: $text-color;
+  border-color: $border-color;
+  border-radius: $border-radius-base;
+  @include box-shadow(none);
+
+  &::before {
+    color: $text-color;
+    border-color: $border-color;
+    border-radius: 0 $border-radius-base $border-radius-base 0;
+    background-color: $brand-default;
+  }
+}
+
+
+
+.spinner .form-control {
+  text-align: center;
+}

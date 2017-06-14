@@ -1,0 +1,32 @@
+/* $labels
+ ------------------------------------------*/
+
+.tag {
+	font-weight: $font-weight-bold;
+  @include rounded($border-radius-base);
+}
+
+.tag-default {
+  color: $text-color;
+  @include tag-variant($label-default-bg);
+}
+
+.tag-primary {
+  @include tag-variant($label-primary-bg);
+}
+
+.tag-success {
+  @include tag-variant($label-success-bg);
+}
+
+.tag-info {
+  @include tag-variant($label-info-bg);
+}
+
+.tag-warning {
+  @include tag-variant($label-warning-bg);
+}
+
+.tag-danger {
+  @include tag-variant($label-danger-bg);
+}

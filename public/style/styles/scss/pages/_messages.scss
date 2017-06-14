@@ -1,0 +1,179 @@
+/* $messages
+ ------------------------------------------*/
+
+.contacts-container {
+  height: calc(100vh - #{$header-height});
+  .contacts-list {
+    background-color: $brand-default;
+    a {
+      position: relative;
+      display: table;
+      padding: $padding-base;
+      clear: both;
+      .contact-avatar {
+        width: 34px;
+      }
+      .contact-details > * {
+        display: block;
+      }
+      @include hover-focus {
+        background-color: lighten($brand-default, 1%);
+        color: $text-color;
+      }
+    }
+  }
+}
+
+.header-secondary + .main-content > .content-view {
+  .contacts-container {
+    height: calc(100vh - #{$header-height + $header-height});
+  }
+}
+
+.messages-list {
+  position: relative;
+}
+
+.message-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  .message-list-item {
+    a {
+      display: block;
+      padding: ($gutter /2) $padding-base;
+      cursor: pointer;
+      color: $text-color;
+      @include clearfix();
+      &:hover,
+      &:focus,
+      &:active {
+        color: $text-color;
+        background-color: rgba(0, 0, 0, .05);
+      }
+      p {
+        margin-bottom: 0;
+      }
+      .message-list-item-header {
+        display: block;
+        margin-bottom: 2px;
+        span {
+          color: darken(#fff, 80%);
+        }
+      }
+      .time {
+        font-size: 10px;
+        font-weight: $font-weight-bold;
+        margin-top: 3px;
+        color: darken(#fff, 30%);
+        @include float(right);
+      }
+    }
+  }
+}
+
+.message-view {
+  position: relative;
+  width: 100%;
+  background-color: white;
+}
+
+.message-header,
+.contact-header {
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  height: $header-height;
+  background: white;
+  box-shadow: 0 0 1px rgba(0, 0, 0, .1);
+  .lead {
+    margin-bottom: 5px;
+  }
+  .date {
+    font-size: 11px;
+    color: darken(#fff, 30%);
+    @include float(right);
+  }
+  .message-toolbar,
+  .contact-toolbar {
+    position: relative;
+    display: block;
+    height: 100%;
+    padding: 0 $padding-base;
+    @include clearfix();
+    p {
+      padding: 8px 0;
+    }
+    input {
+      font-size: $font-size-base;
+      width: 100%;
+      @include vertical-align($header-height, 2.05rem);
+    }
+    a {
+      display: inline-block;
+      color: lighten($text-color, 10%);
+      @include vertical-align($header-height, 1.813rem);
+      &:hover {
+        color: $text-color;
+      }
+    }
+  }
+}
+
+.no-messages,
+.no-contacts {
+  max-width: 100%;
+  @include align-items(center);
+  @include align-content(center);
+  @include justify-content(center);
+}
+
+.contacts-list {
+  position: relative;
+}
+
+@include media-breakpoint-up(lg) {
+  .contacts-sidebar {
+    width: 250px;
+  }
+  .contacts-list {
+    min-width: 240px;
+    max-width: 240px;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .message-view,
+  .contact-view {
+    position: fixed;
+    z-index: $zindex-chat;
+    top: $header-height;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    -webkit-transition: -webkit-transform $transition-duration cubic-bezier(.7, 0, .3, 1);
+    -moz-transition: -moz-transform $transition-duration cubic-bezier(.7, 0, .3, 1);
+    -o-transition: -o-transform $transition-duration cubic-bezier(.7, 0, .3, 1);
+    transition: transform $transition-duration cubic-bezier(.7, 0, .3, 1);
+    background-color: transparentize(white, .01);
+    @include translate(100%, 0);
+    @include translate3d(100%, 0, 0);
+    .scroll {
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: 100%;
+    }
+  }
+  .message-open .message-view,
+  .contact-open .contact-view {
+    @include translate(0, 0);
+    @include translate3d(0, 0, 0);
+  }
+  .contacts-list {
+    min-height: calc(100vh - #{$header-footer-height});
+    #list1 {
+      position: absolute;
+    }
+  }
+}

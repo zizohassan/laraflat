@@ -1,0 +1,35 @@
+/* $intl-tel-input
+ ------------------------------------------*/
+
+.iti-flag {
+  width: 1rem;
+  height: .6875rem;
+  @include box-shadow(none);
+}
+
+.intl-tel-input {
+  width: 100%;
+  .flag-dropdown:hover .selected-flag {
+    background-color: transparentize($brand-default, .5);
+  }
+  .selected-flag .arrow {
+    border-top-color: $border-color;
+  }
+  .selected-flag .arrow.up {
+    border-bottom-color: $border-color;
+  }
+  .country-list {
+    z-index: 1000;
+    border-color: $border-color;
+    @include box-shadow(none);
+  }
+  .country-list .divider {
+    border-bottom-color: $border-color;
+  }
+  .country-list .country .dial-code {
+    color: $text-color;
+  }
+  .country-list .country.highlight {
+    background-color: transparentize($brand-default, .5);
+  }
+}

@@ -1,0 +1,149 @@
+.pricing {
+  padding-top: $padding-base;
+  padding-bottom: $padding-base;
+  .pricing-plan {
+    position: relative;
+    text-align: center;
+  }
+  .pricing-plan {
+    overflow: hidden;
+    margin-top: $gutter;
+    padding: $padding-base;
+    cursor: default;
+    border-radius: $border-radius-base;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 1px 1px rgba(0, 0, 0, .05);
+  }
+  .plan-price {
+    font-size: 2.5rem;
+    font-weight: 900;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .plan-price-symbol {
+    font-size: 1rem;
+    vertical-align: super;
+  }
+  .plan-price-period {
+    font-size: 0.8125rem;
+    display: inline-block;
+    padding: 0;
+    opacity: .7;
+  }
+  .plan-title {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    overflow: hidden;
+    margin-bottom: $gutter;
+    white-space: nowrap;
+    letter-spacing: .01rem;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+  }
+  .plan-features {
+    line-height: 2.5;
+    margin: 0;
+    padding: $padding-base;
+    list-style: none;
+    li {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+  .btn {
+    font-size: .9rem;
+  }
+}
+
+
+/* $switch
+ ------------------------------------------*/
+
+.switch {
+  position: relative;
+  display: inline-block;
+  height: 1.875rem;
+  margin: 0 1rem;
+  padding: .3125rem 0;
+  span {
+    position: relative;
+    display: inline-block;
+    box-sizing: content-box;
+    width: 3.125rem;
+    height: 2.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color $transition-duration;
+    vertical-align: middle;
+    border-radius: 1.5rem;
+    background-color: $brand-default;
+    background-clip: content-box;
+  }
+  input {
+    display: none;
+  }
+  span i {
+    position: absolute;
+    top: 0;
+    display: inline-block;
+    @include padding-right(1.25rem);
+    cursor: pointer;
+    transition: all ease $transition-duration;
+  }
+  span i::before {
+    display: block;
+    width: 1.875rem;
+    height: 1.875rem;
+    content: '';
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 0 .0625rem rgba(0, 0, 0, .075), 0 .0625rem .125rem rgba(0, 0, 0, .25);
+  }
+  :disabled + span i::before {
+    background-color: rgba(239, 239, 239, 1);
+  }
+  :checked + span {
+    transition: background-color $transition-duration;
+    i {
+      @include padding-right(0);
+      @include padding-left(1.313rem);
+    }
+  }
+  /* sizes. */
+  &.switch-sm {
+    border-radius: 1.25rem;
+    span {
+      width: 2.063rem;
+      height: .625rem;
+    }
+    span i::before {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+    :checked + span i {
+      @include padding-left(.875rem);
+    }
+  }
+  &.switch-lg {
+    border-radius: 2.5rem;
+    span {
+      width: 4.125rem;
+      height: 2.5rem;
+    }
+    span i::before {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    :checked + span i {
+      @include padding-left(1.688rem);
+    }
+  }
+}
+
+.center-table {
+  display: table;
+  margin: 0 auto;
+}

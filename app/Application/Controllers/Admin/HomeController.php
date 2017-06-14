@@ -21,11 +21,11 @@ class HomeController extends AbstractController
 
     public function index($pages = null , $limit = null){
         $data = $this->homeInterface->getData($pages , $limit);
-        return view('admin.home.index' ,compact('data'));
+        return view(layoutPath('index') ,compact('data'));
     }
 
     public function icons(){
-        return view('admin.layout.static.icons');
+        return view(layoutPath('layout.static.icons'));
     }
 
     public function apiDocs(){

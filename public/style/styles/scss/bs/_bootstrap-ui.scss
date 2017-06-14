@@ -1,0 +1,91 @@
+/* $bootstrap.ui
+ ------------------------------------------*/
+
+
+/*Carousel*/
+
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+}
+
+
+/*Datepicker*/
+
+.ui-datepicker {
+  table {
+    padding: $padding-base;
+    border: 1px solid $border-color;
+    outline: none;
+    background-color: white;
+    thead {
+      border-bottom: 1px solid $border-color;
+    }
+    .h6 {
+      font-size: $font-size-base;
+    }
+    .btn {
+      border-color: transparent;
+      background-color: transparent;
+      &:hover {
+        border-color: $brand-default;
+        background-color: $brand-default;
+      }
+      &.active {
+        border-color: $brand-primary;
+        background-color: $brand-primary;
+        @include box-shadow(none);
+        span {
+          color: white!important;
+        }
+      }
+    }
+  }
+  .dropdown-menu table {
+    border: 0;
+  }
+}
+
+
+/*Timepicker*/
+
+.ui-timepicker td {
+  padding: 0 5px;
+}
+
+.glyphicon-star,
+.glyphicon-star-empty {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 20px;
+  height: 20px;
+  white-space: nowrap;
+  background-size: contain;
+}
+
+.glyphicon-star-empty {
+  background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=') no-repeat;
+}
+
+.glyphicon-star {
+  background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=') no-repeat;
+}
+
+.glyphicon-chevron-left,
+.glyphicon-chevron-right {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-chevron-left:before {
+  content: '\f104';
+}
+
+.glyphicon-chevron-right:before {
+  content: '\f105';
+}

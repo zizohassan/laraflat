@@ -1,0 +1,21 @@
+/* $error-pages
+ ------------------------------------------*/
+
+.error-number {
+  font-size: 150px;
+  line-height: 1;
+  strong {
+    font-weight: 900;
+  }
+}
+
+.error-icon {
+  font-size: 100px;
+  line-height: 160px;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 20px;
+  color: $brand-danger;
+  border: 3px solid $brand-danger;
+  @include rounded(50%);
+}

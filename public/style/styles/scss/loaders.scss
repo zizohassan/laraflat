@@ -1,0 +1,64 @@
+/**
+ *
+ * All animations must live in their own file
+ * in the animations directory and be included
+ * here.
+ *
+ */
+
+
+/**
+ * Styles shared by multiple animations
+ */
+
+$primary-color: rgb(99, 102, 197) !default;
+$ball-size: 15px !default;
+$margin: 2px !default;
+$line-height: 35px !default;
+$line-width: 4px !default;
+@import '../../vendor/loaders.css/src/mixins';
+
+/**
+ * Dots
+ */
+
+@import '../../vendor/loaders.css/src/animations/ball-pulse';
+@import '../../vendor/loaders.css/src/animations/ball-pulse-sync';
+@import '../../vendor/loaders.css/src/animations/ball-scale';
+@import '../../vendor/loaders.css/src/animations/ball-scale-random';
+@import '../../vendor/loaders.css/src/animations/ball-rotate';
+@import '../../vendor/loaders.css/src/animations/ball-clip-rotate';
+@import '../../vendor/loaders.css/src/animations/ball-clip-rotate-pulse';
+@import '../../vendor/loaders.css/src/animations/ball-clip-rotate-multiple';
+@import '../../vendor/loaders.css/src/animations/ball-scale-ripple';
+@import '../../vendor/loaders.css/src/animations/ball-scale-ripple-multiple';
+@import '../../vendor/loaders.css/src/animations/ball-beat';
+@import '../../vendor/loaders.css/src/animations/ball-scale-multiple';
+@import '../../vendor/loaders.css/src/animations/ball-triangle-trace';
+@import '../../vendor/loaders.css/src/animations/ball-pulse-rise';
+@import '../../vendor/loaders.css/src/animations/ball-grid-beat';
+@import '../../vendor/loaders.css/src/animations/ball-grid-pulse';
+@import '../../vendor/loaders.css/src/animations/ball-spin-fade-loader';
+@import '../../vendor/loaders.css/src/animations/ball-spin-loader';
+@import '../../vendor/loaders.css/src/animations/ball-zig-zag';
+@import '../../vendor/loaders.css/src/animations/ball-zig-zag-deflect';
+
+/**
+ * Lines
+ */
+
+@import '../../vendor/loaders.css/src/animations/line-scale';
+@import '../../vendor/loaders.css/src/animations/line-scale-random';
+@import '../../vendor/loaders.css/src/animations/line-scale-pulse-out';
+@import '../../vendor/loaders.css/src/animations/line-scale-pulse-out-rapid';
+@import '../../vendor/loaders.css/src/animations/line-spin-fade-loader';
+
+/**
+ * Misc
+ */
+
+@import '../../vendor/loaders.css/src/animations/triangle-skew-spin';
+@import '../../vendor/loaders.css/src/animations/square-spin';
+@import '../../vendor/loaders.css/src/animations/pacman';
+@import '../../vendor/loaders.css/src/animations/cube-transition';
+@import '../../vendor/loaders.css/src/animations/semi-circle-spin';

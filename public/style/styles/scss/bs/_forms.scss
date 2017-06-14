@@ -1,0 +1,42 @@
+/* $forms
+ ------------------------------------------*/
+
+label {
+  font-weight: $font-weight-medium;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.form-control {
+  border-color: $input-border;
+  @include rounded($border-radius-base);
+  @include box-shadow(none);
+  &::placeholder {
+    color: $input-color-placeholder;
+  }
+  &:disabled,
+  &[readonly] {
+    background-color: $brand-default;
+  }
+  &:focus {
+    border-color: $input-border-focus;
+    @include box-shadow(none);
+  }
+}
+
+
+/*Form validation states*/
+
+.has-success {
+  @include form-control-validation($brand-success);
+}
+
+.has-warning {
+  @include form-control-validation($brand-warning);
+}
+
+.has-danger {
+  @include form-control-validation($brand-danger);
+}

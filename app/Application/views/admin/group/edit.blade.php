@@ -1,13 +1,13 @@
-@extends('admin.layout.app')
+@extends(layoutExtend())
 
 @section('title')
     {{ adminTrans('group' , 'group') }} {{  isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') }}
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => adminTrans('group' , 'group'), 'model'=>'group' , 'action' => isset($item) ? adminTrans('curd' , 'edit')  : adminTrans('curd' , 'add') ])
-        @include('admin.layout.messages')
-        <form action="{{ concatenateLangToUrl('admin/group/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
+    @component(layoutForm(), ['title' => adminTrans('group' , 'group'), 'model'=>'group' , 'action' => isset($item) ? adminTrans('curd' , 'edit')  : adminTrans('curd' , 'add') ])
+    @include(layoutMessage())
+    <form action="{{ concatenateLangToUrl('admin/group/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">

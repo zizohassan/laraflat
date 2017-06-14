@@ -1,0 +1,75 @@
+/* $jvectormap
+ ------------------------------------------*/
+
+.jvectormap-tip {
+  font-family: inherit;
+  color: $text-color;
+  border: solid .0625rem $brand-primary;
+  background: $brand-white;
+  @include rounded($border-radius-base);
+}
+
+.jvectormap-label {
+  font-family: inherit;
+  font-size: smaller;
+  font-size: inherit;
+  position: absolute;
+  padding: .1875rem;
+  color: white;
+  border-color: $brand-primary;
+  background-color: $brand-primary;
+  @include rounded($border-radius-base);
+}
+
+.jvectormap-zoomin,
+.jvectormap-zoomout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2rem;
+  height: 2rem;
+  margin-left: $padding-base;
+  cursor: pointer;
+  text-indent: -9999px;
+  background-color: white;
+  background-repeat: no-repeat;
+  @include rounded(.125rem);
+  &::before {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    width: .125rem;
+    height: .625rem;
+    margin-top: -.25rem;
+    margin-right: -.0625rem;
+    content: '';
+    background: $text-color;
+  }
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    width: .625rem;
+    height: .125rem;
+    margin-right: -.3125rem;
+    content: '';
+    background: $text-color;
+  }
+}
+
+.jvectormap-zoomin {
+  top: $padding-base;
+  margin-top: 0;
+  margin-bottom: 1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.jvectormap-zoomout {
+  top: ($padding-base + 2.063rem);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  &::before {
+    display: none;
+  }
+}

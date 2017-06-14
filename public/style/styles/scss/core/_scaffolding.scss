@@ -1,0 +1,116 @@
+/* $scaffolding
+ ------------------------------------------*/
+
+@font-face {
+  font-family: 'Material Icons';
+  font-weight: 400;
+  font-style: normal;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(../fonts/material/MaterialIcons-Regular.woff2) format('woff2'), url(../fonts/material/MaterialIcons-Regular.woff) format('woff'), url(../fonts/material/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-size: 24px;
+  width: 24px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  /* Preferred icon size */
+  display: inline-block;
+  vertical-align: bottom;
+  white-space: nowrap;
+  letter-spacing: normal;
+  text-transform: none;
+  word-wrap: normal;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+.btn-sm:not(.btn-icon ) > .material-icons {
+  line-height: 21px!important;
+}
+
+::-moz-selection {
+  color: white;
+  background: $brand-primary;
+  text-shadow: none;
+}
+
+::selection {
+  color: white;
+  background: $brand-primary;
+  text-shadow: none;
+}
+
+.pace {
+  background-color: transparent;
+  .pace-progress {
+    background-color: $brand-success;
+  }
+  .pace-activity {
+    background-image: none;
+  }
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  font-family: $font-family-base-webfont, sans-serif;
+  font-size: $font-size-base;
+  color: $text-color;
+  background-color: #D1D1D2;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  background: $main-panel-bg;
+  @include flexbox;
+  @include flex-direction(row);
+}
+
+.app:not(.layout-static) {
+  max-height: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  @include hover-focus {
+    cursor: pointer;
+    text-decoration: none;
+    outline: 0;
+  }
+}
+
+.touch {
+  li:hover,
+  li:focus,
+  a:hover,
+  a:focus,
+  {
+    background-color: transparent!important;
+  }
+}

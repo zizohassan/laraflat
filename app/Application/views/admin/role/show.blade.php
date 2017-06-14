@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+@extends(layoutExtend())
 
 @section('title')
     {{  adminTrans('role' , 'role') }}     {{  adminTrans('curd' , 'view') }}
@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => adminTrans('role' , 'role') , 'model' => 'role' , 'action' => adminTrans('curd' , 'view') ])
+    @component(layoutForm() , ['title' => adminTrans('role' , 'role') , 'model' => 'role' , 'action' => adminTrans('curd' , 'view') ])
 
         <table class="table table-bordered table-responsive table-striped">
             @php

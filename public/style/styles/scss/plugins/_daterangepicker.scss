@@ -1,0 +1,60 @@
+/* $daterangepicker
+ ------------------------------------------*/
+
+.daterangepicker {
+  font-size: $font-size-base;
+  display: none;
+  visibility: visible;
+  margin-top: -.0625rem;
+  @include opacity(1);
+  @include rounded($border-radius-base);
+  @include box-shadow(0 .0625rem 1px transparentize($border-color, .7));
+  .ranges .input-mini {
+    color: $text-color;
+    border-color: $border-color;
+    background-color: transparent;
+    @include rounded($border-radius-base);
+  }
+  .calendar-date {
+    border-color: $border-color;
+    @include rounded($border-radius-base);
+  }
+  td.available + td.start-date {
+    border-radius: $border-radius-base 0 0 $border-radius-base;
+  }
+  td.in-range + td.end-date {
+    border-radius: 0 $border-radius-base $border-radius-base 0;
+  }
+  td.available:hover,
+  th.available:hover {
+    background: $brand-default;
+  }
+  td.active,
+  td.active:hover {
+    color: #fff;
+    border-color: $brand-primary;
+    background-color: $brand-primary;
+  }
+  td,
+  th {
+    @include rounded($border-radius-base);
+  }
+  .calendar th,
+  .calendar td {
+    font-family: inherit;
+  }
+  td.start-date.end-date {
+    @include rounded($border-radius-base);
+  }
+  .ranges li {
+    color: $text-color;
+    border-color: $border-color;
+    background: $border-color;
+    @include rounded($border-radius-base);
+  }
+  .ranges li.active,
+  .ranges li:hover {
+    border-color: $brand-primary;
+    background: $brand-primary;
+  }
+}

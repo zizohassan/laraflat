@@ -1,0 +1,51 @@
+/* $main-panel
+ ------------------------------------------*/
+
+.main-panel {
+  background: $main-panel-bg;
+  min-height: 100%;
+  box-sizing: border-box;
+  @include flex-direction(column);
+  @include flexbox;
+  @include flex(1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  > .main-content {
+    box-sizing: border-box;
+    @include flex-direction(column);
+    @include flexbox;
+    @include flex(1);
+    > .content-view {
+      position: relative;
+      box-sizing: border-box;
+      padding: $gutter;
+      @include flex(1 0 auto);
+    }
+  }
+}
+
+.no-padding .content-view {
+  padding: 0!important;
+}
+
+
+/*Margins*/
+
+.row {
+  margin-right: ($gutter / -2);
+  margin-left: ($gutter / -2);
+}
+
+@mixin grid-columns($i: 1, $list: ".col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list: "#{$list}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+  }
+  #{$list} {
+    position: relative;
+    min-height: 1px;
+    padding-left: ($grid-gutter-width / 2);
+    padding-right: ($grid-gutter-width / 2);
+  }
+}
+
+@include grid-columns();

@@ -1,0 +1,84 @@
+/* $datepicker
+ ------------------------------------------*/
+
+.center-block > .datepicker {
+  margin: 0 auto;
+}
+
+.datepicker.dropdown-menu {
+  font-size: $font-size-base;
+  display: none;
+  visibility: visible;
+  padding: $padding-base;
+  border-color: $border-color;
+  @include opacity(1);
+  @include rounded($border-radius-base);
+  @include box-shadow(0 .0625rem 1px transparentize($border-color, .7));
+}
+
+.datepicker-inline {
+  border: .0625rem solid $border-color;
+}
+
+.datepicker {
+  @include rounded($border-radius-base);
+  &-dropdown {
+    font-size: $font-size-base;
+    display: none;
+    visibility: visible;
+    padding: $padding-base;
+    border-color: $border-color;
+    @include opacity(1);
+    @include rounded($border-radius-base);
+    @include box-shadow(0 .0625rem 1px transparentize($border-color, .7));
+    &:before {
+      border-bottom-color: $border-color;
+      border-bottom-color: rgba(0, 0, 0, .2);
+    }
+    &.datepicker-orient-bottom:before {
+      border-top-color: $border-color;
+    }
+  }
+  table {
+    tr {
+      td,
+      th {
+        @include rounded($border-radius-base);
+      }
+    }
+  }
+  table tr td {
+    &.active,
+    &.active:hover,
+    &.active.disabled,
+    &.active.disabled:hover {
+      position: relative;
+      text-shadow: 0 -.0625rem 0 rgba(0, 0, 0, .25);
+      @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+    }
+    span {
+      @include rounded($border-radius-base);
+      &.active,
+      &.active:hover,
+      &.active.disabled,
+      &.active.disabled:hover {
+        position: relative;
+        text-shadow: 0 -.0625rem 0 rgba(0, 0, 0, .25);
+        @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+      }
+    }
+  }
+}
+
+.input-daterange {
+  input:first-child {
+    border-radius: $border-radius-base 0 0 $border-radius-base;
+  }
+  input:last-child {
+    border-radius: 0 $border-radius-base $border-radius-base 0;
+  }
+  .input-group-addon {
+    border: solid $input-group-addon-border-color;
+    background-color: $input-group-addon-bg;
+  }
+}

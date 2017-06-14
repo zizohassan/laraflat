@@ -1,0 +1,113 @@
+/* $buttons
+ ------------------------------------------*/
+
+.btn {
+  @include rounded($border-radius-base);
+  @include transition(all $transition-duration linear);
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+      outline: 0;
+    }
+  }
+}
+
+
+/* Rounded button styles */
+
+.btn-round,
+.btn-round a,
+.btn-round .btn,
+.input-round {
+  @include rounded(2.5rem);
+  &::before {
+    @include rounded(2.5rem);
+  }
+}
+
+//
+// Alternate buttons
+//
+.btn-default {
+  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+}
+
+.btn-primary {
+  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+}
+
+.btn-secondary {
+  @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+}
+
+.btn-info {
+  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+}
+
+.btn-success {
+  @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+}
+
+.btn-warning {
+  @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+}
+
+.btn-danger {
+  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+}
+
+// Remove all backgrounds
+.btn-outline-default {
+  @include button-outline-variant($btn-default-bg);
+}
+
+.btn-outline-primary {
+  @include button-outline-variant($btn-primary-bg);
+}
+
+.btn-outline-secondary {
+  @include button-outline-variant($btn-secondary-border);
+}
+
+.btn-outline-info {
+  @include button-outline-variant($btn-info-bg);
+}
+
+.btn-outline-success {
+  @include button-outline-variant($btn-success-bg);
+}
+
+.btn-outline-warning {
+  @include button-outline-variant($btn-warning-bg);
+}
+
+.btn-outline-danger {
+  @include button-outline-variant($btn-danger-bg);
+}
+
+.btn-link {
+  color: $link-color;
+}
+
+
+/* Floatin Button */
+
+.btn-float {
+  line-height: 50px;
+  position: fixed;
+  z-index: 2;
+  bottom: $gutter*3;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%;
+  @include right($gutter);
+  > .material-icons {
+    line-height: 50px;
+    vertical-align: baseline;
+  }
+}

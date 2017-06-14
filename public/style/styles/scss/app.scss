@@ -1,0 +1,101 @@
+/*
+*   Template name: Milestone Bootstrap 4 Dashboard Template
+*   Demo URL: htp://milestone.nyasha.me
+*/
+
+/* Table of Contents
+    Use (CMD/CTRL + F $[SECTION]) to quickly find what you are looking for
+    [SECTION]
+	1.	scaffolding
+	2.	typography
+	3.	avatar
+	4.	sidebar-panel
+	5.	header
+	6.	brand
+	7.	main-panel
+	8.	footer
+	9.	chat-panel
+	10.	offscreen-menu
+	11.	widget
+	12.	layout-options
+	13.	modal-panel
+	14.	alerts
+	15.	breadcrumbs
+	16.	buttons
+	17.	cards
+	18.	dropdown
+	19.	forms
+	20.	input-groups
+	21.	labels
+	22.	listgroup
+	23.	modal
+	24.	navbar
+	25.	navs
+	26.	pills
+	27.	tabs
+	28.	pagination
+	29.	popover
+	30.	progress-bar
+	31.	tables
+	32.	tooltip
+	33.	colors
+	34.	bootstrap.ui
+	35.	session
+	36.	lockscreen
+	37.	error-pages
+	38.	calendar
+	39.	gallery
+	40.	invoice
+	41.	messages
+	42.	social
+	43.	timeline
+	44.	charts
+	45.	jquery.ui
+	46.	bootstrap-tags
+	47.	bootstap-timepicker
+	48.	c3-charts
+	49.	chartjs
+	50.	clock-picker
+	51.	color-picker
+	52.	datepicker
+	53.	daterangepicker
+	54.	easypie
+	55.	flot-chart
+	56.	google-map
+	57.	input-select
+	58.	intl-tel-input
+	59.	jvectormap
+	60.	labelauty
+	61.	multiselect
+	62.	nestable
+	63.	noty
+	64.	nvd
+	65.	jquery-validation
+	66.	portlets
+	67.	rickshaw
+	68.	social-button
+	69.	sortable
+	70.	summernote
+	71.	sweet-alert
+	72.	touch-spin
+	73.	utilities
+*/
+
+@import "mixins/bi-app/bi-app-ltr";
+
+// Core Variables and Mixins
+@import "app.variables";
+@import "variables";
+@import "mixins";
+// Core Styles
+@import "core";
+// Bootstrap Elements
+@import "bs";
+// Pages
+@import "pages";
+// Plugins
+@import "plugins";
+// Utility classes
+@import "utilities";
+// Demo specific
+@import "demo";

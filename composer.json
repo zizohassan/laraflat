@@ -35,7 +35,8 @@
             "app/Application/Helpers/setting.php",
             "app/Application/Helpers/menu.php",
             "app/Application/Helpers/user.php",
-            "app/Application/Helpers/lang.php"
+            "app/Application/Helpers/lang.php",
+            "app/Application/Helpers/adminTheme.php"
         ]
     },
     "autoload-dev": {

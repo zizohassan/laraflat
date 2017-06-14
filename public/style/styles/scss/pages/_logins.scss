@@ -1,0 +1,72 @@
+/* $session
+ ------------------------------------------*/
+
+.session-panel {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.session {
+  min-height: 100vh;
+  @include flexbox;
+  @include flex-direction(column);
+}
+
+.session-content {
+  padding: 40px $gutter;
+  @include flexbox;
+  @include align-items(center);
+  @include justify-content(center);
+  @include flex(1 0 auto);
+  @include flex-direction(column);
+  min-height: 100%;
+}
+
+.session-wrapper {
+  min-height: 100%;
+  margin: 0 auto -$footer-height;
+  @include clearfix();
+  &::after {
+    height: $footer-height;
+  }
+}
+
+.app.error-page .card,
+.app.lockscreen .card {
+  display: block;
+  width: 100%;
+  margin: 100px auto;
+}
+
+.app.lockscreen .card {
+  max-width: 400px;
+}
+
+.form-layout {
+  //display: none;
+  @include flex(none);
+  max-width: 540px;
+  width: 100%;
+  margin: 0 auto;
+  label {
+    display: block;
+    width: 100%;
+  }
+  .divider {
+    display: block;
+    height: 1px;
+    margin-top: 1.563rem;
+    margin-right: -$padding-base;
+    margin-bottom: 1.563rem;
+    margin-left: -$padding-base;
+    text-align: center;
+    background: $border-color;
+  }
+  .divider span {
+    position: relative;
+    top: -10px;
+    display: inline-block;
+    padding: 0 .75rem;
+    background-color: white;
+  }
+}

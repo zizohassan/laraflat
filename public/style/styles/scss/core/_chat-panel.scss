@@ -1,0 +1,290 @@
+/* $chat-panel
+ ------------------------------------------*/
+
+.chat-panel {
+  .modal-dialog {
+    width: $sidebar-width!important;
+    background: white!important;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .075);
+  }
+  .modal-body {
+    overflow-y: auto;
+    height: 100%;
+    max-height: calc(100vh - #{$header-height-px});
+  }
+}
+
+.chat-panel,
+.chat-message {
+  .modal-body {
+    padding: $gutter/2 0;
+  }
+  .chat-inner {
+    width: 100%;
+    height: 100%;
+  }
+  .chat-header {
+    min-height: $header-height-px;
+    padding: 0 $gutter;
+    background-color: transparentize(black, .95);
+    @include clearfix();
+    .chat-header-title {
+      display: inline-block;
+      margin: 0;
+      @include vertical-align-padding($header-height, 1.063rem);
+    }
+    .chat-conversation-title {
+      display: inline-block;
+      margin: 0;
+      @include vertical-align-padding($header-height, 2.375rem);
+      span {
+        display: block;
+      }
+    }
+    > a,
+    > .dropdown {
+      @include vertical-align-padding($header-height, 1.688rem);
+    }
+    > .dropdown > a::after {
+      display: none;
+    }
+    .chat-right,
+    .chat-back {
+      cursor: pointer;
+      border: .0625rem solid transparent;
+      background-color: transparent;
+      background-image: none;
+      @include padding-left($padding-base);
+      @include padding-right($padding-base);
+      @include vertical-align-padding($header-height, 1.438rem);
+    }
+    .chat-right {
+      position: absolute;
+      top: 0;
+      @include right(0);
+    }
+    .chat-back {
+      font-size: 1rem;
+      line-height: 1;
+      position: absolute;
+      top: 0;
+      color: black;
+      text-shadow: 0 .0625rem 0 white;
+      @include left(0);
+      @include opacity(.4);
+      &:hover {
+        @include opacity(.5);
+      }
+    }
+  }
+}
+
+.chat-message {
+  //display: block;
+  .modal-body {
+    overflow-y: auto;
+    height: 100%;
+    max-height: calc(100vh - 200px);
+    padding: $gutter/2;
+  }
+  .modal-content {
+    display: inline-block;
+  }
+}
+
+.chat-backdrop {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.chat-message {
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.chat-group {
+  margin-bottom: $padding-base;
+  .chat-group-header {
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .chat-group-header,
+  a {
+    position: relative;
+    display: block;
+    padding: .6125rem $gutter;
+    &:hover {
+      color: darken($text-color, 10%);
+    }
+  }
+  .status-online,
+  .status-away,
+  .status-no-disturb,
+  .status-invisible,
+  .status-offline {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: $brand-default;
+    @include margin-right(.3125rem);
+    @include rounded(5px);
+  }
+  .status-online {
+    background-color: $brand-success;
+  }
+  .status-away {
+    background-color: $brand-warning;
+  }
+  .status-no-disturb {
+    background-color: $brand-danger;
+  }
+  .status-invisible,
+  .status-offline {
+    background-color: $brand-default;
+  }
+}
+
+.chat-conversation-content {
+  position: absolute;
+  top: $header-height;
+  right: 0;
+  bottom: $header-height;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: $padding-base;
+}
+
+.chat-conversation-footer {
+  position: relative;
+  width: 100%;
+  border-top: 1px solid $border-color;
+}
+
+.chat-conversation-user {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: $gutter;
+  padding: 0 4rem;
+  @include flexbox;
+}
+
+.me {
+  @include justify-content(flex-end);
+}
+
+.me .chat-conversation-avatar {
+  @include margin-left($padding-base);
+  @include order(2);
+}
+
+.me .chat-conversation-message {
+  @include order(1);
+}
+
+.me .chat-conversation-message::after {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  content: '';
+  border: 5px solid $brand-info;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  @include right(-7px);
+}
+
+.them .chat-conversation-avatar {
+  @include margin-right($padding-base);
+}
+
+.them .chat-conversation-message::after {
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  content: '';
+  border: 5px solid $brand-default;
+  border-bottom-color: transparent;
+  @include left(-7px);
+  @include border-left-color(transparent);
+}
+
+.chat-conversation-avatar {
+  position: relative;
+  width: 36px;
+  @include flex-shrink(0);
+  @include flex-grow(0);
+  img {
+    max-width: 100%;
+    border-radius: 50%;
+  }
+}
+
+.chat-conversation-message {
+  position: relative;
+  padding: .625rem $padding-base;
+  background-color: $brand-default;
+  @include rounded(4px);
+  p {
+    margin: 0;
+  }
+}
+
+.chat-conversation-user.me .chat-conversation-message {
+  position: relative;
+  background-color: $brand-info;
+  @include float(right);
+  p {
+    color: white;
+  }
+}
+
+.chat-input {
+  position: absolute;
+  top: 0;
+  right: 3rem;
+  left: 3rem;
+  display: block;
+  overflow: hidden;
+  overflow-y: auto;
+  max-height: $header-height;
+  resize: none;
+  border: 0;
+  outline: none;
+  @include vertical-align-padding($footer-height, 1rem);
+  @include rounded(0);
+  @include box-shadow(none);
+}
+
+.chat-input:empty::before {
+  content: 'Send a message';
+}
+
+.chat-input:focus::before {
+  content: '';
+}
+
+.chat-left {
+  padding: .625rem $padding-base;
+  color: inherit;
+  border: none;
+  outline: none;
+  background: transparent;
+  @include vertical-align($footer-height, 2.563rem);
+  @include float(left);
+}
+
+.chat-right {
+  position: relative;
+  overflow: hidden;
+  padding: .625rem $padding-base;
+  border: none;
+  outline: none;
+  background: transparent;
+  @include vertical-align($footer-height, 2.563rem);
+  @include float(right);
+}
+
+.chat-send > i {
+  position: relative;
+}

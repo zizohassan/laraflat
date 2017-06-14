@@ -42,7 +42,7 @@ function extractTextFiled ($lang , $name ,  $class = '' , $value , $transeFile =
       $i = 0;
       foreach ($lang as $l){
             $active = $i == 0 ? 'active' : '';
-            $out .= ' <li role="presentation" class="'.$active.'"><a href="#'.$name.$l['regional'].'" data-toggle="tab" aria-expanded="false">'.$title.' '.$l['native'].'</a></li>';
+            $out .= ' <li role="presentation" class="nav-item "><a href="#'.$name.$l['regional'].'" class="nav-link '.$active.'" data-toggle="tab" aria-expanded="false">'.$title.' '.$l['native'].'</a></li>';
             $i++;
       }
       $i = 0;
@@ -67,7 +67,7 @@ function extractTexArea($lang , $name , $rows=8 , $class = '' , $value ,  $trans
       $i = 0;
       foreach ($lang as $l){
             $active = $i == 0 ? 'active' : '';
-            $out .= ' <li role="presentation" class="'.$active.'"><a href="#'.$name.$l['regional'].'" data-toggle="tab" aria-expanded="false">'.$title.' '.$l['native'].'</a></li>';
+            $out .= ' <li role="presentation" class="nav-item "><a href="#'.$name.$l['regional'].'" class="nav-link '.$active.'" data-toggle="tab" aria-expanded="false">'.$title.' '.$l['native'].'</a></li>';
             $i++;
       }
       $i = 0;
