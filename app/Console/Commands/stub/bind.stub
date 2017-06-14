@@ -1,0 +1,4 @@
+$this->app->bind(
+   'App\Application\Repository\InterFaces\DummyInterface',
+   'App\Application\Repository\Eloquent\DummyEloquent'
+);

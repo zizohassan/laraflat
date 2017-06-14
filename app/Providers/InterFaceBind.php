@@ -32,5 +32,9 @@ class InterFaceBind extends ServiceProvider
             'App\Application\Repository\InterFaces\PageInterface',
             'App\Application\Repository\Eloquent\PageEloquent'
         );
+
+
+        require_once __DIR__.'/ExtraInterfaces.php';
+
     }
 }
