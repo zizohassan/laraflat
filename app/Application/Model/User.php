@@ -30,7 +30,7 @@ class User extends Authenticatable
     public function   validation ($id){
         return [
             'name' => 'required|min:4|max:40',
-            'username' => 'required|alpha_dash|unique:users,username,'.$id,
+            'username' => 'required|alpha_dash|unique:users',
             'email' => 'email|unique:users,email,'.$id,
             'password' => 'required'
         ];
