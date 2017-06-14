@@ -14,6 +14,10 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\MakeAdminModel::class,
+        Commands\MakeModel::class,
+        Commands\MakeAdminController::class,
+        Commands\MakeController::class,
+        Commands\MakeInterfaceEloquent::class,
     ];
 
 

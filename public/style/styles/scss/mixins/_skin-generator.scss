@@ -1,0 +1,88 @@
+// Sidebar skin generator
+@mixin sidebar-variant($background, $color, $hover-active-color, $brand-background, $brand-color) {
+  .sidebar-panel {
+    background-color: $background;
+    > .brand {
+      background-color: $brand-background;
+      > a {
+        color: $brand-color;
+         @include hover-focus {
+          color: lighten($brand-color, 5%);
+        }
+      }
+    }
+    .nav-profile > .dropdown-toggle,
+    .nav-title {
+      color: $color;
+    }
+    > nav {
+      > ul > li > a:hover,
+      > ul > li.open > a:hover {
+        background-color: darken($background, 3%);
+      }
+      li.open > a,
+      li.active > a {
+        color: $hover-active-color;
+      }
+      > ul > li.open:before {
+        position: absolute;
+        z-index: 99;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        content: '';
+        background: $brand-primary;
+        @include left(0);
+      }
+      a {
+        color: $color;
+         @include hover-focus {
+          color: $hover-active-color!important;
+        }
+      }
+    }
+  }
+}
+
+// Header skin generator
+@mixin header-variant($background, $color, $hover-active-color) {
+  .main-panel > .header {
+    color: $color;
+    background-color: $background;
+    .navbar-nav .nav-link.dropdown > a,
+    .nav > li > a,
+    .navbar-heading,
+    .material-icons {
+      color: $color;
+    }
+    .navbar-nav {
+      .dropdown-menu {
+        border-color: $background;
+      }
+    }
+    .search-form > input {
+      &:-moz-placeholder {
+        color: $color;
+      }
+      &::-moz-placeholder {
+        color: $color;
+      }
+      &:-ms-input-placeholder {
+        color: $color;
+      }
+      &::-webkit-input-placeholder {
+        color: $color;
+      }
+    }
+    .search-form .form-control:focus {
+      background: $background;
+    }
+    .nav > li > a:hover,
+    .nav > li > a:focus,
+    .nav .open > a,
+    .nav .open > a:hover,
+    .nav .open > a:focus {
+      color: $hover-active-color;
+    }
+  }
+}

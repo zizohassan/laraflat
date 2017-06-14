@@ -1,0 +1,375 @@
+﻿$titleColor: #04528f;
+$defaultWidth: 1000px;
+$bodyBgColor: #BCBCBC;
+$liWith: 33%;
+@mixin width() {
+  width: $defaultWidth;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// example: @include animation('slide-down 5s 3');
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
+// example: @include backface-visibility("hidden");
+@mixin backface-visibility($value) {
+  -webkit-backface-visibility: $value;
+  -moz-backface-visibility: $value;
+  backface-visibility: $value;
+}
+
+// example: @include background-cover();
+@mixin background-cover() {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+@mixin box-sizing($box-model) {
+  -webkit-box-sizing: $box-model;
+  -moz-box-sizing: $box-model;
+  box-sizing: $box-model;
+}
+
+//example @include breakpoint(940) { width:80%; }
+@mixin breakpoint($size) {
+  @media only screen and (max-width: $size + px) {
+    @content;
+  }
+}
+
+// example @include hoverFocus('text-decoration', 'none');
+@mixin hoverFocus($property, $value) {
+  &:hover,
+  &:focus {
+    #{$property}: $value;
+  }
+}
+
+// example: @include inline-block();
+@mixin inline-block() {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+}
+
+// example: @include inner-shadow(1px, 2px, 2px, #000);
+@mixin inner-shadow($hoff: false, $voff: false, $blur: false, $color: false) {
+  -webkit-box-shadow: inset $hoff $voff $blur $color;
+  -moz-box-shadow: inset $hoff $voff $blur $color;
+  box-shadow: inset $hoff $voff $blur $color;
+}
+
+// example: @include linearGradient(#cccccc, #333333);
+@mixin linearGradient($top, $bottom) {
+  background: #{$top};
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #{$top} 0%, #{$bottom} 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #{$top}), color-stop(100%, #{$bottom}));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #{$top} 0%, #{$bottom} 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #{$top} 0%, #{$bottom} 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #{$top} 0%, #{$bottom} 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #{$top} 0%, #{$bottom} 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$top}', endColorstr='#{$bottom}', GradientType=0);
+  /* IE6-9 */
+}
+
+// example: @include linear-gradient(-10, #cccccc, #333333);
+@mixin linear-gradient($angle, $colorStart, $colorStop) {
+  background: #{$colorStart};
+  /* Old browsers */
+  background: -moz-linear-gradient($angle, #{$colorStart} 0%, #{$colorStop} 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, #{$colorStart}), color-stop(100%, #{$colorStop}));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg, #{$colorStart} 0%, #{$colorStop} 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg, #{$colorStart} 0%, #{$colorStop} 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg, #{$colorStart} 0%, #{$colorStop} 100%);
+  /* IE10+ */
+  background: linear-gradient(45deg, #{$colorStart} 0%, #{$colorStop} 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$colorStart}', endColorstr='#{$colorStop}', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+}
+
+// example @include min-breakpoint(940) { width:80%; }
+@mixin min-breakpoint($size) {
+  @media only screen and (min-width: $size + px) {
+    @content;
+  }
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// example: @include placeholder-color(#333);
+@mixin placeholder-color($color) {
+  &.placeholder {
+    color: $color;
+  }
+  &:-moz-placeholder {
+    color: $color;
+  }
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
+
+// example: @include replace-text();
+@mixin replace-text() {
+  border: 0;
+  color: transparent;
+  font: 0/0 a;
+  text-shadow: none;
+}
+
+// example: @include rem("margin", 10, 5, 10, 5);
+// example: @include rem("font-size", 14);
+@mixin rem($property, $values...) {
+  $n: length($values);
+  $i: 1;
+  $pxlist: ();
+  $remlist: ();
+  @while $i <=$n {
+    $itemVal: (nth($values, $i));
+    @if $itemVal !="auto" {
+      $pxlist: append($pxlist, $itemVal + px);
+      //$remlist: append($remlist, ($itemVal / 10) + rem); // Use this if you've set HTML font size value to 62.5%
+      $remlist: append($remlist, ($itemVal / 16) + rem);
+    }
+    @else {
+      $pxlist: append($pxlist, auto);
+      $remlist: append($remlist, auto);
+    }
+    $i: $i + 1;
+  }
+  #{$property}: $pxlist;
+  #{$property}: $remlist;
+}
+
+// example: @include retina("logo2x.png", 100, 50);
+@mixin retina($image, $width, $height) {
+  @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6/2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+    background-image: url("#{$image}");
+    background-size: $width + px $height + px;
+    //background-size: $width / 10 + rem $height / 10 + rem; // Use this if you've set HTML font size value to 62.5%
+    background-size: $width / 16 + rem $height / 16 + rem;
+  }
+}
+
+// example: @include roundedCorners(10);
+@mixin roundedCornersPx($size: 10) {
+  -webkit-border-radius: $size + px;
+  -moz-border-radius: $size + px;
+  border-radius: $size + px;
+}
+
+@mixin roundedCornersPercent($size: 10) {
+  -webkit-border-radius: $size + %;
+  -moz-border-radius: $size + %;
+  border-radius: $size + %;
+}
+
+// Rounded Corners Top Only
+@mixin roundedTop($size) {
+  -webkit-border-radius: $size + px $size + px 0 0;
+  -moz-border-radius: $size + px $size + px 0 0;
+  border-radius: $size + px $size + px 0 0;
+}
+
+// Rounded Corner Top Left Only
+@mixin roundedTopLeft($size) {
+  -webkit-border-radius: $size + px 0 0 0;
+  -moz-border-radius: $size + px 0 0 0;
+  border-radius: $size + px 0 0 0;
+}
+
+// Rounded Corner Top Right Only
+@mixin roundedTopRight($size) {
+  -webkit-border-radius: 0 $size + px 0 0;
+  -moz-border-radius: 0 $size + px 0 0;
+  border-radius: 0 $size + px 0 0;
+}
+
+// Rounded Corners Bottom Only
+@mixin roundedBottom($size) {
+  -webkit-border-radius: 0 0 $size + px $size + px;
+  -moz-border-radius: 0 0 $size + px $size + px;
+  border-radius: 0 0 $size + px $size + px;
+}
+
+// Rounded Corner Bottom Left Only
+@mixin roundedBottomLeft($size) {
+  -webkit-border-radius: 0 0 0 $size + px;
+  -moz-border-radius: 0 0 0 $size + px;
+  border-radius: 0 0 0 $size + px;
+}
+
+// Rounded Corner Bottom Right Only
+@mixin roundedBottomRight($size) {
+  -webkit-border-radius: 0 0 $size + px 0;
+  -moz-border-radius: 0 0 $size + px 0;
+  border-radius: 0 0 $size + px 0;
+}
+
+// Rounded Corners Left Only
+@mixin roundedLeft($size) {
+  -webkit-border-radius: 0 0 $size + px $size + px;
+  -moz-border-radius: 0 0 $size + px $size + px;
+  border-radius: $size + px 0 0 $size + px;
+}
+
+// Rounded Corners Right Only
+@mixin roundedRight($size) {
+  -webkit-border-radius: 0 $size + px $size + px 0;
+  -moz-border-radius: 0 $size + px $size + px 0;
+  border-radius: 0 $size + px $size + px 0;
+}
+
+// Rounded Corners Right Only
+@mixin rounded($topLeft:0,
+$topRight:0,
+$bottomLeft:0,
+$bottomRight:0) {
+  -webkit-border-radius: $topLeft+ px $topRight + px $bottomRight + px $bottomLeft+px;
+  -moz-border-radius: $topLeft+ px $topRight + px $bottomRight + px $bottomLeft+px;
+  border-radius: $topLeft+ px $topRight + px $bottomRight + px $bottomLeft+px;
+}
+
+// Single Transform
+// ----------------------------------------------------------------------
+// example: @include flat-button($greyBlue, white, 5px 15px);
+@mixin single-transform($deg) {
+  -ms-transform: rotateX($deg);
+  -webkit-transform: rotateX($deg);
+  transform: rotate($deg);
+}
+
+// example: @include single-text-shadow(1px, 2px, 2px, #000);
+@mixin single-text-shadow($hoff: false,
+$voff: false,
+$blur: false,
+$color: false) {
+  text-shadow: $hoff $voff $blur $color;
+}
+
+// example: @include transform("origin", 0, 0);
+@mixin transform($type,
+$values...) {
+  $n: length($values);
+  $i: 1;
+  $originVal: ();
+  @while $i <=$n {
+    $itemVal: (nth($values, $i));
+    @if $type=="rotate" or $type=="rotateY" or $type=="rotateX" {
+      $originVal: append($originVal, $itemVal + deg);
+    }
+    @else {
+      $originVal: append($originVal, $itemVal + px);
+    }
+    $i: $i + 1;
+  }
+  -webkit-transform: #{$type}($originVal);
+  -moz-transform: #{$type}($originVal);
+  transform: #{$type}($originVal);
+}
+
+// example: @include single-transition(background, 1s, ease-in-out, 0);
+@mixin single-transition($property,
+$duration,
+$timing-function,
+$delay) {
+  -webkit-transition: $property $duration $timing-function $delay;
+  -moz-transition: $property $duration $timing-function $delay;
+  -o-transition: $property $duration $timing-function $delay;
+  transition: $property $duration $timing-function $delay;
+}
+
+// example: @include double-transition(background, 1s, ease-in-out, 0, opacity, .1s, ease-in-out, 0);
+@mixin double-transition($property1,
+$duration1,
+$timing-function1,
+$delay1,
+$property2,
+$duration2,
+$timing-function2,
+$delay2) {
+  -webkit-transition: $property1 $duration1 $timing-function1 $delay1, $property2 $duration2 $timing-function2 $delay2;
+  -moz-transition: $property1 $duration1 $timing-function1 $delay1, $property2 $duration2 $timing-function2 $delay2;
+  -o-transition: $property1 $duration1 $timing-function1 $delay1, $property2 $duration2 $timing-function2 $delay2;
+  transition: $property1 $duration1 $timing-function1 $delay1, $property2 $duration2 $timing-function2 $delay2;
+}
+
+// example: @include translate(0);
+@mixin translate($value) {
+  -webkit-transform: translatez($value);
+  -moz-transform: translatez($value);
+  -ms-transform: translatez($value);
+  -o-transform: translatez($value);
+  transform: translatez($value);
+}
+
+// example: @include arrow("left", #cccccc, 10);
+@mixin arrow($direction,
+$color,
+$size) {
+  $pxSize: $size + px;
+  $remSize: ($size / 10) + rem;
+  width: 0;
+  height: 0;
+  @if $direction=="left" {
+    border-top: $pxSize solid transparent;
+    border-right: $pxSize solid $color;
+    border-bottom: $pxSize solid transparent;
+    border-top: $remSize solid transparent;
+    border-right: $remSize solid $color;
+    border-bottom: $remSize solid transparent;
+  }
+  @else if $direction=="right" {
+    border-top: $pxSize solid transparent;
+    border-bottom: $pxSize solid transparent;
+    border-left: $pxSize solid $color;
+    border-top: $remSize solid transparent;
+    border-bottom: $remSize solid transparent;
+    border-left: $remSize solid $color;
+  }
+  @else if $direction=="up" {
+    border-left: $pxSize solid transparent;
+    border-right: $pxSize solid transparent;
+    border-bottom: $pxSize solid $color;
+    border-left: $remSize solid transparent;
+    border-right: $remSize solid transparent;
+    border-bottom: $remSize solid $color;
+  }
+  @else if $direction=="down" {
+    border-left: $pxSize solid transparent;
+    border-right: $pxSize solid transparent;
+    border-top: $pxSize solid $color;
+    border-left: $remSize solid transparent;
+    border-right: $remSize solid transparent;
+    border-top: $remSize solid $color;
+  }
+}

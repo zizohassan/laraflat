@@ -1,0 +1,155 @@
+/* $layout-options
+ ------------------------------------------*/
+
+
+/*Flex Layout*/
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    .layout-#{$breakpoint},
+    //.layout-column,
+    .layout-row-#{$breakpoint} {
+      box-sizing: border-box;
+      width: 100%;
+      @include flexbox;
+    }
+
+    .layout-column-#{$breakpoint} {
+      @include flex;
+      @include flex-direction(column);
+    }
+
+    .layout-row-#{$breakpoint} {
+      @include flex-direction(row);
+      > * {
+        max-width: 100%;
+      }
+    }
+
+    .flexbox-#{$breakpoint} {
+      box-sizing: border-box;
+      @include flexbox;
+    }
+
+    .flex-#{$breakpoint} {
+      box-sizing: border-box;
+      @include flex(1);
+    }
+  }
+}
+
+/*Heights*/
+.full-height {
+  height: 100%;
+}
+.fill-container,
+.page-height {
+  height: calc(100vh - #{$header-footer-height});
+}
+
+.header-secondary + .main-content > .content-view {
+  .fill-container,
+  .page-height {
+    height: calc(100vh - #{$header-height + $header-height + $footer-height});
+  }
+}
+
+
+/*Table equal columns*/
+
+.column-equal {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  .col {
+    display: table-cell;
+    float: none;
+    vertical-align: top;
+  }
+}
+
+
+/*Scroll*/
+
+.scroll-y {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* Fixed header layout*/
+
+.fixed-header {
+  .main-panel {
+    overflow-x: initial;
+    overflow-y: initial;
+  }
+  .main-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+
+/* Static sidebar layout*/
+.app.layout-static {
+  max-height: initial!important;
+  max-height: auto!important;
+  height: initial!important;
+  height: auto!important;
+}
+.app.static {
+  max-height: initial;
+  height: initial;
+  .main-panel {
+    overflow-x: initial;
+    overflow-y: initial;
+  }
+  .main-content {
+    overflow-x: visible;
+    overflow-y: visible;
+  }
+  .contacts-container {
+    height: initial!important;
+  }
+  .full-height {
+    height: initial
+  }
+  .fill-container {
+    width: 100%;
+    height: initial;
+  }
+  #google-container {
+    position: absolute!important;
+  }
+}
+
+
+/* Boxed layout*/
+
+.app.boxed {
+  overflow: hidden;
+  margin-right: auto;
+  margin-left: auto;
+  &.expanding .sidebar-panel {
+    position: absolute;
+  }
+}
+
+@media (min-width: 48em) {
+  .app.boxed {
+    max-width: 46.88rem;
+  }
+}
+
+@media (min-width: 62rem) {
+  .app.boxed {
+    max-width: 60.63rem;
+  }
+}
+
+@media (min-width: 75rem) {
+  .app.boxed {
+    max-width: 73.13rem;
+  }
+}

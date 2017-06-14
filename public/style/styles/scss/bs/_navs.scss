@@ -1,0 +1,68 @@
+/* $navs
+ ------------------------------------------*/
+
+
+/* Navs */
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  color: #fff;
+  background-color: $brand-primary;
+}
+
+
+/* Pills */
+
+.nav-pills {
+  .nav-link {
+    @include rounded($border-radius-base);
+  }
+  .nav-link.active,
+  .nav-item.open .nav-link {
+    @include plain-hover-focus {
+      color: white;
+      background-color: $brand-primary;
+    }
+  }
+}
+
+
+/* Tabs */
+
+.nav-tabs {
+  margin-right: -1px;
+  margin-left: -1px;
+  border: 0;
+  .nav-item {
+    position: relative;
+    display: block;
+    margin: 0;
+    text-align: center;
+    text-decoration: none;
+    .nav-link {
+      font-weight: 500;
+      padding: $gutter/2 $padding-base;
+      border-color: transparent;
+      border-bottom: 0;
+      border-radius: ($border-radius-base + 1) ($border-radius-base + 1) 0 0;
+      &:hover,
+      &:hover,
+      &:focus {
+        color: white;
+        background-color: $brand-primary;
+      }
+      &.active {
+        color: $text-color;
+        border-color: $border-color;
+        background-color: white;
+      }
+    }
+  }
+}
+
+.tab-content {
+  padding: $padding-base;
+  border-radius: 0 0 $border-radius-base $border-radius-base;
+  background-color: white;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 1px 1px rgba(0, 0, 0, .05);
+}

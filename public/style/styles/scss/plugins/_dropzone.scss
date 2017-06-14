@@ -1,0 +1,67 @@
+.drop-box {
+  width: 100%;
+  margin-bottom: $gutter;
+  padding: 1.563rem $padding-base;
+  text-align: center;
+  border: .0625rem dashed $border-color;
+  background: white;
+}
+
+.dragover {
+  border-color: $brand-primary;
+}
+
+.dropzone {
+  display: table;
+  width: 100%;
+  padding: 0;
+  border-width: 1px;
+  border-style: dashed;
+  background: white;
+  @include rounded($border-radius-base);
+  .dz-message {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .dz-preview.dz-file-preview .dz-image {
+    background: $brand-default;
+    @include rounded($border-radius-base);
+  }
+  .dz-preview .dz-error-message {
+    background: $brand-danger;
+    @include rounded($border-radius-base);
+  }
+  .dz-preview .dz-error-message:after {
+    border-bottom-color: $brand-danger;
+  }
+  .dz-preview .dz-progress {
+    border-color: $border-color;
+  }
+  .dz-preview .dz-progress .dz-upload {
+    background: $brand-primary;
+  }
+  .dz-preview .dz-details .dz-filename:hover span {
+    border-color: $border-color;
+  }
+  .dz-preview .dz-details .dz-filename span,
+  .dz-preview .dz-details .dz-size span {
+    @include rounded($border-radius-base);
+  }
+}
+
+.my-drop-zone {
+  min-height: 1.25rem;
+  margin-bottom: $padding-base;
+  padding: 1.188rem;
+  border: dashed .0625rem $text-color;
+  background-color: white;
+  @include rounded($border-radius-base);
+}
+
+.nv-file-over {
+  border-color: $brand-danger;
+}
+
+.another-file-over-class {
+  border-color: $brand-success;
+}

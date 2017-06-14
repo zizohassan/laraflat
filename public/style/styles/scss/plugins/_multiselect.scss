@@ -1,0 +1,40 @@
+/* $multiselect
+ ------------------------------------------*/
+
+select.center-block + .ms-container {
+  margin: 0 auto $gutter;
+}
+
+.ms-container .ms-selectable,
+.ms-container .ms-selection {
+  color: $text-color;
+}
+
+.ms-container .ms-list {
+  border-color: $border-color;
+  @include box-shadow(none);
+  @include rounded($border-radius-base);
+}
+
+.ms-container .ms-list.ms-focus {
+  border-color: $brand-primary;
+  @include box-shadow(none);
+}
+
+.ms-container .ms-selectable li.ms-elem-selectable,
+.ms-container .ms-selection li.ms-elem-selection {
+  font-size: $font-size-base;
+  color: $text-color;
+  border-bottom-color: $border-color;
+}
+
+.ms-container .ms-selectable li.ms-hover,
+.ms-container .ms-selection li.ms-hover {
+  color: white;
+  background-color: $brand-primary;
+}
+
+.ms-container .ms-selectable li.disabled,
+.ms-container .ms-selection li.disabled {
+  background-color: $brand-default;
+}

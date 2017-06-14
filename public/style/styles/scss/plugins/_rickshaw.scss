@@ -1,0 +1,42 @@
+/* $rickshaw
+ ------------------------------------------*/
+
+.rickshaw_graph {
+  display: block;
+}
+
+.rickshaw_graph .detail .x_label {
+  font-family: inherit;
+  @include rounded($border-radius-base);
+}
+
+.rickshaw_graph .detail .item {
+  font-family: inherit;
+  @include rounded($border-radius-base);
+  ;
+}
+
+.rickshaw_graph .x_tick {
+  border-left: .0625rem dashed rgba(0, 0, 0, .2);
+}
+
+.rickshaw_graph .x_tick .title {
+  font-family: inherit;
+  color: black;
+}
+
+.rickshaw_annotation_timeline .annotation .content {
+  @include rounded($border-radius-base);
+}
+
+.rickshaw_legend {
+  font-family: inherit;
+}
+
+.rickshaw_legend li:hover {
+  @include rounded($border-radius-base);
+}
+
+.rickshaw_legend li:active {
+  @include rounded($border-radius-base);
+}

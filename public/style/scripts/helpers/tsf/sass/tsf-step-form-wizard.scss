@@ -1,0 +1,194 @@
+﻿@import "effects";
+@import "../../../../styles/scss/app.variables";
+@import "../../../../styles/scss/variables";
+@import "../../../../styles/scss/mixins";
+
+/*
+
+    Common Style
+
+*/
+
+.tsf-container,
+.tsf-wizard {
+  @include clearfix;
+}
+
+.tsf-nav-step ul {
+  .number {
+    font-size: 1.2rem;
+  }
+  li > * .desc span {
+    font-size: 90%;
+  }
+}
+
+.tsf-step {
+  display: none;
+  /*visibility:hidden;*/
+  &.active {
+    /*visibility:visible;*/
+    display: block;
+  }
+}
+
+.tsf-content {
+  width: 100%;
+  display: block;
+  padding: $padding-base;
+  margin-bottom: $gutter;
+  border: 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 1px 1px rgba(0, 0, 0, .05);
+  @include rounded($border-radius-base);
+  background-color: white;
+  input.error {
+    border: 1px solid $brand-danger;
+    ;
+  }
+  label.error {
+    color: $brand-danger;
+    ;
+    font-style: italic;
+  }
+}
+
+.tsf-controls {
+  padding: 0;
+  margin-bottom: $gutter;
+  .tsf-wizard-btn {
+    @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+    &.btn-right {
+      float: right;
+    }
+  }
+}
+
+.tsf-nav-step {
+  ul {
+    a {
+      text-decoration: none !important;
+    }
+    .desc {
+      padding-top: 0;
+    }
+    label {
+      margin-bottom: 0 !important;
+    }
+  }
+  .tsf-nav {
+    -moz-transition: all 1000ms;
+    -o-transition: all 1000ms;
+    -webkit-transition: all 1000ms;
+    transition: all 1000ms;
+    position: absolute;
+  }
+}
+
+.tsf-nav-many-steps {
+  height: 100px;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  .tsf-left-container,
+  .tsf-right-container {
+    width: 66.66666667%;
+    float: left;
+  }
+
+  .tsf-right-nav-step,
+  .tsf-left-nav-step {
+    float: left;
+    width: 33.33333333%;
+  }
+
+  .tsf-right-nav-step {
+    float: right;
+  }
+  .tsf-right-nav-step .gsi-vertical {
+    padding-left: ($gutter*2)!important;
+  }
+  .tsf-left-nav-step .gsi-vertical {
+    padding-right: ($gutter*2)!important;
+  }
+}
+
+.tsf-right-nav-step .gsi-vertical {
+  margin: 0!important;
+  width: 100% !important;
+  &.gsi-step-indicator.triangle li:first-child {
+    margin-top: 0;
+  }
+}
+
+.tsf-left-nav-step .gsi-vertical {
+  margin: 0!important;
+  width: 100% !important;
+  &.gsi-step-indicator.triangle li:first-child {
+    margin-top: 0;
+  }
+}
+
+.tsf-wizard {
+  .tsf-nav-step {
+    label {
+      cursor: pointer !important;
+    }
+  }
+  &.not-show-num {
+    .tsf-nav-step {
+      .number {
+        display: none;
+      }
+    }
+  }
+  &.bottom {
+    @include flexbox;
+    @include flex-flow(column);
+    .tsf-bottom-container {
+      @include order(1);
+      @include flexbox;
+      @include flex-flow(column);
+    }
+    .tsf-bottom-nav-step {
+      @include order(2);
+    }
+    .tsf-controls {
+      @include order(1);
+    }
+    .tsf-content {
+      @include order(2);
+    }
+  }
+}
+
+input.parsley-success,
+select.parsley-success,
+textarea.parsley-success {
+  @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+  @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
+}
+
+.parsley-errors-list {
+  margin: 2px 0 3px;
+  padding: 0;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  opacity: 0;
+  transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+}

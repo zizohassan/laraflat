@@ -1,0 +1,74 @@
+/* $summernote
+ ------------------------------------------*/
+
+.note-air-editor {
+  min-height: 9.375rem;
+  padding: $gutter/2;
+  background-color: white;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 1px 1px rgba(0, 0, 0, .05);
+  @include rounded($border-radius-base);
+}
+
+.note-editor.note-frame {
+  border: 0;
+}
+
+.note-editor {
+  overflow: visible;
+  border: 0;
+  background-color: white;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 1px 1px rgba(0, 0, 0, .05);
+  @include rounded($border-radius-base);
+  .btn-group .btn {
+    @include box-shadow(none);
+  }
+  .note-toolbar {
+    padding: 0 $gutter/2 $gutter/2;
+    border-color: $border-color;
+  }
+  .dropdown-menu {
+    font-size: inherit;
+    overflow: auto;
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    li > a {
+      font-weight: normal;
+      line-height: 1.5;
+      display: block;
+      clear: both;
+      width: 100%;
+      padding: 3px 20px;
+      text-align: inherit;
+      white-space: nowrap;
+      color: #373a3c;
+      border: 0;
+      background: none;
+    }
+  }
+  .note-editable {
+    min-height: 9.375rem;
+    padding: $gutter/2;
+    background-color: transparent!important;
+  }
+}
+
+.note-popover .popover-content > .btn-group,
+.panel-heading.note-toolbar > .btn-group {
+  margin-top: $gutter/2;
+}
+
+.note-popover.popover,
+.note-icon-caret {
+  display: none;
+}
+
+.note-popover .popover .popover-content .note-para .dropdown-menu,
+.panel-heading.note-toolbar .note-para .dropdown-menu {
+  min-width: 257px;
+}
+
+[class^="note-icon-"]:before,
+[class*=" note-icon-"]:before {
+  line-height: 1;
+}

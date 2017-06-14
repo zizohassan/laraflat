@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+@extends(layoutExtend())
 
 @section('title')
     {{ adminTrans('menu' , 'menu') }} {{  isset($item) ? adminTrans('curd' , 'edit'):  adminTrans('curd' , 'add') }}
@@ -9,8 +9,8 @@
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => adminTrans('menu' , 'menu') , 'model' => 'menu' , 'action' => isset($item) ? adminTrans('curd' , 'edit'): adminTrans('curd' , 'add') ])
-        @include('admin.layout.messages')
+    @component(layoutForm() , ['title' => adminTrans('menu' , 'menu') , 'model' => 'menu' , 'action' => isset($item) ? adminTrans('curd' , 'edit'): adminTrans('curd' , 'add') ])
+    @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/menu/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">

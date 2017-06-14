@@ -1,0 +1,215 @@
+/* $noty
+ ------------------------------------------*/
+
+li.app-noty {
+  position: relative;
+  display: block;
+  margin-bottom: $gutter;
+}
+
+li.app-noty:last-child {
+  margin-bottom: 0;
+}
+
+.noty_message[style] {
+  font-size: $font-size-base!important;
+}
+
+.app-noty .noty_bar {
+  padding: 1rem $padding-base;
+  border: .0625rem solid transparent;
+  @include rounded($border-radius-small);
+}
+
+.app-noty-top-left,
+.app-noty-top-right,
+.app-noty-top {
+  .app-noty .noty_bar {
+    -webkit-animation: fadeIn 150ms;
+    animation: fadeIn 150ms;
+  }
+  .app-noty.i-am-closing-now .noty_bar {
+    -webkit-animation: fadeOut 150ms;
+    animation: fadeOut 150ms;
+  }
+}
+
+.app-noty-bottom-left,
+.app-noty-bottom-right,
+.app-noty-bottom {
+  .app-noty .noty_bar {
+    -webkit-animation: fadeIn 150ms;
+    animation: fadeIn 150ms;
+  }
+  .app-noty.i-am-closing-now .noty_bar {
+    -webkit-animation: fadeOut 150ms;
+    animation: fadeOut 150ms;
+  }
+}
+
+.app-noty-bottom,
+.app-noty-bottom-right,
+.app-noty-bottom-left,
+.app-noty-top,
+.app-noty-top-right,
+.app-noty-top-left {
+  position: fixed;
+  z-index: 99999;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  @include transition(all $transition-duration cubic-bezier(.7, 0, .3, 1));
+  width: 300px;
+}
+
+
+/* Bottom notification */
+
+.app-noty-bottom {
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  li.app-noty {
+    margin-top: -.0625rem;
+    margin-bottom: 0;
+  }
+  .noty_bar {
+    @include rounded(0);
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .app-noty-bottom {
+    padding-left: $sidebar-width;
+  }
+  .expanding ~ .app-noty-bottom {
+    padding-left: $sidebar-small-menu-width;
+  }
+  .horizontal ~ .app-noty-bottom,
+  .offcanvas ~ .app-noty-bottom,
+  .boxed ~ .app-noty-bottom {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+
+/* Bottom right notification */
+
+.app-noty-bottom-right {
+  right: $gutter;
+  bottom: ($footer-height + $gutter);
+}
+
+@include media-breakpoint-up(lg) {
+  .boxed ~ .app-noty-bottom-right{
+    right: $gutter;
+  }
+}
+
+
+/* Bottom left notification */
+
+.app-noty-bottom-left {
+  bottom: ($footer-height + $gutter);
+  left: $gutter;
+}
+
+@include media-breakpoint-up(lg) {
+  .app-noty-bottom-left {
+    left: ($sidebar-width + $gutter);
+  }
+  .expanding ~ .app-noty-bottom-left {
+    left: ($sidebar-small-menu-width + $gutter);
+  }
+  .horizontal ~ .app-noty-bottom-left,
+  .offcanvas ~ .app-noty-bottom-left,
+  .boxed ~ .app-noty-bottom-left,
+  .boxed.expanding ~ .app-noty-bottom-left {
+    left: $gutter;
+  }
+}
+
+
+/* Top notification */
+
+.app-noty-top {
+  top: ($header-height + $gutter);
+  right: $gutter;
+}
+
+.app-noty-top {
+  top: ($header-height);
+  right: 0;
+  width: 100%;
+  li.app-noty {
+    margin-top: -.0625rem;
+    margin-bottom: 0;
+  }
+  .noty_bar {
+    @include rounded(0);
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .app-noty-top {
+    padding-left: $sidebar-width;
+  }
+  .expanding ~ .app-noty-top {
+    position: absolute;
+    padding-left: $sidebar-small-menu-width;
+  }
+  .horizontal ~ .app-noty-top,
+  .offcanvas ~ .app-noty-top,
+  .boxed ~ .app-noty-top {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+
+/* Top right notification */
+
+.app-noty-top-right {
+  top: ($header-height + $gutter);
+  right: $gutter;
+}
+
+@include media-breakpoint-up(lg) {
+  .boxed ~ .app-noty-top-right,
+  .boxed.expanding ~ .app-noty-top-right {
+    right: $gutter;
+  }
+}
+
+
+/* Top left notification */
+
+.app-noty-top-left {
+  top: ($header-height + $gutter);
+  left: $gutter;
+}
+
+@include media-breakpoint-up(lg) {
+  .app-noty-top-left {
+    left: ($sidebar-width + $gutter);
+  }
+  .expanding ~ .app-noty-top-left {
+    left: ($sidebar-small-menu-width + $gutter);
+  }
+  .horizontal ~ .app-noty-top-left,
+  .offcanvas ~ .app-noty-top-left,
+  .boxed ~ .app-noty-top-left,
+  .boxed.expanding ~ .app-noty-top-left {
+    left: $gutter;
+  }
+}
+
+
+/* Notification colors */
+
+@include bg-variant('.noty_container_type_success .noty_bar', $brand-success);
+@include bg-variant('.noty_container_type_information .noty_bar', $brand-info);
+@include bg-variant('.noty_container_type_warning .noty_bar', $brand-warning);
+@include bg-variant('.noty_container_type_error .noty_bar', $brand-danger);
+@include bg-variant('.noty_container_type_confirm .noty_bar', $brand-primary);

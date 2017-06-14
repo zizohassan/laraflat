@@ -1,0 +1,227 @@
+/* $calendar
+ ------------------------------------------*/
+
+.fc-toolbar {
+  margin: 0;
+  margin-bottom: 0;
+  padding: $gutter/2 $padding-base;
+  color: #fff;
+  border-radius: $border-radius-base $border-radius-base 0 0;
+  background: $brand-info;
+  .fc-left {
+    display: block;
+    width: 100%;
+    margin-bottom: $gutter;
+    h2 {
+      float: none;
+      text-align: center;
+    }
+  }
+  .fc .fc-toolbar > * > * {
+    float: none;
+  }
+  .fc-left h2 {
+    font-size: 1.2rem;
+  }
+  > .fc-center {
+    display: table;
+  }
+}
+
+.fc-state-default.fc-corner-left {
+  border-top-left-radius: $border-radius-base;
+  border-bottom-left-radius: $border-radius-base;
+}
+
+.fc-state-default.fc-corner-right {
+  border-top-right-radius: $border-radius-base;
+  border-bottom-right-radius: $border-radius-base;
+}
+
+.fc-t-events {
+  outline: none;
+}
+
+.fc td.fc-widget-header {
+  padding: .5rem 0;
+  color: white;
+  border: 0;
+  background-color: darken($brand-info, 5%);
+}
+
+.fullcalendar {
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 1px 1px rgba(0, 0, 0, .05);
+  th.fc-widget-header {
+    font-size: $font-size-base;
+    font-weight: $font-weight-base;
+    border-width: 0;
+  }
+  .fc td {
+    font-weight: $font-weight-bold;
+  }
+  .fc td,
+  .fc th {
+    border-right: 0;
+    border-left: 0;
+  }
+  .fc-day-grid > .fc-widget-content {
+    border-bottom: 1px solid $border-color;
+  }
+  .fc-day-grid > .fc-widget-content:last-child {
+    border-bottom: 0;
+  }
+  tr > .fc-day {
+    border-right: 1px solid $border-color;
+  }
+  tr > .fc-day:last-child {
+    border-right: 0;
+  }
+  .fc-day-grid-event .fc-time {
+    font-weight: inherit;
+    &::after {
+      display: inline-block;
+      content: ':';
+    }
+  }
+  .fc-widget-content {
+    border-width: 0;
+    border-color: $border-color;
+  }
+  .fc-slats .fc-widget-content {
+    border-width: 1px;
+  }
+  .fc-unthemed th,
+  .fc-unthemed td,
+  .fc-unthemed hr,
+  .fc-unthemed thead,
+  .fc-unthemed tbody,
+  .fc-unthemed .fc-row,
+  .fc-unthemed .fc-popover {
+    border-color: $border-color;
+  }
+  .fc-unthemed hr,
+  .fc-unthemed .fc-popover .fc-header {
+    background-color: $border-color;
+  }
+  .fc-state-hover,
+  .fc-state-down,
+  .fc-state-active,
+  .fc-state-disabled {
+    color: darken($text-color, 5%);
+    outline: none;
+    background-color: $border-color;
+  }
+  .fc-state-hover {
+    color: darken($text-color, 5%);
+  }
+  .fc-button {
+    position: relative;
+    position: relative;
+    z-index: 1;
+    height: inherit;
+    padding: .375rem $padding-base;
+    outline: 0;
+    background-image: none;
+    text-shadow: none;
+    @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+    @include rounded($border-radius-base);
+    @include transition(all $transition-duration linear);
+    -webkit-backface-visibility: hidden;
+    &.fc-today-button {
+      margin-right: $gutter;
+    }
+  }
+  .fc-button.fc-state-down,
+  .fc-button.fc-state-active {
+    border-color: #c4c2c2;
+    background-color: #cfcfcf;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  }
+}
+
+.fc-widget-content {
+  border: 0;
+}
+
+.fc .fc-toolbar > * > * {
+  margin-left: 0;
+}
+
+.fc-event {
+  font-size: 12px;
+  padding: 2px 5px;
+  color: white;
+  border-color: transparent;
+  @include rounded(0);
+}
+
+.external-event {
+  font-size: $font-size-base;
+  display: block;
+  margin: 0 0 .0625rem 0;
+  padding: 4px;
+  border-color: transparent;
+  .remove {
+    cursor: pointer;
+  }
+}
+
+.external-events {
+  padding: 0;
+  list-style: none;
+  li {
+    position: relative;
+    display: block;
+    margin: 0 5px 5px;
+    padding: 0 5px;
+    border-radius: $border-radius-base;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 1px 1px rgba(0, 0, 0, .05);
+  }
+}
+
+.external-events .form-control {
+  font-size: .9rem;
+  padding-left: 0;
+}
+
+.event-type {
+  margin-top: 5px;
+  padding: 0;
+  list-style: none;
+  li {
+    display: inline-block;
+    a::before {
+      display: block;
+      width: 100%;
+      height: 100%;
+      content: '';
+      background-color: $brand-primary;
+    }
+    a:hover,
+    a:focus,
+    a.active {
+      border-color: $brand-primary;
+    }
+    a {
+      position: relative;
+      display: block;
+      width: 15px;
+      height: 15px;
+      padding: 1px;
+      border: .0625rem solid transparent;
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .fc-toolbar {
+    .fc-right,
+    .fc-center {
+      display: table;
+      float: none;
+      margin: 0 auto $gutter;
+    }
+  }
+}

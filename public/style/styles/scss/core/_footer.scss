@@ -1,0 +1,73 @@
+/* $footer
+ ------------------------------------------*/
+
+.content-footer {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  min-height: $footer-height;
+  padding: 0 $gutter;
+  @include clearfix();
+  .footer-text {
+    display: inline-block;
+    padding-right: $padding-base;
+    padding-left: $padding-base;
+    @include vertical-align($footer-height, 1.188rem);
+    @include float(left);
+    &.small {
+      @include vertical-align($footer-height, .9375rem);
+    }
+  }
+  .footer-right {
+    @include float(right);
+    @include margin-right(0);
+  }
+  nav {
+    @include margin-right($padding-base);
+  }
+  nav ul {
+    font-weight: normal;
+    line-height: 1;
+    margin: 0;
+    list-style: none;
+    li {
+      display: inline-block;
+      vertical-align: -webkit-baseline-middle;
+      a {
+        line-height: 1.25rem;
+        display: block;
+        max-height: $footer-height;
+        padding-right: .625rem;
+        padding-left: .625rem;
+        color: $text-color;
+        @include vertical-align-padding($footer-height, 1.188rem);
+        &:hover,
+        &:focus {
+          color: darken($text-color, 5%);
+          background-color: transparent;
+        }
+      }
+      &:first-child {
+        @include margin-left(0);
+        a {
+          @include padding-left(0);
+        }
+      }
+    }
+  }
+  li:hover,
+  li a:hover,
+  li a:active {
+    background: transparent;
+  }
+}
+
+.session-footer {
+  padding: 0 4rem;
+}
+
+.no-footer .content-footer,
+.no-footer .session-footer {
+  display: none;
+  visibility: hidden;
+}

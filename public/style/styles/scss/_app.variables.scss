@@ -1,0 +1,71 @@
+//
+// General
+//
+
+$transition-duration: 200ms;
+$main-panel-bg: rgba(247, 240, 240, 1);
+$border-color: rgba(0, 0, 0, 0.1);
+$gutter: 1.5rem;
+
+//
+// Widths
+//
+$sidebar-width: 18rem;
+$sidebar-small-menu-width: 4rem;
+$sidebar-width-mobile: 18rem;
+
+//
+// Heights
+//
+$header-height: 3.438rem;
+$header-height-px: 56px;
+$footer-height: 3rem;
+
+//
+// Branding
+//
+$main-color: rgb(76, 127, 240);
+$brand-dark: rgb(83, 90, 108);
+$brand-default: rgb(232, 232, 232);
+$brand-primary: $main-color;
+$brand-success: rgb(127, 195, 92);
+$brand-warning: rgb(240, 197, 76);
+$brand-danger: rgb(210, 109, 84);
+$brand-info: rgb(76, 195, 240);
+$brand-white: rgb(255, 255, 255);
+
+//
+// Typography
+//
+$font-size-base: 0.8125rem;
+$font-weight-base: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+$text-color: rgba(0, 0, 0, 0.7);
+$link-color: $brand-primary;
+$link-hover-color: rgb(68, 68, 68);
+$font-family-base-webfont: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+$font-family-heading-webfont: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+//
+// Radius
+//
+$border-radius-base: 2px;
+$border-radius-large: 4px;
+$border-radius-small: 1px;
+
+//
+// Sidebar Skin
+//
+$sidebar-skin-background: white;
+$sidebar-skin-color: $text-color;
+$sidebar-skin-hover: rgb(0, 0, 0);
+$sidebar-skin-brand-background: $sidebar-skin-background;
+$sidebar-skin-brand-color: $text-color;
+
+//
+// Header Skin
+//
+$header-skin-background: $brand-primary;
+$header-skin-color: rgba(255, 255, 255, .7);
+$header-skin-hover: rgb(255, 255, 255);

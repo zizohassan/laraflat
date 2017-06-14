@@ -1,0 +1,163 @@
+/* $Widget
+ ------------------------------------------*/
+
+
+/*Notifications*/
+
+@mixin notification($color) {
+  .notification-bar-icon i {
+    background-color: $color;
+  }
+}
+
+.notification-bar-icon,
+.notification-bar-details {
+  display: table-cell;
+  float: none;
+  vertical-align: middle;
+}
+
+.notification-bar-icon {
+  width: 3rem;
+  height: 3rem;
+  div {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid $border-color;
+    border-radius: 50%;
+    background-color: #fff;
+  }
+  i {
+    position: absolute;
+    top: 50%;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 50%;
+    background-color: $brand-success;
+    @include left(50%);
+    @include margin(-.9375rem, 0, 0, -.9375rem);
+  }
+}
+
+.notification-bar-details {
+  @include padding-left(.9rem);
+  .notification-bar-title {
+    font-size: .85rem;
+    display: block;
+  }
+}
+
+.notification-bar-success {
+  @include notification($brand-success);
+}
+
+.notification-bar-fail {
+  @include notification($brand-danger);
+}
+
+.notification-bar-info {
+  @include notification($brand-info);
+}
+
+.dropdown-menu.notifications {
+  .dropdown-item {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+  .notification-icon {
+    width: 2rem;
+  }
+  .notification-message {
+    @include padding-left(.625rem);
+  }
+  .notifications-header {
+    padding: 0 $padding-base;
+  }
+  .notifications-header {
+    padding-top: .625rem;
+    padding-right: 1.25rem;
+    padding-bottom: .625rem;
+    padding-left: 1.25rem;
+    border-bottom: 1px solid $border-color;
+    p {
+      margin: 0;
+    }
+  }
+  li a {
+    line-height: 1.563rem;
+    display: table;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+  }
+  .notification-icon,
+  .notification-message {
+    position: relative;
+    display: table-cell;
+    float: none;
+    height: 100%;
+    vertical-align: middle;
+  }
+  .time {
+    font-size: .75rem;
+    line-height: 1;
+    display: block;
+    color: transparentize(#000, .5);
+  }
+  .avatar {
+    width: 100%;
+  }
+  a:hover,
+  a:active {
+    color: darken($text-color, 5%);
+    background-color: transparent;
+  }
+  .notifications-wrapper {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 250px;
+  }
+  .notifications-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      margin: 0 $gutter;
+    }
+    li a {
+      position: relative;
+      padding: $padding-base 0;
+      border-bottom: .0625rem solid #f1f1f1;
+    }
+    li:last-child a {
+      border-bottom: 0;
+    }
+  }
+  .notification-footer {
+    padding: $padding-base $gutter;
+  }
+}
+
+.circle-icon {
+  line-height: 2rem;
+  position: relative;
+  display: table;
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  text-align: center;
+  @include float(left);
+  @include rounded(50%);
+  > i {
+    font-size: 1rem;
+    display: table-cell;
+    float: none;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  }
+}

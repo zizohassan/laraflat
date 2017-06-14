@@ -1,0 +1,31 @@
+/* $brand
+ ------------------------------------------*/
+
+.brand {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  .toggle-offscreen {
+    @include vertical-align-padding($header-height-px, 24px);
+    @include float(left);
+    @include margin-right(1rem);
+    .material-icons {
+      vertical-align: middle;
+    }
+  }
+  .brand-logo {
+    display: inline-block;
+    @include vertical-align-padding($header-height-px, 16px);
+    line-height: 13px;
+    img {
+      max-height: 16px;
+    }
+  }
+}
+
+.sidebar-panel .brand {
+  min-height: $header-height-px;
+  @include padding-left($gutter);
+  @include padding-right($gutter);
+}

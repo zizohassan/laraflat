@@ -1,12 +1,12 @@
-@extends('admin.layout.app')
+@extends(layoutExtend())
 
 @section('title')
     {{ adminTrans('setting' , 'setting') }} {{  isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') }}
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => adminTrans('setting' , 'setting') , 'model' => 'setting' , 'action' => isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') ])
-        @include('admin.layout.messages')
+    @component(layoutForm() , ['title' => adminTrans('setting' , 'setting') , 'model' => 'setting' , 'action' => isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') ])
+    @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/setting/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">

@@ -1,12 +1,12 @@
-@extends('admin.layout.app')
+@extends(layoutExtend())
 
 @section('title')
     {{ adminTrans('permission' , 'permission') }} {{  isset($item) ? adminTrans('home' , 'edit') : adminTrans('home' , 'add') }}
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => adminTrans('permission' , 'permission') , 'model' => 'permission' , 'action' => isset($item) ? adminTrans('home' , 'edit') : adminTrans('home' , 'add') ])
-        @include('admin.layout.messages')
+    @component( layoutForm() , ['title' => adminTrans('permission' , 'permission') , 'model' => 'permission' , 'action' => isset($item) ? adminTrans('home' , 'edit') : adminTrans('home' , 'add') ])
+    @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/permission/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">

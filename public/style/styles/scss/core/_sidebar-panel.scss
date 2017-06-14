@@ -1,0 +1,339 @@
+/* $sidebar-panel
+ ------------------------------------------*/
+
+.sidebar-panel {
+  position: static;
+  z-index: 60;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .075);
+  @include flexbox;
+  @include flex-direction(column);
+  @include left(0);
+  @include transition(width 300ms cubic-bezier(.7, 0, .3, 1));
+  .brand {
+    z-index: 1;
+  }
+  .expanding-visible {
+    display: none!important;
+    visibility: hidden;
+  }
+  .expanding-hidden {
+  }
+  .nav-title {
+    font-size: 11px;
+    position: relative;
+    display: table;
+    clear: both;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: .4rem $gutter;
+    white-space: nowrap;
+    letter-spacing: .01rem;
+  }
+  .nav-profile {
+    position: relative;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    .uib-dropdown-menu,
+    .dropdown-menu {
+      left: 50%;
+      width: 90%;
+      transform: translate(-50%, 0);
+      background: $main-panel-bg;
+      box-shadow: 0 .375rem .75rem rgba(0, 0, 0, .1);
+      a {
+        padding-top: 3px;
+        padding-right: 1.25rem;
+        padding-bottom: 3px;
+        padding-left: 1.25rem;
+      }
+    }
+    > a:focus {
+      background-color: transparent;
+    }
+    a.dropdown-toggle {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      padding: .4rem $gutter;
+      &::after {
+        font-family: 'Material Icons';
+        font-size: 24px;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1;
+        position: absolute;
+        top: 50%;
+        display: block;
+        width: auto;
+        height: auto;
+        margin-top: -12px;
+        margin-right: 0;
+        margin-left: 0;
+        content: 'arrow_drop_down';
+        vertical-align: bottom;
+        white-space: nowrap;
+        letter-spacing: normal;
+        text-transform: none;
+        word-wrap: normal;
+        border: 0;
+        @include right($gutter);
+        direction: ltr;
+        /* Support for all WebKit browsers. */
+        -webkit-font-smoothing: antialiased;
+        /* Support for Safari and Chrome. */
+        text-rendering: optimizeLegibility;
+        /* Support for Firefox. */
+        -moz-osx-font-smoothing: grayscale;
+        /* Support for IE. */
+        font-feature-settings: 'liga';
+      }
+      .user-image {
+        @include padding-right(.5rem);
+        .avatar {
+          width: 2.8rem;
+        }
+      }
+      .user-info,
+      .user-image {
+        display: inline-block;
+      }
+      .user-info small {
+        display: block;
+      }
+      .user-info {
+        float: none!important;
+        overflow: hidden;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      > * {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+  > nav {
+    position: relative;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overflow-y: overlay;
+    box-sizing: border-box;
+    @include flex(1);
+    -webkit-overflow-scrolling: touch;
+    margin-right: -35px;
+    padding-right: 35px;
+    ul {
+      margin-bottom: 5px;
+      padding: 0;
+      list-style: none;
+    }
+    ul > li > a,
+    .menu-link {
+      display: block;
+      clear: both;
+      white-space: nowrap;
+      @include transition(background $transition-duration, color $transition-duration);
+      > span {
+        display: inline-block;
+      }
+      > .material-icons {
+        line-height: 1;
+        text-align: center;
+        @include margin-right(.5em);
+      }
+    }
+    .user-image,
+    .user-info,
+    .nav-profile .dropdown-toggle::after {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .user-info {
+      @include padding-left(1rem);
+      small {
+        display: block;
+      }
+    }
+    .badge {
+      line-height: 1;
+      font-size: 10px;
+      padding: .3rem .4rem;
+      color: inherit;
+      border: 1px solid rgba(0, 0, 0, .1);
+      @include rounded($border-radius-base);
+      margin-top: 2px;
+      font-weight: 800;
+    }
+    li {
+      line-height: 24px;
+      ul.sub-menu li a {
+        @include padding(.4rem, $gutter, .4rem, 4.01rem);
+      }
+    }
+    .menu-caret {
+      display: inline-block;
+      -webkit-transition: -webkit-transform $transition-duration cubic-bezier(.7, 0, .3, 1);
+      -moz-transition: -moz-transform $transition-duration cubic-bezier(.7, 0, .3, 1);
+      -o-transition: -o-transform $transition-duration cubic-bezier(.7, 0, .3, 1);
+      transition: transform $transition-duration cubic-bezier(.7, 0, .3, 1);
+      @include float(right);
+      @include margin-left(.3125rem);
+    }
+    ul.nav > li {
+      position: relative;
+      display: block;
+      > a:focus {
+        background-color: transparent;
+      }
+      a {
+        position: relative;
+        display: block;
+        clear: both;
+        padding: .4rem $gutter;
+        > * {
+          vertical-align: middle;
+        }
+      }
+      > ul {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        overflow: hidden;
+        max-height: 0;
+        -webkit-transition: .5s cubic-bezier(.35, 0, .25, 1);
+        -moz-transition: .5s cubic-bezier(.35, 0, .25, 1);
+        transition: .5s cubic-bezier(.35, 0, .25, 1);
+        -webkit-transition-property: max-height;
+        -moz-transition-property: max-height;
+        transition-property: max-height;
+      }
+      &.open > a > .menu-caret,
+      li.open > a > .menu-caret {
+        @include rotate(-180deg);
+      }
+      &.open > ul,
+      li.open > ul {
+        max-height: 1000px;
+      }
+      &.open {
+        background-color: rgba(0, 0, 0, .05);
+      }
+      .sub-menu {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+      }
+      > .sub-menu .sub-menu {
+        @include padding-left($gutter);
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .sidebar-panel {
+    z-index: 1030;
+    width: $sidebar-width;
+    > .brand,
+    > .nav-profile,
+    > nav {
+      min-width: $sidebar-width;
+    }
+  }
+  /* Collapsed sidebar */
+  .expanding {
+    .sidebar-panel {
+      position: fixed;
+    }
+    .main-panel {
+      @include margin-left($sidebar-small-menu-width);
+    }
+    .sidebar-panel:not(:hover) {
+      width: $sidebar-small-menu-width;
+      > .brand,
+      > .nav-profile,
+      > nav {
+        min-width: $sidebar-small-menu-width;
+      }
+      > .brand {
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+        .brand-logo {
+          @include vertical-align-padding($header-height-px, 40px);
+          img {
+            max-height: 40px;
+          }
+        }
+      }
+      .nav-profile {
+        > a {
+          padding-right: 0;
+          padding-left: 0;
+          &.dropdown-toggle::after {
+            display: none;
+            visibility: hidden;
+          }
+        }
+        .user-image {
+          display: block!important;
+          padding-right: 0!important;
+          padding-left: 0;
+          text-align: center;
+        }
+        .dropdown-menu {
+          display: none;
+        }
+      }
+      .small-menu-hidden,
+      .nav-title {
+        opacity: 0;
+      }
+      .expanding-visible {
+        display: block!important;
+        visibility: visible;
+      }
+      .expanding-hidden,
+      .sub-menu {
+        display: none!important;
+        visibility: hidden;
+      }
+      > nav {
+        > ul > li {
+          > a {
+            padding-right: 0;
+            padding-left: 0;
+          }
+          > a > span {
+            display: none;
+          }
+          .material-icons {
+            width: 100%;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .sidebar-panel {
+    position: absolute;
+  }
+}
+
+
+/* default sidebar skin */
+
+@include sidebar-variant($sidebar-skin-background, $sidebar-skin-color, $sidebar-skin-hover, $sidebar-skin-brand-background, $sidebar-skin-brand-color);

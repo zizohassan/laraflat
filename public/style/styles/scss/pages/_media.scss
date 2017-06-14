@@ -1,0 +1,17 @@
+/* $gallery
+ ------------------------------------------*/
+
+.media-item {
+  margin-bottom: $gutter;
+}
+
+.media {
+  .card-block {
+    margin-bottom: .2rem;
+    padding: .3rem;
+    border-radius: 0;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,156 @@
+/* $timeline
+ ------------------------------------------*/
+
+.timeline {
+  position: relative;
+  margin-bottom: 3.25rem;
+  &::before {
+    position: absolute;
+    top: 6px;
+    width: 3px;
+    height: 100%;
+    content: '';
+    background: $timeline-border-color;
+    @include left(98px);
+  }
+  .timeline-icon {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    @include left(80px);
+    @include rounded(50%);
+    @include box-shadow(0 0 0 2px $timeline-border-color);
+    > i {
+      line-height: 40px;
+    }
+  }
+  .timeline-card {
+    position: relative;
+    margin: 40px 0;
+    @include clearfix();
+  }
+  .timeline-card:first-child {
+    margin-top: 0;
+  }
+  .timeline-heading {
+    position: relative;
+    margin-bottom: $padding-base;
+    border-color: transparent;
+    @include clearfix();
+    &.border:after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      height: 1px;
+      content: '';
+      border-bottom: .0625rem solid transparentize(black, .94);
+    }
+  }
+  .timeline-content {
+    position: relative;
+    @include margin-left(150px);
+    @include clearfix();
+    .timeline-body {
+      display: inline-block;
+      padding: $padding-base /2;
+      background: white;
+      box-shadow: 0 0 0 1px rgba(64, 64, 69, .08);
+      @include rounded($border-radius-base);
+    }
+  }
+  .timeline-content .timeline-date {
+    display: inline-block;
+    padding: 5px 0 10px;
+  }
+  .timeline-content .timeline-body::before {
+    position: absolute;
+    top: 13px;
+    width: 0;
+    height: 0;
+    content: ' ';
+    pointer-events: none;
+    border-width: 7px;
+    border-style: solid;
+    @include right(100%);
+    @include border-color(transparent, rgba(150, 150, 150, .2), transparent, transparent);
+  }
+  .timeline-content .timeline-body::after {
+    position: absolute;
+    top: 14px;
+    width: 0;
+    height: 0;
+    content: ' ';
+    pointer-events: none;
+    border-width: 6px;
+    border-style: solid;
+    @include right(100%);
+    @include border-color(transparent, white, transparent, transparent);
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .timeline:not(.stacked) {
+    &::before {
+      @include left(50%);
+      @include margin-left(-2px);
+    }
+    .timeline-card:nth-child(even) .timeline-content {
+      @include float(right);
+    }
+    .timeline-card:nth-child(odd) .timeline-content .timeline-body {
+      @include float(right);
+    }
+    .timeline-card:nth-child(odd) .timeline-content .timeline-body::before {
+      position: absolute;
+      @include right(auto);
+      @include left(100%);
+      @include border-color(transparent, transparent, transparent, rgba(150, 150, 150, .2));
+    }
+    .timeline-card:nth-child(odd) .timeline-content .timeline-body::after {
+      position: absolute;
+      @include right(auto);
+      @include left(100%);
+      @include border-color(transparent, transparent, transparent, white);
+    }
+    .timeline-card:nth-child(even) .timeline-content .timeline-date {
+      @include right(122%);
+      @include left(auto);
+      @include text-align(right);
+    }
+    .timeline-card:first-child {
+      margin-top: 0;
+    }
+    .timeline-icon {
+      @include left(50%);
+      @include margin-left(-20px);
+    }
+    .timeline-content {
+      width: 45%;
+      @include margin-left(0);
+    }
+  }
+  .timeline .timeline-date {
+    position: absolute;
+    top: 6px;
+    width: 100%;
+    @include left(122%);
+  }
+  .timeline.stacked {
+    .timeline-date {
+      @include left(-150px);
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .timeline .timeline-date {
+    position: absolute;
+    top: 6px;
+    width: 100%;
+    @include left(-150px);
+  }
+}

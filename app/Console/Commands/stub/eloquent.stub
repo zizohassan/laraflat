@@ -1,0 +1,9 @@
+<?php
+namespace App\Application\Repository\Eloquent;
+
+use App\Application\Repository\InterFaces\DummyInterface;
+
+class DummyClass  implements DummyInterface{
+
+
+}

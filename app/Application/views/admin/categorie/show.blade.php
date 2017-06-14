@@ -1,11 +1,11 @@
-@extends('admin.layout.app')
+@extends(layoutExtend())
 
 @section('title')
     {{ adminTrans('categorie' , 'Category') }} {{ adminTrans('home' , 'view')  }}
 @endsection
 
 @section('content')
-    @component('admin.layout.form' , ['title' => adminTrans('categorie' , 'Category'), 'model' => 'categorie' ,  'action' => adminTrans('home' , 'view') ])
+    @component(layoutForm()  , ['title' => adminTrans('categorie' , 'Category'), 'model' => 'categorie' ,  'action' => adminTrans('home' , 'view') ])
 
         <table class="table table-bordered table-responsive table-striped">
             @php

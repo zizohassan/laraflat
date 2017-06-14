@@ -55,12 +55,10 @@ function extractTextFiled ($lang, $name,  $class = '', $value, $transeFile = nul
       foreach ($lang as $l)
       {
             $active = $i == 0 ? 'active' : '';
-            $out .= ' <li role="presentation" class="'
-                 . $active
-                  . '"><a href="#'
+            $out .= ' <li role="presentation" class="nav-item " ><a href="#'
                   . $name 
                   . $l['regional']
-                  . '" data-toggle="tab" aria-expanded="false">'
+                  . '" data-toggle="tab" aria-expanded="false" class="nav-link '.$active.'">'
                   . $title
                   . ' '
                   . $l['native']
@@ -115,12 +113,10 @@ function extractTexArea($lang, $name, $rows=8, $class = '', $value,  $transeFile
       foreach ($lang as $l)
       {
             $active = $i == 0 ? 'active' : '';
-            $out .= ' <li role="presentation" class="'
-                 . $active
-                  . '"><a href="#'
+            $out .= ' <li role="presentation" class="nav-item "><a href="#'
                   . $name
                   . $l['regional']
-                  . '" data-toggle="tab" aria-expanded="false">'
+                  . '" data-toggle="tab" aria-expanded="false" class="nav-link '.$active.'">'
                   . $title
                   . ' '
                   . $l['native']

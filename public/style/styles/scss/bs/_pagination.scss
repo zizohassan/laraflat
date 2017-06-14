@@ -1,0 +1,47 @@
+/* $pagination
+ ------------------------------------------*/
+
+.pagination {
+  border-radius: $border-radius-base;
+}
+
+.page-item {
+  &:first-child {
+    .page-link {
+      border-top-left-radius: $border-radius-base;
+      border-bottom-left-radius: $border-radius-base;
+    }
+  }
+  &:last-child {
+    .page-link {
+      border-top-right-radius: $border-radius-base;
+      border-bottom-right-radius: $border-radius-base;
+    }
+  }
+  &.active .page-link {
+    @include plain-hover-focus {
+      color: white;
+      border-color: $brand-primary;
+      background-color: $brand-primary;
+    }
+  }
+  &.disabled .page-link {
+    @include plain-hover-focus {
+      color: $text-color;
+      background-color: $brand-default;
+    }
+  }
+}
+
+.page-link {
+  color: $text-color;
+  border-color: $pagination-border;
+  @include hover-focus {
+    color: white;
+    background-color: $brand-primary;
+  }
+}
+
+.ng-table-pagination {
+  margin: 0;
+}

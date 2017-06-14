@@ -1,0 +1,378 @@
+/*!
+ * ui-select
+ * http://github.com/angular-ui/ui-select
+ * Version: 0.13.1 - 2015-09-30T05:39:26.659Z
+ * License: MIT
+ */
+
+.ui-select-choices-row:hover {
+  background-color: $brand-default;
+}
+
+
+/* Select2 theme */
+
+.select2-container .select2-selection {
+  line-height: 34px;
+  display: block;
+  height: 34px;
+  padding: 0 0 0 8px;
+  color: $text-color;
+  border-color: $border-color;
+  outline: 0;
+  background-color: #fff;
+  background-image: none;
+  @include rounded($border-radius-base);
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    display: block;
+    width: 0;
+    height: 0;
+    margin-top: -3px;
+    content: ' ';
+    border-width: 5px 5px 0 5px;
+    border-style: solid;
+    border-color: #808080 transparent transparent transparent;
+  }
+}
+
+.select2-container--open .select2-selection::after {
+  margin-top: -4px;
+  border-width: 0 5px 5px 5px;
+  border-color: transparent transparent #808080 transparent;
+}
+
+.select2-container.select2-drop-above .select2-selection {
+  border-bottom-color: $border-color;
+  border-radius: 0 0 $border-radius-base $border-radius-base;
+  background-image: none;
+}
+
+.select2-dropdown {
+  color: $text-color;
+  border-color: $border-color;
+  border-radius: 0 0 $border-radius-base $border-radius-base;
+  @include box-shadow(none);
+}
+
+.select2-dropdown.select2-dropdown--above {
+  border-color: $border-color;
+  border-radius: $border-radius-base $border-radius-base 0 0;
+  @include box-shadow(none);
+}
+
+.select2-container--open,
+.select2-dropdown.select2-dropdown--above.select2-container--open {
+  border-color: $brand-primary;
+}
+
+.select2-drop-auto-width {
+  border-color: $border-color;
+}
+
+.select2-container .select2-selection .select2-selection__arrow {
+  display: none;
+  visibility: hidden;
+  border-color: $border-color;
+  border-radius: 0 $border-radius-base $border-radius-base 0;
+  background: white;
+  background-image: none;
+}
+
+.select2-container-active .select2-selection,
+.select2-container-active .select2-choices {
+  border-color: $brand-primary;
+  @include box-shadow(none);
+}
+
+.select2-dropdown-open .select2-selection {
+  background-color: white;
+  background-image: none;
+  @include box-shadow(none);
+}
+
+.select2-dropdown-open.select2-drop-above .select2-selection,
+.select2-dropdown-open.select2-drop-above .select2-choices {
+  border-color: $brand-primary;
+  background-image: none;
+}
+
+.select2-container-multi .select2-choices {
+  border-color: $border-color;
+  background-image: none;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container-multi.select2-container-active .select2-choices {
+  border-color: $brand-primary;
+  @include box-shadow(none);
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice,
+.select2-container-multi .select2-choices .select2-search-choice {
+  border-color: $brand-default;
+  border-radius: $border-radius-base;
+  background-image: none;
+  @include box-shadow(none);
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.select2-results .select2-highlighted {
+  background: $brand-primary;
+}
+
+.select2-search-choice-close {
+  top: 2px;
+}
+
+.select2-search input {
+  border-color: $border-color!important;
+  outline: 0;
+}
+
+
+/* Mark invalid Select2 */
+
+.ng-dirty.ng-invalid > a.select2-selection {
+  border-color: $brand-danger;
+}
+
+
+/* Handle up direction Select2 */
+
+.select2-container-multi .select2-choices .select2-search-field input {
+    padding: 0.6rem 0.3125rem;
+    margin: 0;
+}
+.ui-select-container[theme='select2'].direction-up .ui-select-match {
+  border-radius: $border-radius-base;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.ui-select-container[theme='select2'].direction-up .ui-select-dropdown {
+  border-radius: $border-radius-base;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  @include box-shadow(none);
+}
+
+.select2-container .select2-choice,
+.ui-select-container[theme='select2'] .select2-choice {
+  line-height: 38px;
+  height: 38px;
+  padding: 0 $padding-base;
+  color: $text-color;
+  border-color: $border-color;
+  border-radius: $border-radius-base;
+  background: #fff;
+  background-image: none;
+}
+
+.select2-drop-active,
+.select2-container-active .select2-choice, .select2-container-active .select2-choices {
+  border-color: $brand-primary;
+  box-shadow: none;
+}
+
+.select2-container .select2-choice .select2-arrow,
+.ui-select-container[theme='select2'] .select2-choice .select2-arrow {
+  width: 38px;
+  //height: auto;
+  margin-top: -1px;
+  text-align: center;
+  border-left: 0;
+  border-radius: 0 $border-radius-base $border-radius-base 0;
+  background: #fff;
+  background-image: none;
+}
+
+.select2-container .select2-choice .select2-arrow::after,
+.ui-select-container[theme='select2'] .select2-choice .select2-arrow::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  content: '';
+  border-width: 5px 5px 0 5px;
+  border-style: solid;
+  border-color: #808080 transparent transparent transparent;
+}
+
+.select2-container .select2-choice .select2-arrow b,
+.ui-select-container[theme='select2'] .select2-choice .select2-arrow b {
+  display: none;
+  visibility: hidden;
+  background-image: none;
+}
+
+.ui-select-container[theme='select2'].select2-container-active .select2-choice,
+.ui-select-container[theme='select2'].select2-container-active .select2-choices {
+  border-color: $brand-primary;
+  @include box-shadow(none);
+}
+
+.ui-select-container[theme='select2'].select2-dropdown-open .select2-choice {
+  background-color: white;
+}
+
+.ui-select-container[theme='select2'] .select2-drop-active {
+  border-color: $brand-primary;
+}
+
+.ui-select-container[theme='select2'].direction-up.select2-dropdown-open .ui-select-match {
+  border-bottom-color: $brand-primary;
+}
+
+.ui-select-container[theme='select2'] .select2-search input {
+  font-family: inherit;
+  font-size: $font-size-base;
+  min-height: 38px;
+  border-color: $border-color;
+  background: white;
+}
+
+.ui-select-container[theme='select2'] .select2-results .select2-highlighted {
+  color: #fff;
+  background: $brand-primary;
+}
+
+
+/* Selectize theme */
+
+.selectize-control.multi .selectize-input.has-items {
+    padding: 7px 8px 4px;
+}
+
+.selectize-input {
+  padding: 9px 8px;
+  border-color: $border-color;
+  @include box-shadow(none);
+  @include rounded($border-radius-base);
+}
+
+.selectize-dropdown-header {
+  border-bottom-color: $border-color;
+  -webkit-border-radius: $border-radius-base $border-radius-base 0 0;
+  -moz-border-radius: $border-radius-base $border-radius-base 0 0;
+  border-radius: $border-radius-base $border-radius-base 0 0;
+  background: $brand-default;
+}
+
+.selectize-input.focus {
+  @include box-shadow(none);
+}
+
+.selectize-input.dropdown-active {
+  -webkit-border-radius: $border-radius-base $border-radius-base 0 0;
+  -moz-border-radius: $border-radius-base $border-radius-base 0 0;
+  border-radius: $border-radius-base $border-radius-base 0 0;
+}
+
+.selectize-dropdown {
+  -webkit-border-radius: 0 0 $border-radius-base $border-radius-base;
+  -moz-border-radius: 0 0 $border-radius-base $border-radius-base;
+  border-radius: 0 0 $border-radius-base $border-radius-base;
+  @include box-shadow(none);
+}
+
+.selectize-dropdown .create {
+  color: white!important;
+}
+
+
+/* Helper class to show styles when focus */
+
+.selectize-input.selectize-focus {
+  border-color: $brand-primary !important;
+}
+
+
+/* Mark invalid Selectize */
+
+.ng-dirty.ng-invalid > div.selectize-input {
+  border-color: $brand-danger;
+}
+
+
+/* Handle up direction Selectize */
+
+.ui-select-container[theme='selectize'].direction-up .ui-select-dropdown {
+  @include box-shadow(none);
+}
+
+.ui-select-container[theme='selectize'] .selectize-input {
+  line-height: 36px;
+  padding: .4375rem $padding-base;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-color: $border-color;
+  @include box-shadow(none);
+  @include rounded($border-radius-base);
+}
+
+.ui-select-container[theme='selectize'] .selectize-dropdown {
+  border-color: $border-color;
+  border-radius: 0 0 $border-radius-base $border-radius-base;
+  @include box-shadow(none);
+}
+
+.selectize-dropdown .active {
+  color: #fff;
+  background-color: $brand-primary;
+}
+
+
+/* Bootstrap theme */
+
+
+/* Helper class to show styles when focus */
+
+.btn-default-focus {
+  border-color: $brand-primary;
+  outline: 0;
+  @include box-shadow(none);
+}
+
+.input-group > .ui-select-bootstrap > input.ui-select-search.form-control {
+  border-radius: $border-radius-base;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group > .ui-select-bootstrap > input.ui-select-search.form-control.direction-up {
+  border-radius: $border-radius-base !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.ui-select-multiple .ui-select-match-item.dropping-before:before {
+  border-color: $brand-primary;
+}
+
+.ui-select-multiple .ui-select-match-item.dropping-after:after {
+  border-color: $brand-primary;
+}
+
+.ui-select-bootstrap .ui-select-choices-row.active > a {
+  background-color: $brand-primary;
+}
+
+.ui-select-bootstrap .ui-select-choices {
+  font-size: inherit;
+}
+
+
+/* Mark invalid Bootstrap */
+
+.ui-select-bootstrap.ng-dirty.ng-invalid > button.btn.ui-select-match {
+  border-color: $brand-danger;
+}
+
+
+/* Handle up direction Bootstrap */
+
+.ui-select-container[theme='bootstrap'].direction-up .ui-select-dropdown {
+  @include box-shadow(none);
+}

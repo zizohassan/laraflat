@@ -1,0 +1,24 @@
+/* $listgroup
+ ------------------------------------------*/
+.list-group-item {
+  border: 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.05);
+  &:first-child {
+    border-top-right-radius: $border-radius-base;
+    border-top-left-radius: $border-radius-base;
+  }
+  &:last-child {
+    border-bottom-right-radius: $border-radius-base;
+    border-bottom-left-radius: $border-radius-base;
+  }
+}
+
+a.list-group-item:hover,
+a.list-group-item:focus {
+  background-color: lighten($brand-default, 5%)
+}
+
+@include list-group-item-variant(success, lighten($brand-success, 30%), darken($brand-success, 20%));
+@include list-group-item-variant(info, lighten($brand-info, 30%), darken($brand-info, 20%));
+@include list-group-item-variant(warning, lighten($brand-warning, 30%), darken($brand-warning, 20%));
+@include list-group-item-variant(danger, lighten($brand-danger, 30%), darken($brand-danger, 20%));

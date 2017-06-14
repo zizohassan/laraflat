@@ -1,0 +1,23 @@
+/* $progress-bar
+ ------------------------------------------*/
+
+.progress {
+  height: 10px;
+  margin-bottom: $gutter;
+}
+
+.progress-success {
+  @include progress-variant($brand-success);
+}
+
+.progress-info {
+  @include progress-variant($brand-info);
+}
+
+.progress-warning {
+  @include progress-variant($brand-warning);
+}
+
+.progress-danger {
+  @include progress-variant($brand-danger);
+}

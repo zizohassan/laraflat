@@ -1,0 +1,30 @@
+{
+  "name": "sortable",
+  "version": "0.8.0",
+  "homepage": "http://adamschwartz.co/sortable",
+  "authors": [
+    "Adam Schwartz <adam.flynn.schwartz@gmail.com>"
+  ],
+  "description": "The simplest, most elegant way to sort a table.",
+  "main": "sortable.coffee",
+  "license": "MIT",
+  "keywords": [
+    "table",
+    "sort",
+    "sortable",
+    "sorting"
+  ],
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "_release": "0.8.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.8.0",
+    "commit": "3f9fdca0877af76da6e0ed6e98b788a30fde6bf1"
+  },
+  "_source": "https://github.com/HubSpot/sortable.git",
+  "_target": "~0.8.0",
+  "_originalSource": "sortable"
+}

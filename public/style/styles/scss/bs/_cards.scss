@@ -1,0 +1,219 @@
+/* $cards
+ ------------------------------------------*/
+
+$card-border-radius: $border-radius-base;
+$card-border-radius-inner: $border-radius-base;
+$card-spacer-y: $gutter / 2;
+$card-spacer-x: $padding-base;
+.card {
+  margin-bottom: $gutter;
+  border: 0;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 1px 1px rgba(0, 0, 0, .05);
+  @include rounded($card-border-radius);
+}
+
+.card-block {
+  padding: $card-spacer-y $card-spacer-x;
+}
+
+.card-title {
+  margin-bottom: $card-spacer-y;
+}
+
+.card-subtitle {
+  margin-top: -($card-spacer-y / 2);
+  margin-bottom: 0;
+}
+
+.card-link {
+  + .card-link {
+    @include margin-left($card-spacer-x);
+  }
+}
+
+.card {
+  > .list-group:first-child {
+    .list-group-item:first-child {
+      border-radius: $card-border-radius $card-border-radius 0 0;
+    }
+  }
+  > .list-group:last-child {
+    .list-group-item:last-child {
+      border-radius: 0 0 $card-border-radius $card-border-radius;
+    }
+  }
+}
+
+.card-header {
+  font-size: .86rem;
+  position: relative;
+  padding: $card-spacer-y $card-spacer-x;
+  &:first-child {
+    @include rounded($card-border-radius-inner $card-border-radius-inner 0 0);
+  }
+}
+
+.card-header.no-bg + .card-block {
+  padding-top: 0;
+}
+
+.card-footer {
+  padding: $card-spacer-y $card-spacer-x;
+  &:last-child {
+    @include rounded(0 0 $card-border-radius-inner $card-border-radius-inner);
+  }
+}
+
+// Card image caps
+.card-img-top {
+  @include rounded($card-border-radius-inner $card-border-radius-inner 0 0);
+}
+
+.card-img-bottom {
+  @include rounded(0 0 $card-border-radius-inner $card-border-radius-inner);
+}
+
+
+/*Background variations*/
+
+.card-primary {
+  @include card-variant($brand-primary, $brand-primary);
+}
+
+.card-success {
+  @include card-variant($brand-success, $brand-success);
+}
+
+.card-info {
+  @include card-variant($brand-info, $brand-info);
+}
+
+.card-warning {
+  @include card-variant($brand-warning, $brand-warning);
+}
+
+.card-danger {
+  @include card-variant($brand-danger, $brand-danger);
+}
+
+
+/*Remove all backgrounds*/
+
+.card-primary-outline {
+  @include card-outline-variant($brand-primary);
+}
+
+.card-secondary-outline {
+  @include card-outline-variant(#fff);
+}
+
+.card-info-outline {
+  @include card-outline-variant($brand-info);
+}
+
+.card-success-outline {
+  @include card-outline-variant($brand-success);
+}
+
+.card-warning-outline {
+  @include card-outline-variant($brand-warning);
+}
+
+.card-danger-outline {
+  @include card-outline-variant($brand-danger);
+}
+
+.card-inverse .card-header {
+  background-color: transparent;
+}
+
+
+/*Card controls*/
+
+.card-controls {
+  line-height: 1;
+  position: absolute;
+  top: 10px;
+  @include right($padding-base);
+  a {
+    position: relative;
+    font-size: 1rem;
+    display: inline-block;
+    @include margin-left(.625rem);
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: $border-radius-base;
+  }
+  .card-collapse,.card-refresh, .card-remove {
+    &::after {
+      font-family: 'Material Icons';
+      font-size: 24px;
+      font-weight: normal;
+      font-style: normal;
+      line-height: 1;
+      display: block;
+      width: auto;
+      height: auto;
+      margin-right: 0;
+      margin-left: 0;
+      vertical-align: bottom;
+      white-space: nowrap;
+      letter-spacing: normal;
+      text-transform: none;
+      word-wrap: normal;
+      border: 0;
+      @include right($gutter);
+      direction: ltr;
+      /* Support for all WebKit browsers. */
+      -webkit-font-smoothing: antialiased;
+      /* Support for Safari and Chrome. */
+      text-rendering: optimizeLegibility;
+      /* Support for Firefox. */
+      -moz-osx-font-smoothing: grayscale;
+      /* Support for IE. */
+      font-feature-settings: 'liga';
+    }
+  }
+  .card-collapse::after {
+    content: 'arrow_drop_down';
+  }
+  .card-refresh::after {
+    content: 'refresh';
+  }
+  .card-remove::after {
+    content: 'close';
+  }
+}
+
+.card-collapsed {
+  > .card-block {
+    display: none;
+  }
+  > .card-header .card-collapse::after {
+    content: 'arrow_drop_up';
+  }
+}
+
+.card-refreshing::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  background-color: transparentize(white, .4);
+}
+
+.card-refreshing::after {
+  position: absolute;
+  z-index: 9;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  content: '';
+  -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;
+  animation: sk-pulseScaleOut 1s infinite ease-in-out;
+  background-color: $brand-primary;
+  @include left(50%);
+  @include margin(-10px, 0, 0, -10px);
+}

@@ -241,9 +241,9 @@
         <p><code>how to use tinymce on any texteara</code></p>
         <p>just put this id on any texteara <code>tinymce</code><br>
             then at the end of the page put this code</p>
-<pre><code> @section('script')
-            @include('admin.layout.helpers.tynic')
-        @endsection</code></pre>
+<pre><code> section('script')
+                include(layoutPath('layout.helpers.tynic'))
+            endsection</code></pre>
         <!-- tinymce -->
         <!-- translate filed -->
         <h1>Translade Fileds</h1>

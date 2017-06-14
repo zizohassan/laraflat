@@ -1,0 +1,23 @@
+/* $invoice
+ ------------------------------------------*/
+
+.invoice-logo {
+  height: 50px;
+}
+
+.invoice-totals {
+  margin-bottom: 15px;
+  @include text-align(right);
+  @include clearfix();
+  .invoice-totals-row {
+    margin-bottom: 5px;
+  }
+  .invoice-totals-title {
+    @include margin-right(15px);
+  }
+  .invoice-totals-value {
+    display: inline-block;
+    min-width: 140px;
+    @include text-align(left);
+  }
+}
