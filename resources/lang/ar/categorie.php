@@ -1,6 +1,6 @@
 <?php
-return[
-    'name' => ' اسم القسم ',
-    'Categories' => 'الاقسام',
-    'Category' => " قسم "
+return [
+    'name'       => 'اسم القسم',
+    'Categories' => 'الأقسام',
+    'Category'   => 'قسم'
 ];
