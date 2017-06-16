@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'group_id'
+        'name','username','email', 'password', 'group_id'
     ];
 
     /**
@@ -30,6 +30,7 @@ class User extends Authenticatable
     public function   validation ($id){
         return [
             'name' => 'required|min:4|max:40',
+            'username' => 'required|alpha_dash|unique:users',
             'email' => 'email|unique:users,email,'.$id,
             'password' => 'required'
         ];
@@ -38,6 +39,7 @@ class User extends Authenticatable
     public function   updateValidation ($id){
         return [
             'name' => 'required|min:4|max:40',
+            'username' => 'required|alpha_dash|unique:users,username,'.$id,
             'email' => 'email|unique:users,email,'.$id,
             'password' => 'required'
         ];
