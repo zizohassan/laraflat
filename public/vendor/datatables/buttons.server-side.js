@@ -10,7 +10,7 @@
     };
 
     DataTable.ext.buttons.excel = {
-        className: 'buttons-excel',
+        className: 'buttons-excel btn btn-primary btn-sm m-r-xs m-b-xs waves-effect',
 
         text: function (dt) {
             return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.excel', 'Excel');
@@ -25,7 +25,7 @@
     DataTable.ext.buttons.export = {
         extend: 'collection',
 
-        className: 'buttons-export',
+        className: 'buttons-export btn btn-primary btn-sm m-r-xs m-b-xs waves-effect',
 
         text: function (dt) {
             return '<i class="fa fa-download"></i> ' + dt.i18n('buttons.export', 'Export') + '&nbsp;<span class="caret"/>';
@@ -35,7 +35,7 @@
     };
 
     DataTable.ext.buttons.csv = {
-        className: 'buttons-csv',
+        className: 'buttons-csv btn btn-info btn-sm m-r-xs m-b-xs waves-effect',
 
         text: function (dt) {
             return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.csv', 'CSV');
@@ -48,7 +48,7 @@
     };
 
     DataTable.ext.buttons.pdf = {
-        className: 'buttons-pdf',
+        className: 'buttons-pdf btn btn-cyan btn-sm m-r-xs m-b-xs waves-effect',
 
         text: function (dt) {
             return '<i class="fa fa-file-pdf-o"></i> ' + dt.i18n('buttons.pdf', 'PDF');
@@ -61,7 +61,7 @@
     };
 
     DataTable.ext.buttons.print = {
-        className: 'buttons-print',
+        className: 'buttons-print btn btn-primary btn-sm m-r-xs m-b-xs waves-effect',
 
         text: function (dt) {
             return  '<i class="fa fa-print"></i> ' + dt.i18n('buttons.print', 'Print');
@@ -74,7 +74,7 @@
     };
 
     DataTable.ext.buttons.reset = {
-        className: 'buttons-reset',
+        className: 'buttons-reset btn btn-warning btn-sm m-r-xs m-b-xs waves-effect',
 
         text: function (dt) {
             return '<i class="fa fa-undo"></i> ' + dt.i18n('buttons.reset', 'Reset');
@@ -86,7 +86,7 @@
     };
 
     DataTable.ext.buttons.reload = {
-        className: 'buttons-reload',
+        className: 'buttons-reload btn btn-success btn-sm m-r-xs m-b-xs waves-effect',
 
         text: function (dt) {
             return '<i class="fa fa-refresh"></i> ' + dt.i18n('buttons.reload', 'Reload');
@@ -98,7 +98,7 @@
     };
 
     DataTable.ext.buttons.create = {
-        className: 'buttons-create',
+        className: 'buttons-create btn btn-success btn-sm m-r-xs m-b-xs waves-effect',
 
         text: function (dt) {
             return '<i class="fa fa-plus"></i> ' + dt.i18n('buttons.create', 'Create');

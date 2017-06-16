@@ -31,8 +31,14 @@
     <link rel="stylesheet" href="{{ url('style') }}/vendor/PACE/themes/blue/pace-theme-minimal.css"/>
     <link rel="stylesheet" href="{{ url('style') }}/vendor/font-awesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="{{ url('style') }}/vendor/animate.css/animate.css"/>
+@if(getDir() == 'rtl')
+    <link rel="stylesheet" href="{{ url('style') }}/styles/app-rtl.css" id="load_styles_before"/>
+    <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins-rtl.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
+@else
     <link rel="stylesheet" href="{{ url('style') }}/styles/app.css" id="load_styles_before"/>
     <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins.css"/>
+@endif
     <!-- endbuild -->
 
     {{ Html::style('admin/plugins/multi-select/css/multi-select.css') }}
@@ -43,9 +49,6 @@
     {{ Html::style('css/sweetalert.css') }}
     {{ Html::style('admin/plugins/tinymce/plugins/elfinder/css/elfinder.full.css') }}
     @yield('style')
-    @if(getDir() == 'rtl')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
-    @endif
     <style>
         .img-responsive{
             width:100%
