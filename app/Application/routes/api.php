@@ -18,10 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(array('prefix' => 'api/v1', 'middleware' => []), function () {
-
-    Route::get('example/foo', function(){
-        return \App\Application\Model\User::get();
-    });
-
+Route::group(array('prefix' => 'v1', 'middleware' => []), function () {
+    require __DIR__.'/appendApi.php';
 });

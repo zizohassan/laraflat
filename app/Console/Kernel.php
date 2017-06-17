@@ -18,6 +18,8 @@ class Kernel extends ConsoleKernel
         Commands\MakeAdminController::class,
         Commands\MakeController::class,
         Commands\MakeInterfaceEloquent::class,
+        Commands\MakeApiController::class,
+        Commands\MakeTransformer::class,
     ];
 
 

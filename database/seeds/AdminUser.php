@@ -16,7 +16,9 @@ class AdminUser extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'group_id' => 1,
-            'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s')
+            'api_token' => str_random(60),
+            'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }
 }

@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'group_id'
+        'name', 'email', 'password', 'group_id' ,'api_token'
     ];
 
     /**
@@ -52,6 +52,14 @@ class User extends Authenticatable
 
     public function group(){
         return $this->belongsTo('App\Application\Model\Group');
+    }
+
+
+    public function loginValidation(){
+        return [
+            'email' => 'required|email',
+            'password' => 'required|max:255',
+        ];
     }
 
 }

@@ -50,3 +50,17 @@ function rename_keys($array, $replacement_keys)  {
         return array_combine($replacement_keys, array_values($array));
     }
 }
+
+
+function extractJsonInfo($data)
+{
+    $newData = (array) json_decode($data);
+    foreach ($newData as $key => $d) {
+        if (is_object($d)) {
+            $newData[$key] = (array)$d;
+        }
+    }
+    return $newData;
+}
+
+

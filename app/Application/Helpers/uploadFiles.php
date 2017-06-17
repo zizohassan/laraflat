@@ -57,9 +57,18 @@ function checkIfFiledFile($array){
 
 function convertToImage($input)
 {
-    $image = $input;
-    $image = base64_decode($image);
-    $NewName = str_random(10).rand(0,10);
-    file_put_contents(public_path(env('UPLOAD_PATH')).'/'.$NewName.'.jpg', $image);
-    return $NewName.'.jpg';
+    if(!is_array($input)){
+        $input = [$input];
+    }
+    $array = [];
+    foreach($input as $in){
+        if($in != ''){
+            $image = $in;
+            $image = base64_decode($image);
+            $NewName = str_random(10).rand(0,10);
+            file_put_contents(public_path(env('UPLOAD_PATH')).'/'.$NewName.'.jpg', $image);
+            $array[] = $NewName.'.jpg';
+        }
+    }
+    return $array;
 }

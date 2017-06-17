@@ -46,7 +46,11 @@ class MakeAdminModel extends GeneratorCommand
             $this->createController();
             $this->createViews();
             $this->appendRoutes();
+            $this->makeApiClass();
+            $this->routeApi();
+            $this->makeTransformer();
             $this->createMigration();
+
 
 //           $this->addItemtoMenue();
     }
@@ -142,6 +146,8 @@ class MakeAdminModel extends GeneratorCommand
         $this->line('Done create Model  at Application Model  '.$this->getNameInput() .' .');
         $this->files->put($path, $this->buildClass($name));
     }
+
+
 
     protected function createController()
     {
@@ -239,4 +245,61 @@ class MakeAdminModel extends GeneratorCommand
         return $stub;
     }
 
+    ////api
+    protected function makeApiClass(){
+        $name = $this->qualifyClass($this->getNameInput());
+        $path = $this->getPath('Application\\Controllers\\Api\\'.$this->getNameInput().'Api');
+        $this->line('Done create Api Class  at Application Controllers Api  '.$this->getNameInput() .'Api .');
+        $this->files->put($path, $this->buildApi($name));
+    }
+
+    protected function getStubApi()
+    {
+        return __DIR__.'/stub/api/apiclass.stub';
+    }
+
+
+    protected function buildApi($name){
+        $stub = $this->files->get($this->getStubApi());
+        return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+    }
+
+    /////api
+
+    ///api routes
+    protected function routeApi(){
+        $name = strtolower($this->getNameInput());
+        $path = $this->getPath('Application\\routes\\appendApi');
+        $this->line('Done append routes to route file at Application route  appendApi .');
+        $this->files->append($path, $this->apiRoute( $name  , __DIR__.'/stub/api/route.stub'));
+    }
+
+    protected function apiRoute($name  , $stub ){
+        $stub = $this->files->get($stub);
+        return $this->replace( $stub, 'DummyRoute',$name)
+            ->replaceView( $stub, 'DummyView',ucfirst($name));
+    }
+
+    ///api routes
+
+
+    ///transformer
+    protected function makeTransformer(){
+        $name = $this->qualifyClass($this->getNameInput());
+        $path = $this->getPath('Application\\Transformers\\'.$this->getNameInput().'Transformers');
+        $this->line('Done create Api Class  at Application Transformers for api  '.$this->getNameInput() .'Transformers .');
+        $this->files->put($path, $this->buildTransformers($name));
+    }
+
+    protected function getTransformer()
+    {
+        return __DIR__.'/stub/api/transformer.stub';
+    }
+
+
+    protected function buildTransformers($name){
+        $stub = $this->files->get($this->getTransformer());
+        return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+    }
+    ////transformer
 }

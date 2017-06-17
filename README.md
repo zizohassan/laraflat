@@ -65,4 +65,21 @@ php artisan key:generate
     php artisan make:admin_model NameOfModel
 ```
 
+## Feature
+
+create langauge files<br>
+ Add Item to AdminAPanel Menu<br>
+ Create model with update , add validation <br>
+ create Datatable class and html<br>
+ Create Controller with add,edit,delete,store,update actions<br>
+ Create View for add , edit, show <br>
+ Generate Admin route  <br>
+ Create Api class with view,view by id ,delete,store,update<br>
+ Generate Api route <br>
+ Create transform file for each api calss<br>
+ Create Migration file<br>
+ Acl permission system<br>
+ setting system <br>
+ multi theme for admin panel<br>
+ support multi language<br>
 

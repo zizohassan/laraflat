@@ -32,6 +32,15 @@ abstract class AbstractTransformer
         }
         return $static->transformModel($modelOrCollection);
     }
+
+    static function transformAr($modelOrCollection, $options = [])
+    {
+        $static = new static($options);
+        if ($modelOrCollection instanceof Collection) {
+            return $modelOrCollection->map([$static, 'transformModelAr'])->toArray();
+        }
+        return $static->transformModelAr($modelOrCollection);
+    }
     /**
      * Check if the model instance is loaded from the provided pivot table.
      *
@@ -62,6 +71,9 @@ abstract class AbstractTransformer
      * @return mixed
      */
     protected function transformModel(Model $modelOrCollection)
+    {
+    }
+    protected function transformModelAr(Model $modelOrCollection)
     {
     }
 }

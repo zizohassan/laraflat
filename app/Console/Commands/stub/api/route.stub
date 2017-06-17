@@ -1,0 +1,8 @@
+
+
+#DummyRoute
+Route::get('DummyRoute/getById/{id}', 'DummyViewApi@getById');
+Route::get('DummyRoute/delete/{id}', 'DummyViewApi@delete');
+Route::post('DummyRoute/add', 'DummyViewApi@add');
+Route::post('DummyRoute/update/{id}', 'DummyViewApi@update');
+Route::get('DummyRoute/{limit?}/{offset?}', 'DummyViewApi@index');
