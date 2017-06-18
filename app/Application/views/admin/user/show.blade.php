@@ -10,7 +10,7 @@
         <table class="table table-bordered table-responsive table-striped">
             @php
                 $fields = rename_keys(
-                removeFromArray($data['fields'] , ['id' , 'remember_token' , 'password' , 'updated_at']) ,
+                removeFromArray($data['fields'] , ['id' , 'api_token', 'remember_token' , 'password' , 'updated_at']) ,
             [
                 adminTrans('user' , 'name') ,
                 adminTrans('user' , 'email'),
