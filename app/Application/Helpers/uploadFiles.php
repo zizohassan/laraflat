@@ -2,12 +2,12 @@
 
 function getFileFieldsName(){
     return [
-        'image',
-        'file',
-        'photo',
-        'logo',
-        'attached',
-        'body_setting'
+        'image' => 'image',
+        'file' => 'file',
+        'photo' => 'photo',
+        'logo' => 'logo',
+        'attached' => 'attached',
+        'body_setting' => 'body_setting'
     ];
 }
 

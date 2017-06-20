@@ -22,5 +22,10 @@ function checkApiHaveImage($request){
             $array[$key] = $r;
         }
     }
+    $imagesOnly = array_intersect_key($array , getFileFieldsName());
+    $getKey  =  key($imagesOnly);
+    if(count($imagesOnly[$getKey]) == 1){
+        $array[$getKey] = $imagesOnly[$getKey][0];
+    }
     return $array;
 }

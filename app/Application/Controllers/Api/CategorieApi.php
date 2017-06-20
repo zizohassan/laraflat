@@ -23,12 +23,12 @@ class CategorieApi extends Controller
         /// $this->middleware('authApi')->only();
     }
 
-    public function index($limit = 10 , $offset = 0){
+    public function index($limit = 10 , $offset = 0 ,  $lang = "en"){
        $data =  $this->model->limit($limit)->offset($offset)->get();
        return response(apiReturn(CategorieTransformers::transform($data))  , 200 );
     }
 
-    public function getById($id){
+    public function getById($id , $lang = "en"){
         $data =  $this->model->find($id);
         return response(apiReturn(CategorieTransformers::transform($data))  , 200 );
     }
@@ -46,7 +46,7 @@ class CategorieApi extends Controller
 
     public function update($id){
         $request = $this->checkRequestType();
-        $v = Validator::make($request, $this->model->updateValidation(null));
+        $v = Validator::make($request, $this->model->updateValidation($id));
         if ($v->fails()) {
             return response(apiReturn('' , 'error'  , $v->errors())  , 401 );
         }

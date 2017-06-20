@@ -64,3 +64,4 @@
     Route::post('categorie/item/{id?}' , 'CategorieController@store');
     Route::get('categorie/{id}/delete' , 'CategorieController@destroy');
     Route::get('categorie/{id}/view' , 'CategorieController@getById');
+
