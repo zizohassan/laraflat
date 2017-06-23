@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(array('prefix' => 'v1', 'middleware' => []), function () {
+Route::group(array('prefix' => 'v1'), function () {
     require __DIR__.'/appendApi.php';
 });

@@ -24,8 +24,11 @@ function checkApiHaveImage($request){
     }
     $imagesOnly = array_intersect_key($array , getFileFieldsName());
     $getKey  =  key($imagesOnly);
-    if(count($imagesOnly[$getKey]) == 1){
-        $array[$getKey] = $imagesOnly[$getKey][0];
+    if(isset($imagesOnly[$getKey])){
+        if(count($imagesOnly[$getKey]) == 1){
+            $array[$getKey] = $imagesOnly[$getKey][0];
+        }
     }
+
     return $array;
 }

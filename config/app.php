@@ -182,6 +182,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         ConsoleTVs\Links\LinksServiceProvider::class,
          Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
 
 
