@@ -20,7 +20,7 @@ class UserApi extends Controller
     {
         $this->model = $model;
         $this->request = $request;
-        $this->middleware('authApi')->only('update');
+        $this->middleware('authApi')->only('update' , 'getUserByToken');
     }
 
     public function index($limit = 10 , $offset = 0){
@@ -71,6 +71,11 @@ class UserApi extends Controller
         $request['password'] = bcrypt($this->request->password);
         $data = $user->update(checkApiHaveImage($request));
         return response(apiReturn($data)  , 200 );
+    }
+
+    public function getUserByToken(){
+        $user = auth()->guard('api')->user();
+        return response(apiReturn(UsersTransformers::transform($user))  , 200 );
     }
 
     public function delete($id){

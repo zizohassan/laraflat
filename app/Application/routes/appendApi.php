@@ -7,6 +7,7 @@ Route::get('users/delete/{id}', 'UserApi@delete');
 Route::post('users/add', 'UserApi@add');
 Route::post('users/update', 'UserApi@update');
 Route::get('users/{limit?}/{offset?}', 'UserApi@index');
+Route::get('users/getUserByToken' , 'UserApi@getUserByToken');
 
 #page
 Route::get('page/getById/{id}/{lang?}', 'PageApi@getById');
