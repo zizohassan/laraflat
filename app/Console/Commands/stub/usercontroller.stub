@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Application\Controllers;
+
+use App\Application\Controllers\AbstractController;
+use Alert;
+
+class DummyClass extends AbstractController
+{
+
+}

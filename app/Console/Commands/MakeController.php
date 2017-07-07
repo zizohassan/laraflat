@@ -40,7 +40,7 @@ class MakeController extends GeneratorCommand
 
     protected function getStub()
     {
-        return  __DIR__.'/stub/admincontroller.stub';
+        return  __DIR__.'/stub/usercontroller.stub';
     }
 
 

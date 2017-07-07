@@ -49,6 +49,7 @@ class MakeAdminModel extends GeneratorCommand
             $this->makeApiClass();
             $this->routeApi();
             $this->makeTransformer();
+            $this->createModel();
             $this->createMigration();
 
 
@@ -101,7 +102,8 @@ class MakeAdminModel extends GeneratorCommand
     {
         $table = Str::plural(Str::snake(class_basename($this->argument('name'))));
         $this->call('make:migration', [
-            'name' => "create_{$table}_table"
+            'name' => "create_{$table}_table" ,
+            '--create' => $table
         ]);
     }
 
@@ -140,6 +142,10 @@ class MakeAdminModel extends GeneratorCommand
             ->replaceView( $stub, 'DummyModel',ucfirst($name));
     }
 
+
+    /*
+     * Model
+     */
     protected function createModel  (){
         $name = $this->qualifyClass($this->getNameInput());
         $path = $this->getPath('Application\\Model\\'.$this->getNameInput());
@@ -148,6 +154,26 @@ class MakeAdminModel extends GeneratorCommand
     }
 
 
+    protected function getStub()
+    {
+        return __DIR__.'/stub/model.stub';
+    }
+
+    protected function buildClass($name){
+        $stub = $this->files->get($this->getStub());
+        return $this->replace( $stub, 'DummyTable',Str::plural(strtolower($this->getClassNameFormNameSpace($name))))
+            ->replaceNamespace($stub, $name)
+            ->replaceClass($stub, $name);
+    }
+
+
+    protected function getClassNameFormNameSpace($nameSpace){
+        return substr(strrchr($nameSpace, "\\"), 1);
+    }
+
+    /*
+    * Model
+    */
 
     protected function createController()
     {
@@ -162,15 +188,7 @@ class MakeAdminModel extends GeneratorCommand
 
     }
 
-    protected function getStub()
-    {
-        return __DIR__.'/stub/model.stub';
-    }
 
-    protected function buildClass($name){
-        $stub = $this->files->get($this->getStub());
-        return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
-    }
 
     protected function buildClassController($name ,$controllerName ,  $dataTableName , $modelName , $viewName, $stub){
         $stub = $this->files->get($stub);

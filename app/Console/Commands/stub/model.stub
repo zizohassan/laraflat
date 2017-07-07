@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DummyClass extends Model
 {
 
-  public $table = "DummyClass";
+  public $table = "DummyTable";
 
 
    protected $fillable = [
