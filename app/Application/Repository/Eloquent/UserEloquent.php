@@ -16,25 +16,15 @@ class UserEloquent extends AbstractEloquent implements UserInterface{
         $this->model = $user;
     }
 
-    public function checkRequest($id , $request){
-        $request = $this->encryptPassword($id , $request);
-        return $request;
-    }
-
-    protected function encryptPassword($id , $request){
-        if($id === null && $request->password != null){
-            return $this->transFormPassword($request , bcrypt($request->password));
-        }else if($id !== null && $request->password != null){
-            return $this->transFormPassword($request , bcrypt($request->password));
+    public function checkRequest($request){
+        if($request->password){
+            $request->request->set('password' , bcrypt($request->password));
+        }else{
+            $request->request->remove('password');
         }
-        return $this->transFormPassword($request , $this->model->find($id)->password);
-    }
-
-    protected function transFormPassword($request , $password){
-        $request->offsetUnset('password');
-        Input::merge(['password' => $password]);
         return $request;
     }
+
 
 
     public function getPermissions()

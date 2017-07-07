@@ -38,8 +38,7 @@ class User extends Authenticatable
     public function   updateValidation ($id){
         return [
             'name' => 'required|min:4|max:40',
-            'email' => 'email|unique:users,email,'.$id,
-            'password' => 'required'
+            'email' => 'email|unique:users,email,'.$id
         ];
     }
     public function permission(){

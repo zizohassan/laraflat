@@ -31,7 +31,7 @@ class UserController extends AbstractController
     }
 
     public function store($id = null , \Illuminate\Http\Request $request){
-        $request = $this->userInterface->checkRequest($id , $request);
+        $request = $this->userInterface->checkRequest($request);
          return $this->storeOrUpdate($request , $id , 'admin/user');
     }
 
