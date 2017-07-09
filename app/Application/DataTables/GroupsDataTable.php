@@ -42,10 +42,7 @@ class GroupsDataTable extends DataTable
     {
         $html =  $this->builder()
             ->columns($this->getColumns())
-            ->parameters([
-                'dom'          => 'Bfrtip',
-                'buttons'      => ['excel', 'print', 'reset', 'reload']
-            ]);
+            ->parameters(dataTableConfig());
         if(getCurrentLang() == 'ar'){
             $html = $html->parameters([
                 'language' => [

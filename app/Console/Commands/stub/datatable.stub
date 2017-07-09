@@ -43,10 +43,7 @@ class DummyDatatable extends DataTable
     {
         return $this->builder()
                     ->columns($this->getColumns())
-                    ->parameters([
-                        'dom'          => 'Bfrtip',
-                        'buttons'      => ['excel', 'print', 'reset', 'reload'],
-                   ]);
+                    ->parameters(dataTableConfig());
     }
     /**
      * Get columns.

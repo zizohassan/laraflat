@@ -4,13 +4,16 @@
     {{ adminTrans('permission' , 'permission') }}   {{ adminTrans('home' , 'control') }}
 @endsection
 
-@section('content')
-    @include(layoutTable() , ['title' =>  adminTrans('permission' , 'permission') , 'model' => 'permission' , 'table' => $dataTable->table() ])
+@section('style')
+    @include('admin.shared.style')
 @endsection
 
+
+@section('content')
+    @include(layoutTable() , ['title' =>  adminTrans('permission' , 'permission') , 'model' => 'permission' , 'table' => $dataTable->table([] , true) ])
+@endsection
+
+
 @section('script')
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js">
-    <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-    <script src="{{ url('/') }}/vendor/datatables/buttons.server-side.js"></script>
-    {!! $dataTable->scripts() !!}
+    @include('admin.shared.scripts')
 @endsection

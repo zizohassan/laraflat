@@ -44,10 +44,7 @@ class UserDataTable extends DataTable
     {
         $html =  $this->builder()
             ->columns($this->getColumns())
-            ->parameters([
-                'dom'          => 'Bfrtip',
-                'buttons'      => ['excel', 'print', 'reset', 'reload']
-            ]);
+            ->parameters(dataTableConfig());
         if(getCurrentLang() == 'ar'){
             $html = $html->parameters([
                 'language' => [
@@ -69,17 +66,17 @@ class UserDataTable extends DataTable
             [
                 'name' => "id",
                 'data' => 'id',
-                'title' => adminTrans('curd' , 'id'),
+                'title' => adminTrans('curd' , 'id')
             ],
             [
                 'name' => "name",
                 'data' => 'name',
-                'title' => adminTrans('user' , 'name'),
+                'title' => adminTrans('user' , 'name')
             ],
             [
                 'name' => "email",
                 'data' => 'email',
-                'title' => adminTrans('user' , 'email'),
+                'title' => adminTrans('user' , 'email')
             ],
             [
                 'name' => "view",
@@ -88,7 +85,7 @@ class UserDataTable extends DataTable
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
-                'orderable' => false,
+                'orderable' => false
             ],
             [
                 'name' => 'edit',
@@ -97,7 +94,7 @@ class UserDataTable extends DataTable
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
-                'orderable' => false,
+                'orderable' => false
             ],
             [
                 'name' => 'delete',
@@ -106,7 +103,7 @@ class UserDataTable extends DataTable
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
-                'orderable' => false,
+                'orderable' => false
             ],
         ];
     }
