@@ -40,14 +40,15 @@ function dataTableConfig(){
         'stateSave' => 'saveState',
         'initComplete' => "function () {
                             var allColumns = this.api().column().columns()[0].length -4 ;
-                            var width = 20;
+                            var width = 50;
                             this.api().columns().every(function (index) {
                                 var column = this;
                                 if(index  <=  allColumns){
                                 if(index != 0){
                                     width=100;
                                 }
-                                    var input = '<input type=\"text\" class=\"form-control\" style=\"width: '+width+'px;\" />';
+                                    var title = $('#dataTableBuilder thead th').eq(index).text()
+                                    var input = '<input type=\"text\" class=\"form-control\" style=\"width: '+width+'px;\" placeholder=\"'+title+'\" />';
                                     $(input).appendTo($(column.footer()).empty())
                                     .on('change', function () {
                                         column.search($(this).val(), false, false, true).draw();
