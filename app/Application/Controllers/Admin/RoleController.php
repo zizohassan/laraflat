@@ -6,6 +6,8 @@ use App\Application\Controllers\AbstractController;
 use App\Application\DataTables\RolesDataTable;
 use App\Application\Model\Role;
 use App\Application\Repository\InterFaces\RolesInterface;
+use App\Application\Requests\Admin\Role\AddRequestRole;
+use App\Application\Requests\Admin\Role\UpdateRequestRole;
 use Yajra\Datatables\Request;
 use Alert;
 
@@ -28,9 +30,14 @@ class RoleController extends AbstractController
         return $this->createOrEdit('admin.role.edit' , $id , $data);
     }
 
-    public function store($id = null , \Illuminate\Http\Request $request){
-         return $this->storeOrUpdate($request , $id , 'admin/role');
+    public function store(AddRequestRole $request){
+         return $this->storeOrUpdate($request , null , 'admin/role');
     }
+
+    public function update($id , UpdateRequestRole $request){
+        return $this->storeOrUpdate($request , $id , 'admin/role');
+    }
+
 
     public function getById($id){
         $fields = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());

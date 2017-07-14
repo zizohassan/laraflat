@@ -7,6 +7,8 @@ use App\Application\DataTables\GroupsDataTable;
 use App\Application\Model\Group;
 use App\Application\Repository\InterFaces\GroupInterface;
 use App\Application\Repository\InterFaces\UserInterface;
+use App\Application\Requests\Admin\Group\AddRequestGroup;
+use App\Application\Requests\Admin\Group\UpdateRequestGroup;
 use Yajra\Datatables\Request;
 use Alert;
 
@@ -33,8 +35,12 @@ class GroupController extends AbstractController
         return $this->createOrEdit('admin.group.edit' , $id , $data);
     }
 
-    public function store($id = null , \Illuminate\Http\Request $request){
-         return $this->storeOrUpdate($request , $id , 'admin/group');
+    public function store(AddRequestGroup $request){
+         return $this->storeOrUpdate($request , null , 'admin/group');
+    }
+
+    public function update($id , UpdateRequestGroup  $request){
+        return $this->storeOrUpdate($request , $id , 'admin/group');
     }
 
     public function getById($id){

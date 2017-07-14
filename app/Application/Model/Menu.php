@@ -15,12 +15,12 @@ class Menu extends Model
 
   public function   validation ($id){
     return [
-        'name' => 'required|unique:menu,name,'.$id
+
     ];
   }
   public function   updateValidation ($id){
     return [
-        'name' => 'required|unique:menu,name,'.$id
+
     ];
   }
 

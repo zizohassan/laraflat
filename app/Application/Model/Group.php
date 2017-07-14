@@ -16,15 +16,13 @@ class Group extends Model
 
     public function   validation ($id){
        return [
-           'name' =>'required',
-           'slug' => 'required|unique:groups,slug,'.$id
+
        ];
     }
 
     public function   updateValidation ($id){
         return [
-            'name' =>'required',
-            'slug' => 'required|unique:groups,slug,'.$id
+
         ];
     }
 

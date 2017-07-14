@@ -6,6 +6,8 @@ use App\Application\Controllers\AbstractController;
 use App\Application\DataTables\UserDataTable;
 use App\Application\Model\User;
 use App\Application\Repository\InterFaces\UserInterface;
+use App\Application\Requests\Admin\User\AddRequestUser;
+use App\Application\Requests\Admin\User\UpdateRequestUser;
 use Yajra\Datatables\Request;
 
 class UserController extends AbstractController
@@ -30,9 +32,14 @@ class UserController extends AbstractController
         return $this->createOrEdit('admin.user.edit' , $id , $data);
     }
 
-    public function store($id = null , \Illuminate\Http\Request $request){
+    public function store(AddRequestUser $request){
         $request = $this->userInterface->checkRequest($request);
-         return $this->storeOrUpdate($request , $id , 'admin/user');
+         return $this->storeOrUpdate($request , null , 'admin/user');
+    }
+
+    public function update($id , UpdateRequestUser $request){
+        $request = $this->userInterface->checkRequest($request);
+        return $this->storeOrUpdate($request , $id , 'admin/user');
     }
 
     public function getById($id){

@@ -2,6 +2,8 @@
 
 namespace App\Application\Controllers\Admin;
 
+use App\Application\Requests\Admin\DummyModel\AddRequestDummyModel;
+use App\Application\Requests\Admin\DummyModel\UpdateRequestDummyModel;
 use App\Application\Controllers\AbstractController;
 use App\Application\DataTables\DummyDataTable;
 use App\Application\Model\DummyModel;
@@ -23,8 +25,12 @@ class DummyClass extends AbstractController
         return $this->createOrEdit('admin.DummyView.edit' , $id);
     }
 
-    public function store($id = null , \Illuminate\Http\Request $request){
-         return $this->storeOrUpdate($request , $id , 'admin/DummyView');
+    public function store(AddRequestDummyModel $request){
+         return $this->storeOrUpdate($request , null , 'admin/DummyView');
+    }
+
+    public function update($id , UpdateRequestDummyModel $request){
+             return $this->storeOrUpdate($request , $id , 'admin/DummyView');
     }
 
     public function getById($id){

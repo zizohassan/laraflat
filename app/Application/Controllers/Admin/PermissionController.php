@@ -5,6 +5,8 @@ namespace App\Application\Controllers\Admin;
 use App\Application\Controllers\AbstractController;
 use App\Application\DataTables\PermissionsDataTable;
 use App\Application\Model\Permission;
+use App\Application\Requests\Admin\Permission\AddRequestPermission;
+use App\Application\Requests\Admin\Permission\UpdateRequestPermission;
 use Yajra\Datatables\Request;
 use Alert;
 
@@ -24,8 +26,12 @@ class PermissionController extends AbstractController
         return $this->createOrEdit('admin.permission.edit' , $id , ['model' => $model]);
     }
 
-    public function store($id = null , \Illuminate\Http\Request $request){
-         return $this->storeOrUpdate($request , $id , 'admin/permission');
+    public function store(AddRequestPermission $request){
+         return $this->storeOrUpdate($request , null , 'admin/permission');
+    }
+
+    public function update($id , UpdateRequestPermission $request){
+        return $this->storeOrUpdate($request , $id , 'admin/permission');
     }
 
     public function getById($id){

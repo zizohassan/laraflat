@@ -59,8 +59,10 @@ class PermissionMiddleware
                 'add'
             ],
             'store' => [
-                'edit',
                 'add'
+            ],
+            'update' => [
+                'edit'
             ],
             'index' => [
                 'view'

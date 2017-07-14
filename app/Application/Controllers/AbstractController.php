@@ -31,18 +31,12 @@ abstract class AbstractController extends  Controller{
             $this->createLog('Visit Create Page' , 'Success');
             return view($view , compact('data'));
         }
-        $dataLog = [
-            'Edit Id' => [$id]
-        ];
-        $this->createLog('Visit Edit Page' , 'Success' , json_encode($dataLog));
+        $this->createLog('Visit Edit Page' , 'Success' , json_encode(['Edit Id' => [$id]]));
         $item = $this->model->where('id' , $id)->first();
         return view($view , compact('item' , 'data'));
     }
+
     public function storeOrUpdate(Request $request , $id = null , $callback = true){
-        $validation =  $this->itemValidation($request->all() , $id);
-        if($validation !== true){
-            return redirect()->back()->with(['errors' => $validation]);
-        }
         $field = checkIfFiledFile($request->all());
         if($field){
             $request = $this->uploadFile($request , $field);
@@ -56,22 +50,6 @@ abstract class AbstractController extends  Controller{
         return $this->updateItem($request , $item , $callback , $id);
     }
 
-    public function itemValidation($array , $id){
-        if($id == null){
-            $valid = Validator::make($array,$this->model->validation($id));
-        }else{
-            $valid = Validator::make($array,$this->model->updateValidation($id));
-        }
-        if($valid->fails()){
-            if($id != null){
-                $this->createLog('Update' , 'Error' , json_encode($valid->errors()));
-            }else{
-                $this->createLog('Create' , 'Error' , json_encode($valid->errors()));
-            }
-            return $valid->errors();
-        }
-        return true;
-    }
     public function storeItem($array  , $callback){
         $encodeArray = transformArray($array);
         $new = $this->model->create($encodeArray);
@@ -118,6 +96,7 @@ abstract class AbstractController extends  Controller{
             $this->savePermission($permission, $addPermission);
         }
     }
+
     public function saveRoles($array , $item){
         if(count($array) > 0){
             $request = $this->checkIfArray($array);
@@ -125,6 +104,7 @@ abstract class AbstractController extends  Controller{
         }
         return $item->role()->sync([]);
     }
+
     public function savePermission($array , $item){
         if(count($array) > 0){
             $request = $this->checkIfArray($array);
@@ -132,6 +112,7 @@ abstract class AbstractController extends  Controller{
         }
         return $item->permission()->sync([]);
     }
+
     public function deleteItem($id , $callBack = null){
         $item = $this->model->find($id);
         $item = $item ? $item : null;
@@ -158,6 +139,7 @@ abstract class AbstractController extends  Controller{
         }
         return redirect('404');
     }
+
     public function uploadFile($request , $field){
         if($request->file($field) != null){
             $destinationPath = env('UPLOAD_PATH');
@@ -189,8 +171,6 @@ abstract class AbstractController extends  Controller{
         }
     }
 
-
-
     protected function checkIfArray($request){
         return is_array($request) ? $request : [$request];
     }
@@ -205,7 +185,5 @@ abstract class AbstractController extends  Controller{
         ];
         $this->log->create($data);
     }
-
-
 
 }
