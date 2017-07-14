@@ -27,6 +27,12 @@ php artisan key:generate
 ```
 
 
+# Or Install Form Composer
+
+```
+  composer create-project --prefer-dist laraflat/laraflat
+```
+
 ## Migrate
 
 ```
