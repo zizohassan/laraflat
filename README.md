@@ -85,6 +85,21 @@ create langauge files<br>
 ً we generate two request file one for store data other for update data <br>
  
  
+   <!-- Requests -->
+ # Requests
+We Generate two Requests file one for update and other for add
+```
+  app\Application\Requests\Admin\ModelRequestName\AddRequestModelname
+  app\Application\Requests\Admin\ModelRequestName\UpdateRequestModelname
+```
+the first one will use in store function on the controller <br>
+the secound one will use in the update function in the controller
+
+ <!-- Requests  -->
+
+
+ 
+ 
  <!-- model -->
 # Model
 ```app/Application/Model/Nameofmodel.php```
