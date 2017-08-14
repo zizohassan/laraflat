@@ -51,10 +51,55 @@ class MakeAdminModel extends GeneratorCommand
             $this->makeTransformer();
             $this->createModel();
             $this->createMigration();
-
+            $this->makeRequest();
+            $this->makeRequest('UpdateRequest');
 
 //           $this->addItemtoMenue();
     }
+
+
+
+
+    /*
+     * Make Request For admin
+     */
+
+
+
+    protected function makeRequest($requestType = 'AddRequest')
+    {
+        $ds = DIRECTORY_SEPARATOR;
+        $name = ucfirst($this->getNameInput());
+        $folderName = ucfirst($this->getNameInput());
+        $pathFile = app_path('Application'.$ds.'Requests'.$ds.'Admin'.$ds.$folderName);
+        if(!file_exists($pathFile)){
+           File::makeDirectory($pathFile, 0775, true);
+        }
+        if($requestType == 'AddRequest'){
+          $file =   __DIR__.'/stub/addrequest.stub';
+        }else{
+            $file =   __DIR__.'/stub/updaterequest.stub';
+        }
+        $path = $this->getPath('Application\\Requests\\Admin\\'.$folderName.'\\'.$requestType.$name);
+        $this->line('Done create Request class  at Application   '.$requestType.$this->getNameInput());
+        $this->files->put($path, $this->buildRequest( $name ,  'Admin\\'.$folderName  , $file));
+    }
+
+
+
+    protected function buildRequest($name  , $nameDatatable  , $stub ){
+        $stub = $this->files->get($stub);
+        return $this->replace( $stub, 'DummyFolder',$nameDatatable)
+            ->replaceView( $stub, 'DummyName',ucfirst($name));
+    }
+
+
+
+
+    /*
+    * Make Request For admin
+    */
+
 
 
     protected function addItemtoMenue(){

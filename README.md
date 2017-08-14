@@ -27,6 +27,12 @@ php artisan key:generate
 ```
 
 
+# Or Install Form Composer
+
+```
+  composer create-project --prefer-dist laraflat/laraflat
+```
+
 ## Migrate
 
 ```
@@ -82,6 +88,22 @@ create langauge files<br>
  setting system <br>
  multi theme for admin panel<br>
  support multi language<br>
+ً we generate two request file one for store data other for update data <br>
+ 
+ 
+   <!-- Requests -->
+ # Requests
+We Generate two Requests file one for update and other for add
+```
+  app\Application\Requests\Admin\ModelRequestName\AddRequestModelname
+  app\Application\Requests\Admin\ModelRequestName\UpdateRequestModelname
+```
+the first one will use in store function on the controller <br>
+the secound one will use in the update function in the controller
+
+ <!-- Requests  -->
+
+
  
  
  <!-- model -->
@@ -101,25 +123,7 @@ it will contain the following
     protected $fillable = [
            'name'
     ]; 
-```    
-
-## Validation method on store action make sure to add your only validation store action here
-```     
-    public function validation($id){
-            return [
-                'name.*' => 'required|max:90'
-            ];
-       }
-```
-
-## Validation method on update action make sure to add only your update  validation here in this method
-```
-   public function updateValidation($id){
-        return [
-            'name.*' => 'required|max:90'
-        ];
-   }
-```   
+```      
 
 <!-- model -->
 
@@ -409,6 +413,19 @@ laraflat support menu system so if you want to show your menu use this function
 ```menu('menuName')```
 this will build ul with li with menu itmes 
  <!-- menus  -->
+ 
+ 
+ 
+  <!-- Api -->
+ # Api
+We Generate apicontroller for each module you add 
+```app\Application\Api\ModelNameApi.php```
+and we also generate the api routes for you 
+you can check this link to show how it work with angular 4 <a href="https://5dmat-web.com/playlist/47">Api with angular</a>
+
+ <!-- Api  -->
+
+
 
 
 

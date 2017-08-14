@@ -7,6 +7,8 @@ use App\Application\DataTables\MenusDataTable;
 use App\Application\Model\Item;
 use App\Application\Model\Menu;
 use App\Application\Repository\InterFaces\MenuInterface;
+use App\Application\Requests\Admin\Menu\AddRequestMenu;
+use App\Application\Requests\Admin\Menu\UpdateRequestMenu;
 use UxWeb\SweetAlert\SweetAlert;
 use Yajra\Datatables\Request;
 use Alert;
@@ -29,8 +31,13 @@ class MenuController extends AbstractController
         return $this->createOrEdit('admin.menu.edit' , $id  , ['items' => $items]);
     }
 
-    public function store($id = null , \Illuminate\Http\Request $request){
-         return $this->storeOrUpdate($request , $id , 'admin/menu');
+    public function store(AddRequestMenu $request){
+         return $this->storeOrUpdate($request , null , 'admin/menu');
+    }
+
+
+    public function update($id , UpdateRequestMenu $request){
+        return $this->storeOrUpdate($request , $id , 'admin/menu');
     }
 
     public function getById($id){

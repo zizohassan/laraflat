@@ -13,22 +13,6 @@ class Role extends Model
         'name' , 'slug' , 'description'
    ];
 
-  public function   validation ($id){
-        return [
-            'name' =>'required',
-            'slug' => 'required|unique:roles,slug,'.$id
-        ];
-  }
-
-    public function   updateValidation ($id){
-        return [
-            'name' =>'required',
-            'slug' => 'required|unique:roles,slug,'.$id
-        ];
-    }
-
-
-
   public function user(){
       return $this->belongsToMany('App\Application\Model\User' , 'role_user');
   }

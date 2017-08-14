@@ -14,15 +14,6 @@ class DummyClass extends Model
 
    ];
 
-   public function validation($id){
-        return [
-        ];
-   }
 
-   public function updateValidation($id){
-           return [
-
-           ];
-   }
 
 }

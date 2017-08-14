@@ -13,16 +13,5 @@ class Categorie extends Model
         'name' , 'created_at' , 'updated_at'
    ];
 
-   public function validation($id){
-        return [
-            'name.*' => 'required|max:90'
-        ];
-   }
-
-   public function updateValidation($id){
-        return [
-            'name.*' => 'required|max:90'
-        ];
-   }
 
 }
