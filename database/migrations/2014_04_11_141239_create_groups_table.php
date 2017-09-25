@@ -14,6 +14,7 @@ class CreateGroupsTable extends Migration
             $table->increments('id')->unsigned();
             $table->string('name');
             $table->string('slug');
+            $table->integer('auth');
             $table->string('description')->nullable();
             $table->timestamps();
         });
