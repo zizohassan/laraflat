@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\Application\Model\Group;
 
 class AdminMiddleware
 {
@@ -19,7 +20,11 @@ class AdminMiddleware
         if(!Auth::check()){
             return redirect('/login');
         }
-        if(Auth::user()->group_id !== 1)
+        
+        // get user group
+        $group = Group::find(Auth::user()->group_id);
+        
+        if($group->auth !== 1)
         {
             return redirect('/');
         }
