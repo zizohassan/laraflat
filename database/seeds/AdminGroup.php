@@ -15,11 +15,13 @@ class AdminGroup extends Seeder
             'name' => 'Admin',
             'slug'=> 'admin',
             'description'=> 'Access to User , permission , role , groups roles',
+            'auth' => 1,
         ]);
         DB::table('groups')->insert([
             'name' => 'User',
             'slug'=> 'user',
             'description'=> 'User group ',
+            'auth' => 0,
         ]);
     }
 }
