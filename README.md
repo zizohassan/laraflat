@@ -5,8 +5,9 @@ Advanced laravel system to build admin panel
 
 ## Requirements
 
-PHP >= 7 , 
-PHP Curl extension 
+Laravel => 5.5 , <br>
+PHP >= 7 ,   <br>
+PHP Curl extension   <br>
 
 
 ## Download The Files 
@@ -20,7 +21,7 @@ download all files
 now type this line on your console
 
 ```
-composer install
+composer update
 ```
 ```
 php artisan key:generate
