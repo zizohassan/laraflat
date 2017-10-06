@@ -5,7 +5,7 @@ Advanced laravel system to build admin panel
 
 ## Requirements
 
-PHP >= 5.6.4 , 
+PHP >= 7 , 
 PHP Curl extension 
 
 
