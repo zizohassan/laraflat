@@ -69,6 +69,7 @@ class PagesDataTable extends DataTable
             [
                 'name' => "title",
                 'data' => 'title',
+                'title' => adminTrans('page' , 'title'),
             ],
             [
                 'name' => "status",

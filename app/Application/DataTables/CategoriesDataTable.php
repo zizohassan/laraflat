@@ -69,6 +69,7 @@ class CategoriesDataTable extends DataTable
             [
                 'name' => "name",
                 'data' => 'name',
+                'title' => adminTrans('categorie' , 'name'),
             ],
 
              [
