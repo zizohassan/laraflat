@@ -4,7 +4,6 @@
     "keywords": ["adminpanel", "laravel" , "laraflat"],
     "license": "MIT",
     "type": "project",
-    "minimum-stability": "dev",
     "require": {
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
