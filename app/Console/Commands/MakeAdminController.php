@@ -23,7 +23,7 @@ class MakeAdminController extends GeneratorCommand
 
 
 
-    public function fire(){
+    public function handle(){
         $this->createController();
     }
 
