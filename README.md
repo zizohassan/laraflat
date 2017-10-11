@@ -1,5 +1,5 @@
-# LaraFlat 5.5
-Advanced laravel system to build admin panel  LaraFlat 5.5
+# LaraFlat
+Advanced laravel system to build admin panel
 
 
 
@@ -21,7 +21,7 @@ download all files
 now type this line on your console
 
 ```
-composer update
+composer install
 ```
 ```
 php artisan key:generate
