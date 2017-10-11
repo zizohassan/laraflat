@@ -23,7 +23,7 @@ class MakeInterfaceEloquent extends GeneratorCommand
 
 
 
-    public function fire(){
+    public function handle(){
         $this->createInterface();
         $this->createEloquent();
         $this->appendToBindProvider();
