@@ -23,7 +23,7 @@ class MakeApiController extends GeneratorCommand
 
 
 
-    public function fire(){
+    public function handle(){
         $this->makeApiClass();
         $this->routeApi();
     }
