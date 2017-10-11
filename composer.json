@@ -60,10 +60,9 @@
             "@php artisan package:discover"
         ]
     },
-    "config": {
+     "config": {
         "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true
+        "sort-packages": true
     },
-    "minimum-stability": "stable" 
+     "minimum-stability": "dev"
 }
