@@ -24,7 +24,7 @@ class MakeRequest extends GeneratorCommand
 
 
 
-    public function fire(){
+    public function handle(){
         $this->makeRequest();
         $this->makeRequest('UpdateRequest');
     }
