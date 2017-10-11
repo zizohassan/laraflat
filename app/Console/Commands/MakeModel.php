@@ -24,7 +24,7 @@ class MakeModel extends GeneratorCommand
 
     protected $type = "Model";
 
-    public function fire(){
+    public function handle(){
         $this->createModel();
     }
 
