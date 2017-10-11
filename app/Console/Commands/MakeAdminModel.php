@@ -37,7 +37,7 @@ class MakeAdminModel extends GeneratorCommand
      *
      * @return void
      */
-    public function fire()
+    public function handle()
     {
             $this->addlanguageFile();
             $this->ImportMenuTable();
