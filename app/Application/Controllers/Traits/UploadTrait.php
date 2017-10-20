@@ -16,15 +16,13 @@ trait UploadTrait{
             }else{
                 $imageName = $this->uploadFileOrMultiUpload($request->file($field) , $destinationPath);
             }
-            $request = $request->except($field);
             if(count($all) > 0){
-                $request[$field] = json_encode($all);
-                return $request;
+                $request->request->add([$field => json_encode($all)]);
+                return $request->request->all();
             }
-            $request[$field] = $imageName;
-            return $request;
+            $request->request->add([$field => $imageName]);
+            return $request->request->all();
         }
-        return $request->all();
     }
 
     protected function uploadFileOrMultiUpload($image , $destinationPath){

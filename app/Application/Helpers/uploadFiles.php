@@ -47,10 +47,14 @@ function getExtention($fileName){
 
 
 function checkIfFiledFile($array){
+    $collect = [];
     foreach($array as $key => $file){
         if(in_array($key , getFileFieldsName())){
-            return $key;
+            $collect[]= $key;
         }
+    }
+    if(count($collect) > 0){
+        return $collect;
     }
     return false;
 }

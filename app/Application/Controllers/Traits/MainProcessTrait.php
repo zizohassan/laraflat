@@ -11,7 +11,6 @@ trait MainProcessTrait {
         $items = $this->model->with($with)->paginate($paginate);
         return view($view , compact('items'));
     }
-
     public function createOrEdit($view , $id = null , $data = ['']){
         if($id == null){
             $this->createLog('Visit Create Page' , 'Success');
@@ -21,26 +20,25 @@ trait MainProcessTrait {
         $item = $this->model->where('id' , $id)->first();
         return view($view , compact('item' , 'data'));
     }
-
     public function storeOrUpdate(Request $request , $id = null , $callback = true){
         try{
             $field = checkIfFiledFile($request->all());
-            if($field){
-                $request = $this->uploadFile($request , $field);
+            if(count($field) > 0){
+                foreach($field as $key => $f){
+                    $data = $this->uploadFile($request , $f);
+                }
             }else{
-                $request = $request->all();
+                $data = $request->all();
             }
             if($id == null){
-                return $this->storeItem($request , $callback);
+                return $this->storeItem($data , $callback);
             }
             $item =  $this->model->where('id' , $id)->first();
-            return $this->updateItem($request , $item , $callback , $id);
+            return $this->updateItem($data , $item , $callback , $id);
         }catch(\Exception $e){
             return $this->catchExceptions($e);
         }
-
     }
-
     public function storeItem($array  , $callback){
         $encodeArray = transformArray($array);
         $new = $this->model->create($encodeArray);
@@ -57,7 +55,6 @@ trait MainProcessTrait {
         }
         return $new;
     }
-
     public function updateItem($array , $item , $callback , $id){
         $encodeArray = transformArray($array);
         $update = $item->update($encodeArray);
@@ -75,7 +72,6 @@ trait MainProcessTrait {
         $this->errorMessage(adminTrans('messages' , 'updateMessageError') , adminTrans('messages', 'error'));
         return redirect(404);
     }
-
     public function deleteItem($id , $callBack = null){
         try{
             $item = $this->model->find($id);
@@ -102,6 +98,4 @@ trait MainProcessTrait {
             return $this->catchExceptions($e);
         }
     }
-
-
 }
