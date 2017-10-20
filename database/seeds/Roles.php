@@ -64,5 +64,10 @@ class Roles extends Seeder
             'slug'=> 'Categories',
             'description'=> 'Add , edit , delete , view role to model Categories',
         ]);
+        DB::table('roles')->insert([
+            'name' => 'Contact',
+            'slug'=> 'Contact',
+            'description'=> 'Add , edit , delete , view role to model Contact',
+        ]);
     }
 }

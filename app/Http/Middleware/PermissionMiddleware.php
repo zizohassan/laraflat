@@ -93,7 +93,10 @@ class PermissionMiddleware
              ],
             'icons' =>[
                 'add'
-            ]
+            ],
+            'replayEmail' =>[
+                'edit'
+            ],
         ];
     }
 }

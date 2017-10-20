@@ -13,7 +13,7 @@ class AddItemsToMenu extends Seeder
     {
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' الرئيسية ' , 'en' => 'Home']),
+            'name' => encodeJson(['ar' => ' الرئيسية ', 'en' => 'Home']),
             'link' => '/admin/home',
             'type' => '',
             'parent_id' => 0,
@@ -23,17 +23,17 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
-           'name' =>encodeJson( ['ar' => 'الاقسام', 'en' => 'Categories']),
-           'link' => '/admin/categorie',
-           'type' => '',
-           'parent_id' => 0,
-           'menu_id' => 1,
-           'order' => 2,
-           'icon' => '<i class="material-icons">control_point_duplicate</i>'
+            'name' => encodeJson(['ar' => 'الاقسام', 'en' => 'Categories']),
+            'link' => '/admin/categorie',
+            'type' => '',
+            'parent_id' => 0,
+            'menu_id' => 1,
+            'order' => 2,
+            'icon' => '<i class="material-icons">control_point_duplicate</i>'
         ]);
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => '  المستخدمين ' , 'en' => 'User']),
+            'name' => encodeJson(['ar' => '  المستخدمين ', 'en' => 'User']),
             'link' => '/admin/users',
             'type' => '',
             'parent_id' => 0,
@@ -43,7 +43,7 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' اعدادت الموقع ' , 'en' => 'Setting']),
+            'name' => encodeJson(['ar' => ' اعدادت الموقع ', 'en' => 'Setting']),
             'link' => '/admin/settings',
             'type' => '',
             'parent_id' => 0,
@@ -54,7 +54,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' الصفحات ', 'en' => 'Page']),
+            'name' => encodeJson(['ar' => ' الصفحات ', 'en' => 'Page']),
             'link' => '/admin/page',
             'type' => '',
             'parent_id' => 0,
@@ -65,33 +65,40 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' سجل البينات ' , 'en' => 'Logs']),
+            'name' => encodeJson(['ar' => ' سجل البينات ', 'en' => 'Logs']),
             'link' => '/admin/log',
             'type' => '',
             'parent_id' => 0,
             'menu_id' => 1,
-            'order' => 6    ,
+            'order' => 6,
             'icon' => '<i class="material-icons">info</i>'
         ]);
 
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' الاحصائيات '  , 'en' => 'Statistics']),
+            'name' => encodeJson(['ar' => ' الاحصائيات ', 'en' => 'Statistics']),
             'link' => '/admin/links',
             'type' => '',
             'parent_id' => 0,
             'menu_id' => 1,
-            'order' => 7   ,
+            'order' => 7,
             'icon' => '<i class="material-icons">insert_chart</i>'
         ]);
 
 
-
-
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' اتصل بنا ', 'en' => 'Contact Us']),
+            'link' => '/admin/contact',
+            'type' => '',
+            'parent_id' => 0,
+            'menu_id' => 1,
+            'order' => 8,
+            'icon' => '<i class="material-icons">perm_contact_calendar</i>'
+        ]);
 
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' المستخدمين ' , 'en' => "Users"]),
+            'name' => encodeJson(['ar' => ' المستخدمين ', 'en' => "Users"]),
             'link' => '/admin/user',
             'type' => '',
             'parent_id' => 3,
@@ -100,9 +107,8 @@ class AddItemsToMenu extends Seeder
         ]);
 
 
-
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' جروبات الاعضاء ', 'en' => 'Groups']),
+            'name' => encodeJson(['ar' => ' جروبات الاعضاء ', 'en' => 'Groups']),
             'link' => '/admin/group',
             'type' => '',
             'parent_id' => 3,
@@ -111,9 +117,8 @@ class AddItemsToMenu extends Seeder
         ]);
 
 
-
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' قوانين الاستخدام ' , 'en' => 'Roles']),
+            'name' => encodeJson(['ar' => ' قوانين الاستخدام ', 'en' => 'Roles']),
             'link' => '/admin/role',
             'type' => '',
             'parent_id' => 3,
@@ -122,7 +127,7 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' =>  ' التصاريح ' , 'en' => 'Permissions']),
+            'name' => encodeJson(['ar' => ' التصاريح ', 'en' => 'Permissions']),
             'link' => '/admin/permission',
             'type' => '',
             'parent_id' => 3,
@@ -131,7 +136,7 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' ايقونات الموقع '  , 'en' => 'Icons']),
+            'name' => encodeJson(['ar' => ' ايقونات الموقع ', 'en' => 'Icons']),
             'link' => '/admin/icons',
             'type' => '',
             'parent_id' => 4,
@@ -141,7 +146,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' =>   '  التوثيق ', 'en' => 'Docs']),
+            'name' => encodeJson(['ar' => '  التوثيق ', 'en' => 'Docs']),
             'link' => '/admin/docs',
             'type' => '',
             'parent_id' => 4,
@@ -151,7 +156,7 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' اعدادت الموقع ' , 'en' => 'Settings']),
+            'name' => encodeJson(['ar' => ' اعدادت الموقع ', 'en' => 'Settings']),
             'link' => '/admin/setting',
             'type' => '',
             'parent_id' => 4,
@@ -160,9 +165,8 @@ class AddItemsToMenu extends Seeder
         ]);
 
 
-
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' =>  ' القوائم ' , 'en' => 'Menu']),
+            'name' => encodeJson(['ar' => ' القوائم ', 'en' => 'Menu']),
             'link' => '/admin/menu',
             'type' => '',
             'parent_id' => 4,
@@ -171,9 +175,8 @@ class AddItemsToMenu extends Seeder
         ]);
 
 
-
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' =>' لارافلات ' , 'en' => "laraFalt"]),
+            'name' => encodeJson(['ar' => ' لارافلات ', 'en' => "laraFalt"]),
             'link' => 'https://laraflat.com/',
             'type' => 'blank',
             'parent_id' => 0,
@@ -182,7 +185,7 @@ class AddItemsToMenu extends Seeder
         ]);
         DB::table('items')->insert([
 
-            'name' =>encodeJson( ['ar' => ' خدمات ويب ', 'en' => '5dmat-web']),
+            'name' => encodeJson(['ar' => ' خدمات ويب ', 'en' => '5dmat-web']),
             'link' => 'https://5dmat-web.com/',
             'type' => 'blank',
             'parent_id' => 0,
@@ -190,15 +193,13 @@ class AddItemsToMenu extends Seeder
             'order' => 2
         ]);
         DB::table('items')->insert([
-            'name' =>encodeJson( ['ar' => ' ستريم لاب ' , 'en' => 'StreamLab']),
+            'name' => encodeJson(['ar' => ' ستريم لاب ', 'en' => 'StreamLab']),
             'link' => 'https://streamlab.io/',
             'type' => 'blank',
             'parent_id' => 0,
             'menu_id' => 2,
             'order' => 3
         ]);
-
-
 
 
     }

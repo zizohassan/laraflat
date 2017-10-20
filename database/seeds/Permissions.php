@@ -104,5 +104,15 @@ class Permissions extends Seeder
             'action_delete'=>  'on',
             'action_view'=>  'on',
         ]);
+        DB::table('permissions')->insert([
+            'name' => 'Contact',
+            'slug'=> 'contact',
+            'description'=> 'Full Access to all Contact model',
+            'model'=> 'contact',
+            'action_add'=> 'on',
+            'action_edit'=>  'on',
+            'action_delete'=>  'on',
+            'action_view'=>  'on',
+        ]);
     }
 }

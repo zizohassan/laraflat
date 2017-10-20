@@ -26,7 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         return view('website.home');
     }
 
@@ -39,7 +38,6 @@ class HomeController extends Controller
     }
 
     public function welcome(){
-        $page = Page::select('title' , 'slug')->where('slug' , 'about_us')->first();
-        return view('website.welcome' , compact('page'));
+        return view('website.welcome');
     }
 }
