@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::share('page'  , Page::select('title' , 'slug')->where('slug' , 'about_us')->first());
+        //
     }
 
     /**

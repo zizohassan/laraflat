@@ -23,6 +23,7 @@
             <li><a href="{{ url('/login') }}">{{ adminTrans('website' , 'login') }}</a></li>
             <li><a href="{{ url('/register') }}">{{ adminTrans('website' , 'register') }}</a></li>
         @endif
+        @php $page = page(); @endphp
         <li><a href="{{ url('/page/'.$page->slug) }}">{{ getDefaultValueKey($page->title) }}</a></li>
         <li><a href="{{ url('contact') }}">{{ adminTrans('website' , 'Contact Us') }}</a></li>
         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
