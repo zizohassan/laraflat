@@ -46,6 +46,14 @@ function removeFromArray($orignalArray , $expectArray){
 }
 
 function rename_keys($array, $replacement_keys)  {
+    // prevents errors if keys were not renamed
+    // or if keys count != actual array count
+    if (count($array) != count($replacement_keys)) {
+        foreach ($array as $value) {
+            $replacement[] = $value;
+        }
+        $replacement_keys = $replacement;
+    }
     if(count($replacement_keys) > 0){
         return array_combine($replacement_keys, array_values($array));
     }
