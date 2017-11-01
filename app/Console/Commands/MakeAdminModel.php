@@ -51,9 +51,9 @@ class MakeAdminModel extends GeneratorCommand
             $this->makeTransformer();
             $this->createModel();
             $this->createMigration();
-            $this->makeRequest();
-            $this->makeRequest('UpdateRequest');
-
+             $this->call('make:laraflat_request' , ['name' => class_basename($this->getNameInput())]);
+             $this->makeRequest();
+             $this->makeRequest('UpdateRequest');
 //           $this->addItemtoMenue();
     }
 

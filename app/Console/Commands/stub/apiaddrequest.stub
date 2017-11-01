@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Application\Requests\DummyFolder;
+
+
+class ApiAddRequestDummyName
+{
+    public function rules()
+    {
+        return [
+            //
+        ];
+    }
+}

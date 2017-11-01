@@ -22,13 +22,10 @@ class MakeRequest extends GeneratorCommand
      */
     protected $description = 'create  Request in application path';
 
-
-
     public function handle(){
         $this->makeRequest();
         $this->makeRequest('UpdateRequest');
     }
-
 
     protected function makeRequest($requestType = 'AddRequest')
     {
@@ -40,12 +37,17 @@ class MakeRequest extends GeneratorCommand
             File::makeDirectory($pathFile, 0775, true);
         }
         if($requestType == 'AddRequest'){
-            $file =   __DIR__.'/stub/addrequest.stub';
+            $file = __DIR__.'/stub/addrequest.stub';
+            $apiFile =  __DIR__.'/stub/apiaddrequest.stub';
         }else{
-            $file =   __DIR__.'/stub/updaterequest.stub';
+            $file = __DIR__.'/stub/updaterequest.stub';
+            $apiFile =  __DIR__.'/stub/apiupdaterequest.stub';
         }
         $path = $this->getPath('Application\\Requests\\Website\\'.$folderName.'\\'.$requestType.$name);
+        $apiPath = $this->getPath('Application\\Requests\\Website\\'.$folderName.'\\Api'.$requestType.$name);
         $this->line('Done create Request class  at Application   '.$requestType.$this->getNameInput());
+        $this->line('Done create Request class  at Application Api'.$requestType.$this->getNameInput());
+        $this->files->put($apiPath, $this->buildRequest( $name ,  'Website\\'.$folderName  , $apiFile));
         $this->files->put($path, $this->buildRequest( $name ,  'Website\\'.$folderName  , $file));
     }
 

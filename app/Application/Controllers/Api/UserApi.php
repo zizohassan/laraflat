@@ -5,6 +5,9 @@ namespace App\Application\Controllers\Api;
 
 use App\Application\Controllers\Controller;
 use App\Application\Model\User;
+use App\Application\Requests\Website\User\ApiAddRequestUser;
+use App\Application\Requests\Website\User\ApiLoginRequest;
+use App\Application\Requests\Website\User\ApiUpdateRequestUser;
 use App\Application\Transformers\UsersTransformers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -33,9 +36,9 @@ class UserApi extends Controller
         return response(apiReturn(UsersTransformers::transform($data)) , 200 );
     }
 
-    public function login()
+    public function login(ApiLoginRequest $validation)
     {
-        $v = Validator::make($this->request->all(), $this->model->loginValidation());
+        $v = Validator::make($this->request->all(), $validation->rules());
         if ($v->fails()) {
             return response(apiReturn('' , 'error' , $v->errors())  , 401 );
         }
@@ -48,8 +51,8 @@ class UserApi extends Controller
         return response(apiReturn($user)  , 200 );
     }
 
-    public function add(){
-        $v = Validator::make($this->request->all(), $this->model->validation(null));
+    public function add(ApiAddRequestUser $validation){
+        $v = Validator::make($this->request->all(), $validation->rules());
         if ($v->fails()) {
             return response(apiReturn('' , 'error' , $v->errors())  , 401 );
         }
@@ -61,8 +64,8 @@ class UserApi extends Controller
         return response(apiReturn(UsersTransformers::transform($data))  , 200 );
     }
 
-    public function update(){
-        $v = Validator::make($this->request->all(), $this->model->updateValidation(null));
+    public function update(ApiUpdateRequestUser $validation){
+        $v = Validator::make($this->request->all(), $validation->updateValidation());
         if ($v->fails()) {
             return response(apiReturn('' , 'error' , $v->errors())  , 401 );
         }

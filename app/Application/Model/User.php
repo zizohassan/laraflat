@@ -40,11 +40,4 @@ class User extends Authenticatable
     }
 
 
-    public function loginValidation(){
-        return [
-            'email' => 'required|email',
-            'password' => 'required|max:255',
-        ];
-    }
-
 }

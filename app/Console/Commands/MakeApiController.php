@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Illuminate\Console\GeneratorCommand;
 
@@ -26,6 +27,8 @@ class MakeApiController extends GeneratorCommand
     public function handle(){
         $this->makeApiClass();
         $this->routeApi();
+        $this->call('make:laraflat_request' , ['name' => class_basename($this->getNameInput())]);
+        $this->call('make:laraflat_transformer' , ['name' => class_basename($this->getNameInput())]);
     }
 
 
@@ -87,5 +90,6 @@ class MakeApiController extends GeneratorCommand
         );
         return $stub;
     }
+
 
 }

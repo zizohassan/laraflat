@@ -5,6 +5,8 @@ namespace App\Application\Controllers\Api;
 
 use App\Application\Controllers\Controller;
 use App\Application\Model\Categorie;
+use App\Application\Requests\Website\Categorie\ApiAddRequestCategorie;
+use App\Application\Requests\Website\Categorie\ApiUpdateRequestCategorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Application\Transformers\CategorieTransformers;
@@ -33,22 +35,22 @@ class CategorieApi extends Controller
         return response(apiReturn(CategorieTransformers::transform($data))  , 200 );
     }
 
-    public function add(){
+    public function add(ApiAddRequestCategorie $validation){
         $request = $this->checkRequestType();
-        $v = Validator::make($request, $this->model->validation(null));
+        $v = Validator::make($this->request->all(), $validation->rules());
         if ($v->fails()) {
-            return response(apiReturn('' , 'error'  , $v->errors())  , 401 );
+            return response(apiReturn('' , 'error' , $v->errors())  , 401 );
         }
         $data = $this->model->create(transformArray(checkApiHaveImage($request)));
         return response(apiReturn(CategorieTransformers::transform($data))  , 200 );
 
     }
 
-    public function update($id){
+    public function update($id , ApiUpdateRequestCategorie $validation){
         $request = $this->checkRequestType();
-        $v = Validator::make($request, $this->model->updateValidation($id));
+        $v = Validator::make($this->request->all(), $validation->rules());
         if ($v->fails()) {
-            return response(apiReturn('' , 'error'  , $v->errors())  , 401 );
+            return response(apiReturn('' , 'error' , $v->errors())  , 401 );
         }
         $data = $this->model->find($id)->update(transformArray(checkApiHaveImage($request)));
          return response(apiReturn($data)  , 200 );
