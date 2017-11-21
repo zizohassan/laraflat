@@ -28,12 +28,18 @@ class UserApi extends Controller
 
     public function index($limit = 10 , $offset = 0){
        $data =  $this->model->limit($limit)->offset($offset)->get();
-        return response(apiReturn(UsersTransformers::transform($data)) , 200 );
+        if($data){
+            return response(apiReturn(UsersTransformers::transform($data)) , 200 );
+        }
+        return response(apiReturn('' , '' , 'No Data Found')  , 200 );
     }
 
     public function getById($id){
         $data =  $this->model->find($id);
-        return response(apiReturn(UsersTransformers::transform($data)) , 200 );
+        if($data){
+            return response(apiReturn(UsersTransformers::transform($data)) , 200 );
+        }
+        return response(apiReturn('' , '' , 'No Data Found')  , 200 );
     }
 
     public function login(ApiLoginRequest $validation)

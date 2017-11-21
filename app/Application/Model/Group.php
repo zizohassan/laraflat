@@ -14,18 +14,6 @@ class Group extends Model
    ];
 
 
-    public function   validation ($id){
-       return [
-
-       ];
-    }
-
-    public function   updateValidation ($id){
-        return [
-
-        ];
-    }
-
 
   public function user(){
         return $this->hasMany('App\Application\Model\User', 'group_id');

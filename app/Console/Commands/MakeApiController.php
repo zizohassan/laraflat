@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Str;
+
 use Illuminate\Console\GeneratorCommand;
+use Symfony\Component\Console\Input\InputArgument;
 
 class MakeApiController extends GeneratorCommand
 {
@@ -13,22 +13,51 @@ class MakeApiController extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:laraflat_api_controller';
+    protected $name = 'laraflat:api_controller';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create  APi Controller in application path';
+    protected $description = 'Create Api Controller in application path';
 
 
 
     public function handle(){
+        if($this->option('cols')){
+            $cols = $this->option('cols');
+            $cols = explode(',' , $cols);
+            if($cols){
+                foreach($cols as $col){
+                    $col = explode(':' , $col);
+                    foreach($col as $key => $c){
+                        if($key == 0){
+                            $this->colsArray[$c] = $c;
+                            $name = $c;
+                        }elseif($key == 1){
+                            $this->colsType[$name] = $c;
+                        }elseif($key == 2){
+                            $this->colsValidation[$name] = str_replace('_' , '|' , str_replace('-' , ':' , $c));
+                        }elseif($key == 3){
+                            $this->multiLanguage[$name] = $c;
+                        }
+                    }
+                }
+            }
+            $this->call('laraflat:api_request' , ['name' => class_basename($this->getNameInput()) , '--cols' => $this->fillValidation()]);
+            $this->call('laraflat:transformer' , ['name' => class_basename($this->getNameInput()) ,'--cols' => $this->option('cols')]);
+            if(!file_exists(app_path('Application/Model/'.ucfirst($this->getNameInput())).'.php')) {
+                $this->call('laraflat:model', ['name' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
+            }
+        }else{
+            $this->call('laraflat:api_request' , ['name' => class_basename($this->getNameInput())]);
+            if(!file_exists(app_path('Application/Model/'.ucfirst($this->getNameInput())).'.php')) {
+                $this->call('laraflat:model', ['name' => class_basename($this->getNameInput())]);
+            }
+        }
         $this->makeApiClass();
         $this->routeApi();
-        $this->call('make:laraflat_request' , ['name' => class_basename($this->getNameInput())]);
-        $this->call('make:laraflat_transformer' , ['name' => class_basename($this->getNameInput())]);
     }
 
 
@@ -91,5 +120,23 @@ class MakeApiController extends GeneratorCommand
         return $stub;
     }
 
+    protected function getOptions()
+    {
+        return [
+            ['cols', 'c', InputArgument::OPTIONAL, 'Set Model Fillable , request , migration columns']
+        ];
+    }
+
+    protected function fillValidation(){
+        $result = '';
+        $i = 1;
+        foreach($this->colsValidation as $key => $value){
+            $multiLanguage = isset($this->multiLanguage[$key]) && $this->multiLanguage[$key] == 'true' ? '.*' : '';
+            $i++;
+            $result .= $key.$multiLanguage.':'.str_replace('|' , '_' ,str_replace(':' , '-' , $value));
+            $result .= count($this->colsValidation)  == $i ? ',':'';
+        }
+        return $result;
+    }
 
 }

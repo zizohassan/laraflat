@@ -25,13 +25,16 @@ class DummyClass extends AbstractController
         return $this->createOrEdit('admin.DummyView.edit' , $id);
     }
 
-    public function store(AddRequestDummyModel $request){
-         return $this->storeOrUpdate($request , null , 'admin/DummyView');
-    }
+     public function store(AddRequestDummyModel $request){
+          $item =  $this->storeOrUpdate($request , null , true);
+          return redirect('admin/DummyView');
+     }
 
-    public function update($id , UpdateRequestDummyModel $request){
-             return $this->storeOrUpdate($request , $id , 'admin/DummyView');
-    }
+     public function update($id , UpdateRequestDummyModel $request){
+          $item =  $this->storeOrUpdate($request , $id , true);
+          return redirect()->back();
+     }
+
 
     public function getById($id){
         $fields = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());

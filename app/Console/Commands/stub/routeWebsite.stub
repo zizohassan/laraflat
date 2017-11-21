@@ -1,0 +1,9 @@
+
+
+#### DummyRoute control
+Route::get('DummyRoute' , 'DummyController@index');
+Route::get('DummyRoute/item/{id?}' , 'DummyController@show');
+Route::post('DummyRoute/item' , 'DummyController@store');
+Route::post('DummyRoute/item/{id}' , 'DummyController@update');
+Route::get('DummyRoute/{id}/delete' , 'DummyController@destroy');
+Route::get('DummyRoute/{id}/view' , 'DummyController@getById');

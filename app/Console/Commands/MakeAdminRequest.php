@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Console\Input\InputArgument;
+
 
 class MakeAdminRequest extends GeneratorCommand
 {
@@ -13,7 +15,7 @@ class MakeAdminRequest extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:laraflat_admin_request';
+    protected $name = 'laraflat:admin_request';
 
     /**
      * The console command description.
@@ -22,11 +24,29 @@ class MakeAdminRequest extends GeneratorCommand
      */
     protected $description = 'create Admin Request in application path';
 
-
+    protected $colsValidation = [];
 
     public function handle(){
+        if($this->option('cols')){
+            $this->setCols();
+        }
         $this->makeRequest();
         $this->makeRequest('UpdateRequest');
+    }
+
+    protected function setCols(){
+        $cols = $this->option('cols');
+        $cols = explode(',' , $cols);
+        foreach($cols as $col){
+            $col = explode(':' , $col);
+            foreach($col as $key => $c){
+                if($key == 0){
+                    $name = $c;
+                }elseif($key == 1){
+                    $this->colsValidation[$name] = str_replace('_' , '|' , str_replace('-' , ':' , $c));
+                }
+            }
+        }
     }
 
 
@@ -56,6 +76,7 @@ class MakeAdminRequest extends GeneratorCommand
     protected function buildRequest($name  , $nameDatatable  , $stub ){
         $stub = $this->files->get($stub);
         return $this->replace( $stub, 'DummyFolder',$nameDatatable)
+            ->replace($stub , 'DummyValidation', $this->reFormatRequest())
             ->replaceView( $stub, 'DummyName',ucfirst($name));
     }
 
@@ -87,5 +108,22 @@ class MakeAdminRequest extends GeneratorCommand
 
     }
 
+    protected function reFormatRequest(){
+        if($this->colsValidation){
+            $result = '';
+            foreach($this->colsValidation as $key => $cols){
+                $result .= '"'.$key.'" => "'.$cols.'",'."\n\t\t\t";
+            }
+            return $result;
+        }
+        return ' ';
+    }
+
+    protected function getOptions()
+    {
+        return [
+            ['cols', 'c', InputArgument::OPTIONAL, 'Set Model Fillable , request , migration columns']
+        ];
+    }
 
 }

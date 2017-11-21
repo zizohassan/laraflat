@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{  adminTrans('role' , 'role') }}     {{  adminTrans('home' , 'control') }}
+    {{  trans('role.role') }}     {{  trans('home.control') }}
 @endsection
 
 @section('style')
@@ -10,7 +10,7 @@
 
 
 @section('content')
-    @include(layoutTable() , ['title' => adminTrans('role' , 'role')  ,'model' => 'role' , 'table' => $dataTable->table([] , true) ])
+    @include(layoutTable() , ['title' => trans('role.role')  ,'model' => 'role' , 'table' => $dataTable->table([] , true) ])
 @endsection
 
 

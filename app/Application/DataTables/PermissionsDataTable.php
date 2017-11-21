@@ -63,42 +63,42 @@ class PermissionsDataTable extends DataTable
             [
                 'name' => "id",
                 'data' => 'id',
-                'title' => adminTrans('curd' , 'id'),
+                'title' => trans('curd.id'),
             ],
             [
                 'name' => "slug",
                 'data' => 'slug',
-                'title' => adminTrans('permission' , 'slug'),
+                'title' => trans('permission.slug'),
             ],
             [
                 'name' => "action_add",
                 'data' => 'action_add',
-                'title' => adminTrans('permission' , 'action_add'),
+                'title' => trans('permission.action_add'),
             ],
             [
                 'name' => "action_edit",
                 'data' => 'action_edit',
-                'title' => adminTrans('permission' , 'action_edit'),
+                'title' => trans('permission.action_edit'),
             ],
             [
                 'name' => "action_delete",
                 'data' => 'action_delete',
-                'title' => adminTrans('permission' , 'action_delete'),
+                'title' => trans('permission.action_delete'),
             ],
             [
                 'name' => "action_view",
                 'data' => 'action_view',
-                'title' => adminTrans('permission' , 'action_view'),
+                'title' => trans('permission.action_view'),
             ],
             [
                 'name' => "model",
                 'data' => 'model',
-                'title' => adminTrans('permission' , 'model'),
+                'title' => trans('permission.model'),
             ],
             [
                 'name' => "view",
                 'data' => 'view',
-                'title' => adminTrans('curd' , 'view'),
+                'title' => trans('curd.view'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
@@ -107,7 +107,7 @@ class PermissionsDataTable extends DataTable
             [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => adminTrans('curd' , 'edit'),
+                'title' => trans('curd.edit'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
@@ -116,7 +116,7 @@ class PermissionsDataTable extends DataTable
             [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => adminTrans('curd' , 'delete'),
+                'title' => trans('curd.delete'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,

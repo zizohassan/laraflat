@@ -64,27 +64,27 @@ class PagesDataTable extends DataTable
             [
                 'name' => "id",
                 'data' => 'id',
-                'title' => adminTrans('curd' , 'id'),
+                'title' => trans('curd.id'),
             ],
             [
                 'name' => "title",
                 'data' => 'title',
-                'title' => adminTrans('page' , 'title'),
+                'title' => trans('page.title'),
             ],
             [
                 'name' => "status",
                 'data' => 'status',
-                'title' => adminTrans('page' , 'status'),
+                'title' => trans('page.status'),
             ],
             [
                 'name' => "date",
                 'data' => 'date',
-                'title' => adminTrans('page' , 'date'),
+                'title' => trans('page.date'),
             ],
             [
                 'name' => "view",
                 'data' => 'view',
-                'title' => adminTrans('curd' , 'view'),
+                'title' => trans('curd.view'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
@@ -93,7 +93,7 @@ class PagesDataTable extends DataTable
             [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => adminTrans('curd' , 'edit'),
+                'title' => trans('curd.edit'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
@@ -102,7 +102,7 @@ class PagesDataTable extends DataTable
             [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => adminTrans('curd' , 'delete'),
+                'title' => trans('curd.delete'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,

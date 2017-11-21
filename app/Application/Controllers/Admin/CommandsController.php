@@ -1,0 +1,148 @@
+<?php
+
+namespace App\Application\Controllers\Admin;
+
+use App\Application\Controllers\AbstractController;
+use App\Application\Model\Categorie;
+use Alert;
+use App\Application\Model\Command;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+
+class CommandsController extends AbstractController
+{
+    public function __construct(Categorie $model)
+    {
+        parent::__construct($model);
+    }
+
+    public function index(){
+        $commands = $this->commands();
+        $migrationTypes = $this->migrationType();
+        $validationTypes = $this->validationTypes();
+        $history = Command::get();
+        return view('admin.commands.index' , compact('commands' , 'migrationTypes' , 'validationTypes' , 'history'));
+    }
+
+    public function exe(Request $request){
+        if($request->name){
+            if(in_array($request->commands , $this->commands()) &&  $request->commands != 'laraflat:admin_model'){
+                $this->artisanCall($request->commands , ucfirst($request->name));
+            }else{
+                if(count($request->colsName) > 0){
+                    $cols = $this->handelRequest($request);
+                    $this->artisanCall($request->commands , ucfirst($request->name) , $cols);
+                }
+            }
+            alert()->success(trans('admin.Done'));
+            return redirect()->back()->withInput();
+        }
+        alert()->error(trans('admin.Error'));
+        return redirect()->back()->withInput();
+    }
+
+    protected function artisanCall($command , $name , $cols = null){
+        $array = [
+            'name' => $name,
+            'command' => $command,
+            'options' => $cols
+        ];
+        Command::create($array);
+        if($cols == null){
+            return Artisan::call($command , ['name' => $name]);
+        }
+         Artisan::call($command , ['name' => $name , '--cols' => $cols]);
+         Artisan::call("migrate");
+        Artisan::call('langman:sync');
+        return true;
+    }
+
+
+    protected function handelRequest($request){
+        $colsOption = "";
+        $count = 0;
+        foreach($request->colsName as $key =>  $cols){
+            $count++;
+            $lang = $request->lang[$key] == 0 ? 'false' : 'true';
+            $validation = $this->handelValidation($request->validation[$key] , $request->validationVal[$key]);
+            $colsOption .= $cols.':'.$request->migration[$key].':'.$validation.':'.$lang;
+            if($count != count($request->colsName)){
+                $colsOption .= ',';
+            }
+        }
+      return $colsOption;
+    }
+
+    protected function handelValidation($validation  , $vVlaue){
+        $out = '';
+        if(is_array($validation)){
+            $count = 0;
+            foreach($validation as $key => $value){
+                $count++;
+                if(key_exists($key , $vVlaue) && $vVlaue[$key] != null){
+                    $out .= $key.'-'.$vVlaue[$key];
+                    if($count != count($validation)){
+                        $out .= '_';
+                    }
+                }else{
+                    $out .= $key;
+                    if($count != count($validation)){
+                        $out .= '_';
+                    }
+                }
+            }
+        }
+        return $out;
+    }
+
+    protected function migrationType(){
+        return [
+            'string',
+            'boolean',
+            'char',
+            'date',
+            'double',
+            'text',
+            'mediumText',
+            'longText',
+            'float',
+            'integer',
+            'ipAddress',
+            'tinyInteger'
+        ];
+    }
+
+    protected function validationTypes(){
+        return [
+            'min' => true,
+            'max' => true,
+            'required' => false,
+            'nullable' => false,
+            'email' => false,
+            'date' => false,
+            'boolean' => false,
+            'ip' => false,
+            'integer' => false,
+            'image' => false,
+            'url' => false,
+        ];
+    }
+
+    protected function commands(){
+        return [
+            'laraflat:admin_controller',
+            'laraflat:admin_model',
+            'laraflat:admin_request',
+            'laraflat:api_controller',
+            'laraflat:api_request',
+            'laraflat:controller',
+            'laraflat:datatable',
+            'laraflat:interface',
+            'laraflat:migrate',
+            'laraflat:model',
+            'laraflat:request',
+            'laraflat:rollback',
+            'laraflat:transformer'
+        ];
+    }
+}

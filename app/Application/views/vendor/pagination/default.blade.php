@@ -1,3 +1,3 @@
-@if ($items->hasPages())
+@if($items->hasPages())
     {{ $items->links() }}
 @endif

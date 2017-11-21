@@ -1,11 +1,13 @@
-<?php
+<?php 
+
 return [
-    'name' => 'Username',
+    'name' => 'User Name',
     'email' => 'Email',
     'user' => 'User',
     'password' => 'Password',
-    'group' => 'User Group '
-    ,'role' => '  User Role  '
-    ,'permission' => ' User Permission  ',
-    'created_at' => 'Join At'
+    'group' => 'User Group',
+    'role' => 'User Role',
+    'permission' => 'User Permission',
+    'created_at' => 'Craeted At',
+    'Laraflat Commands' => '',
 ];

@@ -1,11 +1,11 @@
 @extends(layoutExtend())
 
 @section('title')
-     {{ adminTrans('categorie' , 'Category') }} {{  isset($item) ? adminTrans('home' , 'edit') : adminTrans('home','add') }}
+     {{ trans('categorie.Category') }} {{  isset($item) ? trans('home.edit') : trans('home.add') }}
 @endsection
 
 @section('content')
-    @component(layoutForm() , ['title' =>  adminTrans('categorie' , 'Category') , 'model' => 'categorie' , 'action' => isset($item) ? adminTrans('home' , 'edit') : adminTrans('home','add') ])
+    @component(layoutForm() , ['title' =>  trans('categorie.Category') , 'model' => 'categorie' , 'action' => isset($item) ? trans('home.dit') : trans('home.add') ])
         @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/categorie/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
@@ -15,7 +15,7 @@
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default" >
                     <i class="material-icons">check_circle</i>
-                    {{ adminTrans('home' , 'save') }} {{ adminTrans('categorie' , 'Category') }}
+                    {{ trans('home.save') }} {{ trans('categorie.Category') }}
                 </button>
             </div>
         </form>

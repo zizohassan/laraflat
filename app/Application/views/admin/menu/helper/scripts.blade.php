@@ -32,13 +32,13 @@
                 $("#type").val(json.type == undefined || json.type ==  '' ? 'self' : json.type).change();
                 $('#menu_id').val(json.id);
                 $('#actionBtn').attr('onclick' , 'UpdateItem();return false;');
-                $('#actionBtn').html('{{ adminTrans('menu', 'save_item') }}');
+                $('#actionBtn').html('{{ trans('menu.save_item') }}');
             });
         }else{
             clearFields();
             $('#actionBtn').removeAttr('onclick');
             $('#menu_id').val({{$item->id}});
-            $('#actionBtn').html('{{ adminTrans('menu', 'add_item') }}');
+            $('#actionBtn').html('{{ trans('menu.add_item') }}');
         }
     });
     function clearFields(){

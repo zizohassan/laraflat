@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ adminTrans('menu' , 'menu') }} {{  isset($item) ? adminTrans('curd' , 'edit'):  adminTrans('curd' , 'add') }}
+    {{ trans('menu.menu') }} {{  isset($item) ? trans('curd.edit'):  trans('curd.add') }}
 @endsection
 
 @section('style')
@@ -9,13 +9,13 @@
 @endsection
 
 @section('content')
-    @component(layoutForm() , ['title' => adminTrans('menu' , 'menu') , 'model' => 'menu' , 'action' => isset($item) ? adminTrans('curd' , 'edit'): adminTrans('curd' , 'add') ])
+    @component(layoutForm() , ['title' => trans('menu.menu') , 'model' => 'menu' , 'action' => isset($item) ? trans('curd.edit'): trans('curd.add') ])
     @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/menu/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">
-                    <input type="text" name="name" id="name" class="form-control" placeholder="{{ adminTrans('menu'  , 'name') }}" value="{{ isset($item) ? $item->name : old('name') }}"/>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="{{ trans('menu.name') }}" value="{{ isset($item) ? $item->name : old('name') }}"/>
                 </div>
             </div>
             @if(isset($item))
@@ -24,12 +24,12 @@
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default" >
                     <i class="material-icons">check_circle</i>
-                    {{ adminTrans('home' , 'save') }} {{ adminTrans('menu' , 'menu') }}
+                    {{ trans('home.save') }} {{ trans('menu.menu') }}
                 </button>
                 @if(isset($item))
                     <span class="btn btn-info waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal" >
                         <i class="material-icons">playlist_add</i>
-                        {{ adminTrans('menu' , 'add_new_item') }}
+                        {{ trans('menu.add_new_item') }}
                     </span>
                 @endif
             </div>

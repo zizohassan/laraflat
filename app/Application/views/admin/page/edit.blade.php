@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ adminTrans('page' , 'page') }} {{  isset($item) ? adminTrans('curd' , 'edit'): adminTrans('curd' , 'add') }}
+    {{ trans('page.page') }} {{  isset($item) ? trans('curd.edit'): trans('curd.add') }}
 @endsection
 
 @section('style')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    @component(layoutForm() , ['title' => adminTrans('page' , 'page') ,'model' => 'page' , 'action' => isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') ])
+    @component(layoutForm() , ['title' => trans('page.page') ,'model' => 'page' , 'action' => isset($item) ? trans('curd.edit') : trans('curd.add') ])
     @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/page/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
@@ -19,8 +19,8 @@
 
             <div class="form-group">
                 <div class="form-line">
-                    <label for="">{{ adminTrans('page' , 'slug') }}</label>
-                    <input type="text" name="slug" id="slug" placeholder="{{ adminTrans('page' , 'slug') }}" class="form-control" value="{{ isset($item) ? $item->slug : old('slug') }}"/>
+                    <label for="">{{ trans('page.slug') }}</label>
+                    <input type="text" name="slug" id="slug" placeholder="{{ trans('page.slug') }}" class="form-control" value="{{ isset($item) ? $item->slug : old('slug') }}"/>
                 </div>
             </div>
 
@@ -28,7 +28,7 @@
 
             <div class="form-group">
                 <div class="">
-                    <label for="">{{ adminTrans('page' , 'status') }}</label>
+                    <label for="">{{ trans('page.status') }}</label>
                     @php $status = isset($item) ? $item->status  : null @endphp
                     {!! Form::select('status' , status() , $status, ['class' => 'form-control' ] ) !!}
                 </div>
@@ -36,7 +36,7 @@
 
             <div class="form-group">
                 <div class="form-line">
-                    <label for="">{{ adminTrans('page' , 'date') }}</label>
+                    <label for="">{{ trans('page.date') }}</label>
                     <input type="text" name="date" class="datepicker form-control" value="{{ isset($item) ? $item->date : old('date') }}">
                 </div>
             </div>
@@ -45,7 +45,7 @@
 
             <div class="form-group">
                 <div class="form-line">
-                    <label for="">{{ adminTrans('page' , 'image') }}</label>
+                    <label for="">{{ trans('page.image') }}</label>
                     @if(isset($item) && $item->image != '')
                         <img src="{{ url('/'.env('UPLOAD_PATH').'/'.$item->image) }}" class="img-responsive thumbnail" alt="">
                         <br>
@@ -58,7 +58,7 @@
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default" >
                     <i class="material-icons">check_circle</i>
-                    {{ adminTrans('home' , 'save') }} {{ adminTrans('page' , 'page') }}
+                    {{ trans('home.save') }} {{ trans('page.page') }}
                 </button>
             </div>
         </form>

@@ -3,32 +3,32 @@
 
 function status(){
     return [
-        'Active' => adminTrans('home' ,'Active'),
-        'Deactive' => adminTrans('home' ,'Deactive'),
+        'Active' => trans('home.Active'),
+        'Deactive' => trans('home.Deactive'),
     ];
 }
 
 function setting_type(){
     return [
-        'text' => adminTrans('home' ,'text'),
-        'textarea' => adminTrans('home' ,'textarea'),
-        'image' => adminTrans('home' ,'image'),
+        'text' => trans('home.text'),
+        'textarea' => trans('home.textarea'),
+        'image' => trans('home.image'),
     ];
 
 }
 
 function type(){
     return [
-        'Main' => adminTrans('home' ,'main'),
-        'Sub' => adminTrans('home' ,'sub'),
+        'Main' => trans('home.main'),
+        'Sub' => trans('home.sub'),
     ];
 }
 
 
 function menuTarget(){
     return [
-        'blank' => adminTrans('home' ,'blank'),
-        'self' => adminTrans('home' ,'self'),
+        'blank' => trans('home.blank'),
+        'self' => trans('home.self'),
     ];
 }
 
@@ -36,8 +36,8 @@ function menuTarget(){
 
 function permissionType(){
     return [
-        'on' => adminTrans('home' ,'on'),
-        'off' => adminTrans('home' ,'off'),
+        'on' => trans('home.on'),
+        'off' => trans('home.off'),
     ];
 }
 

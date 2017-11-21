@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 return [
     'Name' => ' Name ',
     'Email' => ' Email ',
@@ -11,5 +12,24 @@ return [
     'Your message has Been sent' => 'Your message has Been sent',
     'login' => 'Login',
     'register' => 'Register',
-    'home' => 'Home'
+    'home' => 'Home',
+    'Back' => 'Back',
+    'Update' => 'Update',
+    'edit' => 'Edit',
+    'add' => 'Add',
+    'show' => 'Show',
+    'delete' => ' Delete',
+    'Hi' => 'Hi',
+    'Models' => 'Models',
+    'No' => 'No\'',
+    'Yes' => 'Yes',
+    'DummyView' => 'DummyView',
+    'title' => '',
+    'body' => '',
+    'image' => '',
+    'youtube' => '',
+    'post' => '',
+    'comment' => '',
+    'test' => '',
+    'test2' => '',
 ];

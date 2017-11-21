@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 
 use Illuminate\Console\GeneratorCommand;
+use Symfony\Component\Console\Input\InputArgument;
+
 
 class MakeModel extends GeneratorCommand
 {
@@ -12,7 +14,7 @@ class MakeModel extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:laraflat_model';
+    protected $name = 'laraflat:model';
 
     /**
      * The console command description.
@@ -24,8 +26,46 @@ class MakeModel extends GeneratorCommand
 
     protected $type = "Model";
 
+    protected $colsArray = [];
+    protected $colsType = [];
+    protected $colsValidation = [];
+    protected $multiLanguage = [];
+
     public function handle(){
+        if($this->option('cols')){
+            $cols = $this->option('cols');
+            $cols = explode(',' , $cols);
+            if($cols){
+                foreach($cols as $col){
+                    $col = explode(':' , $col);
+                    foreach($col as $key => $c){
+                        if($key == 0){
+                            $this->colsArray[$c] = $c;
+                            $name = $c;
+                        }elseif($key == 1){
+                            $this->colsType[$name] = $c;
+                        }elseif($key == 2){
+                            $this->colsValidation[$name] = str_replace('_' , '|' , str_replace('-' , ':' , $c));
+                        }elseif($key == 3){
+                            $this->multiLanguage[$name] = $c;
+                        }
+                    }
+                }
+            }
+        }
         $this->createModel();
+        if(count($this->colsValidation) > 0 ){
+            $this->call('laraflat:request' , ['name' => class_basename($this->getNameInput()) , '--cols' => $this->fillValidation()]);
+            $this->call('laraflat:admin_request' , ['name' => class_basename($this->getNameInput()) , '--cols' => $this->fillValidation()]);
+        }else{
+            $this->call('laraflat:request' , ['name' => class_basename($this->getNameInput())]);
+            $this->call('laraflat:admin_request' , ['name' => class_basename($this->getNameInput())]);
+        }
+        if(count($this->colsType) > 0 ){
+            $this->call('laraflat:migrate' , ['name' => class_basename($this->getNameInput()) , '--cols' => $this->filltype()]);
+        }else{
+            $this->call('laraflat:migrate' , ['name' => class_basename($this->getNameInput())]);
+        }
     }
 
 
@@ -44,7 +84,57 @@ class MakeModel extends GeneratorCommand
 
     protected function buildClass($name){
         $stub = $this->files->get($this->getStub());
-        return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+        return $this->replace( $stub, 'DummyTable',strtolower(class_basename($name)))
+                    ->replace( $stub, 'DummyFillAbel',$this->appdenToFillable())
+                    ->replaceNamespace($stub, $name)->replaceClass($stub, $name);
     }
 
+    protected function replace(&$stub,$rep ,  $name)
+    {
+        $stub = str_replace(
+            [$rep],
+            $name,
+            $stub
+        );
+        return $this;
+    }
+
+    protected function getOptions()
+    {
+        return [
+            ['cols', 'c', InputArgument::OPTIONAL, 'Set Model Fillable , request , migration columns']
+        ];
+    }
+
+     protected function appdenToFillable()
+    {
+        if(count($this->colsArray) > 0){
+            return "'".implode("','" , array_keys($this->colsArray))."'";
+        }
+        return ' ';
+    }
+
+    protected function fillValidation(){
+        $result = '';
+        $i = 0;
+        foreach($this->colsValidation as $key => $value){
+            $multiLanguage = isset($this->multiLanguage[$key]) && $this->multiLanguage[$key] == 'true' ? '.*' : '';
+            $i++;
+            $result .= $key.$multiLanguage.':'.str_replace('|' , '_' ,str_replace(':' , '-' , $value));
+            $result .= count($this->colsValidation)  != $i ? ',':'';
+        }
+        return $result;
+    }
+
+    protected function filltype(){
+        $result = '';
+        $i = 0;
+        foreach($this->colsType as $key => $value){
+            $result .= $key.':'.$value;
+            $result .=count($this->colsType)  != $i ? ',':'';
+            $i++;
+        }
+        return $result;
+    }
 }
+

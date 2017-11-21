@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 return [
     'role' => ' قانون ',
@@ -22,8 +22,8 @@ return [
     'created_at' => ' سجل في	',
     'actions' => ' العمليات ',
     'page' => ' صحفة ',
-    'pages' =>' صفحات ',
-    'edit' =>' تعديل ',
+    'pages' => ' صفحات ',
+    'edit' => ' تعديل ',
     'home' => ' الرئيسية ',
     'save' => ' حفظ  ',
     'add' => ' اضف  ',
@@ -36,7 +36,6 @@ return [
     'laraflat' => 'LaraFlat',
     'streamlab' => 'StreamLab',
     '5dmat-web' => '5dmat-web',
-
     'Active' => ' مفعل ',
     'Deactive' => ' غير معفل ',
     'text' => ' حقل نصر ',
@@ -47,5 +46,9 @@ return [
     'blank' => 'blank',
     'self' => 'self',
     'on' => ' معفل ',
-    'off' => ' غير معفل '
+    'off' => ' غير معفل ',
+    'dit' => ' تعديل ',
+    'Edit' => ' تعديل ',
+    'main' => ' رئيسي ',
+    'sub' => ' فرعي ',
 ];

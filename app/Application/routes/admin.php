@@ -1,6 +1,13 @@
 <?php
 Route::get('icons', 'HomeController@icons');
 Route::get('docs', 'HomeController@apiDocs');
+Route::get('commands', 'CommandsController@index');
+Route::post('command/exe', 'CommandsController@exe');
+Route::get('relation', 'RelationController@index');
+Route::post('relation/exe', 'RelationController@exe');
+Route::get('getCols/{model}', 'RelationController@getCols');
+Route::post('relation/rollback', 'RelationController@rollback');
+
 #### user control
 Route::get('user', 'UserController@index');
 Route::get('user/item/{id?}', 'UserController@show');
@@ -8,6 +15,17 @@ Route::post('user/item', 'UserController@store');
 Route::post('user/item/{id}', 'UserController@update');
 Route::get('user/{id}/delete', 'UserController@destroy');
 Route::get('user/{id}/view', 'UserController@getById');
+Route::get('translation' , 'TranslationController@index');
+Route::get('translation/readFile/{file}' , 'TranslationController@readFile');
+Route::post('translation/save' , 'TranslationController@save');
+Route::get('translation/getAllContent/{file}' , 'TranslationController@getAllContent');
+Route::post('translation/both/save' , 'TranslationController@bothSave');
+Route::get('custom-permissions' , 'Development\CustomPermissionsController@index');
+Route::get('custom-permissions/readFile/{file}' , 'Development\CustomPermissionsController@readFile');
+Route::post('custom-permissions/save' , 'Development\CustomPermissionsController@save');
+
+
+
 #### group control
 Route::get('group', 'GroupController@index');
 Route::get('group/item/{id?}', 'GroupController@show');
@@ -79,4 +97,79 @@ Route::post('contact/item/{id}', 'ContactController@update');
 Route::get('contact/{id}/delete', 'ContactController@destroy');
 Route::get('contact/{id}/view', 'ContactController@getById');
 Route::post('contact/replay/{id}', 'ContactController@replayEmail');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

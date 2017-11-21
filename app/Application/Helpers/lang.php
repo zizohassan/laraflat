@@ -38,24 +38,31 @@ function extractFiled( $name = 'name', $value = null, $type = 'text', $transeFil
 
 function getLangValue($value, $key)
 {
-      return isset(json_decode($value)->$key) ? json_decode($value)->$key : null;
+    if($value != '' && $value != null){
+        return isset(json_decode($value)->$key) ? json_decode($value)->$key : null;
+    }
+    return null;
 }
 
 function getDefaultValueKey($value)
 {
-      $deflan = getCurrentLang();
-      return isset(json_decode($value)->$deflan) ? json_decode($value)->$deflan  : null;
+    if($value != '' && $value != null){
+        $deflan = getCurrentLang();
+        return isset(json_decode($value)->$deflan) ? json_decode($value)->$deflan  : null;
+    }
+    return null;
 }
 
 function extractTextFiled ($lang, $name,  $class = '', $value, $transeFile = null)
 {
+
       $title  = $transeFile != null ? adminTrans($transeFile , $name)  : $name;
       $out = '<ul class="nav nav-tabs tab-nav-right" role="tablist">';
       $i = 0;
       foreach ($lang as $l)
       {
             $active = $i == 0 ? 'active' : '';
-            $out .= ' <li role="presentation" class="nav-item " ><a href="#'
+            $out .= ' <li role="presentation" class="nav-item '.$active.'" ><a href="#'
                   . $name 
                   . $l['regional']
                   . '" data-toggle="tab" aria-expanded="false" class="nav-link '.$active.'">'
@@ -95,7 +102,7 @@ function extractTextFiled ($lang, $name,  $class = '', $value, $transeFile = nul
                   . '" class="form-control '
                   . $class 
                   . '" value="'
-                  . getLangValue($value, $key)
+                  . checkValueBeforeSet($value, $key)
                   . '" />';
             $out .= '</div>';
             $out .= '</div></div>';
@@ -103,6 +110,16 @@ function extractTextFiled ($lang, $name,  $class = '', $value, $transeFile = nul
       }
       $out .='</div>';
       return $out;
+}
+
+function checkValueBeforeSet($value , $key){
+    if($value != null && $value != '' && is_string($value)){
+      return  getLangValue($value, $key);
+    } elseif(is_array($value)){
+        return $value[$key];
+    }else{
+        return $value;
+    }
 }
 
 function extractTexArea($lang, $name, $rows=8, $class = '', $value,  $transeFile = null)
@@ -113,7 +130,7 @@ function extractTexArea($lang, $name, $rows=8, $class = '', $value,  $transeFile
       foreach ($lang as $l)
       {
             $active = $i == 0 ? 'active' : '';
-            $out .= ' <li role="presentation" class="nav-item "><a href="#'
+            $out .= ' <li role="presentation" class="nav-item '.$active.'"><a href="#'
                   . $name
                   . $l['regional']
                   . '" data-toggle="tab" aria-expanded="false" class="nav-link '.$active.'">'
@@ -155,7 +172,7 @@ function extractTexArea($lang, $name, $rows=8, $class = '', $value,  $transeFile
                  . '" class="form-control '
                  . $class
                  . '">'
-                 . getLangValue($value, $key)
+                . checkValueBeforeSet($value, $key)
                  . '</textarea>';
             $out .= '</div>';
             $out .= ' </div></div>';

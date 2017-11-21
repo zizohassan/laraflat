@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ adminTrans('permission' , 'permission') }}   {{ adminTrans('home' , 'control') }}
+    {{ trans('permission.permission') }}   {{ trans('home.control') }}
 @endsection
 
 @section('style')
@@ -10,7 +10,7 @@
 
 
 @section('content')
-    @include(layoutTable() , ['title' =>  adminTrans('permission' , 'permission') , 'model' => 'permission' , 'table' => $dataTable->table([] , true) ])
+    @include(layoutTable() , ['title' =>  trans('permission.permission') , 'model' => 'permission' , 'table' => $dataTable->table([] , true) ])
 @endsection
 
 

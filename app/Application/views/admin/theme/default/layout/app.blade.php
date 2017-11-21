@@ -111,7 +111,7 @@
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
-                        <li><a href="{{ url('/admin/user/item/'.auth()->user()->id) }}"><i class="material-icons">person</i>{{ adminTrans('home' ,'profile') }}</a></li>
+                        <li><a href="{{ url('/admin/user/item/'.auth()->user()->id) }}"><i class="material-icons">person</i>{{ trans('home.profile') }}</a></li>
                         <li role="seperator" class="divider"></li>
                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                 <li>
@@ -123,7 +123,7 @@
                         <li role="seperator" class="divider"></li>
                         <li><a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="material-icons">input</i>{{ adminTrans('home' ,'sign_out') }}</a></li>
+                                                     document.getElementById('logout-form').submit();"><i class="material-icons">input</i>{{ trans('home.sign_out') }}</a></li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
@@ -135,7 +135,7 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
-                <li class="header">{{ adminTrans('home'  , 'MAIN_NAVIGATION') }}</li>
+                <li class="header">{{ trans('home.MAIN_NAVIGATION') }}</li>
                 @include(layoutMenu())
             </ul>
         </div>
@@ -185,17 +185,17 @@
     function deleteThisItem(e){
         var link = $(e).data('link');
         swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this Item Again!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            closeOnConfirm: false
-            },
-            function(){
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this Item Again!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: false
+                },
+                function(){
                     window.location = link;
-            });
+                });
     }
 </script>
 @include('sweet::alert')

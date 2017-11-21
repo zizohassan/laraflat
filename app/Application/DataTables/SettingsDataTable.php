@@ -63,17 +63,17 @@ class SettingsDataTable extends DataTable
             [
                 'name' => "id",
                 'data' => 'id',
-                'title' => adminTrans('curd' , 'id'),
+                'title' => trans('curd.id'),
             ],
             [
                 'name' => "name",
                 'data' => 'name',
-                'title' => adminTrans('setting' , 'name'),
+                'title' => trans('setting.name'),
             ],
             [
                 'name' => "view",
                 'data' => 'view',
-                'title' => adminTrans('curd' , 'view'),
+                'title' => trans('curd.view'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
@@ -82,7 +82,7 @@ class SettingsDataTable extends DataTable
             [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => adminTrans('curd' , 'edit'),
+                'title' => trans('curd.edit'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
@@ -91,7 +91,7 @@ class SettingsDataTable extends DataTable
             [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => adminTrans('curd' , 'delete'),
+                'title' => trans('curd.delete'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,

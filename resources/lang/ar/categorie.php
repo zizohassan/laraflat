@@ -1,6 +1,11 @@
-<?php
+<?php 
+
 return [
-    'name'       => 'اسم القسم',
+    'name' => 'اسم القسم',
     'Categories' => 'الأقسام',
-    'Category'   => 'قسم'
+    'Category' => 'قسم',
+    'Commnads' => '  الاوامر  ',
+    'Edit' => ' تعديل ',
+    'Custom Permissions' => ' تصاريح خاصة ',
+    'Translation' => ' الترجمة ',
 ];

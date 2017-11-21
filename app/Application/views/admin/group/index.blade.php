@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{  adminTrans('group' , 'group')}} {{ adminTrans('home' , 'control') }}
+    {{  trans('group.group')}} {{ trans('home.control') }}
 @endsection
 
 
@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    @include(layoutTable(), ['title' =>  adminTrans('group' , 'group'), 'model'=>'group', 'table' => $dataTable->table([] , true) ])
+    @include(layoutTable(), ['title' =>  trans('group.group'), 'model'=>'group', 'table' => $dataTable->table([] , true) ])
 @endsection
 
 @section('script')

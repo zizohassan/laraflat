@@ -14,7 +14,7 @@
                         <i class="material-icons">playlist_add_check</i>
                     </div>
                     <div class="content">
-                        <div class="text">{{ adminTrans('home' ,'user') }}</div>
+                        <div class="text">{{ trans('home.user') }}</div>
                         <div class="number count-to" data-from="0" data-to="{{$data['userCount']}}" data-speed="15" data-fresh-interval="20">{{$data['userCount']}}</div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         <i class="material-icons">help</i>
                     </div>
                     <div class="content">
-                        <div class="text">{{ adminTrans('home' ,'groups') }}</div>
+                        <div class="text">{{ trans('home.groups') }}</div>
                         <div class="number count-to" data-from="0" data-to="{{$data['groupCount']}}" data-speed="1000" data-fresh-interval="20">{{$data['groupCount']}}</div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                         <i class="material-icons">forum</i>
                     </div>
                     <div class="content">
-                        <div class="text">{{ adminTrans('home' ,'permissions') }}</div>
+                        <div class="text">{{ trans('home.permissions') }}</div>
                         <div class="number count-to" data-from="0" data-to="{{$data['permissionsCount']}}" data-speed="1000" data-fresh-interval="20">{{ $data['permissionsCount'] }}</div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         <i class="material-icons">person_add</i>
                     </div>
                     <div class="content">
-                        <div class="text">{{ adminTrans('home' ,'roles') }}</div>
+                        <div class="text">{{ trans('home.roles') }}</div>
                         <div class="number count-to" data-from="0" data-to="{{$data['roleCount']}}" data-speed="1000" data-fresh-interval="20">{{ $data['roleCount'] }}</div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                         <i class="material-icons">find_in_page</i>
                     </div>
                     <div class="content">
-                        <div class="text">{{ adminTrans('home' ,'pages') }}</div>
+                        <div class="text">{{ trans('home.pages') }}</div>
                         <div class="number count-to" data-from="0" data-to="{{$data['pages']}}" data-speed="1000" data-fresh-interval="20">{{ $data['pages'] }}</div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                         <i class="material-icons">menu</i>
                     </div>
                     <div class="content">
-                        <div class="text">{{ adminTrans('home' ,'menus') }}</div>
+                        <div class="text">{{ trans('home.menus') }}</div>
                         <div class="number count-to" data-from="0" data-to="{{$data['menus']}}" data-speed="1000" data-fresh-interval="20">{{ $data['menus'] }}</div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         <i class="material-icons">build</i>
                     </div>
                     <div class="content">
-                        <div class="text">{{ adminTrans('home' ,'setting') }}</div>
+                        <div class="text">{{ trans('home.setting') }}</div>
                         <div class="number count-to" data-from="0" data-to="{{$data['setting']}}" data-speed="1000" data-fresh-interval="20">{{ $data['setting'] }}</div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                         <i class="material-icons">info</i>
                     </div>
                     <div class="content">
-                        <div class="text">{{ adminTrans('home' ,'logs') }}</div>
+                        <div class="text">{{ trans('home.logs') }}</div>
                         <div class="number count-to" data-from="0" data-to="{{$data['logs']}}" data-speed="1000" data-fresh-interval="20">{{ $data['logs'] }}</div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
             <div class="card card-block">
                 <div class="header">
-                    <h5>{{ adminTrans('home' ,'last_register_user') }}</h5>
+                    <h5>{{ trans('home.last_register_user') }}</h5>
                 </div>
                 <div class="body">
                     <div class="">
@@ -112,9 +112,9 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>{{ adminTrans('home' ,'username') }}</th>
-                                <th>{{ adminTrans('home' ,'created_at') }}</th>
-                                <th>{{ adminTrans('curd' ,'edit') }}</th>
+                                <th>{{ trans('home.username') }}</th>
+                                <th>{{ trans('home.created_at') }}</th>
+                                <th>{{ trans('curd.edit') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -125,7 +125,7 @@
                                     <td>{{ $last->name }}</td>
                                     <td>{{ $last->created_at}}</td>
                                     <td>
-                                        <a href="{{ url('admin/user/item/'.$last->id) }}">{{ adminTrans('home' ,'edit') }}</a>
+                                        <a href="{{ url('admin/user/item/'.$last->id) }}">{{ trans('home.edit') }}</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -139,12 +139,16 @@
         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
             <div class="card card-block">
                 <div class="">
-                    <div class="m-b--35 font-bold"><h5>{{ adminTrans('home' ,'admin_panel_log') }}</h5></div>
+                    <div class="m-b--35 font-bold"><h5>{{ trans('home.admin_panel_log') }}</h5></div>
                     <ul class="list-unstyled m-x-n m-b-0">
                         @foreach($data['log'] as $Log)
                             <li class="b-t p-a-1">
                                 <a href="{{ url('admin/log/'.$Log->id.'/view') }}" class="col-white">
-                                    #{{ $Log->user->name }}
+                                    @if($Log->user)
+                                        #{{ $Log->user->name }}
+                                    @else
+                                        {{ trans('admin.Visitor') }}
+                                    @endif
                                     <span class="pull-right align-left">
                                          <b>{{ $Log->model }}</b> : {{ $Log->action }}
                                     </span>

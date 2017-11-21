@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Application\Controllers;
+namespace App\Application\Controllers\Website;
 
 use Alert;
+use App\Application\Controllers\AbstractController;
 use App\Application\Model\Contact;
 use App\Application\Requests\Website\Contact\AddRequestContact;
 

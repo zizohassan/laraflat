@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Console\Input\InputArgument;
+
 
 class MakeRequest extends GeneratorCommand
 {
@@ -13,7 +15,9 @@ class MakeRequest extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:laraflat_request';
+    protected $name = 'laraflat:request';
+
+    protected $colsValidation = [];
 
     /**
      * The console command description.
@@ -23,8 +27,26 @@ class MakeRequest extends GeneratorCommand
     protected $description = 'create  Request in application path';
 
     public function handle(){
+        if($this->option('cols')){
+            $this->setCols();
+        }
         $this->makeRequest();
         $this->makeRequest('UpdateRequest');
+    }
+
+    protected function setCols(){
+        $cols = $this->option('cols');
+        $cols = explode(',' , $cols);
+        foreach($cols as $col){
+            $col = explode(':' , $col);
+            foreach($col as $key => $c){
+                if($key == 0){
+                    $name = $c;
+                }elseif($key == 1){
+                    $this->colsValidation[$name] = str_replace('_' , '|' , str_replace('-' , ':' , $c));
+                }
+            }
+        }
     }
 
     protected function makeRequest($requestType = 'AddRequest')
@@ -38,16 +60,11 @@ class MakeRequest extends GeneratorCommand
         }
         if($requestType == 'AddRequest'){
             $file = __DIR__.'/stub/addrequest.stub';
-            $apiFile =  __DIR__.'/stub/apiaddrequest.stub';
         }else{
             $file = __DIR__.'/stub/updaterequest.stub';
-            $apiFile =  __DIR__.'/stub/apiupdaterequest.stub';
         }
         $path = $this->getPath('Application\\Requests\\Website\\'.$folderName.'\\'.$requestType.$name);
-        $apiPath = $this->getPath('Application\\Requests\\Website\\'.$folderName.'\\Api'.$requestType.$name);
         $this->line('Done create Request class  at Application   '.$requestType.$this->getNameInput());
-        $this->line('Done create Request class  at Application Api'.$requestType.$this->getNameInput());
-        $this->files->put($apiPath, $this->buildRequest( $name ,  'Website\\'.$folderName  , $apiFile));
         $this->files->put($path, $this->buildRequest( $name ,  'Website\\'.$folderName  , $file));
     }
 
@@ -56,9 +73,20 @@ class MakeRequest extends GeneratorCommand
     protected function buildRequest($name  , $nameDatatable  , $stub ){
         $stub = $this->files->get($stub);
         return $this->replace( $stub, 'DummyFolder',$nameDatatable)
+            ->replace($stub , 'DummyValidation', $this->reFormatRequest())
             ->replaceView( $stub, 'DummyName',ucfirst($name));
     }
 
+    protected function reFormatRequest(){
+        if($this->colsValidation){
+            $result = '';
+            foreach($this->colsValidation as $key => $cols){
+                $result .= '"'.$key.'" => "'.$cols.'",'."\n\t\t\t";
+            }
+            return $result;
+        }
+        return ' ';
+    }
     protected function replace(&$stub,$rep ,  $name)
     {
         $stub = str_replace(
@@ -81,6 +109,12 @@ class MakeRequest extends GeneratorCommand
     }
 
 
+    protected function getOptions()
+    {
+        return [
+            ['cols', 'c', InputArgument::OPTIONAL, 'Generate request columns']
+        ];
+    }
 
     protected function getStub()
     {

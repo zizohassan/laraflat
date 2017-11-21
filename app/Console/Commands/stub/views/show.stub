@@ -1,0 +1,14 @@
+@extends('layouts.app')
+
+@section('title')
+    {{ trans('DummyView.DummyView') }} {{ trans('home.view') }}
+@endsection
+
+@section('content')
+<div class="container">
+        <a href="{{ url('DummyView') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> {{ trans('website.Back') }}  </a>
+DummyTable
+        @include('website.DummyView.buttons.delete' , ['id' => $item->id])
+        @include('website.DummyView.buttons.edit' , ['id' => $item->id])
+</div>
+@endsection

@@ -1,11 +1,11 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ adminTrans('contact' , 'contact') }} {{ adminTrans('home' , 'view') }}
+    {{ trans('contact.contact') }} {{ trans('home.view') }}
 @endsection
 
 @section('content')
-    @component(layoutForm() , ['title' => adminTrans('contact' , 'contact') , 'model' => 'contact' , 'action' => adminTrans('home' , 'view')  , 'button' => false  ])
+    @component(layoutForm() , ['title' => trans('contact.contact') , 'model' => 'contact' , 'action' => trans('home.view')  , 'button' => false  ])
     @include('admin.contact.buttons.delete' , ['id' => $item->id])
     @include('admin.contact.buttons.edit' , ['id' => $item->id])
     <table class="table table-bordered  table-striped">
@@ -13,12 +13,12 @@
         $fields = rename_keys(
         removeFromArray($data['fields'] , ['id' , 'created_at' , 'updated_at']) ,
         [
-        adminTrans('contact' , 'name'),
-        adminTrans('contact' , 'email'),
-        adminTrans('contact' , 'subject'),
-        adminTrans('contact' , 'phone'),
-        adminTrans('contact' , 'user_id'),
-        adminTrans('contact' , 'message'),
+            trans('contact.name'),
+            trans('contact.email'),
+            trans('contact.subject'),
+            trans('contact.phone'),
+            trans('contact.user_id'),
+            trans('contact.message'),
         ]);
         @endphp
         @foreach($fields as $key =>  $field)

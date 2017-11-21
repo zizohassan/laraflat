@@ -13,7 +13,7 @@ trait HelpersTrait{
             'action' => $action,
             'model' => $this->model->getTable(),
             'status' => $status,
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->check() ? auth()->user()->id : 0,
             'messages' => $messages
         ];
         $this->log->create($data);

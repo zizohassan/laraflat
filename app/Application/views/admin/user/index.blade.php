@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ adminTrans('user' , 'user') }} {{ adminTrans('home' , 'control') }}
+    {{ trans('user.user') }} {{ trans('home.control') }}
 @endsection
 
 @section('style')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    @include(layoutTable() , ['title' => adminTrans('user' , 'user') , 'model' => 'user' , 'table' => $dataTable->table([] , true) ])
+    @include(layoutTable() , ['title' => trans('user.user') , 'model' => 'user' , 'table' => $dataTable->table([] , true) ])
 @endsection
 
 @section('script')

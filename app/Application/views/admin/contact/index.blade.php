@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-     {{ adminTrans('contact' , 'contact') }} {{ adminTrans('home' , 'control') }}
+     {{ trans('contact.contact') }} {{ trans('home.control') }}
 @endsection
 
 @section('style')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    @include(layoutTable() , ['title' => adminTrans('contact' , 'contact') , 'model' => 'contact' , 'table' => $dataTable->table([] , true) , 'button' => false ])
+    @include(layoutTable() , ['title' => trans('contact.contact') , 'model' => 'contact' , 'table' => $dataTable->table([] , true) , 'button' => false ])
 @endsection
 
 @section('script')

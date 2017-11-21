@@ -17,7 +17,7 @@ trait MainProcessTrait {
             return view($view , compact('data'));
         }
         $this->createLog('Visit Edit Page' , 'Success' , json_encode(['Edit Id' => [$id]]));
-        $item = $this->model->where('id' , $id)->first();
+        $item = $this->model->findOrFail($id);
         return view($view , compact('item' , 'data'));
     }
     public function storeOrUpdate(Request $request , $id = null , $callback = true){
@@ -52,7 +52,7 @@ trait MainProcessTrait {
             $this->createLog('Create', 'Success', json_encode($dataLog));
         }
         $this->saveRolePermission($array , $new);
-        $this->doneMessage(adminTrans('messages' , 'storeMessageSuccess') , adminTrans('messages', 'success'));
+        $this->doneMessage(trans('messages.storeMessageSuccess') , trans('messages.success'));
         if($callback !== true){
             return redirect($callback);
         }
@@ -66,13 +66,13 @@ trait MainProcessTrait {
         }
         $this->saveRolePermission($array , null , $id);
         if($update){
-            $this->doneMessage(adminTrans('messages' , 'updateMessageSuccess') , adminTrans('messages', 'success'));
+            $this->doneMessage(trans('messages.updateMessageSuccess') , trans('messages.success'));
             if($callback !== true){
                 return redirect($callback);
             }
-            return redirect()->back();
+            return $item;
         }
-        $this->errorMessage(adminTrans('messages' , 'updateMessageError') , adminTrans('messages', 'error'));
+        $this->errorMessage(trans('messages.updateMessageError') , trans('messages.error'));
         return redirect(404);
     }
     public function deleteItem($id , $callBack = null){
@@ -86,7 +86,7 @@ trait MainProcessTrait {
                 return redirect(404);
             }
             if($item->delete()){
-                $this->doneMessage(adminTrans('messages' , 'deleteMessageSuccess') , adminTrans('messages', 'success'));
+                $this->doneMessage(trans('messages.deleteMessageSuccess') , trans('messages.success'));
                 if($this->model->getTable() != 'logs'){
                     $this->createLog('Delete' , 'Success' , json_encode(['Updated id' => [$id]]));
                 }
@@ -95,7 +95,7 @@ trait MainProcessTrait {
                 }
                 return redirect()->back();
             }
-            $this->errorMessage(adminTrans('messages' , 'deleteMessageError') , adminTrans('messages', 'error'));
+            $this->errorMessage(trans('messages.deleteMessageError') , trans('messages.error'));
             return redirect('404');
         }catch(\Exception $e){
             return $this->catchExceptions($e);

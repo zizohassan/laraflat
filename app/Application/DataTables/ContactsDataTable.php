@@ -55,32 +55,32 @@ class ContactsDataTable extends DataTable
               [
                   'name' => "id",
                   'data' => 'id',
-                  'title' => adminTrans('curd' , 'id'),
+                  'title' => trans('curd.id'),
              ],
              [
                 'name' => "name",
                 'data' => 'name',
-                'title' => adminTrans('contact' , 'name'),
+                'title' => trans('contact.name'),
              ],
             [
                 'name' => "email",
                 'data' => 'email',
-                'title' => adminTrans('contact' , 'email'),
+                'title' => trans('contact.email'),
             ],
             [
                 'name' => "subject",
                 'data' => 'subject',
-                'title' => adminTrans('contact' , 'subject'),
+                'title' => trans('contact.subject'),
             ],
             [
                 'name' => "user_id",
                 'data' => 'user_id',
-                'title' => adminTrans('contact' , 'user_id'),
+                'title' => trans('contact.user_id'),
             ],
              [
                   'name' => 'view',
                   'data' => 'view',
-                  'title' => adminTrans('curd' , 'view'),
+                  'title' => trans('curd.view'),
                   'exportable' => false,
                   'printable' => false,
                   'searchable' => false,
@@ -89,7 +89,7 @@ class ContactsDataTable extends DataTable
              [
                   'name' => 'edit',
                   'data' => 'edit',
-                  'title' =>  adminTrans('curd' , 'edit'),
+                  'title' =>  trans('curd.edit'),
                   'exportable' => false,
                   'printable' => false,
                   'searchable' => false,
@@ -98,7 +98,7 @@ class ContactsDataTable extends DataTable
              [
                    'name' => 'delete',
                    'data' => 'delete',
-                   'title' => adminTrans('curd' , 'delete'),
+                   'title' => trans('curd.delete'),
                    'exportable' => false,
                    'printable' => false,
                    'searchable' => false,

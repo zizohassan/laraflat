@@ -1,33 +1,33 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ adminTrans('group' , 'group') }} {{  isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') }}
+    {{ trans('group.group') }} {{  isset($item) ? trans('curd.edit') : trans('curd.add') }}
 @endsection
 
 @section('content')
-    @component(layoutForm(), ['title' => adminTrans('group' , 'group'), 'model'=>'group' , 'action' => isset($item) ? adminTrans('curd' , 'edit')  : adminTrans('curd' , 'add') ])
+    @component(layoutForm(), ['title' => trans('group.group'), 'model'=>'group' , 'action' => isset($item) ? trans('curd.edit')  : trans('curd.add') ])
     @include(layoutMessage())
     <form action="{{ concatenateLangToUrl('admin/group/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">
-                    <input type="text" name="name" id="name" placeholder="{{ adminTrans('group' , 'name') }}" class="form-control" value="{{ isset($item) ? $item->name : old('name') }}"/>
+                    <input type="text" name="name" id="name" placeholder="{{ trans('group.name') }}" class="form-control" value="{{ isset($item) ? $item->name : old('name') }}"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-line">
-                    <input type="text" name="slug" id="name" placeholder="{{ adminTrans('group' , 'slug') }}" class="form-control" value="{{ isset($item) ? $item->slug : old('slug') }}"/>
+                    <input type="text" name="slug" id="name" placeholder="{{ trans('group.slug') }}" class="form-control" value="{{ isset($item) ? $item->slug : old('slug') }}"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-line">
-                    <textarea  name="description" id="description" placeholder="{{ adminTrans('group' , 'des') }}" class="form-control">{{ isset($item) ? $item->description : old('description') }}</textarea>
+                    <textarea  name="description" id="description" placeholder="{{ trans('group.des') }}" class="form-control">{{ isset($item) ? $item->description : old('description') }}</textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="">
-                    <label for="">{{ adminTrans('group' , 'per_role') }}</label>
+                    <label for="">{{ trans('group.per_role') }}</label>
                     @php $roles = isset($data['roles_permission']) ? $data['roles_permission']->role->pluck('id')->all() : null @endphp
                     {!! Form::select('roles[]' , $data['roles'] , $roles, ['multiple' => true  , 'id' => 'roles' ] ) !!}
                 </div>
@@ -35,7 +35,7 @@
 
             <div class="form-group">
                 <div class="">
-                    <label for="">{{ adminTrans('group' , 'permission') }}</label>
+                    <label for="">{{ trans('group.permission') }}</label>
                     @php $permission = isset($data['roles_permission']) ? $data['roles_permission']->permission->pluck('id')->all()  : null @endphp
                     {!! Form::select('permission[]' , $data['permissions'] , $permission , ['multiple' => true , 'id' => 'permissions' ] ) !!}
                 </div>
@@ -44,7 +44,7 @@
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default" >
                     <i class="material-icons">check_circle</i>
-                    {{ adminTrans('home' , 'save') }} {{ adminTrans('group' , 'group') }}
+                    {{ trans('home.save') }} {{ trans('group.group') }}
                 </button>
             </div>
         </form>
