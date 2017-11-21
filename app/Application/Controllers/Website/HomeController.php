@@ -4,20 +4,22 @@ namespace App\Application\Controllers\Website;
 
 
 
+use App\Application\Controllers\AbstractController;
 use App\Application\Controllers\Controller;
 use App\Application\Model\Page;
+use App\Application\Model\User;
 
 
-class HomeController extends Controller
+class HomeController extends AbstractController
 {
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        $this->middleware('auth')->except(['getPageBySlug' , 'welcome']);
+
     }
 
     /**
