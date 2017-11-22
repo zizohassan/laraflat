@@ -40,13 +40,10 @@ class CustomPermissionsController extends AbstractController
         if (file_exists($path)) {
             $out = '<?php' . "\n";
             $out .= "\t" . 'return [' . "\n";
-            foreach ($request->value as $index => $value) {
-                $index = !is_int($index) ? $index : $request->key[$index];
-                $out .= "\t\t" ."'". $index ."' =>  [" . "\n";
-                foreach($value as $k => $v){
-                    $out .= "\t\t\t"."'". $v . "'," . "\n";
+            if($request->namespace){
+                foreach ($request->namespace as $index => $value) {
+                    $out .= "\t\t\t"."'". $value . "'," . "\n";
                 }
-                $out .= "\t\t" . '],' . "\n";
             }
             $out .= "\t" . '];' . "\n";
             $bytes_written = File::put($path, $out);

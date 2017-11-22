@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 return [
     'slug' => '  الاسم المختصر ',
     'action_add' => ' تصريح الاضافة  ',
@@ -8,5 +9,13 @@ return [
     'model' => ' اسم الجدول ',
     'permission' => 'التصاريح',
     'name' => ' اسم التصريح  ',
-    'des' => ' وصف التصريح '
+    'des' => ' وصف التصريح ',
+    'No' => '',
+    'Yes' => '',
+    'Controller Name' => '',
+    'Function Name' => '',
+    'Controller Type' => '',
+    'Allow' => '',
+    'NameSpace' => '',
+    'Method Name' => '',
 ];

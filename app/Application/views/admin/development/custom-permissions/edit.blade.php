@@ -14,22 +14,18 @@
         </div>
         <table class="table table-bordered  table-striped">
             <tr>
-                <th>{{ trans('admin.Key') }}</th>
-                <th>{{ trans('admin.Value') }}</th>
+                <th>{{ trans('admin.Name') }}</th>
+                <th>{{ trans('admin.Namespace') }}</th>
                 <th width="50">#</th>
             </tr>
-            @php $action = ['add' , 'edit' , 'view' , 'delete'] @endphp
+
             @foreach($content as $key => $value)
                 <tr class="count">
                     <td width="20%">
-                        <input type="text" name="key[]" value="{{ $key }}" class="form-control">
+                        {{ class_basename($value) }}
                     </td>
                     <td>
-                        <select name="value[{{ $key }}][]" class="form-control" multiple>
-                            @foreach($action as $v)
-                                <option value="{{ $v }}" {{ in_array($v , $value)  ? "selected" : ""}} >{{ $v }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" name="namespace[]"  class="form-control" value="{{ $value }}" required>
                     </td>
                     <td>
                         <span class="btn btn-danger" onclick="hide(this)"><i class="fa fa-trash"></i></span>
@@ -50,16 +46,11 @@
 @section('script')
     <script>
         function addNewRow() {
-            var length = $('.count').length;
-            $('table').append('<tr><td width="20%"> <input type="text" name="key[]"  class="form-control"></td>' +
+            $('table').append('<tr><td width="20%"> {{ trans('admin.Name') }}</td>' +
                     '<td>' +
-                    ' <select name="value['+length+'][]" class="form-control" multiple>' +
-                    @foreach($action as $v)
-                        '  <option value="{{ $v }}" >{{ $v }}</option>' +
-                    @endforeach
-                    ' </select>' +
+                    ' <input type="text" name="namespace[]" class="form-control"  placeholder="{{ trans('admin.Namespace') }}" required>' +
                     '  </td>' +
-                    ' <span class="btn btn-danger" onclick="hide(this)">' +
+                    ' <span class="btn btn-danger" onclick="hide(this)"   >' +
                     '<i class="fa fa-trash"></i></span> </td> </tr>'
             )
             ;

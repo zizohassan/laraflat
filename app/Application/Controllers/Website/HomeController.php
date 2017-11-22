@@ -10,18 +10,8 @@ use App\Application\Model\Page;
 use App\Application\Model\User;
 
 
-class HomeController extends AbstractController
+class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(User $user)
-    {
-
-    }
-
     /**
      * Show the application dashboard.
      *

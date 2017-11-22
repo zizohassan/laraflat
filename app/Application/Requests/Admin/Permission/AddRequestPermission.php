@@ -25,7 +25,10 @@ class AddRequestPermission extends FormRequest
     {
         return [
             'name' => 'required',
-            'model' => 'required',
+            'controller_name' => 'required',
+            'permission' => 'required',
+            'method_name' => 'required',
+            'controller_type' => 'required',
             'slug' => 'required|unique:permissions'
         ];
     }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class AddMenu extends Seeder
 {
@@ -11,6 +12,11 @@ class AddMenu extends Seeder
      */
     public function run()
     {
+
+        Schema::disableForeignKeyConstraints();
+        DB::table('menu')->truncate();
+        Schema::enableForeignKeyConstraints();
+
         DB::table('menu')->insert([
             'name' => 'Admin',
         ]);

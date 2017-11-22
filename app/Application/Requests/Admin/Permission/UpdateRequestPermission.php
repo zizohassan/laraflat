@@ -27,7 +27,10 @@ class UpdateRequestPermission extends FormRequest
         $id = Route::input('id');
         return [
             'name' => 'required',
-            'model' => 'required',
+            'controller_name' => 'required',
+            'permission' => 'required',
+            'method_name' => 'required',
+            'controller_type' => 'required',
             'slug' => 'required|unique:permissions,slug,'.$id
         ];
     }

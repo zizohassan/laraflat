@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\Schema;
 class Roles extends Seeder
 {
     /**
@@ -11,63 +11,19 @@ class Roles extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-            'name' => 'User',
-            'slug'=> 'user',
-            'description'=> 'Add , edit , delete , view role to model user',
-        ]);
-
-        DB::table('roles')->insert([
-            'name' => 'Group',
-            'slug'=> 'group',
-            'description'=> 'Add , edit , delete , view role to model group',
-        ]);
-
-        DB::table('roles')->insert([
-            'name' => 'Role',
-            'slug'=> 'role',
-            'description'=> 'Add , edit , delete , view role to model role',
-        ]);
-
-        DB::table('roles')->insert([
-            'name' => 'Permission',
-            'slug'=> 'permission',
-            'description'=> 'Add , edit , delete , view role to model permission',
-        ]);
-
-        DB::table('roles')->insert([
-            'name' => 'Setting',
-            'slug'=> 'setting',
-            'description'=> 'Add , edit , delete , view role to model setting',
-        ]);
-
-        DB::table('roles')->insert([
-            'name' => 'Menu',
-            'slug'=> 'menu',
-            'description'=> 'Add , edit , delete , view role to model Menu',
-        ]);
-
-        DB::table('roles')->insert([
-            'name' => 'Page',
-            'slug'=> 'page',
-            'description'=> 'Add , edit , delete , view role to model Page',
-        ]);
-
-        DB::table('roles')->insert([
-            'name' => 'Log',
-            'slug'=> 'log',
-            'description'=> 'Add , edit , delete , view role to model Log',
-        ]);
-
-        DB::table('roles')->insert([
-            'name' => 'Categories',
-            'slug'=> 'Categories',
-            'description'=> 'Add , edit , delete , view role to model Categories',
-        ]);
-        DB::table('roles')->insert([
-            'name' => 'Contact',
-            'slug'=> 'Contact',
-            'description'=> 'Add , edit , delete , view role to model Contact',
-        ]);
+        Schema::disableForeignKeyConstraints();
+        \Illuminate\Support\Facades\DB::table('roles')->truncate();
+        \Illuminate\Support\Facades\DB::table('permission_role')->truncate();
+        \Illuminate\Support\Facades\DB::table('role_user')->truncate();
+        Schema::enableForeignKeyConstraints();
+        foreach(\App\Application\Model\Permission::get()->groupBy('controller_name') as $key =>  $controllerGroup){
+            $array = [
+                'name' => "$key",
+                'slug' => "$key-admin",
+                'description' => "Access to All $key functions"
+            ];
+           $role =  \App\Application\Model\Role::create($array);
+            $role->permission()->sync($controllerGroup->pluck('id')->all());
+        }
     }
 }

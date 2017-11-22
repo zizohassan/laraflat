@@ -30,6 +30,7 @@ class RollBack extends GeneratorCommand
 
     public function handle(){
         $name = ucfirst($this->getNameInput());
+        Permission::where('controller_name'  ,$name.'Controller')->delete();
         $this->deleteFile(app_path('Application/Controllers/Admin/'.$name.'Controller.php'));
         $this->deleteFile(app_path('Application/Controllers/Api/'.$name.'Api.php'));
         $this->deleteFile(app_path('Application/Controllers/Website/'.$name.'Controller.php'));
@@ -48,7 +49,6 @@ class RollBack extends GeneratorCommand
         if(Item::where('link' , strtolower($name))->count() > 0){
             Item::where('link' , strtolower($name))->delete();
         }
-        Permission::where('model'  ,strtolower($name))->delete();
         $dir = app_path('Application/routes/appendWebsite.php');
         $this->replaceFromFile($name.'Controller@' ,$dir );
         $this->replaceFromFile('#### '.strtolower($name).' control' ,$dir );

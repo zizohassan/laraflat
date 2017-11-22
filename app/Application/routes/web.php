@@ -1,6 +1,6 @@
 <?php
 Route::group(['prefix' => LaravelLocalization::setLocale() , 'middleware' => ['localeSessionRedirect', 'localizationRedirect']] , function(){
-    Route::group(['prefix' =>'admin' , 'namespace' => 'Admin' ,'middleware' => ['auth','admin' , 'admin-permissions' ]] , function() {
+    Route::group(['prefix' =>'admin' , 'namespace' => 'Admin' ,'middleware' => ['auth','admin' , 'admin-permissions']] , function() {
         require_once __DIR__ . '/admin.php';
     });
     Route::group([ 'namespace' => 'Website'] , function() {

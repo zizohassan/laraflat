@@ -11,6 +11,7 @@
 
 @section('content')
     @include(layoutTable() , ['title' =>  trans('permission.permission') , 'model' => 'permission' , 'table' => $dataTable->table([] , true) ])
+
 @endsection
 
 

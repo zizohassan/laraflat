@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 return [
     'slug' => ' Slug ',
     'action_add' => ' Add Action ',
@@ -8,5 +9,13 @@ return [
     'model' => 'Model Name',
     'permission' => 'Permission',
     'name' => 'Name',
-    'des' => 'Description'
+    'des' => 'Description',
+    'No' => '',
+    'Yes' => '',
+    'Controller Name' => '',
+    'Function Name' => '',
+    'Controller Type' => '',
+    'Allow' => '',
+    'NameSpace' => '',
+    'Method Name' => '',
 ];

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class AddItemsToMenu extends Seeder
 {
@@ -11,6 +12,10 @@ class AddItemsToMenu extends Seeder
      */
     public function run()
     {
+
+        Schema::disableForeignKeyConstraints();
+        DB::table('items')->truncate();
+        Schema::enableForeignKeyConstraints();
 
         DB::table('items')->insert([
             'name' => encodeJson(['ar' => ' الرئيسية ', 'en' => 'Home']),
@@ -248,6 +253,14 @@ class AddItemsToMenu extends Seeder
             'order' => 3,
         ]);
 
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' اوامر لارافيل  ', 'en' => ' Laravel Commands  ']),
+            'link' => 'admin/laravel/commands',
+            'type' => '',
+            'parent_id' => 20,
+            'menu_id' => 1,
+            'order' => 3,
+        ]);
 
     }
 }

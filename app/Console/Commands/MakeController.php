@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 
+use App\Application\Model\Group;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Support\Facades\File;
@@ -58,6 +59,54 @@ class MakeController extends GeneratorCommand
         $this->createController();
         $this->route();
         $this->createViews();
+        $this->addPermission();
+        $this->addUserPermission();
+    }
+
+    protected function addUserPermission()
+    {
+        $name = $this->getNameInput();
+        $methods = ['index' , 'show' , 'store' , 'update' , 'getById' , 'destroy'];
+        $id = [];
+        foreach($methods as $method){
+            $array = [
+                'name' => 'users-website'.$method."-".$name."Controller",
+                'slug' => "App-Application-Admin-".$name."-Controller".'-'.$method,
+                'description' => "Allow admin on ". $method." in controller ". $name ." Controller",
+                'controller_name' => $name.'Controller',
+                'method_name' => $method,
+                'controller_type' => 'website',
+                'namespace' => "App\\Application\\Controllers\\Website\\".$name."Controller",
+                'permission' => 1
+            ];
+            $item =  \App\Application\Model\Permission::create($array);
+            $id[] = $item->id;
+        }
+        $group = Group::find(2);
+        $group->permission()->attach($id);
+    }
+
+    protected function addPermission()
+    {
+        $name = $this->getNameInput();
+        $methods = ['index' , 'show' , 'store' , 'update' , 'getById' , 'destroy'];
+        $id = [];
+        foreach($methods as $method){
+            $array = [
+                'name' => 'admin-website-'.$method."-".$name."Controller",
+                'slug' => "App-Application-Admin-".$name."-Controller".'-'.$method,
+                'description' => "Allow admin on ". $method." in controller ". $name ." Controller",
+                'controller_name' => $name.'Controller',
+                'method_name' => $method,
+                'controller_type' => 'website',
+                'namespace' => "App\\Application\\Controllers\\Website\\".$name."Controller",
+                'permission' => 1
+            ];
+            $item =  \App\Application\Model\Permission::create($array);
+            $id[] = $item->id;
+        }
+        $group = Group::find(1);
+        $group->permission()->attach($id);
     }
 
     protected function createController()

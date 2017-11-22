@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class AddPage extends Seeder
 {
@@ -11,6 +12,10 @@ class AddPage extends Seeder
      */
     public function run()
     {
+
+        Schema::disableForeignKeyConstraints();
+        DB::table('pages')->truncate();
+        Schema::enableForeignKeyConstraints();
         DB::table('pages')->insert([
             'title' => encodeJson( ['ar' => ' من نحن ', 'en' => 'About us']),
             'slug' => 'about_us',

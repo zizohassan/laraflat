@@ -50,4 +50,9 @@ return [
     'Replay For your message on 5dmat-web' => 'Replay For your message on 5dmat-web',
     'title' => '',
     'tilte' => '',
+    'Namespace' => '',
+    'Not Allow' => '',
+    'Allow' => '',
+    'admin controller' => '',
+    'website controller' => '',
 ];

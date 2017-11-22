@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Controllers\Admin;
+namespace App\Application\Controllers\Admin\Development;
 
 use App\Application\Controllers\AbstractController;
 use App\Application\DataTables\PermissionsDataTable;
@@ -22,15 +22,22 @@ class PermissionController extends AbstractController
     }
 
     public function show($id = null){
-        $model = getModels();
-        return $this->createOrEdit('admin.permission.edit' , $id , ['model' => $model]);
+        getControllerByType();
+        $controller_type = getControllerType();
+        return $this->createOrEdit('admin.permission.edit' , $id , ['controller_type' =>  $controller_type]);
     }
 
     public function store(AddRequestPermission $request){
+        $nameSpace = ltrim(str_replace('-' , '\\' , $request->controller_name) , '\\');
+        $request->request->add(['namespace' => $nameSpace]);
+        $request->request->add(['controller_name' => class_basename($nameSpace)]);
          return $this->storeOrUpdate($request , null , 'admin/permission');
     }
 
     public function update($id , UpdateRequestPermission $request){
+        $nameSpace = ltrim(str_replace('-' , '\\' , $request->controller_name) , '\\');
+        $request->request->add(['namespace' => $nameSpace]);
+        $request->request->add(['controller_name' => class_basename($nameSpace)]);
         return $this->storeOrUpdate($request , $id , 'admin/permission');
     }
 
@@ -43,4 +50,13 @@ class PermissionController extends AbstractController
     public function destroy($id){
         return $this->deleteItem($id , 'admin/permission')->with('sucess' , 'Done Delete permission From system');
     }
+
+    public function getControllerByType($type){
+        return getControllerByType($type , 'json');
+    }
+
+    public function getMethodByController($controller  , $type){
+        return getMethodByController($controller , $type);
+    }
+
 }

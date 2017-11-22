@@ -5,16 +5,16 @@
 @endsection
 
 @section('content')
-    @component(layoutForm() , ['title' =>  trans('group' , 'group'), 'model'=>'group' , 'action' => trans('curd.view') ])
+    @component(layoutForm() , ['title' =>  trans('group.group'), 'model'=>'group' , 'action' => trans('curd.view') ])
 
         <table class="table table-bordered table-responsive table-striped">
             @php
                 $fields = rename_keys(
                      removeFromArray($data['fields'] , ['id' ,  'created_at' , 'updated_at']) ,
                      [
-            trans('group.name'),
-            trans('group.slug'),
-            trans('group.des')
+                        trans('group.name'),
+                        trans('group.slug'),
+                        trans('group.des')
                      ]
                 );
             @endphp

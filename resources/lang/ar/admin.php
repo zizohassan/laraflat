@@ -50,4 +50,9 @@ return [
     'Replay For your message on 5dmat-web' => ' رد علي رسالتك علي خدمات ويب ',
     'title' => '',
     'tilte' => '',
+    'Namespace' => '',
+    'Not Allow' => '',
+    'Allow' => '',
+    'admin controller' => '',
+    'website controller' => '',
 ];

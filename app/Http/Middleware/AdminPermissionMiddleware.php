@@ -2,39 +2,38 @@
 
 namespace App\Http\Middleware;
 
-use App\Application\PermissionTraits\PermissionsModel;
 use App\Http\Middleware\CustomPermissions\PermissionTrait;
 use Closure;
-use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 
 class AdminPermissionMiddleware
 {
     use PermissionTrait;
-    protected $router;
-    protected $permissionsModel;
-    public function __construct(Router $router , PermissionsModel $permissionsModel)
-    {
-        $this->router = $router;
-        $this->permissionsModel  = $permissionsModel;
-    }
+
     public function handle($request, Closure $next)
     {
-            $user = Auth::user();
-            $id = $this->router->getRoutes()->match($request)->hasParameter('id');
-            $method = $this->router->getRoutes()->match($request)->getActionMethod();
-            $model = strtolower(class_basename($this->router->getRoutes()->match($request)->getController()->model));
-            $action = $this->getMethod($method , $id);
-           if($action === false){
-                return redirect(env('DENY_URL_PERMISSION'));
-            }
-           if($this->permissionsModel->canUser($user  ,$action, $model)){
-                return $next($request);
-            }
+        $user = Auth::user();
+        $method = request()->route()->getActionMethod();
+        $controller = explode('@', request()->route()->getActionName())[0];
+        $this->can($user , 'admin');
+        if (!key_exists($controller, $this->permission)) {
             return redirect(env('DENY_URL_PERMISSION'));
+        }
+        if (!isset($this->permission[$controller])) {
+            return redirect(env('DENY_URL_PERMISSION'));
+        }
+        if (!isset($this->permission[$controller][$method])) {
+            return redirect(env('DENY_URL_PERMISSION'));
+        }
+        if ($this->permission[$controller][$method] != 1) {
+            return redirect(env('DENY_URL_PERMISSION'));
+        }
+        return $next($request);
+
     }
 
-    protected function actionsWithMethods(){
+    protected function actionsWithMethods()
+    {
         return require_once app_path('Http/Middleware/CustomPermissions/admin.php');
     }
 }

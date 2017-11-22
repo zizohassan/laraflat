@@ -1,0 +1,1 @@
+{{ $permission == 0 ? trans('permission.No') :  trans('permission.Yes') }}

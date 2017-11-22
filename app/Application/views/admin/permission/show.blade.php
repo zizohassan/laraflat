@@ -15,11 +15,11 @@
                 trans('permission.name') ,
                 trans('permission.slug') ,
                 trans('permission.des') ,
-                trans('permission.model') ,
-                trans('permission.action_add') ,
-                trans('permission.action_edit') ,
-                trans('permission.action_view') ,
-                trans('permission.action_delete') ,
+                trans('permission.Controller Name') ,
+                trans('permission.Function Name') ,
+                trans('permission.Controller Type') ,
+                trans('permission.Allow') ,
+                trans('permission.NameSpace') ,
             ]
         );
         @endphp

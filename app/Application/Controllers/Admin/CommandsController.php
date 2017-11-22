@@ -8,6 +8,9 @@ use Alert;
 use App\Application\Model\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
 
 class CommandsController extends AbstractController
 {
@@ -17,11 +20,45 @@ class CommandsController extends AbstractController
     }
 
     public function index(){
-        $commands = $this->commands();
+        $commands = $this->laraFlatCommands();
         $migrationTypes = $this->migrationType();
         $validationTypes = $this->validationTypes();
         $history = Command::get();
         return view('admin.commands.index' , compact('commands' , 'migrationTypes' , 'validationTypes' , 'history'));
+    }
+
+    public function command(){
+        $commands = $this->commands();
+        return view('admin.commands.other' , compact('commands'));
+    }
+
+    public function otherExe(Request $request){
+        if($request->commands == 'migrate'){
+            $this->clearAllTables();
+            Artisan::call($request->commands);
+            Artisan::call("db:seed");
+        }else{
+            Artisan::call($request->commands);
+        }
+        shell_exec('composer --working-dir='.app_path("/").' dumpautoload');
+        alert()->success(trans('admin.Done'));
+        return redirect()->back()->withInput();
+    }
+
+    protected function clearAllTables(){
+        Schema::disableForeignKeyConstraints();
+        $tableNames = Schema::getConnection()->getDoctrineSchemaManager()->listTableNames();
+        foreach ($tableNames as $name) {
+            Schema::dropIfExists($name);
+        }
+        Schema::enableForeignKeyConstraints();
+    }
+
+    protected function commands(){
+        return [
+            'migrate',
+            'db:seed',
+        ];
     }
 
     public function exe(Request $request){
@@ -32,6 +69,8 @@ class CommandsController extends AbstractController
                 if(count($request->colsName) > 0){
                     $cols = $this->handelRequest($request);
                     $this->artisanCall($request->commands , ucfirst($request->name) , $cols);
+                }else{
+                    $this->artisanCall($request->commands , ucfirst($request->name));
                 }
             }
             alert()->success(trans('admin.Done'));
@@ -128,7 +167,7 @@ class CommandsController extends AbstractController
         ];
     }
 
-    protected function commands(){
+    protected function laraFlatCommands(){
         return [
             'laraflat:admin_controller',
             'laraflat:admin_model',
