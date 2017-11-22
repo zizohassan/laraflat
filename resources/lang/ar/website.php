@@ -22,14 +22,5 @@ return [
     'delete' => ' حذف ',
     'Back' => ' رجوع ',
     'Update' => ' حفظ ',
-    'DummyView' => '',
-    'add' => ' اضافة ',
-    'title' => '',
-    'body' => '',
-    'image' => '',
-    'youtube' => '',
-    'post' => '',
-    'comment' => '',
-    'test' => '',
-    'test2' => '',
+    'DummyView' => ''
 ];

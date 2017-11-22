@@ -9,5 +9,5 @@ return [
     'role' => 'User Role',
     'permission' => 'User Permission',
     'created_at' => 'Craeted At',
-    'Laraflat Commands' => '',
+    'Laraflat Commands' => 'Laraflat Commands',
 ];

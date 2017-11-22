@@ -24,12 +24,5 @@ return [
     'No' => 'No\'',
     'Yes' => 'Yes',
     'DummyView' => 'DummyView',
-    'title' => '',
-    'body' => '',
-    'image' => '',
-    'youtube' => '',
-    'post' => '',
-    'comment' => '',
-    'test' => '',
-    'test2' => '',
+
 ];
