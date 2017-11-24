@@ -1,11 +1,14 @@
 <?php
 Route::get('icons', 'HomeController@icons');
 Route::get('docs', 'HomeController@apiDocs');
+
+### commands
 Route::get('commands', 'CommandsController@index');
 Route::post('command/exe', 'CommandsController@exe');
 Route::get('laravel/commands', 'CommandsController@command');
 Route::post('command/otherExe', 'CommandsController@otherExe');
 
+### relations
 Route::get('relation', 'RelationController@index');
 Route::post('relation/exe', 'RelationController@exe');
 Route::get('getCols/{model}', 'RelationController@getCols');
@@ -18,21 +21,20 @@ Route::post('user/item', 'UserController@store');
 Route::post('user/item/{id}', 'UserController@update');
 Route::get('user/{id}/delete', 'UserController@destroy');
 Route::get('user/{id}/view', 'UserController@getById');
+
+#### translation
 Route::get('translation' , 'TranslationController@index');
 Route::get('translation/readFile/{file}' , 'TranslationController@readFile');
 Route::post('translation/save' , 'TranslationController@save');
 Route::get('translation/getAllContent/{file}' , 'TranslationController@getAllContent');
 Route::post('translation/both/save' , 'TranslationController@bothSave');
+
+#### permissions
 Route::get('custom-permissions' , 'Development\CustomPermissionsController@index');
 Route::get('custom-permissions/readFile/{file}' , 'Development\CustomPermissionsController@readFile');
 Route::post('custom-permissions/save' , 'Development\CustomPermissionsController@save');
 Route::get('getControllerByType/{type}' , 'Development\PermissionController@getControllerByType');
 Route::get('getMethodByController/{controller}/{type}' , 'Development\PermissionController@getMethodByController');
-
-
-
-
-
 
 
 #### group control

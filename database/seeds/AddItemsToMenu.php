@@ -262,5 +262,14 @@ class AddItemsToMenu extends Seeder
             'order' => 3,
         ]);
 
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => '  التحكم في قواعد البينات  ', 'en' => ' DataBase Manager  ']),
+            'link' => '/adminer.php',
+            'type' => 'blank',
+            'parent_id' => 20,
+            'menu_id' => 1,
+            'order' => 3,
+        ]);
+
     }
 }
