@@ -58,6 +58,12 @@ class CommandsController extends AbstractController
         return [
             'migrate',
             'db:seed',
+            'cache:clear',
+            'cache:forget',
+            'route:cache',
+            'route:clear',
+            'storage:link',
+            'view:clear'
         ];
     }
 
