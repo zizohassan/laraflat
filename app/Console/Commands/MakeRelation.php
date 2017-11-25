@@ -104,20 +104,20 @@ class MakeRelation extends GeneratorCommand
     protected function addToViews(){
         $findAdminShowFile = '<table class="table table-bordered table-responsive table-striped">'."\n";
         $template = app_path('Application/views/website/'.$this->fKey.'/show.blade.php');
-        $this->addLineToFile($template , $findAdminShowFile , '@include("website.'.$this->fKey.'.relation.'.$this->type.'.show")'."\n");
-        $this->createFile('Application/views/website/'.$this->fKey.'/relation/'.$this->type.'/show.blade.php',$this->getAdminTr($this->pKey , $this->fKey , $this->pluckFone , false));
+        $this->addLineToFile($template , $findAdminShowFile , '@include("website.'.$this->fKey.'.relation.'.$this->pKey.'.show")'."\n");
+        $this->createFile('Application/views/website/'.$this->fKey.'/relation/'.$this->pKey.'/show.blade.php',$this->getAdminTr($this->pKey , $this->fKey , $this->pluckFone , false));
 
         $template = app_path('Application/views/admin/'.$this->fKey.'/show.blade.php');
-        $this->addLineToFile($template , $findAdminShowFile , '@include("admin.'.$this->fKey.'.relation.'.$this->type.'.show")'."\n");
-        $this->createFile('Application/views/admin/'.$this->fKey.'/relation/'.$this->type.'/show.blade.php',$this->getAdminTr($this->pKey , $this->fKey , $this->pluckFone));
+        $this->addLineToFile($template , $findAdminShowFile , '@include("admin.'.$this->fKey.'.relation.'.$this->pKey.'.show")'."\n");
+        $this->createFile('Application/views/admin/'.$this->fKey.'/relation/'.$this->pKey.'/show.blade.php',$this->getAdminTr($this->pKey , $this->fKey , $this->pluckFone));
 
         $template = app_path('Application/views/website/'.$this->pKey.'/show.blade.php');
-        $this->addLineToFile($template , $findAdminShowFile , '@include("website.'.$this->pKey.'.relation.'.$this->type.'.show")'."\n");
-        $this->createFile('Application/views/website/'.$this->pKey.'/relation/'.$this->type.'/show.blade.php',$this->getAdminTr($this->fKey , $this->pKey , $this->pluckPOne , false));
+        $this->addLineToFile($template , $findAdminShowFile , '@include("website.'.$this->pKey.'.relation.'.$this->fKey.'.show")'."\n");
+        $this->createFile('Application/views/website/'.$this->pKey.'/relation/'.$this->fKey.'/show.blade.php',$this->getAdminTr($this->fKey , $this->pKey , $this->pluckPOne , false));
 
         $template = app_path('Application/views/admin/'.$this->pKey.'/show.blade.php');
-        $this->addLineToFile($template , $findAdminShowFile , '@include("admin.'.$this->pKey.'.relation.'.$this->type.'.show")'."\n");
-        $this->createFile('Application/views/admin/'.$this->pKey.'/relation/'.$this->type.'/show.blade.php',$this->getAdminTr($this->fKey , $this->pKey , $this->pluckFone));
+        $this->addLineToFile($template , $findAdminShowFile , '@include("admin.'.$this->pKey.'.relation.'.$this->fKey.'.show")'."\n");
+        $this->createFile('Application/views/admin/'.$this->pKey.'/relation/'.$this->fKey.'/show.blade.php',$this->getAdminTr($this->fKey , $this->pKey , $this->pluckFone));
     }
 
     protected function getAdminTr($key , $okey , $p , $admin = true){
@@ -145,29 +145,29 @@ class MakeRelation extends GeneratorCommand
     protected function adminMtmHtml(){
         $findAdminEditFile = "{{ csrf_field() }}"."\n";
         $adminEdit = app_path('Application/views/admin/'.$this->fKey.'/edit.blade.php');
-        $this->addLineToFile($adminEdit , $findAdminEditFile , '@include("admin.'.$this->fKey.'.relation.'.$this->type.'.edit")'."\n");
+        $this->addLineToFile($adminEdit , $findAdminEditFile , '@include("admin.'.$this->fKey.'.relation.'.$this->pKey.'.edit")'."\n");
         if($this->typeMtm == 'select'){
-            $this->createFile('Application/views/admin/'.$this->fKey.'/relation/'.$this->type.'/edit.blade.php',$this->addSelectMtM($this->pKey));
+            $this->createFile('Application/views/admin/'.$this->fKey.'/relation/'.$this->pKey.'/edit.blade.php',$this->addSelectMtM($this->pKey));
         }else{
-            $this->createFile('Application/views/admin/'.$this->fKey.'/relation/'.$this->type.'/edit.blade.php',$this->addCheckBox($this->pKey));
+            $this->createFile('Application/views/admin/'.$this->fKey.'/relation/'.$this->pKey.'/edit.blade.php',$this->addCheckBox($this->pKey));
         }
         $adminEdit = app_path('Application/views/admin/'.$this->pKey.'/edit.blade.php');
-        $this->addLineToFile($adminEdit , $findAdminEditFile , '@include("admin.'.$this->pKey.'.relation.'.$this->type.'.edit")'."\n");
-        $this->createFile('Application/views/admin/'.$this->pKey.'/relation/'.$this->type.'/edit.blade.php',$this->showTr($this->pKey , $this->fKey));
+        $this->addLineToFile($adminEdit , $findAdminEditFile , '@include("admin.'.$this->pKey.'.relation.'.$this->fKey.'.edit")'."\n");
+        $this->createFile('Application/views/admin/'.$this->pKey.'/relation/'.$this->fKey.'/edit.blade.php',$this->showTr($this->pKey , $this->fKey));
     }
 
     protected function websiteMtmHtml(){
         $findAdminEditFile = "{{ csrf_field() }}"."\n";
         $adminEdit = app_path('Application/views/website/'.$this->fKey.'/edit.blade.php');
-        $this->addLineToFile($adminEdit , $findAdminEditFile , '@include("website.'.$this->fKey.'.relation.'.$this->type.'.edit")'."\n");
+        $this->addLineToFile($adminEdit , $findAdminEditFile , '@include("website.'.$this->fKey.'.relation.'.$this->pKey.'.edit")'."\n");
         if($this->typeMtm == 'select'){
-            $this->createFile('Application/views/website/'.$this->fKey.'/relation/'.$this->type.'/edit.blade.php',$this->addSelectMtM($this->pKey));
+            $this->createFile('Application/views/website/'.$this->fKey.'/relation/'.$this->pKey.'/edit.blade.php',$this->addSelectMtM($this->pKey));
         }else{
-            $this->createFile('Application/views/website/'.$this->fKey.'/relation/'.$this->type.'/edit.blade.php',$this->addCheckBox($this->pKey));
+            $this->createFile('Application/views/website/'.$this->fKey.'/relation/'.$this->pKey.'/edit.blade.php',$this->addCheckBox($this->pKey));
         }
         $adminEdit = app_path('Application/views/website/'.$this->pKey.'/edit.blade.php');
-        $this->addLineToFile($adminEdit , $findAdminEditFile , '@include("website.'.$this->pKey.'.relation.'.$this->type.'.edit")'."\n");
-        $this->createFile('Application/views/website/'.$this->pKey.'/relation/'.$this->type.'/edit.blade.php',$this->showTr($this->pKey , $this->fKey , false));
+        $this->addLineToFile($adminEdit , $findAdminEditFile , '@include("website.'.$this->pKey.'.relation.'.$this->fKey.'.edit")'."\n");
+        $this->createFile('Application/views/website/'.$this->pKey.'/relation/'.$this->fKey.'/edit.blade.php',$this->showTr($this->pKey , $this->fKey , false));
     }
 
     protected function addSaveToControllers(){
@@ -297,14 +297,15 @@ class MakeRelation extends GeneratorCommand
     }
 
     protected function createRelationFolder(){
+
         $this->createFolder('Application/views/admin/'.$this->pKey.'/relation');
-        $this->createFolder('Application/views/website/'.$this->pKey.'/relation');
         $this->createFolder('Application/views/admin/'.$this->fKey.'/relation');
+        $this->createFolder('Application/views/website/'.$this->pKey.'/relation');
         $this->createFolder('Application/views/website/'.$this->fKey.'/relation');
-        $this->createFolder('Application/views/admin/'.$this->pKey.'/relation/'.$this->type);
-        $this->createFolder('Application/views/website/'.$this->pKey.'/relation/'.$this->type);
-        $this->createFolder('Application/views/admin/'.$this->fKey.'/relation/'.$this->type);
-        $this->createFolder('Application/views/website/'.$this->fKey.'/relation/'.$this->type);
+        $this->createFolder('Application/views/admin/'.$this->fKey.'/relation/'.$this->pKey);
+        $this->createFolder('Application/views/admin/'.$this->pKey.'/relation/'.$this->fKey);
+        $this->createFolder('Application/views/website/'.$this->pKey.'/relation/'.$this->fKey);
+        $this->createFolder('Application/views/website/'.$this->fKey.'/relation/'.$this->pKey);
     }
 
     protected function addRelationsOtO(){
@@ -384,19 +385,19 @@ class MakeRelation extends GeneratorCommand
         //////adminEdit
         $findAdminEditFile = "{{ csrf_field() }}"."\n";
         $adminEdit = app_path('Application/views/admin/'.$this->fKey.'/edit.blade.php');
-        $this->addLineToFile($adminEdit , $findAdminEditFile , '@include("admin.'.$this->fKey.'.relation.'.$this->type.'.edit")'."\n");
-        $this->createFile('Application/views/admin/'.$this->fKey.'/relation/'.$this->type.'/edit.blade.php',$this->selectHtml());
+        $this->addLineToFile($adminEdit , $findAdminEditFile , '@include("admin.'.$this->fKey.'.relation.'.$this->pKey.'.edit")'."\n");
+        $this->createFile('Application/views/admin/'.$this->fKey.'/relation/'.$this->pKey.'/edit.blade.php',$this->selectHtml());
         $websiteEdit = app_path('Application/views/website/'.$this->fKey.'/edit.blade.php');
-        $this->addLineToFile($websiteEdit , $findAdminEditFile , '@include("website.'.$this->fKey.'.relation.'.$this->type.'.edit")'."\n");
-        $this->createFile('Application/views/website/'.$this->fKey.'/relation/'.$this->type.'/edit.blade.php',$this->selectHtml());
+        $this->addLineToFile($websiteEdit , $findAdminEditFile , '@include("website.'.$this->fKey.'.relation.'.$this->pKey.'.edit")'."\n");
+        $this->createFile('Application/views/website/'.$this->fKey.'/relation/'.$this->pKey.'/edit.blade.php',$this->selectHtml());
         //////admin view
         $findAdminShowFile = '<table class="table table-bordered table-responsive table-striped">'."\n";
         $adminView = app_path('Application/views/admin/'.$this->fKey.'/show.blade.php');
-        $this->addLineToFile($adminView , $findAdminShowFile , '@include("admin.'.$this->fKey.'.relation.'.$this->type.'.show")'."\n");
-        $this->createFile('Application/views/admin/'.$this->fKey.'/relation/'.$this->type.'/show.blade.php', $this->getTr());
+        $this->addLineToFile($adminView , $findAdminShowFile , '@include("admin.'.$this->fKey.'.relation.'.$this->pKey.'.show")'."\n");
+        $this->createFile('Application/views/admin/'.$this->fKey.'/relation/'.$this->pKey.'/show.blade.php', $this->getTr());
         $websiteView = app_path('Application/views/website/'.$this->fKey.'/show.blade.php');
-        $this->addLineToFile($websiteView , $findAdminShowFile , '@include("website.'.$this->fKey.'.relation.'.$this->type.'.show")'."\n");
-        $this->createFile('Application/views/website/'.$this->fKey.'/relation/'.$this->type.'/show.blade.php', $this->getTr());
+        $this->addLineToFile($websiteView , $findAdminShowFile , '@include("website.'.$this->fKey.'.relation.'.$this->pKey.'.show")'."\n");
+        $this->createFile('Application/views/website/'.$this->fKey.'/relation/'.$this->pKey.'/show.blade.php', $this->getTr());
 
         ///////model
         $model = app_path('Application/Model/'.ucfirst($this->fKey).'.php');
@@ -411,7 +412,7 @@ class MakeRelation extends GeneratorCommand
         $out .= "\t\t\t".'</th>'."\n";
         $out .= "\t\t\t".'<td>'."\n";
         $out .= "\t\t\t\t".'@php $'.$this->pKey.' = App\\Application\\Model\\'.ucfirst($this->pKey).'::find($item->'.$this->pKey.'_id);  @endphp'."\n";
-        $out .= "\t\t\t\t".'{{ {{ is_json($'.$this->pKey.'->'.$this->pluckFone.') ? getDefaultValueKey($'.$this->pKey.'->'.$this->pluckFone.') :  $'.$this->pKey.'->'.$this->pluckFone.'}} }}'."\n";
+        $out .= "\t\t\t\t".'{{ is_json($'.$this->pKey.'->'.$this->pluckFone.') ? getDefaultValueKey($'.$this->pKey.'->'.$this->pluckFone.') :  $'.$this->pKey.'->'.$this->pluckFone.'}}'."\n";
         $out .= "\t\t\t".'</td>'."\n";
         $out .= "\t\t".'</tr>'."\n";
         return $out;
@@ -422,9 +423,9 @@ class MakeRelation extends GeneratorCommand
         $out .= "\t\t\t".'<label for="'.$this->pKey.'">{{ trans( "'.$this->pKey.'.'.$this->pKey.'") }}</label>'."\n";
         $out .= "\t\t\t".'@php $'.str_plural($this->pKey).' = App\\Application\\Model\\'.ucfirst($this->pKey).'::pluck("'.$this->pluckFone.'" ,"'.$this->pluckFtwo.'")->all()  @endphp'."\n";
         $out .= "\t\t\t".'@php  $'.$this->pKey.'_id = isset($item) ? $item->'.$this->pKey.'_id : null @endphp'."\n";
-        $out .= "\t\t\t".'<select name="'.$this->pKey.'_id[]"  class="form-control" multiple>'."\n";
+        $out .= "\t\t\t".'<select name="'.$this->pKey.'_id"  class="form-control" >'."\n";
         $out .= "\t\t\t".'@foreach( $'.str_plural($this->pKey).' as $key => $relatedItem)'."\n";
-        $out .= "\t\t\t".'<option value="{{ $key }}"  {{ in_array($key ,$'.$this->pKey.'_id ) ? "selected" : "" }}> {{ is_json($relatedItem) ? getDefaultValueKey($relatedItem) :  $relatedItem}}</label>'."\n";
+        $out .= "\t\t\t".'<option value="{{ $key }}"  {{ $key == $'.$this->pKey.'_id  ? "selected" : "" }}> {{ is_json($relatedItem) ? getDefaultValueKey($relatedItem) :  $relatedItem}}</label>'."\n";
         $out .= "\t\t\t".'@endforeach'."\n";
         $out .= "\t\t\t".'</select>'."\n";
         $out .= "\t\t".'</div>'."\n";
@@ -516,9 +517,14 @@ class MakeRelation extends GeneratorCommand
     }
 
     protected function createFolder($path){
-        if(!file_exists(app_path($path))) {
-            File::makeDirectory(app_path($path), 0775);
+        try{
+            if(!file_exists($path)) {
+                File::makeDirectory(app_path($path), 0775, true, true);
+            }
+        }catch(\Exception $e){
+
         }
+
     }
 
     protected function createFile($path , $content){

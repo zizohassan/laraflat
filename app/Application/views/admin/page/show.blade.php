@@ -28,7 +28,7 @@
                 @if($type == 'File')
                     <td><a href="{{ url(env('UPLOAD_PATH').'/'.$item[$field]) }}">{{ $item[$field] }}</a></td>
                 @elseif($type == 'Image')
-                    <td><img src="{{ url(env('UPLOAD_PATH').'/'.$item[$field]) }}" class="img-responsive thumbnail"
+                    <td><img src="{{ url(env('SMALL_IMAGE_PATH').'/'.$item[$field]) }}" class=" thumbnail"
                              width="200"/></td>
                 @else
                     @if($field == 'title' || $field == 'body')

@@ -2,6 +2,8 @@
 
 namespace App\Application\Controllers\Traits;
 
+use Intervention\Image\Facades\Image;
+
 trait UploadTrait{
 
     public function uploadFile($request , $field){
@@ -28,9 +30,14 @@ trait UploadTrait{
     protected function uploadFileOrMultiUpload($image , $destinationPath){
         $extension = $image->getClientOriginalExtension();
         $fileName = rand(11111,99999).'_'.time().'.'.$extension;
-        if($image->move($destinationPath  , $fileName)){
-            return $fileName ;
-        }
+        $image  = Image::make($image);
+        /*
+         * upload resize image
+         */
+        $image->fit(env('SMALL_IAMGE_WIDTH'), env('SMALL_IAMGE_HEIGHT'));
+        $image->save($destinationPath.'/'.$fileName);
+        $image->save(env('SMALL_IMAGE_PATH').'/'.$fileName , env('IMAGE_RESLUTION'));
+        return $fileName;
     }
 
 }

@@ -13,17 +13,6 @@ class Menu extends Model
         'name'
   ];
 
-  public function   validation ($id){
-    return [
-
-    ];
-  }
-  public function   updateValidation ($id){
-    return [
-
-    ];
-  }
-
 
   public function item(){
      return $this->hasMany('App\Application\Model\Item');

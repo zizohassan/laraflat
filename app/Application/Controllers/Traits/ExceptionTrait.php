@@ -9,17 +9,18 @@ use Alert;
 trait ExceptionTrait {
 
     public function catchExceptions($exception){
-        $message = env('APP_ENV') == 'local' ? $exception->getMessage()  : '';
-        if($exception instanceof UnauthorizedException) {
-            $this->errorMessage( $message, 'Unauthorized Error Occurred !');
-            return redirect()->route('Dashboard');
-        }
-        elseif($exception instanceof InternalErrorException){
-            $this->errorMessage($message , 'Internal Error Occurred !');
-            return redirect()->back()->withInput();
-        }
-        $this->errorMessage($message , 'An Error Occurred !');
-        return redirect()->back()->withInput();
+        dd($exception->getMessage());
+//        $message = env('APP_ENV') == 'local' ? $exception->getMessage()  : '';
+//        if($exception instanceof UnauthorizedException) {
+//            $this->errorMessage( $message, 'Unauthorized Error Occurred !');
+//            return redirect()->route('Dashboard');
+//        }
+//        elseif($exception instanceof InternalErrorException){
+//            $this->errorMessage($message , 'Internal Error Occurred !');
+//            return redirect()->back()->withInput();
+//        }
+//        $this->errorMessage($message , 'An Error Occurred !');
+//        return redirect()->back()->withInput();
     }
 
     protected function doneMessage( $message = "This process done success ." , $title = ""){

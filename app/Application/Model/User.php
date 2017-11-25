@@ -6,9 +6,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 {
     use Notifiable;
      public $table = "users";
-     public function post(){
-		return $this->belongsToMany( Post::class, "user_post", "user_id" , "post_id");
-		}
       protected $fillable = [
         'name', 'email', 'password', 'group_id' ,'api_token'
     ];

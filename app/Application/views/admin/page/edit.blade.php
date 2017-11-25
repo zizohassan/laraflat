@@ -41,13 +41,12 @@
                 </div>
             </div>
 
-
-
             <div class="form-group">
                 <div class="form-line">
                     <label for="">{{ trans('page.image') }}</label>
                     @if(isset($item) && $item->image != '')
-                        <img src="{{ url('/'.env('UPLOAD_PATH').'/'.$item->image) }}" class="img-responsive thumbnail" alt="">
+                        <br>
+                        <img src="{{ url('/'.env('SMALL_IMAGE_PATH').'/'.$item->image) }}" class=" thumbnail" alt="">
                         <br>
                     @endif    
                     <input type="file" name="image" class="" {{ !isset($item) ? "required='required'" : '' }}>

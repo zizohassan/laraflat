@@ -50,20 +50,20 @@ class RelationRollBack extends GeneratorCommand
 //        $this->deleteFile(app_path('Application/Controllers/Admin/'.$name.'Controller.php'));
 //        $this->deleteDir(app_path('Application/Requests/Admin/'.$name));
 
-        $this->deleteDir(app_path('Application/views/admin/' . $this->pKey . '/relation/' . $this->type));
-        $this->deleteDir(app_path('Application/views/admin/' . $this->fKey . '/relation/' . $this->type));
-        $this->deleteDir(app_path('Application/views/website/' . $this->pKey . '/relation/' . $this->type));
-        $this->deleteDir(app_path('Application/views/website/' . $this->fKey . '/relation/' . $this->type));
+        $this->deleteDir(app_path('Application/views/admin/' . $this->pKey . '/relation/' . $this->fKey));
+        $this->deleteDir(app_path('Application/views/admin/' . $this->fKey . '/relation/' . $this->pKey));
+        $this->deleteDir(app_path('Application/views/website/' . $this->pKey . '/relation/' . $this->fKey));
+        $this->deleteDir(app_path('Application/views/website/' . $this->fKey . '/relation/' . $this->pKey));
 
-        $this->replaceFromFile('@include("admin.' . $this->fKey . '.relation.' . $this->type . '.edit")', app_path('Application/views/admin/' . $this->fKey . '/edit.blade.php'));
-        $this->replaceFromFile('@include("admin.' . $this->pKey . '.relation.' . $this->type . '.edit")', app_path('Application/views/admin/' . $this->pKey . '/edit.blade.php'));
-        $this->replaceFromFile('@include("admin.' . $this->fKey . '.relation.' . $this->type . '.show")', app_path('Application/views/admin/' . $this->fKey . '/show.blade.php'));
-        $this->replaceFromFile('@include("admin.' . $this->pKey . '.relation.' . $this->type . '.show")', app_path('Application/views/admin/' . $this->pKey . '/show.blade.php'));
+        $this->replaceFromFile('@include("admin.' . $this->fKey . '.relation.' . $this->pKey . '.edit")', app_path('Application/views/admin/' . $this->fKey . '/edit.blade.php'));
+        $this->replaceFromFile('@include("admin.' . $this->pKey . '.relation.' . $this->fKey . '.edit")', app_path('Application/views/admin/' . $this->pKey . '/edit.blade.php'));
+        $this->replaceFromFile('@include("admin.' . $this->fKey . '.relation.' . $this->pKey . '.show")', app_path('Application/views/admin/' . $this->fKey . '/show.blade.php'));
+        $this->replaceFromFile('@include("admin.' . $this->pKey . '.relation.' . $this->fKey . '.show")', app_path('Application/views/admin/' . $this->pKey . '/show.blade.php'));
 
-        $this->replaceFromFile('@include("website.' . $this->fKey . '.relation.' . $this->type . '.edit")', app_path('Application/views/website/' . $this->fKey . '/edit.blade.php'));
-        $this->replaceFromFile('@include("website.' . $this->pKey . '.relation.' . $this->type . '.edit")', app_path('Application/views/website/' . $this->pKey . '/edit.blade.php'));
-        $this->replaceFromFile('@include("website.' . $this->fKey . '.relation.' . $this->type . '.show")', app_path('Application/views/website/' . $this->fKey . '/show.blade.php'));
-        $this->replaceFromFile('@include("website.' . $this->pKey . '.relation.' . $this->type . '.show")', app_path('Application/views/website/' . $this->pKey . '/show.blade.php'));
+        $this->replaceFromFile('@include("website.' . $this->fKey . '.relation.' . $this->pKey . '.edit")', app_path('Application/views/website/' . $this->fKey . '/edit.blade.php'));
+        $this->replaceFromFile('@include("website.' . $this->pKey . '.relation.' . $this->fKey . '.edit")', app_path('Application/views/website/' . $this->pKey . '/edit.blade.php'));
+        $this->replaceFromFile('@include("website.' . $this->fKey . '.relation.' . $this->pKey . '.show")', app_path('Application/views/website/' . $this->fKey . '/show.blade.php'));
+        $this->replaceFromFile('@include("website.' . $this->pKey . '.relation.' . $this->fKey . '.show")', app_path('Application/views/website/' . $this->pKey . '/show.blade.php'));
 
 
         $this->replaceLines("public function $this->pKey(){", app_path('Application/Model/' . ucfirst($this->fKey) . '.php'));
@@ -167,37 +167,48 @@ class RelationRollBack extends GeneratorCommand
 
     protected function replaceFromFile($key, $path)
     {
-        $fc = file($path);
-        $f = fopen($path, "w");
-        foreach ($fc as $line) {
-            if (!strstr($line, $key)) //look for $key in each line
-                fputs($f, $line); //place $line back in file
+        try{
+            if(file_exists($path)){
+                $fc = file($path);
+                $f = fopen($path, "w");
+                foreach ($fc as $line) {
+                    if (!strstr($line, $key)) //look for $key in each line
+                        fputs($f, $line); //place $line back in file
+                }
+                fclose($f);
+            }
+        }catch(\Expection $e){
+
         }
-        fclose($f);
     }
 
     protected function replaceLines($key, $path, $linesNUmber = 3)
     {
-        $fc = file($path);
-        $f = fopen($path, "w");
-        $i = 0;
-        foreach ($fc as $line) {
-            if ($i == 0) {
-                if (strstr($line, $key)) {
-                    $i++;
-                } else {
-                    fputs($f, $line);
-                }
-            } elseif ($i == $linesNUmber - 1) {
+        try{
+            if(file_exists($path)) {
+                $fc = file($path);
+                $f = fopen($path, "w");
                 $i = 0;
-            } elseif ($i < $linesNUmber) {
-                $i++;
-            } else {
-                fputs($f, $line);
+                foreach ($fc as $line) {
+                    if ($i == 0) {
+                        if (strstr($line, $key)) {
+                            $i++;
+                        } else {
+                            fputs($f, $line);
+                        }
+                    } elseif ($i == $linesNUmber - 1) {
+                        $i = 0;
+                    } elseif ($i < $linesNUmber) {
+                        $i++;
+                    } else {
+                        fputs($f, $line);
+                    }
+                }
+                fclose($f);
             }
+        }catch(\Expection $e){
 
         }
-        fclose($f);
     }
 
     protected function getOptions()
