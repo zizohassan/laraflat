@@ -443,7 +443,9 @@ class MakeRelation extends GeneratorCommand
         $key = ($fmodel->primaryKey) ? $fmodel->primaryKey : 'id';
         $fk = $this->fk;
         $pk = $this->pKey;
+        Schema::disableForeignKeyConstraints();
         DB::table($ft)->truncate();
+        Schema::enableForeignKeyConstraints();
         if (Schema::hasColumn($ft, $pk.'_id'))
         {
             $arrayOfKeys = $this->listTableForeignKeys($ft);
