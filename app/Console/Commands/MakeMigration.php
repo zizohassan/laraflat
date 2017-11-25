@@ -45,7 +45,7 @@ class MakeMigration extends GeneratorCommand
                 if($key == 0){
                     $name = $c;
                 }elseif($key == 1){
-                        $this->colsMigration[$name] = $c;
+                    $this->colsMigration[$name] = $c;
                 }
             }
         }
@@ -106,9 +106,15 @@ class MakeMigration extends GeneratorCommand
     }
 
     protected function reFormatRequest(){
+        $array = [
+            'string',
+            'text',
+            'date'
+        ];
         $reuslt = '';
         foreach($this->colsMigration as $key => $value){
-            $reuslt .= '$table->'.$value.'("'.$key.'");'."\n\t\t\t";
+            $nullable = in_array($value  , $array) ? "->nullable()" : '';
+            $reuslt .= '$table->'.$value.'("'.$key.'")'.$nullable.';'."\n\t\t\t";
         }
         return $reuslt;
     }
