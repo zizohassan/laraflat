@@ -75,6 +75,7 @@ function getControllersFromFolders($path , $type , $folder = ''){
 function getMethodByController($controller , $type = 'admin' , $returnType = 'json'){
     $type = ucfirst($type);
     $controller = str_replace('-' , "\\" , $controller);
+    $controller = str_replace('App\\' , 'app\\' , $controller);
     $path = base_path(str_replace('\\' , '/' , $controller).'.php');
     if(file_exists($path)){
         return $returnType == 'json' ? json_encode(get_this_class_methods($controller)) : get_this_class_methods($controller);
