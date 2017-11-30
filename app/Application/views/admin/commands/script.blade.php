@@ -31,10 +31,12 @@
                 '<label for="name">{{ trans("admin.name") }}</label>' +
                 ' <input type="text" name="name" id="name"  class="form-control" value="' + v + '"/>' +
                 '</div>';
-        output += '<span  class="btn btn-danger" onclick="addNewColumn();"><i class="fa fa-plus"></i></span>';
-        output += showModel === undefined && showModel == null ? '' : appendModels();
+        if(showModel === undefined && showModel == null ){
+            output += '<span  class="btn btn-danger" onclick="addNewColumn();"><i class="fa fa-plus"></i></span>';
+        }else{
+            output += showModel === undefined && showModel == null ? '' : appendModels();
+        }
         form.html(output);
-
     }
 
     function addNewColumn() {
