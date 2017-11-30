@@ -102,7 +102,7 @@ class RollBack extends GeneratorCommand
         $dir = app_path('Application/routes/appendWebsite.php');
         $this->replaceFromFile(ucfirst($command->name).'Controller@addComment' ,$dir );
         $this->replaceFromFile(ucfirst($command->name).'Controller@updateComment' ,$dir );
-        $this->replaceFromFile('#### '.strtolower($command->name).' comment' ,$dir );
+        $this->replaceFromFile('#### '.strtolower($command->name) ,$dir );
         $dir = app_path('Application/routes/admin.php');
         $this->replaceFromFile(ucfirst($command->name).'Controller@addComment' ,$dir );
         $this->replaceFromFile(ucfirst($command->name).'Controller@updateComment' ,$dir );
