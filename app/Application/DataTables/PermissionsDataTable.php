@@ -19,6 +19,7 @@ class PermissionsDataTable extends DataTable
              ->addColumn('edit', 'admin.permission.buttons.edit')
              ->addColumn('delete', 'admin.permission.buttons.delete')
              ->addColumn('view', 'admin.permission.buttons.view')
+            ->addColumn('permission', 'admin.permission.buttons.permission')
              ->make(true);
     }
     /**
@@ -63,42 +64,32 @@ class PermissionsDataTable extends DataTable
             [
                 'name' => "id",
                 'data' => 'id',
-                'title' => adminTrans('curd' , 'id'),
+                'title' => trans('curd.id'),
             ],
             [
-                'name' => "slug",
-                'data' => 'slug',
-                'title' => adminTrans('permission' , 'slug'),
+                'name' => "controller_name",
+                'data' => 'controller_name',
+                'title' => trans('permission.Controller Name'),
             ],
             [
-                'name' => "action_add",
-                'data' => 'action_add',
-                'title' => adminTrans('permission' , 'action_add'),
+                'name' => "method_name",
+                'data' => 'method_name',
+                'title' => trans('permission.Method Name'),
             ],
             [
-                'name' => "action_edit",
-                'data' => 'action_edit',
-                'title' => adminTrans('permission' , 'action_edit'),
+                'name' => "controller_type",
+                'data' => 'controller_type',
+                'title' => trans('permission.Controller Type'),
             ],
             [
-                'name' => "action_delete",
-                'data' => 'action_delete',
-                'title' => adminTrans('permission' , 'action_delete'),
-            ],
-            [
-                'name' => "action_view",
-                'data' => 'action_view',
-                'title' => adminTrans('permission' , 'action_view'),
-            ],
-            [
-                'name' => "model",
-                'data' => 'model',
-                'title' => adminTrans('permission' , 'model'),
+                'name' => "permission",
+                'data' => 'permission',
+                'title' => trans('permission.action_view'),
             ],
             [
                 'name' => "view",
                 'data' => 'view',
-                'title' => adminTrans('curd' , 'view'),
+                'title' => trans('curd.view'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
@@ -107,7 +98,7 @@ class PermissionsDataTable extends DataTable
             [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => adminTrans('curd' , 'edit'),
+                'title' => trans('curd.edit'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
@@ -116,7 +107,7 @@ class PermissionsDataTable extends DataTable
             [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => adminTrans('curd' , 'delete'),
+                'title' => trans('curd.delete'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,

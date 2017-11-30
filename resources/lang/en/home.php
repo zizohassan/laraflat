@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 return [
     'role' => 'Role',
@@ -22,13 +22,13 @@ return [
     'created_at' => 'Created at	',
     'actions' => 'Actions',
     'page' => 'Page',
-    'pages' =>'Pages',
-    'edit' =>'Edit',
-    'home' => 'Home' ,
+    'pages' => 'Pages',
+    'edit' => 'Edit',
+    'home' => 'Home',
     'save' => 'Save',
     'add' => ' Add  ',
     'control' => ' Control ',
-    'view' => ' View ' ,
+    'view' => ' View ',
     'MAIN_NAVIGATION' => 'MAIN NAVIGATION ',
     'Statistics' => 'Statistics',
     'icons' => ' Icons  ',
@@ -46,6 +46,9 @@ return [
     'blank' => 'blank',
     'self' => 'self',
     'on' => 'On',
-    'off' => 'Off'
-
+    'off' => 'Off',
+    'dit' => 'Edit',
+    'Edit' => 'Edit',
+    'main' => 'Main',
+    'sub' => 'Sub',
 ];

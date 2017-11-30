@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ adminTrans('log' , 'log') }} {{ adminTrans('curd' , 'control') }}
+    {{ trans('log.log') }} {{ trans('curd.control') }}
 @endsection
 
 
@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    @include(layoutTable() , ['title' => adminTrans('log' , 'log') , 'model' => 'log' , 'table' => $dataTable->table([] , true) , 'button' => false])
+    @include(layoutTable() , ['title' => trans('log.log') , 'model' => 'log' , 'table' => $dataTable->table([] , true) , 'button' => false])
 @endsection
 
 @section('script')

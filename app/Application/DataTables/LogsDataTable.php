@@ -62,32 +62,32 @@ class LogsDataTable extends DataTable
             [
                 'name' => "id",
                 'data' => 'id',
-                'title' => adminTrans('curd' , 'id'),
+                'title' => trans('curd.id'),
             ],
             [
                 'name' => "model",
                 'data' => 'model',
-                'title' => adminTrans('log' , 'model'),
+                'title' => trans('log.model'),
             ],
             [
                 'name' => "action",
                 'data' => 'action',
-                'title' => adminTrans('log' , 'action'),
+                'title' => trans('log.action'),
             ],
             [
                 'name' => "status",
                 'data' => 'status',
-                'title' => adminTrans('log' , 'status'),
+                'title' => trans('log.status'),
             ],
             [
                 'name' => "created_at",
                 'data' => 'created_at',
-                'title' => adminTrans('log' , 'created_at'),
+                'title' => trans('log.created_at'),
             ],
             [
                 'name' => "view",
                 'data' => 'view',
-                'title' => adminTrans('curd' , 'view'),
+                'title' => trans('curd.view'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,
@@ -97,7 +97,7 @@ class LogsDataTable extends DataTable
             [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => adminTrans('curd' , 'delete'),
+                'title' => trans('curd.delete'),
                 'exportable' => false,
                 'printable' => false,
                 'searchable' => false,

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class AddSetting extends Seeder
 {
@@ -11,6 +12,11 @@ class AddSetting extends Seeder
      */
     public function run()
     {
+
+        Schema::disableForeignKeyConstraints();
+        DB::table('setting')->truncate();
+        Schema::enableForeignKeyConstraints();
+
         DB::table('setting')->insert([
             'name' => 'siteTitle',
             'type'=> 'text',

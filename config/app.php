@@ -183,6 +183,8 @@ return [
         ConsoleTVs\Links\LinksServiceProvider::class,
          Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
+        Themsaid\Langman\LangmanServiceProvider::class,
+
 
 
 

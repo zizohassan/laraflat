@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Psy\Command\Command;
+use Ramsey\Uuid\Generator\CombGenerator;
 
 class Kernel extends ConsoleKernel
 {
@@ -22,6 +24,13 @@ class Kernel extends ConsoleKernel
         Commands\MakeTransformer::class,
         Commands\MakeRequest::class,
         Commands\MakeAdminRequest::class,
+        Commands\MakeMigration::class,
+        Commands\ApiRequest::class,
+        Commands\RollBack::class,
+        Commands\MakeDataTable::class,
+        Commands\MakeRelation::class,
+        Commands\RelationRollBack::class,
+        Commands\AddComment::class,
     ];
 
 

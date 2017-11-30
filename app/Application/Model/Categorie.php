@@ -9,6 +9,7 @@ class Categorie extends Model
 
   public $table = "categories";
 
+
    protected $fillable = [
         'name' , 'created_at' , 'updated_at'
    ];

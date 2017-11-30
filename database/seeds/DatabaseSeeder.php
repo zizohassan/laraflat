@@ -11,11 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AdminGroup::class);
-        $this->call(Roles::class);
+
         $this->call(Permissions::class);
-        $this->call(GroupWithRole::class);
-        $this->call(PermissionWithRole::class);
+        $this->call(Roles::class);
+        $this->call(AdminGroup::class);
         $this->call(AdminUser::class);
         $this->call(AddSetting::class);
         $this->call(AddMenu::class);

@@ -1,0 +1,13 @@
+@extends('layouts.app')
+
+@section('title')
+     {{ trans('DummyView.DummyView') }} {{ trans('home.control') }}
+@endsection
+
+@section('content')
+<div class="container">
+    <div><h1>{{ trans('website.DummyView') }}</h1></div>
+     <div><a href="{{ url('DummyView/item') }}" class="btn btn-default"><i class="fa fa-plus"></i> {{ trans('website.DummyView') }}</a><br></div>
+ DummyTable
+</div>
+@endsection

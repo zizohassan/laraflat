@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class AdminUser extends Seeder
 {
@@ -11,6 +12,9 @@ class AdminUser extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
+        \Illuminate\Support\Facades\DB::table('users')->truncate();
+        Schema::enableForeignKeyConstraints();
         DB::table('users')->insert([
             'name' => 'admin',
             'email' => 'admin@gmail.com',

@@ -1,17 +1,17 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ adminTrans('menu' ,'menu') }} {{ adminTrans('home' ,'view') }}
+    {{ trans('menu.menu') }} {{ trans('home.view') }}
 @endsection
 
 @section('content')
-    @component(layoutForm() , ['title' => adminTrans('menu' ,'menu')  , 'model' => 'menu' , 'action' => 'View' ])
+    @component(layoutForm() , ['title' => trans('menu.menu')  , 'model' => 'menu' , 'action' => 'View' ])
 
         <table class="table table-bordered table-responsive table-striped">
             @php
                 $fields = rename_keys(
                      removeFromArray($data['fields'] , ['id' , 'created_at' , 'updated_at']) ,
-                     [adminTrans('menu' ,'name')]
+                     [trans('menu.name')]
                 );
             @endphp
                  @foreach($fields as $key =>  $field)

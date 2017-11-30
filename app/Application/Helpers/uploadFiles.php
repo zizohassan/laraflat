@@ -3,9 +3,15 @@
 function getFileFieldsName(){
     return [
         'image' => 'image',
+        'image_ar' => 'image_ar',
+        'image_en' => 'image_en',
         'file' => 'file',
         'photo' => 'photo',
+        'photo_en' => 'photo_en',
+        'photo_ar' => 'photo_ar',
         'logo' => 'logo',
+        'logo_ar' => 'logo_ar',
+        'logo_en' => 'logo_en',
         'attached' => 'attached',
         'body_setting' => 'body_setting'
     ];

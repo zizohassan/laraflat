@@ -24,7 +24,7 @@ class AddRequestDummyName extends FormRequest
     public function rules()
     {
         return [
-            //
+            DummyValidation
         ];
     }
 }

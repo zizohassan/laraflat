@@ -10,7 +10,7 @@ class ApiUpdateRequestDummyName
     {
         $id = Route::input('id');
         return [
-            //
+            DummyValidation
         ];
     }
 }

@@ -10,7 +10,7 @@ class Permission extends Model
   public $table = "permissions";
 
   protected $fillable = [
-        'name' , 'slug' , 'action_add' , 'action_edit', 'action_view', 'action_delete' , 'model' , 'description'
+        'name' , 'slug'  , 'controller_name' , 'description' ,'method_name' , 'controller_type' , 'permission' , 'namespace'
   ];
 
   public function user(){

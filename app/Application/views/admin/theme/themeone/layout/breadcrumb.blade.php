@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
     <li class="breadcrumb-item">
         <a href="{{ url('/admin/home') }}"><i class="material-icons">home</i>
-            {{ adminTrans('home' , 'home') }}
+            {{ trans('home.home') }}
         </a>
     </li>
     @isset($title)

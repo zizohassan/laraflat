@@ -15,11 +15,11 @@ class CreatePermissionsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description')->nullable();
-            $table->string('model');
-            $table->string('action_add' , 3);
-            $table->string('action_edit' , 3);
-            $table->string('action_delete' , 3);
-            $table->string('action_view' , 3);
+            $table->string('controller_name');
+            $table->string('method_name');
+            $table->string('controller_type');
+            $table->boolean('permission');
+            $table->string('namespace');
             $table->timestamps();
         });
     }

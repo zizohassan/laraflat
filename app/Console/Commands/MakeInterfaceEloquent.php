@@ -12,7 +12,7 @@ class MakeInterfaceEloquent extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:laraflat_interface';
+    protected $name = 'laraflat:interface';
 
     /**
      * The console command description.

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class AddItemsToMenu extends Seeder
 {
@@ -11,6 +12,10 @@ class AddItemsToMenu extends Seeder
      */
     public function run()
     {
+
+        Schema::disableForeignKeyConstraints();
+        DB::table('items')->truncate();
+        Schema::enableForeignKeyConstraints();
 
         DB::table('items')->insert([
             'name' => encodeJson(['ar' => ' الرئيسية ', 'en' => 'Home']),
@@ -201,6 +206,70 @@ class AddItemsToMenu extends Seeder
             'order' => 3
         ]);
 
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' تطوير  ', 'en' => 'Develop']),
+            'link' => '#',
+            'type' => '',
+            'parent_id' => 0,
+            'menu_id' => 1,
+            'order' => 9,
+            'icon' => '<i class="material-icons">settings</i>'
+        ]);
+
+
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' الاوامر ', 'en' => 'Commands']),
+            'link' => '/admin/commands',
+            'type' => '',
+            'parent_id' => 20,
+            'menu_id' => 1,
+            'order' => 2,
+        ]);
+
+
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => '  العلاقات ', 'en' => 'Relation']),
+            'link' => '/admin/relation',
+            'type' => '',
+            'parent_id' => 20,
+            'menu_id' => 1,
+            'order' => 3,
+        ]);
+
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' الترجمة  ', 'en' => ' Translation ']),
+            'link' => '/admin/translation',
+            'type' => '',
+            'parent_id' => 20,
+            'menu_id' => 1,
+            'order' => 3,
+        ]);
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => '  تخصيص التصريحات  ', 'en' => ' Custom Permissions ']),
+            'link' => '/admin/custom-permissions',
+            'type' => '',
+            'parent_id' => 20,
+            'menu_id' => 1,
+            'order' => 3,
+        ]);
+
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' اوامر لارافيل  ', 'en' => ' Laravel Commands  ']),
+            'link' => 'admin/laravel/commands',
+            'type' => '',
+            'parent_id' => 20,
+            'menu_id' => 1,
+            'order' => 3,
+        ]);
+
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => '  التحكم في قواعد البينات  ', 'en' => ' DataBase Manager  ']),
+            'link' => '/adminer.php',
+            'type' => 'blank',
+            'parent_id' => 20,
+            'menu_id' => 1,
+            'order' => 3,
+        ]);
 
     }
 }

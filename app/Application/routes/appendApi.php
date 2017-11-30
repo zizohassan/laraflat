@@ -16,13 +16,36 @@ Route::post('page/add', 'PageApi@add');
 Route::post('page/update/{id}', 'PageApi@update');
 Route::get('page/{limit?}/{offset?}/{lang?}', 'PageApi@index');
 
-
 #categorie
 Route::get('categorie/getById/{id}/{lang?}', 'CategorieApi@getById');
 Route::get('categorie/delete/{id}', 'CategorieApi@delete');
 Route::post('categorie/add', 'CategorieApi@add');
 Route::post('categorie/update/{id}', 'CategorieApi@update');
 Route::get('categorie/{limit?}/{offset?}/{lang?}', 'CategorieApi@index');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

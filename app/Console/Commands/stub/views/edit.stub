@@ -1,0 +1,22 @@
+@extends('layouts.app')
+
+@section('title')
+    {{ trans('DummyView.DummyView') }} {{  isset($item) ? trans('home.edit')  : trans('home.add')  }}
+@endsection
+
+@section('content')
+<div class="container">
+         @include('layouts.messages')
+         <a href="{{ url('DummyView') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> {{ trans('website.Back') }}  </a>
+        <form action="{{ concatenateLangToUrl('DummyView/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            DummyTable
+            <div class="form-group">
+                <button type="submit" name="submit" class="btn btn-default" >
+                    <i class="fa fa-save"></i>
+                    {{ trans('website.Update') }}  {{ trans('website.DummyView') }}
+                </button>
+            </div>
+        </form>
+</div>
+@endsection

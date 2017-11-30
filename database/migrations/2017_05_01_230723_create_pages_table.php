@@ -19,8 +19,8 @@ class CreatePagesTable extends Migration
             $table->string('slug')->unique();
             $table->longText('body');
             $table->string('status' , '10');
-            $table->string('date' , 12);
-            $table->string('image');
+            $table->date('date');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

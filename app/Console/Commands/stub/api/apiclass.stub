@@ -27,12 +27,18 @@ class DummyClassApi extends Controller
 
     public function index($limit = 10 , $offset = 0 , $lang = "en"){
        $data =  $this->model->limit($limit)->offset($offset)->get();
-       return response(apiReturn(DummyClassTransformers::transform($data))  , 200 );
+       if($data){
+             return response(apiReturn(DummyClassTransformers::transform($data))  , 200 );
+       }
+       return response(apiReturn('' , '' , 'No Data Found')  , 200 );
     }
 
     public function getById($id , $lang = "en"){
         $data =  $this->model->find($id);
-        return response(apiReturn(DummyClassTransformers::transform($data))  , 200 );
+        if($data){
+             return response(apiReturn(DummyClassTransformers::transform($data))  , 200 );
+        }
+        return response(apiReturn('' , '' , 'No Data Found')  , 200 );
     }
 
     public function add(ApiAddRequestDummyClass $validation){

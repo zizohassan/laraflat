@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Application\Controllers\Website;
+
+use \App\Application\Requests\Website\Dummy\AddRequestDummy;
+use \App\Application\Requests\Website\Dummy\UpdateRequestDummy;
+use App\Application\Controllers\AbstractController;
+use App\Application\Model\Dummy;
+use App\Application\Model\DummyParent;
+use Yajra\Datatables\Request;
+use Alert;
+
+class DummyController extends AbstractController
+{
+
+   public function __construct(Dummy $model , DummyParent $parent)
+    {
+        parent::__construct($model);
+        $this->parent = $parent;
+    }
+
+    public function addComment($id , AddRequestDummy $request){
+        $this->parent->findOrFail($id);
+        $array = [
+            'comment' => $request->comment,
+            'user_id' => auth()->user()->id,
+            'DummySmall_id' => $id
+        ];
+        $this->model->create($array);
+        return redirect('DummySmall/'.$id.'/view');
+    }
+
+    public function updateComment($id , UpdateRequestDummy $request){
+        $item =  $this->model->findOrFail($id);
+        if($item->user_id != auth()->user()->id)
+            return redirect('DummySmall/'.$item->DummySmall_id.'/view');
+        $array = [
+            'comment' => $request->comment
+        ];
+        $item->update($array);
+        return redirect('DummySmall/'.$item->DummySmall_id.'/view');
+    }
+
+    public function deleteComment($id){
+        $item =  $this->model->findOrFail($id);
+        if($item->user_id != auth()->user()->id)
+            return redirect('DummySmall/'.$item->DummySmall_id.'/view');
+        $item->delete();
+        return redirect('DummySmall/'.$item->DummySmall_id.'/view');
+    }
+}

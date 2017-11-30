@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ adminTrans('user' , 'user') }} {{  isset($item) ? adminTrans('curd' , 'edit')  : adminTrans('curd' , 'add') }}
+    {{ trans('user.user') }} {{  isset($item) ? trans('curd.edit')  : trans('curd.add') }}
 @endsection
 
 @section('style')
@@ -9,23 +9,23 @@
 @endsection
 
 @section('content')
-    @component(layoutForm() , ['title' => adminTrans('user' , 'user')  , 'model' => 'user' , 'action' => isset($item) ? adminTrans('curd' , 'edit') : adminTrans('curd' , 'add') ])
+    @component(layoutForm() , ['title' => trans('user.user')  , 'model' => 'user' , 'action' => isset($item) ? trans('curd.edit') : trans('curd.add') ])
     @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/user/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post">
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="form-line">
-                    <input type="text" name="name" id="name" placeholder="{{ adminTrans('user' , 'name') }}" class="form-control" value="{{ isset($item) ? $item->name : old('name') }}"/>
+                    <input type="text" name="name" id="name" placeholder="{{ trans('user.name') }}" class="form-control" value="{{ isset($item) ? $item->name : old('name') }}"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-line">
-                     <input type="email" name="email" id="email" {{ isset($item) ? '' : 'required' }} placeholder="{{ adminTrans('user' , 'email') }}"  class="form-control" value="{{ isset($item) ? $item->email : old('email')  }}"/>
+                     <input type="email" name="email" id="email" {{ isset($item) ? '' : 'required' }} placeholder="{{ trans('user.email') }}"  class="form-control" value="{{ isset($item) ? $item->email : old('email')  }}"/>
                  </div>
             </div>
             <div class="form-group">
                 <div class="form-line">
-                    <input type="password" name="password" id="password" placeholder="{{ adminTrans('user' , 'password') }}"    class="form-control"/>
+                    <input type="password" name="password" id="password" placeholder="{{ trans('user.password') }}"    class="form-control"/>
                 </div>
             </div>
 
@@ -33,14 +33,14 @@
             <div class="form-group">
                 <div class="">
                     @php $gourp = isset($item) && $item->group_id != 0 ? $item->group_id : null @endphp
-                    <label for="">{{ adminTrans('user' , 'group') }} </label>
+                    <label for="">{{ trans('user.group') }} </label>
                     {!! Form::select('group_id' , $data['groups'] , $gourp , ['calss' => 'form-control'] ) !!}
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="">
-                    <label for="">{{ adminTrans('user' , 'role') }}</label>
+                    <label for="">{{ trans('user.role') }}</label>
                     @php $roles = isset($data['roles_permission']) ? $data['roles_permission']->role->pluck('id')->all() : null @endphp
                     {!! Form::select('roles[]' , $data['roles'] , $roles, ['multiple' => true  , 'id' => 'roles' ] ) !!}
                 </div>
@@ -48,7 +48,7 @@
 
             <div class="form-group">
                 <div class="">
-                    <label for="">{{ adminTrans('user' , 'permission') }}</label>
+                    <label for="">{{ trans('user.permission') }}</label>
                     @php $permission = isset($data['roles_permission']) ? $data['roles_permission']->permission->pluck('id')->all()  : null @endphp
                     {!! Form::select('permission[]' , $data['permissions'] , $permission , ['multiple' => true , 'id' => 'permissions' ] ) !!}
                 </div>
@@ -57,7 +57,7 @@
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default" >
                     <i class="material-icons">check_circle</i>
-                    {{ adminTrans('home' , 'save') }} {{ adminTrans('user' , 'user') }}
+                    {{ trans('home.save') }} {{ trans('user.user') }}
                 </button>
             </div>
         </form>
@@ -71,8 +71,8 @@
     <script src="{{ url('/admin/plugins/multi-select/js/jquery.multi-select.js') }}"></script>
     <script src="{{ url('/admin/js/search.js') }}"></script>
     <script>
-        $('#roles').multiSelect(search("{{ adminTrans('user' , 'role') }}"));
-        $('#permissions').multiSelect(search("{{ adminTrans('user' , 'permission') }}"));
+        $('#roles').multiSelect(search("{{ trans('user.role') }}"));
+        $('#permissions').multiSelect(search("{{ trans('user.permission') }}"));
         function search(name){
             return {
                 selectableHeader: "<input type='text' class='form-control' autocomplete='off'  placeholder='"+name+"'>",

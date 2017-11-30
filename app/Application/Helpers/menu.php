@@ -54,7 +54,7 @@ function menuArray($main){
     ];
 }
 function extractHtml($main){
-    $out ='<a href="'.$main['link'].'" title="'.getDefaultValueKey($main['name']).'" target="'.$main['type'].'">';
+    $out ='<a href="'.url($main['link']).'" title="'.getDefaultValueKey($main['name']).'" target="'.$main['type'].'">';
     if($main['icon'] != ''){
         $out .= $main['icon'];
     }

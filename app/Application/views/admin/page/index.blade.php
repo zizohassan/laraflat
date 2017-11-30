@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ adminTrans('page' , 'page') }}  {{ adminTrans('home' , 'control') }}
+    {{ trans('page.page') }}  {{ trans('home.control') }}
 @endsection
 
 @section('style')
@@ -10,7 +10,7 @@
 
 
 @section('content')
-    @include(layoutTable(), ['title' =>adminTrans('page' , 'page')  , 'model' => 'page' , 'table' => $dataTable->table([] , true) ])
+    @include(layoutTable(), ['title' =>trans('page.page')  , 'model' => 'page' , 'table' => $dataTable->table([] , true) ])
 @endsection
 
 
