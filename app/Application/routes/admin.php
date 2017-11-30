@@ -108,3 +108,5 @@ Route::post('contact/item/{id}', 'ContactController@update');
 Route::get('contact/{id}/delete', 'ContactController@destroy');
 Route::get('contact/{id}/view', 'ContactController@getById');
 Route::post('contact/replay/{id}', 'ContactController@replayEmail');
+
+#### post comment

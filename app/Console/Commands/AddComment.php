@@ -38,18 +38,18 @@ class AddComment extends GeneratorCommand
         $this->addTR();
         $this->route();
         $this->addControllerFunction();
-        $this->addPermissions('admin' , 'addComment');
-        $this->addPermissions('admin' , 'updateComment');
-        $this->addPermissions('website' , 'addComment');
-        $this->addPermissions('website' , 'updateComment');
-        $this->addPermissions('admin' , 'deleteComment');
-        $this->addPermissions('website' , 'deleteComment');
+        $this->addPermissions('admin' , 'addComment' , null , 'add');
+        $this->addPermissions('admin' , 'updateComment', null , 'update');
+        $this->addPermissions('website' , 'addComment', null , 'add');
+        $this->addPermissions('website' , 'updateComment', null , 'update');
+        $this->addPermissions('admin' , 'deleteComment' ,  null , 'delete');
+        $this->addPermissions('website' , 'deleteComment',  null , 'delete');
     }
 
-    protected function addPermissions($type = 'admin' , $method = 'addComment' , $overriderAdminOnWebsite = null){
+    protected function addPermissions($type = 'admin' , $method = 'addComment' , $overriderAdminOnWebsite = null , $action){
         $overriderAdminOnWebsite = $overriderAdminOnWebsite == null ? $type  : $overriderAdminOnWebsite;
         $array = [
-            'name' => 'comment-'.ucfirst($this->relatedMode).ucfirst($this->getNameInput()),
+            'name' => $action.'-comment-'.ucfirst($this->relatedMode).ucfirst($this->getNameInput()),
             'slug' => 'App-Application-Controllers-'.ucfirst($overriderAdminOnWebsite).'-'.ucfirst($this->relatedMode).ucfirst($this->getNameInput()),
             'description' => 'Allow '.$type.' on index in '.ucfirst($this->relatedMode).ucfirst($this->getNameInput()).' Controller ',
             'controller_name' => ucfirst($this->relatedMode).ucfirst($this->getNameInput()).'Controller',
