@@ -139,7 +139,7 @@ class AddComment extends GeneratorCommand
 
     public function trGenerator($admin = "admin"){
 //        $out = "\t\t".'@php $comments = \App\Application\Model\\'.ucfirst($this->relatedMode).$this->getNameInput().'::with("user")->paginate(env("PAGINATE")); @endphp'."\n";
-        $out = "\t\t".'@php $comments = \App\Application\Model\\'.ucfirst($this->relatedMode).$this->getNameInput().'::with("user")->get(); @endphp'."\n";
+        $out = "\t\t".'@php $comments = \App\Application\Model\\'.ucfirst($this->relatedMode).$this->getNameInput().'::where("'.$this->relatedMode.'_id" ,$item->id )->with("user")->get(); @endphp'."\n";
         $out .= "\t\t\t".'<h3>{{ trans( "admin.Comments") }} ({{ count($comments) }})</h3>'."\n";
         $out .= "\t\t".'@if(count($comments) > 0)'."\n";
         $out .= "\t\t".'<ol>'."\n";
@@ -149,7 +149,7 @@ class AddComment extends GeneratorCommand
         $out .= "\t\t\t\t\t".'<span>{{ $comment->user->name}}</span>'."\n";
         $out .= "\t\t\t\t\t".'<span>{{ $comment->created_at}}</span>'."\n";
         $out .= "\t\t\t\t\t".'<p>{{ $comment->comment}}</p>'."\n";
-        $out .= '@if($comment->user_id == auth()->user()->id)';
+        $out .= '@if(auth()->check() && $comment->user_id == auth()->user()->id)';
         $admin = $admin == 'admin' ? 'admin/' : '';
         $out .= "\t\t\t" . '<a href="{{concatenateLangToUrl("'.$admin. $this->relatedMode . '/delete/comment/".$comment->id)}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>' . "\n";
         $out .= "\t\t\t" . '<span class="btn btn-info" onclick="$(this).next().slideToggle()"><i class="fa fa-edit"></i></span>' . "\n";
@@ -179,7 +179,7 @@ class AddComment extends GeneratorCommand
     public function formGenerator($admin)
     {
         $admin = $admin == 'admin' ? 'admin/' : '';
-        $out = '@if(isset($item))';
+        $out = '@if(isset($item) && auth()->check())';
         $out .= "\t" . '<form method="post" action="{{ concatenateLangToUrl("'.$admin. $this->relatedMode . '/add/comment/".$item->id) }}">{{ csrf_field() }}' . "\n";
         $out .= "\t\t" . '<div class="form-group">' . "\n";
         $out .= "\t\t\t" . '<label for="comment">{{ trans( "admin.Comment") }}</label>' . "\n";
