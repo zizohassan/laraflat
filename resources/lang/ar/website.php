@@ -22,5 +22,7 @@ return [
     'delete' => ' حذف ',
     'Back' => ' رجوع ',
     'Update' => ' حفظ ',
-    'DummyView' => ''
+    'DummyView' => '',
+    'post' => '',
+    'add' => '',
 ];

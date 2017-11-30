@@ -55,4 +55,5 @@ return [
     'Allow' => 'Allow',
     'admin controller' => 'Admin Controller',
     'website controller' => 'Website Controller',
+    'Select Model' => '',
 ];

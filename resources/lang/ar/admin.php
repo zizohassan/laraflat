@@ -55,4 +55,5 @@ return [
     'Allow' => ' متاح الوصول ',
     'admin controller' => ' كنترولر خاص بالمدير ',
     'website controller' => ' كنترولر خاص بالموقع ',
+    'Select Model' => '',
 ];

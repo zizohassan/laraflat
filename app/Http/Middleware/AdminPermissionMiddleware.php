@@ -16,6 +16,7 @@ class AdminPermissionMiddleware
         $method = request()->route()->getActionMethod();
         $controller = explode('@', request()->route()->getActionName())[0];
         $this->can($user , 'admin');
+
         if (!key_exists($controller, $this->permission)) {
             return redirect(env('DENY_URL_PERMISSION'));
         }

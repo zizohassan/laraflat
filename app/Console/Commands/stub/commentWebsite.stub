@@ -1,0 +1,5 @@
+
+#### DummyRoute comment
+Route::post('DummyRoute/add/comment/{id}' , 'DummyController@addComment');
+Route::post('DummyRoute/update/comment/{id}' , 'DummyController@updateComment');
+Route::get('DummyRoute/delete/comment/{id}' , 'DummyController@deleteComment');

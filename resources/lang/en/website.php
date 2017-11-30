@@ -24,5 +24,5 @@ return [
     'No' => 'No\'',
     'Yes' => 'Yes',
     'DummyView' => 'DummyView',
-
+    'post' => '',
 ];
