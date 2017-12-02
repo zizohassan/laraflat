@@ -68,7 +68,7 @@ php artisan key:generate
 
 ## Form Bulider
 
-[![Ihttps://lh3.googleusercontent.com/Ned_Tu_ge6GgJZ_lIO_5mieIEmjDpq9kfgD05wapmvzcInvT4qQMxhxq_hEazf8ZsqA=w300](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)] (https://www.youtube.com/embed/vEck4fALX-I)
+[![https://lh3.googleusercontent.com/Ned_Tu_ge6GgJZ_lIO_5mieIEmjDpq9kfgD05wapmvzcInvT4qQMxhxq_hEazf8ZsqA=w300](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)] (https://www.youtube.com/embed/vEck4fALX-I)
 
 
 ## Relation
