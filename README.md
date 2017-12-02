@@ -68,23 +68,27 @@ php artisan key:generate
 
 ## Form Bulider
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/vEck4fALX-I" frameborder="0" allowfullscreen></iframe>
+[linkname](https://www.youtube.com/embed/vEck4fALX-I)
+
 
 ## Relation
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/1ES7gpIx6Yg" frameborder="0" allowfullscreen></iframe>
+[linkname](https://www.youtube.com/embed/1ES7gpIx6Yg)
+
 
 ## Translation
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bEyU3wWoTCQ" frameborder="0" allowfullscreen></iframe>
-
+[linkname](https://www.youtube.com/embed/bEyU3wWoTCQ)
+ 
+ 
 ## Laravel Commands Adminer
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/TqAQilctSLI" frameborder="0" allowfullscreen></iframe>
+[linkname](https://www.youtube.com/embed/TqAQilctSLI)
+
 
 ## Add Comment to any module
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Fa229mEGyzc" frameborder="0" allowfullscreen></iframe>
+[linkname](https://www.youtube.com/embed/Fa229mEGyzc)
 
 
 ## For More 
