@@ -14,22 +14,22 @@
         <form action="{{ concatenateLangToUrl('admin/page/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
 
-            {!! extractFiled('title' , isset($item->title) ? $item->title : old('title') , 'text' , 'page') !!}
+            {!! extractFiled('title' , $item->title ?? old('title') , 'text' , 'page') !!}
 
 
             <div class="form-group">
                 <div class="form-line">
                     <label for="">{{ trans('page.slug') }}</label>
-                    <input type="text" name="slug" id="slug" placeholder="{{ trans('page.slug') }}" class="form-control" value="{{ isset($item) ? $item->slug : old('slug') }}"/>
+                    <input type="text" name="slug" id="slug" placeholder="{{ trans('page.slug') }}" class="form-control" value="{{ $item->slug ?? old('slug') }}"/>
                 </div>
             </div>
 
-            {!! extractFiled('body' , isset($item->body) ? $item->body : old('body') , 'textarea' , 'page' , 'tinymce' ) !!}
+            {!! extractFiled('body' , $item->body ?? old('body') , 'textarea' , 'page' , 'tinymce' ) !!}
 
             <div class="form-group">
                 <div class="">
                     <label for="">{{ trans('page.status') }}</label>
-                    @php $status = isset($item) ? $item->status  : null @endphp
+                    @php $status = $item->status  ?? null @endphp
                     {!! Form::select('status' , status() , $status, ['class' => 'form-control' ] ) !!}
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <div class="form-group">
                 <div class="form-line">
                     <label for="">{{ trans('page.date') }}</label>
-                    <input type="text" name="date" class="datepicker form-control" value="{{ isset($item) ? $item->date : old('date') }}">
+                    <input type="text" name="date" class="datepicker form-control" value="{{ $item->date ?? old('date') }}">
                 </div>
             </div>
 
