@@ -111,8 +111,8 @@ $opts = array(
 			'driver'        => 'LocalFileSystem',           // driver for accessing file system (REQUIRED)
 			'path'          => realpath(__DIR__).'/../../../../../../uploads/',                 // path to files (REQUIRED)
 			'URL'           => GetBaseurl()."uploads/", // URL to files (REQUIRED)
-			'uploadDeny'    => array('all'),                // All Mimetypes not allowed to upload
-			'uploadAllow'   => array('image', 'text/plain'),// Mimetype `image` and `text/plain` allowed to upload
+			'uploadDeny'    => array('allow'),                // All Mimetypes not allowed to upload
+			'uploadAllow'   => array('image', 'text/plain', 'video/mp4'),// Mimetype `image` and `text/plain` allowed to upload
 			'uploadOrder'   => array('deny', 'allow'),      // allowed Mimetype `image` and `text/plain` only
 			'accessControl' => 'access'                     // disable and hide dot starting files (OPTIONAL)
 		)

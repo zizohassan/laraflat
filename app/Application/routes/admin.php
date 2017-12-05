@@ -1,6 +1,9 @@
 <?php
 Route::get('icons', 'HomeController@icons');
 Route::get('docs', 'HomeController@apiDocs');
+Route::get('file-manager', 'HomeController@fileManager');
+
+
 
 ### commands
 Route::get('commands', 'CommandsController@index');

@@ -1,11 +1,14 @@
 @if (Route::has('login'))
+    <li><a href="{{ url('/') }}">{{ trans('website.home') }}</a></li>
         @if (Auth::check())
-            <li><a href="{{ url('/home') }}">{{ trans('website.home') }}</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                     {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
+                    @if(auth()->user()->group_id == 1)
+                        <li><a href="{{ url(getCurrentLang().'/admin/home') }}">{{ trans('website.Admin') }}</a></li>
+                    @endif
                     <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
@@ -19,7 +22,6 @@
                 </ul>
             </li>
         @else
-            <li><a href="{{ url('/') }}">{{ trans('website.home') }}</a></li>
             <li><a href="{{ url('/login') }}">{{ trans('website.login') }}</a></li>
             <li><a href="{{ url('/register') }}">{{ trans('website.register') }}</a></li>
         @endif
@@ -40,5 +42,4 @@
             </a>
             {!! menu('website' , 'ul' , 'dropdown-menu') !!}
         </li>
-
 @endif

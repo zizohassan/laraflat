@@ -70,12 +70,22 @@ class AddItemsToMenu extends Seeder
 
 
         DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' ادارة الملفات ', 'en' => 'File Manager']),
+            'link' => '/admin/file-manager',
+            'type' => '',
+            'parent_id' => 0,
+            'menu_id' => 1,
+            'order' => 6,
+            'icon' => '<i class="material-icons">folder</i>'
+        ]);
+
+        DB::table('items')->insert([
             'name' => encodeJson(['ar' => ' سجل البينات ', 'en' => 'Logs']),
             'link' => '/admin/log',
             'type' => '',
             'parent_id' => 0,
             'menu_id' => 1,
-            'order' => 6,
+            'order' => 7,
             'icon' => '<i class="material-icons">info</i>'
         ]);
 
@@ -86,7 +96,7 @@ class AddItemsToMenu extends Seeder
             'type' => '',
             'parent_id' => 0,
             'menu_id' => 1,
-            'order' => 7,
+            'order' => 8,
             'icon' => '<i class="material-icons">insert_chart</i>'
         ]);
 
@@ -97,7 +107,7 @@ class AddItemsToMenu extends Seeder
             'type' => '',
             'parent_id' => 0,
             'menu_id' => 1,
-            'order' => 8,
+            'order' => 9,
             'icon' => '<i class="material-icons">perm_contact_calendar</i>'
         ]);
 
@@ -221,7 +231,7 @@ class AddItemsToMenu extends Seeder
             'name' => encodeJson(['ar' => ' الاوامر ', 'en' => 'Commands']),
             'link' => '/admin/commands',
             'type' => '',
-            'parent_id' => 20,
+            'parent_id' => 21,
             'menu_id' => 1,
             'order' => 2,
         ]);
@@ -231,7 +241,7 @@ class AddItemsToMenu extends Seeder
             'name' => encodeJson(['ar' => '  العلاقات ', 'en' => 'Relation']),
             'link' => '/admin/relation',
             'type' => '',
-            'parent_id' => 20,
+            'parent_id' => 21,
             'menu_id' => 1,
             'order' => 3,
         ]);
@@ -240,7 +250,7 @@ class AddItemsToMenu extends Seeder
             'name' => encodeJson(['ar' => ' الترجمة  ', 'en' => ' Translation ']),
             'link' => '/admin/translation',
             'type' => '',
-            'parent_id' => 20,
+            'parent_id' => 21,
             'menu_id' => 1,
             'order' => 3,
         ]);
@@ -248,7 +258,7 @@ class AddItemsToMenu extends Seeder
             'name' => encodeJson(['ar' => '  تخصيص التصريحات  ', 'en' => ' Custom Permissions ']),
             'link' => '/admin/custom-permissions',
             'type' => '',
-            'parent_id' => 20,
+            'parent_id' => 21,
             'menu_id' => 1,
             'order' => 3,
         ]);
@@ -257,7 +267,7 @@ class AddItemsToMenu extends Seeder
             'name' => encodeJson(['ar' => ' اوامر لارافيل  ', 'en' => ' Laravel Commands  ']),
             'link' => 'admin/laravel/commands',
             'type' => '',
-            'parent_id' => 20,
+            'parent_id' => 21,
             'menu_id' => 1,
             'order' => 3,
         ]);
@@ -266,7 +276,7 @@ class AddItemsToMenu extends Seeder
             'name' => encodeJson(['ar' => '  التحكم في قواعد البينات  ', 'en' => ' DataBase Manager  ']),
             'link' => '/adminer.php',
             'type' => 'blank',
-            'parent_id' => 20,
+            'parent_id' => 21,
             'menu_id' => 1,
             'order' => 3,
         ]);
