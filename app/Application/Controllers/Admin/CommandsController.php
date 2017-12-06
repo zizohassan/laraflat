@@ -81,8 +81,8 @@ class CommandsController extends AbstractController
             } else {
                 if (count($request->colsName) > 0 || $request->has('foreign_key')) {
                     $cols = $this->handelRequest($request);
-                    $name = $request->has('foreign_key') ? ucfirst($request->foreign_key).ucfirst($request->name)  : ucfirst($request->name);
-                    $this->artisanCall($request->commands, ucfirst($request->name), $cols , $name);
+                    $name = $request->has('foreign_key') ? ucfirst($request->foreign_key) . ucfirst($request->name) : ucfirst($request->name);
+                    $this->artisanCall($request->commands, ucfirst($request->name), $cols, $name);
                 } else {
                     $this->artisanCall($request->commands, ucfirst($request->name));
                 }
@@ -94,7 +94,7 @@ class CommandsController extends AbstractController
         return redirect()->back()->withInput();
     }
 
-    protected function artisanCall($command, $name, $cols = null , $nameColm = null)
+    protected function artisanCall($command, $name, $cols = null, $nameColm = null)
     {
         $nameColm = $nameColm == null ? $name : $nameColm;
         $array = [
@@ -117,7 +117,7 @@ class CommandsController extends AbstractController
     {
         $colsOption = "";
         if ($request->has('foreign_key')) {
-            $colsOption .= $request->foreign_key ;
+            $colsOption .= $request->foreign_key;
             $request->colsName ? ',' : '';
         }
         if ($request->colsName) {
@@ -125,7 +125,9 @@ class CommandsController extends AbstractController
             foreach ($request->colsName as $key => $cols) {
                 $count++;
                 $lang = $request->lang[$key] == 0 ? 'false' : 'true';
-                $validation = $this->handelValidation($request->validation[$key], $request->validationVal[$key]);
+                $index = $request->validation[$key] ?? [];
+                $rule = $request->validationVal[$key] ?? [];
+                $validation = $this->handelValidation($index, $rule);
                 $colsOption .= $cols . ':' . $request->migration[$key] . ':' . $validation . ':' . $lang;
                 if ($count != count($request->colsName)) {
                     $colsOption .= ',';
