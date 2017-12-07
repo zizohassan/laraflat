@@ -2,6 +2,13 @@
 Route::get('icons', 'HomeController@icons');
 Route::get('docs', 'HomeController@apiDocs');
 Route::get('file-manager', 'HomeController@fileManager');
+Route::get('theme/adminpanel', 'Themes\ThemeController@adminPanel');
+Route::get('theme/open-file', 'Themes\ThemeController@openFile');
+Route::post('theme/save-file', 'Themes\ThemeController@save');
+
+
+
+
 
 
 
@@ -113,3 +120,4 @@ Route::get('contact/{id}/view', 'ContactController@getById');
 Route::post('contact/replay/{id}', 'ContactController@replayEmail');
 
 #### post comment
+

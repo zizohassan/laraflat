@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(layoutExtend('website'))
 
 @section('title')
     {{ trans('DummyView.DummyView') }} {{  isset($item) ? trans('home.edit')  : trans('home.add')  }}

@@ -19,7 +19,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('website.home');
+        return view(layoutHomePage('website'));
     }
 
     public function getPageBySlug($slug){
@@ -31,6 +31,6 @@ class HomeController extends Controller
     }
 
     public function welcome(){
-        return view('website.welcome');
+        return view(layoutHomePage('website'));
     }
 }

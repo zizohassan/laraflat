@@ -281,5 +281,27 @@ class AddItemsToMenu extends Seeder
             'order' => 3,
         ]);
 
+
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' المظهر  ', 'en' => 'Theme']),
+            'link' => '#',
+            'type' => '',
+            'parent_id' => 0,
+            'menu_id' => 1,
+            'order' => 10,
+            'icon' => '<i class="material-icons">color_lens</i>'
+        ]);
+
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' لوحة تحكم المدير  ', 'en' => 'Admin Panel']),
+            'link' => 'admin/theme/adminpanel',
+            'type' => '',
+            'parent_id' => 28,
+            'menu_id' => 1,
+            'order' => 10,
+            'icon' => ''
+        ]);
+
+
     }
 }

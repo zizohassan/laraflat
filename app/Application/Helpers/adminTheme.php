@@ -1,23 +1,37 @@
 <?php
 
-function layoutPath($file){
-    return "admin.theme.".env('THEME').".".$file;
+
+function layoutPath($file , $type = 'admin'){
+    return $type == 'admin' ? "admin.theme.".env('THEME').".".$file  : "website.theme.".env('WEBSITE_THEME').".".$file;
+
 }
 
-function layoutMessage(){
-    return layoutPath("layout.messages");
+function layoutMessage($type = 'admin'){
+    return layoutPath("layout.messages" , $type);
 }
+
+function layoutExtend($type = 'admin'){
+    return layoutPath("layout.app" , $type );
+}
+
+function layoutMenu($type = 'admin'){
+    return layoutPath("layout.menu" , $type);
+}
+function layoutHomePage($type = 'admin'){
+    return layoutPath("home" , $type);
+}
+
+/*
+ * admin functions
+ */
+
+
 
 function layoutForm(){
     return layoutPath("layout.form");
 }
-function layoutExtend(){
-    return layoutPath("layout.app");
-}
 
-function layoutMenu(){
-    return layoutPath("layout.menu");
-}
+
 
 function layoutHeader(){
     return layoutPath("layout.header");
@@ -30,6 +44,10 @@ function layoutBreadcrumb(){
 function layoutTable(){
     return layoutPath("layout.table");
 }
+
+/*
+ * website functions
+ */
 
 
 function is_json($string,$return_data = false) {

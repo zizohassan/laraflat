@@ -30,24 +30,4 @@
             @endif
         </li>
     @endforeach
-@elseif(auth()->user()->group_id == 3)
-    <li>
-        <a href="{{ url('admin/car') }}"  class=" waves-effect waves-block">
-            <i class="material-icons">local_car_wash</i>
-            <span>
-                Cars
-             </span>
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url('admin/usecar') }}"  class=" waves-effect waves-block">
-            <i class="material-icons">folder_shared</i>
-            <span>
-                Use Cars
-             </span>
-        </a>
-    </li>
-
-
 @endif

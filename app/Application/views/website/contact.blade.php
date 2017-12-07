@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(layoutExtend('website'))
 @push('css')
 <style>
     .margin {

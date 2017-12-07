@@ -7,31 +7,6 @@ function getControllerType(){
     ];
 }
 
-//function getControllerByType($type = 'admin' , $returnType = 'json'){
-//    $types  = getControllerType();
-//    if(array_key_exists($type , $types)){
-//        $slug = [];
-//        $path = app_path('Application/Controllers/'.ucfirst($type));
-//        $files = Illuminate\Support\Facades\File::allFiles($path);
-//        foreach ($files as $file){
-//            $className = explode('/' , $file);
-//            $name =  explode('.',end($className))[0];
-//            $nameSpace = '\\App\\Application\\Controllers\\'.ucfirst($type).'\\'.$name;
-//            if(
-//                File::isFile(app_path('Application/Controllers/'.ucfirst($type).'/'.$file->getFileName()))
-//                &&
-//                class_exists('\\App\\Application\\Controllers\\'.ucfirst($type).'\\'.$name)
-//            ){
-//                $slug[str_replace('\\' , '-' , $nameSpace)] = class_basename($nameSpace);
-//            }elseif(is_dir(app_path('Application/Controllers/'.ucfirst($type).'/'.$file->getFileName()))){
-//                dd($file->getFileName());
-//            }
-//        }
-//        return $returnType == 'json' ? json_encode($slug) : $slug;
-//    }
-//    return false;
-//}
-
 
 function getControllerByType($type = 'admin' , $returnType = 'json'){
     $types  = getControllerType();
@@ -50,12 +25,12 @@ function getControllerByType($type = 'admin' , $returnType = 'json'){
 
 function getControllersFromFolders($path , $type , $folder = ''){
     $folderNameSpace = $folder != '' ? getDirectoryName($folder).'\\' : $folder;
-    $folderPath = $folder != '' ? getDirectoryName($folder).'/' : $folder;
+    $folderPath = $folder != '' ? getDirectoryName($folder).DS : $folder;
     $path = $folder != '' ? $folder : $path;
     $files = Illuminate\Support\Facades\File::allFiles($path);
     $slug = [];
     foreach ($files as $file){
-        $className = explode('/' , $file);
+        $className = explode(DS , $file);
         $name =  explode('.',end($className))[0];
         $nameSpace = 'App\\Application\\Controllers\\'.ucfirst($type).'\\'.$folderNameSpace.$name;
         $skipp  = $type == "admin" ? skipp("admin") : skipp("website");
@@ -76,7 +51,7 @@ function getMethodByController($controller , $type = 'admin' , $returnType = 'js
     $type = ucfirst($type);
     $controller = str_replace('-' , "\\" , $controller);
     $controller = str_replace('App\\' , 'app\\' , $controller);
-    $path = base_path(str_replace('\\' , DIRECTORY_SEPARATOR , $controller).'.php');
+    $path = base_path(path($controller).'.php');
     if(file_exists($path)){
         return $returnType == 'json' ? json_encode(get_this_class_methods($controller)) : get_this_class_methods($controller);
     }
@@ -96,7 +71,7 @@ function get_this_class_methods($class){
 
 function getDirectoryName($dir){
     if(file_exists($dir)){
-        $path = explode('/' , $dir);
+        $path = explode(DS , $dir);
         return end($path);
     }
     return false;
