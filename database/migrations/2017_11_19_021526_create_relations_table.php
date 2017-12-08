@@ -16,7 +16,7 @@ class CreateRelationsTable extends Migration
         Schema::create('relations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('options')->nullable();
+            $table->text('options')->nullable();
             $table->string('command');
             $table->string('p');
             $table->string('f');
