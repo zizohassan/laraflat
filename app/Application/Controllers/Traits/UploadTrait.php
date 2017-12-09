@@ -34,9 +34,9 @@ trait UploadTrait{
         /*
          * upload resize image
          */
-        $image->save($destinationPath.DS.$fileName);
-        $image->fit(env('SMALL_IAMGE_WIDTH'), env('SMALL_IAMGE_HEIGHT'));
-        $image->save(env('SMALL_IMAGE_PATH').DS.$fileName , env('IMAGE_RESLUTION'));
+        $image->save(path($destinationPath.DS.$fileName));
+        $image->fit(path(env('SMALL_IAMGE_WIDTH')), path(env('SMALL_IAMGE_HEIGHT')));
+        $image->save(path(env('SMALL_IMAGE_PATH').DS.$fileName) , path(env('IMAGE_RESLUTION')));
         return $fileName;
     }
 
