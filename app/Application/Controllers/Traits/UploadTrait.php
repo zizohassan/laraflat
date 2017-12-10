@@ -2,6 +2,7 @@
 
 namespace App\Application\Controllers\Traits;
 
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 trait UploadTrait{
@@ -34,6 +35,12 @@ trait UploadTrait{
         /*
          * upload resize image
          */
+        if(!file_exists(File::makeDirectory(path(app_path(env('SMALL_IAMGE_WIDTH')))))){
+            File::makeDirectory(path(app_path(env('SMALL_IAMGE_WIDTH'))));
+        }
+        if(!file_exists(File::makeDirectory(path(app_path(env('UPLOAD_PATH')))))){
+            File::makeDirectory(path(app_path(env('UPLOAD_PATH'))));
+        }
         $image->save(path($destinationPath.DS.$fileName));
         $image->fit(path(env('SMALL_IAMGE_WIDTH')), path(env('SMALL_IAMGE_HEIGHT')));
         $image->save(path(env('SMALL_IMAGE_PATH').DS.$fileName) , path(env('IMAGE_RESLUTION')));
