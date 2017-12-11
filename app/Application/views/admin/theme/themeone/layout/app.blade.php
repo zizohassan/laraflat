@@ -222,6 +222,13 @@
                     window.location = link;
                 });
     }
+
+    $('.nav-item').on('click' , function(e){
+        $(this).siblings().removeClass('active');
+        $(this).siblings().find('a').removeClass('active');
+        $(this).addClass('active');
+        $(this).find('a').addClass('active');
+    });
 </script>
 @include('sweet::alert')
 @yield('script')
