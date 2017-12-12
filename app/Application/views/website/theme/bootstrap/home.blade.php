@@ -21,6 +21,10 @@
 @endpush
 @section('content')
     <div class="pull-{{ getDirection() }} col-lg-9">
-        {{ loadHomePageWidget() }}
+        @if(loadHomePageWidget())
+            @foreach(loadHomePageWidget() as $file)
+                @include($file)
+            @endforeach
+        @endif
     </div>
 @endsection

@@ -61,6 +61,7 @@ class MakeController extends GeneratorCommand
         $this->createViews();
         $this->addPermission();
         $this->addUserPermission();
+
     }
 
     protected function addUserPermission()
@@ -168,6 +169,8 @@ class MakeController extends GeneratorCommand
         }
         $this->CreateOnView('index');
         $this->CreateOnView('edit');
+        $this->CreateOnView('sidebar');
+        $this->CreateOnView('homepage');
         $this->CreateOnView('show');
         $this->CreateButton('edit');
         $this->CreateButton('delete');
@@ -185,6 +188,81 @@ class MakeController extends GeneratorCommand
             $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/views/' . $view . '.stub', $this->renderForm($name)));
         } elseif ($view == 'show') {
             $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/views/' . $view . '.stub', $this->renderShow($name)));
+        } elseif($view == 'sidebar'){
+            $path = $this->getPath('Application\\views\\website\\sidebar\\' . strtolower($name) . '.blade');
+            $this->files->put($path, $this->buildSideBar($name, __DIR__ . '/stub/views/' . $view . '.stub', $this->sideBarContent($name)));
+        } elseif($view == 'homepage'){
+            $path = $this->getPath('Application\\views\\website\\homepage\\' . strtolower($name) . '.blade');
+            $this->files->put($path, $this->buildSideBar($name, __DIR__ . '/stub/views/' . $view . '.stub', $this->homePageContent($name)));
+        }
+    }
+
+    protected function sideBarContent($name){
+        if (count($this->cols) > 0) {
+            $out = '@php $sidebar'.$this->getNameInput().' = \\App\\Application\\Model\\'.ucfirst($this->getNameInput()).'::orderBy("id" , "DESC")->limit(5)->get(); @endphp' . "\n";
+            $out .= "\t\t" .'@if(count($sidebar'.$this->getNameInput().') > 0)' . "\n";
+            $out .= "\t\t\t" .'@foreach($sidebar'.$this->getNameInput().' as $d)' . "\n";
+            $out .= "\t\t\t\t" .'<div>' . "\n";
+            $i = 0;
+            foreach ($this->cols as $key => $value) {
+                $i++;
+                if($i<=1){
+                    $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
+                    if ($value[0] == 'boolean') {
+                        $out .= "\t\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
+                    } else if (in_array($key, getFileFieldsName())) {
+                        $out .= "\t\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width="80" />' . "\n";
+                    } else {
+                        if ($isMultiLang) {
+                            $out .=  "\t\t\t\t\t" . '<a href="{{ url("'.strtolower($this->getNameInput()).'/".$d->id."/view") }}" ><p>{{ str_limit(getDefaultValueKey($d->' . $key . ') , 20) }}</a></p>'. "\n";
+                        } else {
+                            $out .=  "\t\t\t\t\t" . '<p><a href="{{ url("'.strtolower($this->getNameInput()).'/".$d->id."/view") }}" >{{ str_limit($d->' . $key . ' , 20) }}</a></p>'. "\n";
+                        }
+                    }
+                }
+            }
+            $out .=  "\t\t\t\t\t" . '<p><a href="{{ url("'.strtolower($this->getNameInput()).'/".$d->id."/view") }}" ><i class="fa fa-eye"></i></a> <small><i class="fa fa-calendar-o"></i> {{ $d->created_at }}</small></p>'. "\n";
+            $out .= "\t\t\t\t" . '<hr>'. "\n";
+            $out .= "\t\t\t\t" .'</div>' . "\n";
+            $out .= "\t\t\t".'@endforeach' . "\n";
+            $out .= "\t\t" .'@endif' . "\n\t\t\t";
+            return $out;
+        }
+    }
+
+    protected function homePageContent($name){
+        if (count($this->cols) > 0) {
+            $out = '@php $sidebar'.$this->getNameInput().' = \\App\\Application\\Model\\'.ucfirst($this->getNameInput()).'::inRandomOrder()->limit(5)->get(); @endphp' . "\n";
+            $out .= "\t\t" .'@if(count($sidebar'.$this->getNameInput().') > 0)' . "\n";
+            $out .= "\t\t\t" .'@foreach($sidebar'.$this->getNameInput().' as $d)' . "\n";
+            $out .= "\t\t\t\t" .'<div>' . "\n";
+            $i = 0;
+            foreach ($this->cols as $key => $value) {
+                $i++;
+                if($i<=3){
+                    $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
+                    if ($value[0] == 'boolean') {
+                        $out .= "\t\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
+                    } else if (in_array($key, getFileFieldsName())) {
+                        $out .= "\t\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width="80" />' . "\n";
+                    } else {
+                        $start = $i != 1 ? '<p>': '<h2>';
+                        $end =$i != 1 ? '</p>': '</h2>';
+                        $limit =  $i == 1 ? 50: 300;
+                        if ($isMultiLang) {
+                            $out .=  "\t\t\t\t\t" .$start .'{{ str_limit(getDefaultValueKey($d->' . $key . ') , '.$limit.') }}'.$end. "\n";
+                        } else {
+                            $out .=  "\t\t\t\t\t" .$start .'{{ str_limit($d->' . $key . ' , '.$limit.') }}'.$end. "\n";
+                        }
+                    }
+                }
+            }
+            $out .=  "\t\t\t\t\t" . '<p><a href="{{ url("'.strtolower($this->getNameInput()).'/".$d->id."/view") }}" ><i class="fa fa-eye"></i></a> <small><i class="fa fa-calendar-o"></i> {{ $d->created_at }}</small></p>'. "\n";
+            $out .= "\t\t\t\t" . '<hr>'. "\n";
+            $out .= "\t\t\t\t" .'</div>' . "\n";
+            $out .= "\t\t\t".'@endforeach' . "\n";
+            $out .= "\t\t" .'@endif' . "\n\t\t\t";
+            return $out;
         }
     }
 
@@ -194,6 +272,13 @@ class MakeController extends GeneratorCommand
         $path = $this->getPath('Application\\views\\website\\' . strtolower($this->getNameInput()) . '\\buttons\\' . $view . '.blade');
         $this->line('Done create action button view at Application view website ' . $this->getNameInput() . ' button');
         $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/views/buttons/' . $view . '.stub'));
+    }
+
+    protected function buildSideBar($name, $stub, $table = null)
+    {
+        $stub = $this->files->get($stub);
+            return $this->replace($stub, 'DUMMYHEADER', $name)
+                ->replaceView($stub, 'DUMMYCONTENT', $table);
     }
 
     protected function buildView($name, $stub, $table = null)
@@ -331,6 +416,15 @@ class MakeController extends GeneratorCommand
             $out .= "\t\t".'</table>'."\n";
         }
         return $out;
+
+    }
+
+
+
+
+
+
+    protected function homePage($name){
 
     }
 

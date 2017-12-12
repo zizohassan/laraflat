@@ -293,7 +293,7 @@ class AddItemsToMenu extends Seeder
         ]);
 
         DB::table('items')->insert([
-            'name' => encodeJson(['ar' => ' لوحة تحكم المدير  ', 'en' => 'Admin Panel']),
+            'name' => encodeJson(['ar' => ' لوحة تحكم المدير  ', 'en' => 'Admin']),
             'link' => 'admin/theme/admin',
             'type' => '',
             'parent_id' => 28,
@@ -304,6 +304,24 @@ class AddItemsToMenu extends Seeder
         DB::table('items')->insert([
             'name' => encodeJson(['ar' => ' الموقع ', 'en' => 'Website']),
             'link' => 'admin/theme/website',
+            'type' => '',
+            'parent_id' => 28,
+            'menu_id' => 1,
+            'order' => 10,
+            'icon' => ''
+        ]);
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' رئيسية الموقع ', 'en' => 'Home Widget']),
+            'link' => 'admin/theme/homepage',
+            'type' => '',
+            'parent_id' => 28,
+            'menu_id' => 1,
+            'order' => 10,
+            'icon' => ''
+        ]);
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => ' السيد بار ', 'en' => 'Sidebar Widget']),
+            'link' => 'admin/theme/sidebar',
             'type' => '',
             'parent_id' => 28,
             'menu_id' => 1,

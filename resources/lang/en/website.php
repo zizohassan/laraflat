@@ -23,7 +23,6 @@ return [
     'Back' => 'Back',
     'Update' => 'Update',
     'Dashboard' => 'Dashboard',
-    'DummyView' => '',
-    'product' => '',
     'post' => '',
+    'DummyView' => '',
 ];

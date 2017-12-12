@@ -4,14 +4,14 @@
     {{  trans('home.Admin Panel')}} {{ trans('home.control') }} {{ trans('home.Theme') }}
 @endsection
 
-
-
 @section('content')
     <div class="col-lg-10">
         @if($theme == 'admin')
             @include('admin.theme.control.adminTheme')
-        @else
+        @elseif($theme == 'website')
             @include('admin.theme.control.websiteTheme')
+        @else
+            @include('admin.theme.control.widgetTheme')
         @endif
     </div>
     <div class="col-lg-2">

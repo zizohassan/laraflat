@@ -4,7 +4,6 @@
 function layoutPath($file, $type = 'admin')
 {
     return $type == 'admin' ? "admin.theme." . env('THEME') . "." . $file : "website.theme." . env('WEBSITE_THEME') . "." . $file;
-
 }
 
 function layoutMessage($type = 'admin')

@@ -5,6 +5,7 @@ namespace App\Application\Controllers\Admin\Themes;
 use App\Application\Controllers\AbstractController;
 use App\Application\Model\User;
 use Alert;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -17,14 +18,40 @@ class ThemeController extends AbstractController
     }
 
     public function adminPanel($theme){
-        $files = $theme == 'admin' ? $this->adminFiles() : $this->websiteFiles();
-        return view('admin.theme.control.index' , compact('files' , 'theme'));
+        $files = $this->getFiles($theme);
+        if($files){
+            return view('admin.theme.control.index' , compact('files' , 'theme'));
+        }
+        alert()->error(trans('admin.We did not find files in this path yet') , trans('admin.Error'));
+        return redirect()->back()->withInput();
+    }
+
+    protected function getFiles($theme){
+        if($theme == 'admin'){
+            return $this->adminFiles();
+        }elseif($theme == 'website'){
+            return $this->websiteFiles();
+        }elseif($theme == 'homepage'){
+           return $this->getHomepageWidget();
+        }elseif($theme == 'sidebar'){
+            return $this->getSideBarWidget();
+        }
+    }
+    protected function getHomepageWidget(){
+        return loadWidget(app_path('Application/views/website/homepage') , '');
+    }
+
+    protected function getSideBarWidget(){
+        return loadWidget(app_path('Application/views/website/sidebar') , '');
     }
 
     public function openFile(Request $request){
         $file = $this->readFile($this->getPath($request->file , $request->type));
+        if($file instanceof RedirectResponse){
+            return $file;
+        }
         $fileName = $request->file;
-        $files = $request->type == 'admin' ? $this->adminFiles() : $this->websiteFiles();
+        $files = $this->getFiles($request->type);
         $theme = $request->type;
         return view('admin.theme.control.view-file' , compact('file' , 'fileName' , 'files' , 'theme'));
 
@@ -42,6 +69,7 @@ class ThemeController extends AbstractController
             'app'
         ];
     }
+
     protected function websiteFiles(){
         return [
             'menu',
@@ -54,8 +82,16 @@ class ThemeController extends AbstractController
             'after-menu'
         ];
     }
+
     protected function getPath($file , $type = 'admin'){
-       return app_path('Application/views/'.str_replace('.' ,DIRECTORY_SEPARATOR , layoutPath('layout'.DIRECTORY_SEPARATOR.$file , $type)).'.blade.php');
+        if($file != ''){
+            if($type == 'admin' || $type == 'website'){
+                return app_path('Application/views/'.str_replace('.' ,DIRECTORY_SEPARATOR , layoutPath('layout'.DIRECTORY_SEPARATOR.$file , $type)).'.blade.php');
+            }else{
+                return app_path('Application/views/website/'.$type.'/'.$file.'.blade.php' , $type);
+            }
+        }
+        return false;
     }
 
     protected function readFile($path)
@@ -70,7 +106,7 @@ class ThemeController extends AbstractController
             }
         }
         alert()->error(trans('admin.Error'));
-        return redirect()->back()->withInput();
+        return redirect('admin/home');
     }
 
     public function save(Request $request)
@@ -86,6 +122,5 @@ class ThemeController extends AbstractController
         alert()->success(trans('admin.Done'));
         return redirect()->back()->withInput();
     }
-
 
 }

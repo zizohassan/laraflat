@@ -2,19 +2,26 @@
 
 function loadSidebarWidget(){
     $path = app_path('Application/views/website/sidebar');
-    loadWidget($path);
+    return loadWidget($path , 'website.sidebar.');
 }
 
 function loadHomePageWidget(){
     $path = app_path('Application/views/website/homepage');
-    loadWidget($path);
+    return loadWidget($path , 'website.homepage.');
 }
 
-function loadWidget($path){
-   $files =  \Illuminate\Support\Facades\File::Files($path);
+function loadWidget($path , $viewpath){
+   $files = getFiles($path);
     if(count($files) > 0){
+        $array = [];
         foreach($files as $file){
-            require_once  $path.DS.$file->getFileName();
+            $array[] = $viewpath.explode('.' , $file->getFileName())[0];
         }
+        return $array;
     }
 }
+
+function getFiles($path){
+    return \Illuminate\Support\Facades\File::Files($path);
+}
+

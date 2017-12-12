@@ -4,8 +4,6 @@
     {{  trans('home.Admin Panel')}} {{ trans('home.control') }} {{ trans('home.Theme') }}
 @endsection
 
-
-
 @section('content')
     <h3>{{ trans('admin.File') }} {{ $fileName }}</h3>
     <div class="col-lg-10">

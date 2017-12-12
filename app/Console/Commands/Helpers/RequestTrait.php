@@ -13,6 +13,7 @@ trait RequestTrait {
             $images = [];
             foreach($this->colsValidation as $key => $cols){
                 if(in_array($key , getFileFieldsName())){
+                    $cols = str_replace(['|nullable' , '|required'] , '' , $cols);
                     $getDimensions = explode(':' , $cols);
                     $images[$getDimensions[1]] = $key;
                     $result .= '"'.$key.'" => "'.$getDimensions[0].'",'."\n\t\t\t";
