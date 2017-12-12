@@ -16,6 +16,7 @@
             <div class="alert alert-waring">
                 {{ trans('admin.Do not Do any thing if you not understand what you do ') }} .
             </div>
+            <input type="hidden" name="type" value="{{ $theme }}"/>
             <br>
             <input type="submit" value="{{ trans('admin.Save') }}" class="btn btn-info"/>
         </form>
@@ -24,7 +25,7 @@
         <h3>{{ trans('admin.Theme File') }}</h3>
         <ol>
             @foreach($files as $file)
-                <li><a href="{{ url('admin/theme/open-file?file='.$file) }}">{{ $file }}</a></li>
+                <li><a href="{{ url('admin/theme/open-file?file='.$file.'&type='.$theme) }}">{{ $file }}</a></li>
             @endforeach
         </ol>
     </div>

@@ -218,7 +218,7 @@ class MakeController extends GeneratorCommand
                 if(in_array($key , getFileFieldsName())){
                     $out .= "\t\t\t\t".'@if(isset($item) && $item->'.$key.' != "")'."\n";
                     $out .= "\t\t\t\t".'<br>'."\n";
-                    $out .= "\t\t\t\t".'<img src="{{ url(env("UPLOAD_PATH")."/".$item->'.$key.') }}" class="thumbnail" alt="" width="200">'."\n";
+                    $out .= "\t\t\t\t".'<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->'.$key.') }}" class="thumbnail" alt="" width="200">'."\n";
                     $out .= "\t\t\t\t".'<br>'."\n";
                     $out .= "\t\t\t\t"."@endif"."\n";
                     $out .= "\t\t\t\t".'<input type="file" name="'.$key.'" >'."\n";
@@ -284,7 +284,7 @@ class MakeController extends GeneratorCommand
                 $out .= "\t\t\t\t".'@if($type == "File")'."\n";
                 $out .= "\t\t\t\t\t".'<td> <a href="{{ url(env("UPLOAD_PATH")."/".$item->'.$key.') }}">{{ $item->'.$key.' }}</a></td>'."\n";
                 $out .= "\t\t\t\t".'@elseif($type == "Image")'."\n";
-                $out .= "\t\t\t\t\t".'<td> <img src="{{ url(env("UPLOAD_PATH")."/".$item->'.$key.') }}" /></td>'."\n";
+                $out .= "\t\t\t\t\t".'<td> <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->'.$key.') }}" /></td>'."\n";
                 $out .= "\t\t\t\t".'@else'."\n";
                 if($key == 'youtube'){
                     $out .= "\t\t\t\t".'@if(isset($item) && $item->'.$key.' != "")'."\n";
@@ -322,7 +322,7 @@ class MakeController extends GeneratorCommand
             $out .= "\t\t\t\t".'@if($type == "File")'."\n";
             $out .= "\t\t\t\t\t".'<td> <a href="{{ url(env("UPLOAD_PATH")."/".$item[$field]) }}">{{ $item[$field] }}</a></td>'."\n";
             $out .= "\t\t\t\t".'@elseif($type == "Image")'."\n";
-            $out .= "\t\t\t\t\t".'<td> <img src="{{ url(env("UPLOAD_PATH")."/".$item[$field]) }}" /></td>'."\n";
+            $out .= "\t\t\t\t\t".'<td> <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item[$field]) }}" /></td>'."\n";
             $out .= "\t\t\t\t".'@else'."\n";
             $out .= "\t\t\t\t\t".' <td>{!!  getDefaultValueKey(nl2br($item[$field]))  !!}</td>'."\n";
             $out .= "\t\t\t\t".'@endif'."\n";
@@ -363,7 +363,7 @@ class MakeController extends GeneratorCommand
                     $out .= "\t\t\t\t\t".'</td>'."\n";
                 }else if(in_array($key , getFileFieldsName())){
                     $out .= "\t\t\t\t\t".'<td>'."\n";
-                    $out .= "\t\t\t\t".'<img src="{{ url(env("UPLOAD_PATH")."/".$d->'.$key.')}}"  width="80" />'."\n";
+                    $out .= "\t\t\t\t".'<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->'.$key.')}}"  width="80" />'."\n";
                     $out .= "\t\t\t\t\t".'</td>'."\n";
                 }else{
                     if($isMultiLang){
@@ -384,7 +384,7 @@ class MakeController extends GeneratorCommand
         $out .= '@endif' . "\n\t\t\t";
         $out .= '</tbody>' . "\n\t\t";
         $out .= '</table>' . "\n\t";
-        $out .= '@include("layouts.paginate" , ["items" => $items])' . "\n\t\t";
+        $out .= '@include(layoutPaginate() , ["items" => $items])' . "\n\t\t";
         return $out;
     }
 

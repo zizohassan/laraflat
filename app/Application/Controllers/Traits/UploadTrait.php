@@ -2,6 +2,7 @@
 
 namespace App\Application\Controllers\Traits;
 
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 trait UploadTrait{
@@ -13,10 +14,10 @@ trait UploadTrait{
             $imageName = '';
             if(is_array($request->file($field))){
                 foreach($request->file($field)  as $file){
-                    $all[] = $this->uploadFileOrMultiUpload($file , $destinationPath);
+                    $all[] = $this->uploadFileOrMultiUpload($file , $destinationPath , $field);
                 }
             }else{
-                $imageName = $this->uploadFileOrMultiUpload($request->file($field) , $destinationPath);
+                $imageName = $this->uploadFileOrMultiUpload($request->file($field) , $destinationPath , $field);
             }
             if(count($all) > 0){
                 $request->request->add([$field => json_encode($all)]);
@@ -27,16 +28,24 @@ trait UploadTrait{
         }
     }
 
-    protected function uploadFileOrMultiUpload($image , $destinationPath){
+    protected function uploadFileOrMultiUpload($image , $destinationPath,$field){
         $extension = $image->getClientOriginalExtension();
         $fileName = rand(11111,99999).'_'.time().'.'.$extension;
         $image  = Image::make($image);
         /*
          * upload resize image
          */
-        $image->save($destinationPath.'/'.$fileName);
-        $image->fit(env('SMALL_IAMGE_WIDTH'), env('SMALL_IAMGE_HEIGHT'));
-        $image->save(env('SMALL_IMAGE_PATH').'/'.$fileName , env('IMAGE_RESLUTION'));
+        $width = env('SMALL_IAMGE_WIDTH');
+        $height = env('SMALL_IAMGE_HEIGHT');
+        $model = strtolower(class_basename($this->model));
+        $path = base_path('config/'.$model.'.php');
+        if(file_exists($path)){
+            $width = config($model.'.'.$field.'.width');
+            $height = config($model.'.'.$field.'.height');
+        }
+        $image->save(path($destinationPath.DS.$fileName));
+        $image->fit(path($width), path($height));
+        $image->save(path(env('SMALL_IMAGE_PATH').DS.$fileName) , path(env('IMAGE_RESLUTION')));
         return $fileName;
     }
 

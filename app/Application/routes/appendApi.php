@@ -51,3 +51,47 @@ Route::get('categorie/{limit?}/{offset?}/{lang?}', 'CategorieApi@index');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

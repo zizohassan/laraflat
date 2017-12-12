@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="container">
-         @include('layouts.messages')
+         @include(layoutMessage('website'))
          <a href="{{ url('DummyView') }}" class="btn btn-danger"><i class="fa fa-arrow-left"></i> {{ trans('website.Back') }}  </a>
         <form action="{{ concatenateLangToUrl('DummyView/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}

@@ -1,64 +1,95 @@
 <?php
 
 
-function layoutPath($file , $type = 'admin'){
-    return $type == 'admin' ? "admin.theme.".env('THEME').".".$file  : "website.theme.".env('WEBSITE_THEME').".".$file;
+function layoutPath($file, $type = 'admin')
+{
+    return $type == 'admin' ? "admin.theme." . env('THEME') . "." . $file : "website.theme." . env('WEBSITE_THEME') . "." . $file;
 
 }
 
-function layoutMessage($type = 'admin'){
-    return layoutPath("layout.messages" , $type);
+function layoutMessage($type = 'admin')
+{
+    return layoutPath("layout.messages", $type);
 }
 
-function layoutExtend($type = 'admin'){
-    return layoutPath("layout.app" , $type );
+function layoutExtend($type = 'admin')
+{
+    return layoutPath("layout.app", $type);
 }
 
-function layoutMenu($type = 'admin'){
-    return layoutPath("layout.menu" , $type);
-}
-function layoutHomePage($type = 'admin'){
-    return layoutPath("home" , $type);
+function layoutMenu($type = 'admin')
+{
+    return layoutPath("layout.menu", $type);
 }
 
-/*
- * admin functions
- */
+function layoutHomePage($type = 'admin')
+{
+    return layoutPath("home", $type);
+}
 
+function layoutFooter($type = 'admin')
+{
+    return layoutPath("layout.footer", $type);
+}
 
+function layoutSideBar($type = 'admin')
+{
+    return layoutPath("layout.side-bar", $type);
+}
 
-function layoutForm(){
+function layoutContent($type = 'admin')
+{
+    return layoutPath("layout.content", $type);
+}
+
+function layoutPushHeader($type = 'admin')
+{
+    return layoutPath("layout.after-menu", $type);
+}
+
+function layoutPushFooter($type = 'admin')
+{
+    return layoutPath("layout.before-footer", $type);
+}
+
+function layoutPaginate($type = 'website')
+{
+    return layoutPath("layout.before-footer", $type);
+}
+
+function layoutForm()
+{
     return layoutPath("layout.form");
 }
 
 
-
-function layoutHeader(){
+function layoutHeader()
+{
     return layoutPath("layout.header");
 }
 
-function layoutBreadcrumb(){
+function layoutBreadcrumb()
+{
     return layoutPath("layout.breadcrumb");
 }
 
-function layoutTable(){
+function layoutTable()
+{
     return layoutPath("layout.table");
 }
 
-/*
- * website functions
- */
 
-
-function is_json($string,$return_data = false) {
+function is_json($string, $return_data = false)
+{
     $data = json_decode($string);
     return (json_last_error() == JSON_ERROR_NONE) ? ($return_data ? $data : TRUE) : FALSE;
 }
 
-function dataTableConfig(){
+function dataTableConfig()
+{
     return [
-        'dom'          => 'Bfrtip',
-        'buttons'      => ['excel', 'print', 'reset', 'reload'],
+        'dom' => 'Bfrtip',
+        'buttons' => ['excel', 'print', 'reset', 'reload'],
         'responsive' => true,
 //        'autoWidth' =>  true,
         'stateSave' => 'saveState',

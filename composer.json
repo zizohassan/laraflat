@@ -45,7 +45,8 @@
             "app/Application/Helpers/adminTheme.php",
             "app/Application/Helpers/api.php",
             "app/Application/Helpers/website.php",
-            "app/Application/Helpers/controllers.php"
+            "app/Application/Helpers/controllers.php",
+            "app/Application/Helpers/widget.php"
         ]
     },
     "autoload-dev": {

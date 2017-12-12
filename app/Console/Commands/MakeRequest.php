@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Commands\Helpers\RequestTrait;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputArgument;
@@ -9,6 +10,8 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class MakeRequest extends GeneratorCommand
 {
+
+    use RequestTrait;
 
     /**
      * The name and signature of the console command.
@@ -68,8 +71,6 @@ class MakeRequest extends GeneratorCommand
         $this->files->put($path, $this->buildRequest( $name ,  'Website\\'.$folderName  , $file));
     }
 
-
-
     protected function buildRequest($name  , $nameDatatable  , $stub ){
         $stub = $this->files->get($stub);
         return $this->replace( $stub, 'DummyFolder',$nameDatatable)
@@ -77,37 +78,10 @@ class MakeRequest extends GeneratorCommand
             ->replaceView( $stub, 'DummyName',ucfirst($name));
     }
 
-    protected function reFormatRequest(){
-        if($this->colsValidation){
-            $result = '';
-            foreach($this->colsValidation as $key => $cols){
-                $result .= '"'.$key.'" => "'.$cols.'",'."\n\t\t\t";
-            }
-            return $result;
-        }
-        return ' ';
-    }
-    protected function replace(&$stub,$rep ,  $name)
+    protected function getStub()
     {
-        $stub = str_replace(
-            [$rep],
-            $name,
-            $stub
-        );
 
-        return $this;
     }
-
-    protected function replaceView(&$stub,$rep ,  $name)
-    {
-        $stub = str_replace(
-            [$rep],
-            $name,
-            $stub
-        );
-        return $stub;
-    }
-
 
     protected function getOptions()
     {
@@ -116,9 +90,5 @@ class MakeRequest extends GeneratorCommand
         ];
     }
 
-    protected function getStub()
-    {
-
-    }
 
 }

@@ -25,4 +25,5 @@ return [
     'Dashboard' => 'لوحة تحكم المدير',
     'DummyView' => '',
     'product' => '',
+    'post' => '',
 ];

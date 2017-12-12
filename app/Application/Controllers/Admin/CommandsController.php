@@ -185,6 +185,7 @@ class CommandsController extends AbstractController
         return [
             'min' => true,
             'max' => true,
+            'image' => true,
             'required' => false,
             'nullable' => false,
             'email' => false,
@@ -192,7 +193,6 @@ class CommandsController extends AbstractController
             'boolean' => false,
             'ip' => false,
             'integer' => false,
-            'image' => false,
             'url' => false,
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Commands\Helpers\RequestTrait;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputArgument;
@@ -9,6 +10,8 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class MakeAdminRequest extends GeneratorCommand
 {
+
+    use RequestTrait;
 
     /**
      * The name and signature of the console command.
@@ -49,9 +52,6 @@ class MakeAdminRequest extends GeneratorCommand
         }
     }
 
-
-
-
     protected function makeRequest($requestType = 'AddRequest')
     {
         $ds = DIRECTORY_SEPARATOR;
@@ -71,8 +71,6 @@ class MakeAdminRequest extends GeneratorCommand
         $this->files->put($path, $this->buildRequest( $name ,  'Admin\\'.$folderName  , $file));
     }
 
-
-
     protected function buildRequest($name  , $nameDatatable  , $stub ){
         $stub = $this->files->get($stub);
         return $this->replace( $stub, 'DummyFolder',$nameDatatable)
@@ -80,50 +78,17 @@ class MakeAdminRequest extends GeneratorCommand
             ->replaceView( $stub, 'DummyName',ucfirst($name));
     }
 
-
-    protected function replace(&$stub,$rep ,  $name)
-    {
-        $stub = str_replace(
-            [$rep],
-            $name,
-            $stub
-        );
-
-        return $this;
-    }
-
-    protected function replaceView(&$stub,$rep ,  $name)
-    {
-        $stub = str_replace(
-            [$rep],
-            $name,
-            $stub
-        );
-        return $stub;
-    }
-
-
     protected function getStub()
     {
 
     }
 
-    protected function reFormatRequest(){
-        if($this->colsValidation){
-            $result = '';
-            foreach($this->colsValidation as $key => $cols){
-                $result .= '"'.$key.'" => "'.$cols.'",'."\n\t\t\t";
-            }
-            return $result;
-        }
-        return ' ';
-    }
-
     protected function getOptions()
     {
         return [
-            ['cols', 'c', InputArgument::OPTIONAL, 'Set Model Fillable , request , migration columns']
+            ['cols', 'c', InputArgument::OPTIONAL, 'Generate request columns']
         ];
     }
+
 
 }

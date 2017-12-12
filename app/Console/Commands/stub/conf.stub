@@ -1,0 +1,8 @@
+<?php
+
+    return [
+        'DUMMYDIM' => [
+            'width' => 'DUMMYWIDTH',
+            'height' => 'DUMMYHEIGHT',
+        ]
+    ];

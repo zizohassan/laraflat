@@ -43,6 +43,8 @@ class RollBack extends GeneratorCommand
         $this->deleteDir(app_path('Application/views/website/'.strtolower($name)));
         $this->deleteFile(resource_path('lang/ar/'.strtolower($name).'.php'));
         $this->deleteFile(resource_path('lang/en/'.strtolower($name).'.php'));
+        $this->deleteFile(resource_path('lang/en/'.strtolower($name).'.php'));
+        $this->deleteFile(base_path('config/'.strtolower($name).'.php'));
         if(Item::where('link' , '/admin/'.strtolower($name))->count() > 0){
             Item::where('link' , '/admin/'.strtolower($name))->delete();
         }

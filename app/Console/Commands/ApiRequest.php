@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Console\Commands\Helpers\RequestTrait;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputArgument;
@@ -10,6 +11,7 @@ use Symfony\Component\Console\Input\InputArgument;
 class ApiRequest extends GeneratorCommand
 {
 
+    use RequestTrait;
     /**
      * The name and signature of the console command.
      *
@@ -68,57 +70,22 @@ class ApiRequest extends GeneratorCommand
         $this->files->put($apiPath, $this->buildRequest( $name ,  'Website\\'.$folderName  , $apiFile));
     }
 
-
-
     protected function buildRequest($name  , $nameDatatable  , $stub ){
         $stub = $this->files->get($stub);
         return $this->replace( $stub, 'DummyFolder',$nameDatatable)
             ->replace($stub , 'DummyValidation', $this->reFormatRequest())
             ->replaceView( $stub, 'DummyName',ucfirst($name));
     }
-
-    protected function reFormatRequest(){
-        if($this->colsValidation){
-            $result = '';
-            foreach($this->colsValidation as $key => $cols){
-                $result .= '"'.$key.'" => "'.$cols.'",'."\n\t\t\t";
-            }
-            return $result;
-        }
-        return ' ';
-    }
-    protected function replace(&$stub,$rep ,  $name)
+    protected function getStub()
     {
-        $stub = str_replace(
-            [$rep],
-            $name,
-            $stub
-        );
 
-        return $this;
     }
-
-    protected function replaceView(&$stub,$rep ,  $name)
-    {
-        $stub = str_replace(
-            [$rep],
-            $name,
-            $stub
-        );
-        return $stub;
-    }
-
 
     protected function getOptions()
     {
         return [
             ['cols', 'c', InputArgument::OPTIONAL, 'Generate request columns']
         ];
-    }
-
-    protected function getStub()
-    {
-
     }
 
 }

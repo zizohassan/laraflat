@@ -6,7 +6,7 @@
         if (command_val == 'laraflat:admin_model') {
             adminModel();
         } else if (command_val == 'laraflat:comment') {
-            adminModel("Comment", "display:none" , true);
+            adminModel("Comment", "display:none", true);
         } else {
             name();
         }
@@ -22,7 +22,7 @@
         form.html(output);
     }
 
-    function adminModel(value, show , showModel) {
+    function adminModel(value, show, showModel) {
         v = value === undefined && value == null ? '' : value;
         s = show === undefined && value == null ? '' : show;
         form.html(' ');
@@ -31,9 +31,9 @@
                 '<label for="name">{{ trans("admin.name") }}</label>' +
                 ' <input type="text" name="name" id="name"  class="form-control" value="' + v + '"/>' +
                 '</div>';
-        if(showModel === undefined && showModel == null ){
+        if (showModel === undefined && showModel == null) {
             output += '<span  class="btn btn-danger" onclick="addNewColumn();"><i class="fa fa-plus"></i></span>';
-        }else{
+        } else {
             output += showModel === undefined && showModel == null ? '' : appendModels();
         }
         form.html(output);
@@ -85,9 +85,9 @@
         output += '<label for="">{{ trans('admin.Select Model') }}</label>';
         output += '<select name="foreign_key" id="foreign_key" class="form-control" required>';
         @foreach($models as $model)
-        output += '<option value="{{ $model }}">{{ $model }}</option>';
+                output += '<option value="{{ $model }}">{{ $model }}</option>';
         @endforeach
-        output += '</select>';
+                output += '</select>';
         output += '</div>';
         output += '</div>';
         output += '</div>';

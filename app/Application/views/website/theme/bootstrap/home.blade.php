@@ -12,11 +12,15 @@
     }
 </style>
 @endpush
-@section('content')
+@push('before')
     <div class="text-center">
         <div class="title m-b-md margin mainImage" style="background-image: url('website/images/bg4.jpg');">
             <img src="{{ url('/admin/images/logo.png') }}" class="imgMargintTop" alt="{{ getSetting('siteTitle')  }}">
         </div>
     </div>
+@endpush
+@section('content')
+    <div class="pull-{{ getDirection() }} col-lg-9">
+        {{ loadHomePageWidget() }}
     </div>
 @endsection
