@@ -203,6 +203,7 @@ class CommandsController extends AbstractController
             'laraflat:admin_controller',
             'laraflat:admin_model',
             'laraflat:comment',
+            'laraflat:rate',
             'laraflat:admin_request',
             'laraflat:api_controller',
             'laraflat:api_request',

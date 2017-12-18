@@ -168,3 +168,34 @@ Route::post('contact/replay/{id}', 'ContactController@replayEmail');
 
 
 
+
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate
+
+#### post Rate

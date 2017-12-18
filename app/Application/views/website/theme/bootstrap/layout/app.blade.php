@@ -13,6 +13,7 @@
     {{ Html::style('css/sweetalert.css') }}
     {{ Html::Style('website/css/custom.css') }}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{ Html::style('css/rate.css') }}
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -33,6 +34,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     {!! Links::track(true) !!}
     {{ Html::script('js/sweetalert.min.js') }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
     <script type="application/javascript">
         function deleteThisItem(e){
             var link = $(e).data('link');
@@ -49,6 +51,12 @@
                         window.location = link;
                     });
         }
+        $('#rate').barrating({
+            theme: 'fontawesome-stars',
+            onSelect:function(value, text, event){
+                $('#rate').closest('form').submit();
+            }
+        });
     </script>
 
     @include('sweet::alert')

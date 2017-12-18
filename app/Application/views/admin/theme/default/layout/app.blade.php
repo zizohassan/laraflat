@@ -29,6 +29,7 @@
     {{ Html::style('admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css') }}
     {{ Html::style('css/sweetalert.css') }}
     {{ Html::style('admin/plugins/tinymce/plugins/elfinder/css/elfinder.full.css') }}
+    {{ Html::style('css/rate.css') }}
     @yield('style')
     <style>
         .card .header .header-dropdown{
@@ -181,6 +182,8 @@
 {{ Html::script('admin/js/jquery.dataTables.min.js') }}
 {{ Html::script('admin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js') }}
 {{ Html::script('js/sweetalert.min.js') }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
+
 <script type="application/javascript">
     function deleteThisItem(e){
         var link = $(e).data('link');
@@ -197,6 +200,12 @@
                     window.location = link;
                 });
     }
+    $('#rate').barrating({
+        theme: 'fontawesome-stars',
+        onSelect:function(value, text, event){
+            $('#rate').closest('form').submit();
+        }
+    });
 </script>
 @include('sweet::alert')
 @yield('script')

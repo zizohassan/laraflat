@@ -31,29 +31,30 @@
     <link rel="stylesheet" href="{{ url('style') }}/vendor/PACE/themes/blue/pace-theme-minimal.css"/>
     <link rel="stylesheet" href="{{ url('style') }}/vendor/font-awesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="{{ url('style') }}/vendor/animate.css/animate.css"/>
-@if(getDir() == 'rtl')
-    <link rel="stylesheet" href="{{ url('style') }}/styles/app-rtl.css" id="load_styles_before"/>
-    <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins-rtl.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
-@else
-    <link rel="stylesheet" href="{{ url('style') }}/styles/app.css" id="load_styles_before"/>
-    <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins.css"/>
-@endif
-    <!-- endbuild -->
+    @if(getDir() == 'rtl')
+        <link rel="stylesheet" href="{{ url('style') }}/styles/app-rtl.css" id="load_styles_before"/>
+        <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins-rtl.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
+    @else
+        <link rel="stylesheet" href="{{ url('style') }}/styles/app.css" id="load_styles_before"/>
+        <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins.css"/>
+        @endif
+                <!-- endbuild -->
 
-    {{ Html::style('admin/plugins/multi-select/css/multi-select.css') }}
-    {{ Html::style('admin/plugins/bootstrap-select/css/bootstrap-select.css') }}
-    {{--{{ Html::style('admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css') }}--}}
-    <link rel="stylesheet" href="{{ url('style') }}/vendor/datatables/media/css/dataTables.bootstrap4.css"/>
+        {{ Html::style('admin/plugins/multi-select/css/multi-select.css') }}
+        {{ Html::style('admin/plugins/bootstrap-select/css/bootstrap-select.css') }}
+        {{--{{ Html::style('admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css') }}--}}
+        <link rel="stylesheet" href="{{ url('style') }}/vendor/datatables/media/css/dataTables.bootstrap4.css"/>
 
-    {{ Html::style('css/sweetalert.css') }}
-    {{ Html::style('admin/plugins/tinymce/plugins/elfinder/css/elfinder.full.css') }}
-    @yield('style')
-    <style>
-        .img-responsive{
-            width:100%
-        }
-    </style>
+        {{ Html::style('css/sweetalert.css') }}
+        {{ Html::style('admin/plugins/tinymce/plugins/elfinder/css/elfinder.full.css') }}
+        {{ Html::style('css/rate.css') }}
+        @yield('style')
+        <style>
+            .img-responsive {
+                width: 100%
+            }
+        </style>
 </head>
 <body>
 
@@ -85,17 +86,20 @@
             </a>
             <div class="dropdown-menu">
                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                        <a class="dropdown-item" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
-                            {{ $properties['native'] }}
-                        </a>
+                    <a class="dropdown-item" hreflang="{{$localeCode}}"
+                       href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                        {{ $properties['native'] }}
+                    </a>
                 @endforeach
                 <div class="dropdown-divider"></div>
 
-                <a href="{{ url('/admin/user/item/'.auth()->user()->id) }}"><i class="material-icons">person</i>{{ trans('home.profile') }}</a>
+                <a href="{{ url('/admin/user/item/'.auth()->user()->id) }}"><i
+                            class="material-icons">person</i>{{ trans('home.profile') }}</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="material-icons">input</i>{{ trans('home.sign_out') }}</a>
+                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i
+                            class="material-icons">input</i>{{ trans('home.sign_out') }}</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
@@ -165,18 +169,18 @@
 </div>
 
 {{--<script type="text/javascript">--}}
-    {{--window.paceOptions = {--}}
-        {{--document: true,--}}
-        {{--eventLag: true,--}}
-        {{--restartOnPushState: true,--}}
-        {{--restartOnRequestAfter: true,--}}
-        {{--ajax: {--}}
-            {{--trackMethods: [ 'POST','GET']--}}
-        {{--}--}}
-    {{--};--}}
+{{--window.paceOptions = {--}}
+{{--document: true,--}}
+{{--eventLag: true,--}}
+{{--restartOnPushState: true,--}}
+{{--restartOnRequestAfter: true,--}}
+{{--ajax: {--}}
+{{--trackMethods: [ 'POST','GET']--}}
+{{--}--}}
+{{--};--}}
 {{--</script>--}}
 
-<!-- build:js({.tmp,app}) scripts/app.min.js -->
+        <!-- build:js({.tmp,app}) scripts/app.min.js -->
 <script src="{{ url('style') }}/vendor/jquery/dist/jquery.js"></script>
 <script src="{{ url('style') }}/vendor/PACE/pace.js"></script>
 <script src="{{ url('style') }}/vendor/tether/dist/js/tether.js"></script>
@@ -196,6 +200,7 @@
 <script src="{{ url('style') }}/vendor/jquery.easy-pie-chart/dist/jquery.easypiechart.js"></script>
 <script src="{{ url('style') }}/vendor/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script src="{{ url('style') }}/scripts/helpers/noty-defaults.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
 <!-- end page scripts -->
 
 <!-- initialize page scripts -->
@@ -207,7 +212,7 @@
 
 {{ Html::script('js/sweetalert.min.js') }}
 <script type="application/javascript">
-    function deleteThisItem(e){
+    function deleteThisItem(e) {
         var link = $(e).data('link');
         swal({
                     title: "Are you sure?",
@@ -218,21 +223,27 @@
                     confirmButtonText: "Yes, delete it!",
                     closeOnConfirm: false
                 },
-                function(){
+                function () {
                     window.location = link;
                 });
     }
 
-    $('.nav-item').on('click' , function(e){
+    $('.nav-item').on('click', function (e) {
         $(this).siblings().removeClass('active');
         $(this).siblings().find('a').removeClass('active');
         $(this).addClass('active');
         $(this).find('a').addClass('active');
-       $(this).closest('ul.nav').next('.tab-content').children('.tab-pane').each(function(){
+        $(this).closest('ul.nav').next('.tab-content').children('.tab-pane').each(function () {
             $(this).removeClass('active');
         });
         var id = $(this).find('a').attr('href');
         $(id).addClass('active');
+    });
+    $('#rate').barrating({
+        theme: 'fontawesome-stars',
+        onSelect:function(value, text, event){
+           $('#rate').closest('form').submit();
+        }
     });
 </script>
 @include('sweet::alert')

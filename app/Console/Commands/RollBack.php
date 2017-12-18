@@ -82,6 +82,9 @@ class RollBack extends GeneratorCommand
             if($command->command == 'laraflat:comment'){
                 $this->rolBackComment($command);
             }
+            if($command->command == 'laraflat:rate'){
+                $this->rolBackRate($command);
+            }
         }
         Command::where('name' , ucfirst($name))->delete();
     }
@@ -114,6 +117,32 @@ class RollBack extends GeneratorCommand
 
         Permission::where('name' , 'comment-'.$command->name)->delete();
 
+    }
+
+    public function rolBackRate($command){
+        $this->deleteFile(app_path('Application/views/admin/'.$command->options.'/rate/rate.blade.php'));
+        $this->deleteFile(app_path('Application/views/admin/'.$command->options.'/rate/rate.blade.php'));
+        $this->deleteFile(app_path('Application/views/website/'.$command->options.'/rate/rate.blade.php'));
+        $this->deleteFile(app_path('Application/views/website/'.$command->options.'/rate/rate.blade.php'));
+        $this->deleteFile(app_path('Application/Controllers/Admin/'.$command->name.'Controller.php'));
+        $this->deleteFile(app_path('Application/Controllers/Website/'.$command->name.'Controller.php'));
+        $this->replaceLines("public function ".strtolower($command->name)."(){", app_path('Application/Model/' . ucfirst($command->options) . '.php'));
+        $this->replaceFromFile('@include("admin.' . $command->options . '.rate.edit")', app_path('Application/views/admin/'.$command->options.'/rate.blade.php'));
+        $this->replaceFromFile('@include("admin.' . $command->options . '.rate.show")' , app_path('Application/views/admin/'.$command->options.'/rate.blade.php'));
+        $this->replaceFromFile('@include("website.' . $command->options . '.rate.edit")', app_path('Application/views/website/'.$command->options.'/rate.blade.php'));
+        $this->replaceFromFile('@include("website.' .$command->options . '.rate.show")', app_path('Application/views/website/'.$command->options.'/rate.blade.php'));
+        $this->replaceFromFile('@include("admin.' . $command->options . '.rate.edit")', app_path('Application/views/admin/'.$command->options.'/rate.blade.php'));
+        $this->replaceFromFile('@include("website.' .$command->options . '.rate.edit")', app_path('Application/views/website/'.$command->options.'/rate.blade.php'));
+        $this->replaceFromFile('@include("admin.' . $command->options . '.rate.show")', app_path('Application/views/admin/'.$command->options.'/rate.blade.php'));
+        $this->replaceFromFile('@include("website.' .$command->options . '.rate.show")', app_path('Application/views/website/'.$command->options.'/rate.blade.php'));
+
+        $dir = app_path('Application/routes/appendWebsite.php');
+        $this->replaceFromFile(ucfirst($command->name).'Controller@addRate' ,$dir );
+        $this->replaceFromFile('#### '.strtolower($command->name) ,$dir );
+        $dir = app_path('Application/routes/admin.php');
+        $this->replaceFromFile(ucfirst($command->name).'Controller@addRate' ,$dir );
+        $this->replaceFromFile('#### '.strtolower($command->name).' rate' ,$dir );
+        Permission::where('name' , 'comment-'.$command->name)->delete();
     }
 
     protected function replaceFromFile($key, $path)

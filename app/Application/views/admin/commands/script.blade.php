@@ -7,6 +7,8 @@
             adminModel();
         } else if (command_val == 'laraflat:comment') {
             adminModel("Comment", "display:none", true);
+        } else if (command_val == 'laraflat:rate') {
+            adminModel("Rate", "display:none", true);
         } else {
             name();
         }
