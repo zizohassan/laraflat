@@ -17,6 +17,8 @@ Route::get('commands', 'CommandsController@index');
 Route::post('command/exe', 'CommandsController@exe');
 Route::get('laravel/commands', 'CommandsController@command');
 Route::post('command/otherExe', 'CommandsController@otherExe');
+Route::post('laravel/haveCommand', 'CommandsController@haveCommand');
+
 
 ### relations
 Route::get('relation', 'RelationController@index');
@@ -118,84 +120,3 @@ Route::post('contact/item/{id}', 'ContactController@update');
 Route::get('contact/{id}/delete', 'ContactController@destroy');
 Route::get('contact/{id}/view', 'ContactController@getById');
 Route::post('contact/replay/{id}', 'ContactController@replayEmail');
-
-#### post comment
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
