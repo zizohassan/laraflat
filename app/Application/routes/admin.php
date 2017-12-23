@@ -7,6 +7,8 @@ Route::get('commands', 'CommandsController@index');
 Route::post('command/exe', 'CommandsController@exe');
 Route::get('laravel/commands', 'CommandsController@command');
 Route::post('command/otherExe', 'CommandsController@otherExe');
+Route::post('laravel/haveCommand', 'CommandsController@haveCommand');
+
 
 ### relations
 Route::get('relation', 'RelationController@index');
