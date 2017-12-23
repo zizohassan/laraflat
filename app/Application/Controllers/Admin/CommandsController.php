@@ -215,4 +215,13 @@ class CommandsController extends AbstractController
             'laraflat:transformer'
         ];
     }
+     public function haveCommand(Request $request){
+        if ($request->name) {
+            $this->artisanCall('laraflat:admin_model', ucfirst($request->name), $request->cols, $request->name);
+            alert()->success(trans('admin.Done'));
+            return redirect()->back()->withInput();
+        }
+        alert()->error(trans('admin.Error'));
+        return redirect()->back()->withInput();
+    }
 }
