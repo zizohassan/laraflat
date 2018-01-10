@@ -14,6 +14,7 @@ Route::get('laravel/commands', 'CommandsController@command');
 Route::post('command/otherExe', 'CommandsController@otherExe');
 Route::post('laravel/haveCommand', 'CommandsController@haveCommand');
 
+
 ### relations
 Route::get('relation', 'RelationController@index');
 Route::post('relation/exe', 'RelationController@exe');
