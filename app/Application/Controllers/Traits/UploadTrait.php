@@ -62,7 +62,6 @@ trait UploadTrait{
     }
 
 
-
     protected function uploadFiles($image , $destinationPath){
         $extension = $image->getClientOriginalExtension();
         $fileName = rand(11111,99999).'_'.time().'.'.$extension;
@@ -72,3 +71,5 @@ trait UploadTrait{
     }
 
 }
+
+
