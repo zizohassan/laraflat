@@ -15,7 +15,7 @@ function getControllerByType($type = 'admin' , $returnType = 'json'){
         $folder = Illuminate\Support\Facades\File::directories($path);
         $array = [];
         foreach($folder as $f){
-            $array = getControllersFromFolders($path , $type , $f);
+            $array = $array + getControllersFromFolders($path , $type , $f);
         }
         $array= $array + getControllersFromFolders($path , $type);
         return $returnType == 'json' ? json_encode($array) : $array;

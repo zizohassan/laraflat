@@ -14,10 +14,18 @@ trait UploadTrait{
             $imageName = '';
             if(is_array($request->file($field))){
                 foreach($request->file($field)  as $file){
-                    $all[] = $this->uploadFileOrMultiUpload($file , $destinationPath , $field);
+                    if(getFileType($field , $request->file($field)->getClientOriginalName()) == 'Image'){
+                        $all[] = $this->uploadFileOrMultiUpload($file , $destinationPath , $field);
+                    }else{
+                        $all[] = $this->uploadFiles($file , $destinationPath);
+                    }
                 }
             }else{
-                $imageName = $this->uploadFileOrMultiUpload($request->file($field) , $destinationPath , $field);
+                if(getFileType($field , $request->file($field)->getClientOriginalName()) == 'Image'){
+                    $imageName = $this->uploadFileOrMultiUpload($request->file($field) , $destinationPath , $field);
+                }else{
+                    $imageName = $this->uploadFiles($request->file($field) , $destinationPath);
+                }
             }
             if(count($all) > 0){
                 $request->request->add([$field => json_encode($all)]);
@@ -44,9 +52,23 @@ trait UploadTrait{
             $height = config($model.'.'.$field.'.height');
         }
         $image->save(path($destinationPath.DS.$fileName));
-        $image->fit(path($width), path($height));
+        $image->resize(path($width), path($height) , function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+
         $image->save(path(env('SMALL_IMAGE_PATH').DS.$fileName) , path(env('IMAGE_RESLUTION')));
         return $fileName;
+    }
+
+
+
+    protected function uploadFiles($image , $destinationPath){
+        $extension = $image->getClientOriginalExtension();
+        $fileName = rand(11111,99999).'_'.time().'.'.$extension;
+        if($image->move($destinationPath  , $fileName)){
+            return $fileName ;
+        }
     }
 
 }

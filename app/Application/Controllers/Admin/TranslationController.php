@@ -25,7 +25,7 @@ class TranslationController extends AbstractController
 
     public function getFiles()
     {
-        return $files = File::allFiles(resource_path('lang/ar'));
+        return $files = File::allFiles(resource_path('lang/'.getCurrentLang()));
     }
 
     public function readFile($path)

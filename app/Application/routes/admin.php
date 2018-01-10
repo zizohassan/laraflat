@@ -1,16 +1,11 @@
 <?php
+Route::get('/', 'HomeController@index');
 Route::get('icons', 'HomeController@icons');
 Route::get('docs', 'HomeController@apiDocs');
 Route::get('file-manager', 'HomeController@fileManager');
 Route::get('theme/open-file', 'Themes\ThemeController@openFile');
 Route::get('theme/{theme}', 'Themes\ThemeController@adminPanel');
 Route::post('theme/save-file', 'Themes\ThemeController@save');
-
-
-
-
-
-
 
 ### commands
 Route::get('commands', 'CommandsController@index');
@@ -119,84 +114,3 @@ Route::post('contact/item/{id}', 'ContactController@update');
 Route::get('contact/{id}/delete', 'ContactController@destroy');
 Route::get('contact/{id}/view', 'ContactController@getById');
 Route::post('contact/replay/{id}', 'ContactController@replayEmail');
-
-#### post comment
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
-
-#### post Rate
