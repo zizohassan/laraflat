@@ -15,11 +15,11 @@ class SettingsDataTable extends DataTable
     public function ajax()
     {
         return $this->datatables
-             ->eloquent($this->query())
-             ->addColumn('edit', 'admin.setting.buttons.edit')
-             ->addColumn('delete', 'admin.setting.buttons.delete')
-             ->addColumn('view', 'admin.setting.buttons.view')
-             ->make(true);
+            ->eloquent($this->query())
+            ->addColumn('edit', 'admin.setting.buttons.edit')
+            ->addColumn('delete', 'admin.setting.buttons.delete')
+            ->addColumn('view', 'admin.setting.buttons.view')
+            ->make(true);
     }
     /**
      * Get the query object to be processed by dataTables.
@@ -59,7 +59,7 @@ class SettingsDataTable extends DataTable
      */
     protected function getColumns()
     {
-        return [
+        $array  =  [
             [
                 'name' => "id",
                 'data' => 'id',
@@ -88,7 +88,9 @@ class SettingsDataTable extends DataTable
                 'searchable' => false,
                 'orderable' => false,
             ],
-            [
+        ];
+        if(env('APP_ENV') == 'local'){
+            array_push( $array , [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' => trans('curd.delete'),
@@ -96,8 +98,9 @@ class SettingsDataTable extends DataTable
                 'printable' => false,
                 'searchable' => false,
                 'orderable' => false,
-            ],
-        ];
+            ]);
+        }
+        return $array;
     }
 
     /**
