@@ -14,7 +14,7 @@ trait UploadTrait{
             $imageName = '';
             if(is_array($request->file($field))){
                 foreach($request->file($field)  as $file){
-                    if(getFileType($field , $request->file($field)->getClientOriginalName()) == 'Image'){
+                    if(getFileType($field , $file->getClientOriginalName()) == 'Image'){
                         $all[] = $this->uploadFileOrMultiUpload($file , $destinationPath , $field);
                     }else{
                         $all[] = $this->uploadFiles($file , $destinationPath);
@@ -62,6 +62,7 @@ trait UploadTrait{
     }
 
 
+
     protected function uploadFiles($image , $destinationPath){
         $extension = $image->getClientOriginalExtension();
         $fileName = rand(11111,99999).'_'.time().'.'.$extension;
@@ -71,5 +72,3 @@ trait UploadTrait{
     }
 
 }
-
-
