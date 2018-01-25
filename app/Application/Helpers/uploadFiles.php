@@ -86,10 +86,7 @@ function checkIfFiledFile($array)
             $collect[] = $key;
         }
     }
-    if (count($collect) > 0) {
-        return $collect;
-    }
-    return false;
+    return count($collect) > 0 ? $collect : [];
 }
 
 function convertToImage($input)

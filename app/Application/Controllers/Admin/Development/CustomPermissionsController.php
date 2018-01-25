@@ -3,14 +3,14 @@
 namespace App\Application\Controllers\Admin\Development;
 
 use App\Application\Controllers\AbstractController;
-use App\Application\Model\Categorie;
 use Alert;
+use App\Application\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class CustomPermissionsController extends AbstractController
 {
-    public function __construct(Categorie $model)
+    public function __construct(User $model)
     {
         parent::__construct($model);
     }

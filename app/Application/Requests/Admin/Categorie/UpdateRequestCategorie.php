@@ -26,7 +26,8 @@ class UpdateRequestCategorie extends FormRequest
     {
         $id = Route::input('id');
         return [
-            'name.*' => 'required|max:90'
+            "title.*" => "min:1|max:80|required",
+			
         ];
     }
 }

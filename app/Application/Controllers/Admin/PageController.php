@@ -2,18 +2,16 @@
 
 namespace App\Application\Controllers\Admin;
 
+use App\Application\Requests\Admin\Page\AddRequestPage;
+use App\Application\Requests\Admin\Page\UpdateRequestPage;
 use App\Application\Controllers\AbstractController;
 use App\Application\DataTables\PagesDataTable;
 use App\Application\Model\Page;
-use App\Application\Repository\InterFaces\PageInterface;
-use App\Application\Requests\Admin\Page\AddRequestPage;
-use App\Application\Requests\Admin\Page\UpdateRequestPage;
 use Yajra\Datatables\Request;
 use Alert;
 
 class PageController extends AbstractController
 {
-
     public function __construct(Page $model)
     {
         parent::__construct($model);
@@ -27,13 +25,16 @@ class PageController extends AbstractController
         return $this->createOrEdit('admin.page.edit' , $id);
     }
 
-    public function store(AddRequestPage $request){
-         return $this->storeOrUpdate($request , null , 'admin/page');
-    }
+     public function store(AddRequestPage $request){
+          $item =  $this->storeOrUpdate($request , null , true);
+          return redirect('admin/page');
+     }
 
-    public function update($id  , UpdateRequestPage $request){
-        return $this->storeOrUpdate($request , $id , 'admin/page');
-    }
+     public function update($id , UpdateRequestPage $request){
+          $item =  $this->storeOrUpdate($request , $id , true);
+          return redirect()->back();
+     }
+
 
     public function getById($id){
         $fields = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());

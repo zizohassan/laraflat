@@ -24,12 +24,10 @@ class AddRequestPage extends FormRequest
     public function rules()
     {
         return [
-            'title.*' => 'required|max:90',
-            'body.*' => 'required|min:20',
-            'date' => 'required',
-            'status' => 'required',
-            'image' => 'image',
-            'slug' => "required|unique:pages"
+            "title.*" => "min:1|max:70|required",
+			"body.*" => "min:1|required",
+			"active" => "required|integer",
+			
         ];
     }
 }

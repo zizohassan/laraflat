@@ -23,7 +23,7 @@ trait MainProcessTrait {
     public function storeOrUpdate(Request $request , $id = null , $callback = true){
         try{
             $field = checkIfFiledFile($request->all());
-            if(count($field) > 0 && $field !== false){
+            if(count($field) > 0){
                 foreach($field as $key => $f){
                     $data = $this->uploadFile($request , $f);
                 }

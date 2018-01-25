@@ -22,13 +22,6 @@ class HomeController extends Controller
         return view(layoutHomePage('website'));
     }
 
-    public function getPageBySlug($slug){
-        $page = Page::where('slug' , $slug)->first();
-        if($page){
-            return view('website.page' , compact('page'));
-        }
-        return redirect('404');
-    }
 
     public function welcome(){
         return view(layoutHomePage('website'));

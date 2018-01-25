@@ -23,6 +23,7 @@ return [
     'Back' => 'رجوع',
     'Update' => 'حفظ',
     'Dashboard' => 'لوحة تحكم المدير',
-    'post' => '',
+    'page' => 'الصفحات',
     'DummyView' => '',
+    'categorie' => '',
 ];

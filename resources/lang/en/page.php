@@ -1,12 +1,12 @@
 <?php
-return [
-    'title' => ' Page Title  ',
-    'status' => ' Page Status ',
-    'date' => ' Published At ',
-    'page' => 'page',
-    'date' => 'Publish Day'
-    ,'body' => 'Page Body',
-    'image' => 'Image',
-    'slug' => ' Slug ',
-    'status' => 'Status'
-];
+	return [
+		'page'=>'Page',
+		'title'=>'Page Title',
+		'body'=>'Page Body',
+		'active'=>'Active',
+		'No'=>'No',
+		'Yes'=>'Yes',
+		'edit'=>'edit',
+		'show'=>'show',
+		'delete'=>'delete',
+	];

@@ -49,8 +49,10 @@
                         <li><a href="{{ url('/login') }}">{{ trans('website.login') }}</a></li>
                         <li><a href="{{ url('/register') }}">{{ trans('website.register') }}</a></li>
                     @endif
-                    @php $page = page(); @endphp
-                    <li><a href="{{ url('/page/'.$page->slug) }}">{{ getDefaultValueKey($page->title) }}</a></li>
+                    @php $pages = page(); @endphp
+                    @foreach($pages as $page)
+                        <li><a href="{{ url('page/'.$page->id.'/view') }}">{{ getDefaultValueKey($page->title) }}</a></li>
+                    @endforeach
                     <li><a href="{{ url('contact') }}">{{ trans('website.Contact Us') }}</a></li>
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                         <li>

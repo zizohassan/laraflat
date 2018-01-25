@@ -23,6 +23,7 @@ return [
     'Back' => 'Back',
     'Update' => 'Update',
     'Dashboard' => 'Dashboard',
-    'post' => '',
+    'page' => 'Page',
     'DummyView' => '',
+    'categorie' => '',
 ];

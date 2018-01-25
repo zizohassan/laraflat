@@ -26,12 +26,10 @@ class UpdateRequestPage extends FormRequest
     {
         $id = Route::input('id');
         return [
-            'title.*' => 'required|max:90',
-            'body.*' => 'required|min:20',
-            'date' => 'required',
-            'status' => 'required',
-            'image' => 'image',
-            'slug' => "required|unique:pages,slug,".$id
+            "title.*" => "min:1|max:70|required",
+			"body.*" => "min:1|required",
+			"active" => "required|integer",
+			
         ];
     }
 }

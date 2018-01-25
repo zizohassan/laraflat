@@ -215,7 +215,7 @@ class MakeRelation extends GeneratorCommand
         $out .= "\t\t\t".'@php  $'.$key.'_id = isset($item) ? $item->'.$this->pKey.'->pluck("id")->all() : [] @endphp'."\n";
         $out .= "\t\t\t".'<select name="'.$key.'_id[]"  class="form-control" multiple>'."\n";
         $out .= "\t\t\t".'@foreach( $'.str_plural($key).' as $key => $relatedItem)'."\n";
-        $out .= "\t\t\t".'<option value="{{ $key }}"  {{ in_array($key ,$'.$key.'_id ) ? "selected" : "" }}> {{ is_json($relatedItem) ? getDefaultValueKey($relatedItem) :  $relatedItem}}</label>'."\n";
+        $out .= "\t\t\t".'<option value="{{ $key }}"  {{ in_array($key ,$'.$key.'_id ) ? "selected" : "" }}> {{ is_json($relatedItem) ? getDefaultValueKey($relatedItem) :  $relatedItem}}</option>'."\n";
         $out .= "\t\t\t".'@endforeach'."\n";
         $out .= "\t\t\t".'</select>'."\n";
         $out .= "\t\t".'</div>'."\n";
@@ -425,7 +425,7 @@ class MakeRelation extends GeneratorCommand
         $out .= "\t\t\t".'@php  $'.$this->pKey.'_id = isset($item) ? $item->'.$this->pKey.'_id : null @endphp'."\n";
         $out .= "\t\t\t".'<select name="'.$this->pKey.'_id"  class="form-control" >'."\n";
         $out .= "\t\t\t".'@foreach( $'.str_plural($this->pKey).' as $key => $relatedItem)'."\n";
-        $out .= "\t\t\t".'<option value="{{ $key }}"  {{ $key == $'.$this->pKey.'_id  ? "selected" : "" }}> {{ is_json($relatedItem) ? getDefaultValueKey($relatedItem) :  $relatedItem}}</label>'."\n";
+        $out .= "\t\t\t".'<option value="{{ $key }}"  {{ $key == $'.$this->pKey.'_id  ? "selected" : "" }}> {{ is_json($relatedItem) ? getDefaultValueKey($relatedItem) :  $relatedItem}}</option>'."\n";
         $out .= "\t\t\t".'@endforeach'."\n";
         $out .= "\t\t\t".'</select>'."\n";
         $out .= "\t\t".'</div>'."\n";
@@ -460,14 +460,74 @@ class MakeRelation extends GeneratorCommand
                 Schema::enableForeignKeyConstraints();
             });
         }
-        Schema::table($ft, function (Blueprint $table) use ($key, $pk, $fk, $pt) {
-            $table->integer($pk . '_id')->unsigned();
-            if ($fk === 'true') {
-                $table->foreign($pk . '_id')->references($key)->on($pt)->onDelete('cascade');
-            }
-        });
+        $data = '';
+        $data .="\t".'Schema::table("'.$ft.'", function (Blueprint $table)  {'."\n";
+        $data .="\t\t".'$table->integer("'.$pk.'_id")->unsigned();'."\n";
+        if ($fk === "true") {
+            $data .= "\t\t".'$table->foreign("'.$pk .'_id")->references("'.$key.'")->on("'.$pt.'")->onDelete("cascade");'."\n";
+        }
+        $data .="\n\t".'});';
+        $dataDown = '';
+        $dataDown .= "\t".'Schema::disableForeignKeyConstraints();'."\n";
+        $dataDown .= "\t\t".'if (Schema::hasColumn("'.$ft.'", "'.$pk.'_id"))'."\n";
+        $dataDown .= "\t\t".'{'."\n";
+        $dataDown .= "\t\t\t".'$arrayOfKeys = $this->listTableForeignKeys("'.$ft.'");'."\n";
+        $dataDown .= "\t\t\t".'Schema::table("'.$ft.'", function ($table) use ($arrayOfKeys) {'."\n";
+        $dataDown .= "\t\t\t".'Schema::disableForeignKeyConstraints();'."\n";
+        $dataDown .= "\t\t\t\t".'if(in_array("'.$ft.'_'.$pk.'_id_foreign" , $arrayOfKeys)){'."\n";
+        $dataDown .= "\t\t\t\t\t".'$table->dropForeign("'.$ft.'_'.$pk . '_id_foreign");'."\n";
+        $dataDown .= "\t\t\t\t\t".'$table->dropColumn("'.$pk . '_id");'."\n";
+        $dataDown .= "\t\t\t\t".'}else{'."\n";
+        $dataDown .= "\t\t\t\t\t".'$table->dropColumn("'.$pk . '_id");'."\n";
+        $dataDown .= "\t\t\t\t".'}'."\n";
+        $dataDown .= "\t\t\t".'Schema::enableForeignKeyConstraints();'."\n";
+        $dataDown .= "\t\t\t".'});'."\n";
+        $dataDown .= "\t\t".'}'."\n";
+        $dataDown .= "\t".'Schema::enableForeignKeyConstraints();'."\n";
+        $this->makeMigrateFile($ft ,$pk ,  $data , $dataDown);
         Artisan::call("migrate");
     }
+
+    protected function makeMigrateFile($ft , $pk , $data , $dataDown)
+    {
+        $name =$pk.$ft;
+        $DS = DIRECTORY_SEPARATOR;
+        $file = __DIR__.'/stub/relation.stub';
+        $path = base_path('database'.$DS.'migrations'.$DS.date('Y_m_d').'_'.time().'_create_'.strtolower($pk).'_'.strtolower($ft).'_table.php');
+        $this->files->put($path, $this->buildRequest( $name , $file , $data , $dataDown) );
+    }
+
+
+
+    protected function buildRequest($name   , $stub ,$data , $dataDown){
+        $stub = $this->files->get($stub);
+        return $this->replace( $stub, 'DummyDown',$dataDown)
+            ->replace($stub , 'DummyUp', $data)
+            ->replaceView( $stub, 'DummyName','Create'.ucfirst($name).'Table');
+    }
+
+
+    protected function replace(&$stub,$rep ,  $name)
+    {
+        $stub = str_replace(
+            [$rep],
+            $name,
+            $stub
+        );
+
+        return $this;
+    }
+
+    protected function replaceView(&$stub,$rep ,  $name)
+    {
+        $stub = str_replace(
+            [$rep],
+            $name,
+            $stub
+        );
+        return $stub;
+    }
+
 
     public function listTableForeignKeys($table)
     {

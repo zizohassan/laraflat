@@ -1,7 +1,7 @@
 @extends(layoutExtend())
 
 @section('title')
-    {{ trans('categorie.Category') }} {{ trans('home.control') }}
+     {{ trans('categorie.categorie') }} {{ trans('home.control') }}
 @endsection
 
 @section('style')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    @include(layoutTable() , ['title' => trans('categorie.Category') , 'model' => 'categorie' , 'table' => $dataTable->table([] , true) ])
+    @include(layoutTable() , ['title' => trans('categorie.categorie') , 'model' => 'categorie' , 'table' => $dataTable->table([] , true) ])
 @endsection
 
 @section('script')

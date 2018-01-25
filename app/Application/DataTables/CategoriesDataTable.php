@@ -19,7 +19,7 @@ class CategoriesDataTable extends DataTable
              ->addColumn('edit', 'admin.categorie.buttons.edit')
              ->addColumn('delete', 'admin.categorie.buttons.delete')
              ->addColumn('view', 'admin.categorie.buttons.view')
-            ->addColumn('name', 'admin.categorie.buttons.langcol')
+             ->addColumn('title', 'admin.categorie.buttons.langcol')
              ->make(true);
     }
     /**
@@ -41,17 +41,9 @@ class CategoriesDataTable extends DataTable
      */
     public function html()
     {
-          $html =  $this->builder()
+        return $this->builder()
                     ->columns($this->getColumns())
                     ->parameters(dataTableConfig());
-          if(getCurrentLang() == 'ar'){
-              $html = $html->parameters([
-                  'language' => [
-                      'url' => url('/vendor/datatables/arabic.json')
-                   ]
-              ]);
-          }
-            return $html;
     }
     /**
      * Get columns.
@@ -61,19 +53,19 @@ class CategoriesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            [
-                'name' => "id",
-                'data' => 'id',
-                'title' => trans('curd.id'),
-            ],
-            [
-                'name' => "name",
-                'data' => 'name',
-                'title' => trans('categorie.name'),
-            ],
-
+              [
+                  'name' => "id",
+                  'data' => 'id',
+                  'title' => trans('curd.id'),
+             ],
+			[
+                'name' => 'title',
+                'data' => 'title',
+                'title' => trans('categorie.title'),
+                
+                ],
              [
-                  'name' => "view",
+                  'name' => 'view',
                   'data' => 'view',
                   'title' => trans('curd.view'),
                   'exportable' => false,
@@ -84,7 +76,7 @@ class CategoriesDataTable extends DataTable
              [
                   'name' => 'edit',
                   'data' => 'edit',
-                  'title' => trans('curd.edit'),
+                  'title' =>  trans('curd.edit'),
                   'exportable' => false,
                   'printable' => false,
                   'searchable' => false,

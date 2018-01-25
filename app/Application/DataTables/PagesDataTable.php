@@ -19,7 +19,7 @@ class PagesDataTable extends DataTable
              ->addColumn('edit', 'admin.page.buttons.edit')
              ->addColumn('delete', 'admin.page.buttons.delete')
              ->addColumn('view', 'admin.page.buttons.view')
-            ->addColumn('title', 'admin.page.buttons.langcol')
+             ->addColumn('name', 'admin.page.buttons.langcol')
              ->make(true);
     }
     /**
@@ -41,17 +41,9 @@ class PagesDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
-            ->columns($this->getColumns())
-            ->parameters(dataTableConfig());
-        if(getCurrentLang() == 'ar'){
-            $html = $html->parameters([
-                'language' => [
-                    'url' => url('/vendor/datatables/arabic.json')
-                ]
-            ]);
-        }
-        return $html;
+        return $this->builder()
+                    ->columns($this->getColumns())
+                    ->parameters(dataTableConfig());
     }
     /**
      * Get columns.
@@ -61,53 +53,46 @@ class PagesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            [
-                'name' => "id",
-                'data' => 'id',
-                'title' => trans('curd.id'),
-            ],
-            [
-                'name' => "title",
+              [
+                  'name' => "id",
+                  'data' => 'id',
+                  'title' => trans('curd.id'),
+             ],
+			[
+                'name' => 'title',
                 'data' => 'title',
-                'title' => trans('page.title'),
-            ],
-            [
-                'name' => "status",
-                'data' => 'status',
-                'title' => trans('page.status'),
-            ],
-            [
-                'name' => "date",
-                'data' => 'date',
-                'title' => trans('page.date'),
-            ],
-            [
-                'name' => "view",
-                'data' => 'view',
-                'title' => trans('curd.view'),
-                'exportable' => false,
-                'printable' => false,
-                'searchable' => false,
-                'orderable' => false,
-            ],
-            [
-                'name' => 'edit',
-                'data' => 'edit',
-                'title' => trans('curd.edit'),
-                'exportable' => false,
-                'printable' => false,
-                'searchable' => false,
-                'orderable' => false,
-            ],
-            [
-                'name' => 'delete',
-                'data' => 'delete',
-                'title' => trans('curd.delete'),
-                'exportable' => false,
-                'printable' => false,
-                'searchable' => false,
-                'orderable' => false,
-            ],
+                'title' => trans("page.title"),
+                'render' => 'function(){
+                        return JSON.parse(this.title).'.getCurrentLang().';
+                    }',
+                ],
+             [
+                  'name' => 'view',
+                  'data' => 'view',
+                  'title' => trans('curd.view'),
+                  'exportable' => false,
+                  'printable' => false,
+                  'searchable' => false,
+                  'orderable' => false,
+             ],
+             [
+                  'name' => 'edit',
+                  'data' => 'edit',
+                  'title' =>  trans('curd.edit'),
+                  'exportable' => false,
+                  'printable' => false,
+                  'searchable' => false,
+                  'orderable' => false,
+             ],
+             [
+                   'name' => 'delete',
+                   'data' => 'delete',
+                   'title' => trans('curd.delete'),
+                   'exportable' => false,
+                   'printable' => false,
+                   'searchable' => false,
+                   'orderable' => false,
+             ],
 
         ];
     }

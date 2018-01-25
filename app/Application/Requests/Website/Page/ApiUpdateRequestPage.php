@@ -10,12 +10,9 @@ class ApiUpdateRequestPage
     {
         $id = Route::input('id');
         return [
-            'title' => 'required',
-            'slug' => 'required',
-            'body' => 'required',
-            'status' => 'required',
-            'date' => 'required',
-            'image' => 'required',
+            "title.*" => "min:1|max:70|requiredbody.*",
+			"active" => "required|integer",
+			
         ];
     }
 }

@@ -10,4 +10,5 @@ return [
     'permission' => ' تصاريح خاصة بالعضو ',
     'created_at' => ' سجل في ',
     'Laraflat Commands' => ' اوامر لارافلات ',
+    'Laraflat Model Name' => '',
 ];
