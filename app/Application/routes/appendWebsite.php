@@ -18,3 +18,6 @@ Route::post('categorie/item' , 'CategorieController@store');
 Route::post('categorie/item/{id}' , 'CategorieController@update');
 Route::get('categorie/{id}/delete' , 'CategorieController@destroy');
 Route::get('categorie/{id}/view' , 'CategorieController@getById');
+
+
+
