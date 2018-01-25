@@ -1,6 +1,9 @@
 <?php
-function page(){
-    return \App\Application\Model\Page::select('title' , 'slug')->where('slug' , 'about_us')->first();
+function page($id = null){
+    if($id != null){
+        return \App\Application\Model\Page::infOrFail($id);
+    }
+    return \App\Application\Model\Page::get();
 }
 
 function getYouTubeId($url){

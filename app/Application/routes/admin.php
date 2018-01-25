@@ -86,13 +86,6 @@ Route::post('addNewItemToMenu', 'MenuController@addNewItemToMenu');
 Route::get('deleteMenuItem/{id}', 'MenuController@deleteMenuItem');
 Route::get('getItemInfo/{id}', 'MenuController@getItemInfo');
 Route::post('updateOneMenuItem', 'MenuController@updateOneMenuItem');
-#### page control
-Route::get('page', 'PageController@index');
-Route::get('page/item/{id?}', 'PageController@show');
-Route::post('page/item', 'PageController@store');
-Route::post('page/item/{id}', 'PageController@update');
-Route::get('page/{id}/delete', 'PageController@destroy');
-Route::get('page/{id}/view', 'PageController@getById');
 #### log control
 Route::get('log', 'LogController@index');
 Route::get('log/item/{id?}', 'LogController@show');
@@ -100,13 +93,6 @@ Route::post('log/item', 'LogController@store');
 Route::post('log/item/{id}', 'LogController@update');
 Route::get('log/{id}/delete', 'LogController@destroy');
 Route::get('log/{id}/view', 'LogController@getById');
-#### categorie control
-Route::get('categorie', 'CategorieController@index');
-Route::get('categorie/item/{id?}', 'CategorieController@show');
-Route::post('categorie/item', 'CategorieController@store');
-Route::post('categorie/item/{id}', 'CategorieController@update');
-Route::get('categorie/{id}/delete', 'CategorieController@destroy');
-Route::get('categorie/{id}/view', 'CategorieController@getById');
 #### contact control
 Route::get('contact', 'ContactController@index');
 Route::get('contact/item/{id?}', 'ContactController@show');
@@ -115,3 +101,28 @@ Route::post('contact/item/{id}', 'ContactController@update');
 Route::get('contact/{id}/delete', 'ContactController@destroy');
 Route::get('contact/{id}/view', 'ContactController@getById');
 Route::post('contact/replay/{id}', 'ContactController@replayEmail');
+
+
+
+
+
+
+#### page control
+Route::get('page' , 'PageController@index');
+Route::get('page/item/{id?}' , 'PageController@show');
+Route::post('page/item' , 'PageController@store');
+Route::post('page/item/{id}' , 'PageController@update');
+Route::get('page/{id}/delete' , 'PageController@destroy');
+Route::get('page/{id}/view' , 'PageController@getById');
+#### page comment
+Route::post('page/add/comment/{id}' , 'PageCommentController@addComment');
+Route::post('page/update/comment/{id}' , 'PageCommentController@updateComment');
+Route::get('page/delete/comment/{id}' , 'PageCommentController@deleteComment');
+
+#### categorie control
+Route::get('categorie' , 'CategorieController@index');
+Route::get('categorie/item/{id?}' , 'CategorieController@show');
+Route::post('categorie/item' , 'CategorieController@store');
+Route::post('categorie/item/{id}' , 'CategorieController@update');
+Route::get('categorie/{id}/delete' , 'CategorieController@destroy');
+Route::get('categorie/{id}/view' , 'CategorieController@getById');

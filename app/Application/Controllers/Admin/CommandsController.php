@@ -3,9 +3,9 @@
 namespace App\Application\Controllers\Admin;
 
 use App\Application\Controllers\AbstractController;
-use App\Application\Model\Categorie;
 use Alert;
 use App\Application\Model\Command;
+use App\Application\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CommandsController extends AbstractController
 {
-    public function __construct(Categorie $model)
+    public function __construct(User $model)
     {
         parent::__construct($model);
     }

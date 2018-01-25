@@ -7,12 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Categorie extends Model
 {
 
-  public $table = "categories";
-
+  public $table = "categorie";
 
    protected $fillable = [
-        'name' , 'created_at' , 'updated_at'
+        'title'
    ];
-
 
 }

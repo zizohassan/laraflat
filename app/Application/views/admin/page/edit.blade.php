@@ -1,78 +1,53 @@
 @extends(layoutExtend())
-
-@section('title')
-    {{ trans('page.page') }} {{  isset($item) ? trans('curd.edit'): trans('curd.add') }}
+ @section('title')
+    {{ trans('page.page') }} {{  isset($item) ? trans('home.edit')  : trans('home.add')  }}
 @endsection
-
 @section('style')
     {{ Html::style('/admin/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}
 @endsection
-
-@section('content')
-    @component(layoutForm() , ['title' => trans('page.page') ,'model' => 'page' , 'action' => isset($item) ? trans('curd.edit') : trans('curd.add') ])
-    @include(layoutMessage())
-        <form action="{{ concatenateLangToUrl('admin/page/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
+ @section('content')
+    @component(layoutForm() , ['title' => trans('page.page') , 'model' => 'page' , 'action' => isset($item) ? trans('home.edit')  : trans('home.add')  ])
+        @include(layoutMessage())
+        <form action="{{ concatenateLangToUrl('admin/page/item') }}{{ isset($item) ? '/'.$item->id : '' }}"
+              method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-
-            {!! extractFiled('title' , $item->title ?? old('title') , 'text' , 'page') !!}
-
-
-            <div class="form-group">
-                <div class="form-line">
-                    <label for="">{{ trans('page.slug') }}</label>
-                    <input type="text" name="slug" id="slug" placeholder="{{ trans('page.slug') }}" class="form-control" value="{{ $item->slug ?? old('slug') }}"/>
-                </div>
+             <div class="form-group">
+                <label for="title">{{ trans("page.title")}}</label>
+                {!! extractFiled("title" , isset($item->title) ? $item->title : old("title") , "text" , "page") !!}
             </div>
-
-            {!! extractFiled('body' , $item->body ?? old('body') , 'textarea' , 'page' , 'tinymce' ) !!}
-
             <div class="form-group">
-                <div class="">
-                    <label for="">{{ trans('page.status') }}</label>
-                    @php $status = $item->status  ?? null @endphp
-                    {!! Form::select('status' , status() , $status, ['class' => 'form-control' ] ) !!}
-                </div>
+                <label for="body">{{ trans("page.body")}}</label>
+                {!! extractFiled("body" , isset($item->body) ? $item->body : old("body") , "textarea" , "page" , 'tinymce' ) !!}
             </div>
-
             <div class="form-group">
-                <div class="form-line">
-                    <label for="">{{ trans('page.date') }}</label>
-                    <input type="text" name="date" class="datepicker form-control" value="{{ $item->date ?? old('date') }}">
+                <label for="active">{{ trans("page.active")}}</label>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" name="active"
+                               {{ isset($item->active) && $item->active  == 0 ? "checked" : "" }} type="radio"
+                               value="0">
+                        {{ trans("page.No")}}
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" name="active"
+                               {{ isset($item->active) && $item->active  == 1 ? "checked" : "" }} type="radio"
+                               value="1">
+                        {{ trans("page.Yes")}}
+                    </label>
                 </div>
+                </label>
             </div>
-
-            <div class="form-group">
-                <div class="form-line">
-                    <label for="">{{ trans('page.image') }}</label>
-                    @if(isset($item) && $item->image != '')
-                        <br>
-                        <img src="{{ url('/'.env('SMALL_IMAGE_PATH').'/'.$item->image) }}" class=" thumbnail" alt="">
-                        <br>
-                    @endif    
-                    <input type="file" name="image" class="" {{ !isset($item) ? "required='required'" : '' }}>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <button type="submit" name="submit" class="btn btn-default" >
+              <div class="form-group">
+                <button type="submit" name="submit" class="btn btn-default">
                     <i class="material-icons">check_circle</i>
-                    {{ trans('home.save') }} {{ trans('page.page') }}
+                    {{ trans('home.save') }}  {{ trans('page.page') }}
                 </button>
             </div>
         </form>
+        @include("admin.page.comment.edit")
     @endcomponent
 @endsection
-@section('script')
+ @section('script')
     @include(layoutPath('layout.helpers.tynic'))
-    {{ Html::script('/admin/plugins/momentjs/moment.js') }}
-    {{ Html::script('/admin/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}
-    <script>
-        $('.datepicker').bootstrapMaterialDatePicker({
-            time:false,
-            format:"L",
-            setDate:"{{ date('d/m/Y')  }}",
-            nowButton:true
-        });
-    </script>
 @endsection
+ 

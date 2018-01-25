@@ -329,8 +329,6 @@ class MakeController extends GeneratorCommand
                         $out .= "\t\t\t\t\t".'<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . '  == 0 ? "checked" : "" }} type="radio" value="0">'."\n";
                         $out .= "\t\t\t\t\t".'{{ trans("'.strtolower($this->getNameInput()).'.No")}}'."\n";
                         $out .= "\t\t\t\t".'</label>'."\n";
-                        $out .= "\t\t\t\t".'</div>';
-                        $out .= "\t\t\t\t".'<div class="form-check">'."\n";
                         $out .= "\t\t\t\t".'<label class="form-check-label">'."\n";
                         $out .= "\t\t\t\t".'<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . ' == 1 ? "checked" : "" }} type="radio" value="1" >'."\n\t\t\t\t";
                         $out .= "\t\t\t\t\t".'{{ trans("'.strtolower($this->getNameInput()).'.Yes")}}'."\n";
@@ -341,6 +339,8 @@ class MakeController extends GeneratorCommand
                             $out .= "\t\t\t\t".'<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
                         } elseif ($value[0] ==  'email') {
                             $out .= "\t\t\t\t".'<input type="email" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
+                        }elseif ($value[0] ==  'url') {
+                            $out .= "\t\t\t\t".'<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
                         } elseif ($value[0]  == 'date') {
                             $out .= "\t\t\t\t".'<input type="date" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
                         } elseif ($value[0]  == 'text') {

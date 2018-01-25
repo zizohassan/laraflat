@@ -2,11 +2,11 @@
 
 namespace App\Application\Controllers\Admin;
 
+use App\Application\Requests\Admin\Categorie\AddRequestCategorie;
+use App\Application\Requests\Admin\Categorie\UpdateRequestCategorie;
 use App\Application\Controllers\AbstractController;
 use App\Application\DataTables\CategoriesDataTable;
 use App\Application\Model\Categorie;
-use App\Application\Requests\Admin\Categorie\AddRequestCategorie;
-use App\Application\Requests\Admin\Categorie\UpdateRequestCategorie;
 use Yajra\Datatables\Request;
 use Alert;
 
@@ -25,14 +25,16 @@ class CategorieController extends AbstractController
         return $this->createOrEdit('admin.categorie.edit' , $id);
     }
 
-    public function store(AddRequestCategorie $request){
-         return $this->storeOrUpdate($request , null , 'admin/categorie');
-    }
+     public function store(AddRequestCategorie $request){
+          $item =  $this->storeOrUpdate($request , null , true);
+          return redirect('admin/categorie');
+     }
 
+     public function update($id , UpdateRequestCategorie $request){
+          $item =  $this->storeOrUpdate($request , $id , true);
+          return redirect()->back();
+     }
 
-    public function update($id , UpdateRequestCategorie $request){
-        return $this->storeOrUpdate($request , $id , 'admin/categorie');
-    }
 
     public function getById($id){
         $fields = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());

@@ -5,6 +5,7 @@ namespace App\Application\Controllers\Admin;
 use App\Application\Controllers\AbstractController;
 use App\Application\Model\Categorie;
 use Alert;
+use App\Application\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -12,7 +13,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class TranslationController extends AbstractController
 {
-    public function __construct(Categorie $model)
+    public function __construct(User $model)
     {
         parent::__construct($model);
     }

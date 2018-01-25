@@ -8,12 +8,9 @@ class ApiAddRequestPage
     public function rules()
     {
         return [
-            'title' => 'required',
-            'slug' => 'required',
-            'body' => 'required',
-            'status' => 'required',
-            'date' => 'required',
-            'image' => 'required',
+            "title.*" => "min:1|max:70|requiredbody.*",
+			"active" => "required|integer",
+			
         ];
     }
 }
