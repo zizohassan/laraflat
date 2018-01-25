@@ -26,4 +26,7 @@ return [
     'page' => 'Page',
     'DummyView' => '',
     'categorie' => '',
+    'post' => '',
+    'likes' => '',
+    'like' => '',
 ];

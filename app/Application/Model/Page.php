@@ -1,13 +1,14 @@
 <?php
- namespace App\Application\Model;
- use Illuminate\Database\Eloquent\Model;
- class Page extends Model
+
+namespace App\Application\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Page extends Model
 {
-   public $table = "page";
-  public function pagecomment(){
-		return $this->hasMany(PageComment::class, "page_id");
-		}
+    public $table = "page";
+
     protected $fillable = [
-        'title','body','active'
-   ];
- }
+        'title', 'body', 'active'
+    ];
+}

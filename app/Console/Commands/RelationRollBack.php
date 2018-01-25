@@ -45,6 +45,7 @@ class RelationRollBack extends GeneratorCommand
     {
         $this->setCols();
 
+
         $name = ucfirst($this->getNameInput());
 
 //        $this->deleteFile(app_path('Application/Controllers/Admin/'.$name.'Controller.php'));

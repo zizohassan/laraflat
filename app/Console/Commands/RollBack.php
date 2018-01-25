@@ -8,6 +8,8 @@ use App\Application\Model\Item;
 use App\Application\Model\Permission;
 use App\Application\Model\Relation;
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -110,6 +112,21 @@ class RollBack extends GeneratorCommand
             }
         }
 
+        $relation = Relation::where('p' , strtolower($name))->get();
+        if (count($relation) > 0) {
+            foreach ($relation as $rel) {
+                foreach (scandir($migrationPath) as $file) {
+                    $migration = explode('_', $file);
+                    if (isset($migration[4]) && isset($migration[5]) && isset($migration[6]) && isset($migration[7])) {
+                        $migration_name = $migration[4] . '_' . $migration[5] . '_' . $migration[6] . '_table.php';
+                        if ($migration_name == 'create_' . $rel->name . '_table.php') {
+                            $this->deleteFile(database_path('migrations/' . $file));
+                        }
+                    }
+                }
+            }
+        }
+
         shell_exec('composer --working-dir=' . app_path("/") . ' dumpautoload');
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists(strtolower($name));
@@ -134,10 +151,26 @@ class RollBack extends GeneratorCommand
                 }
             }
         }
+
+        $rel = Relation::where('f' , mb_strtolower($name))->get();
+
+        if(count($rel) > 0){
+            foreach ($rel as $r){
+                Artisan::call('laraflat:relation_rollBack', ['name' => $r->name, '--options' => $r->options]);
+            }
+        }
+
+        $rel = Relation::where('p' , mb_strtolower($name))->get();
+        if(count($rel) > 0){
+            foreach ($rel as $r){
+                Artisan::call('laraflat:relation_rollBack', ['name' => $r->name, '--options' => $r->options]);
+            }
+        }
         Command::where('name' ,$name.'Comment')->delete();
         Command::where('name' ,$name.'Rate')->delete();
         Command::where('name', ucfirst($name))->delete();
         Relation::where('f' , mb_strtolower($name))->delete();
+        Relation::where('p' , mb_strtolower($name))->delete();
     }
 
     public function rolBackComment($command){
