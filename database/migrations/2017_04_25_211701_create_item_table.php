@@ -21,6 +21,7 @@ class CreateItemTable extends Migration
             $table->string('icon' , '100')->nullable();
             $table->integer('parent_id');
             $table->integer('order');
+            $table->text('controller_path');
             $table->integer('menu_id')->unsigned();
             $table->foreign('menu_id')->references('id')->on('menu')->onDelete('cascade');
             $table->timestamps();
