@@ -1,7 +1,5 @@
 @php
-    $psermisions = new  \App\Application\Controllers\Traits\UsePermissionTrait();
-    $psermisions->can(auth()->user());
-    $p = array_keys($psermisions->permission);
+    $p = permissionArray();
 @endphp
 @foreach(getMenu('Admin') as $admin)
     @if($admin['item']['id'] == 21 || $admin['item']['id'] == 28)
