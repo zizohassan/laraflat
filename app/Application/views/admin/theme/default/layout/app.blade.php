@@ -147,7 +147,7 @@
                 &copy; 2017 <a href="javascript:void(0);">{{ getSetting('siteTitle')  }}</a>.
             </div>
             <div class="version">
-                <b>Version: </b> 1.0
+                <b>Version: </b> 2.1
             </div>
         </div>
         <!-- #Footer -->

@@ -9,30 +9,36 @@ class Item extends Model
     public $table = "items";
 
     protected $fillable = [
-        'name' , 'link' , 'type', 'parent_id', 'menu_id', 'order','icon'
+        'name', 'link', 'type', 'parent_id', 'menu_id', 'order', 'icon', 'controller_path'
     ];
-    public function   validation ($id){
+
+    public function validation($id)
+    {
         return [
-            'name*name' =>'required|unique:items,name,'.$id,
+            'name*name' => 'required|unique:items,name,' . $id,
             'link' => 'required',
             'type' => 'required',
             'parent_id' => 'required',
-            'menu_id' =>'required',
+            'menu_id' => 'required',
             'order' => 'required'
         ];
     }
-    public function   updateValidation ($id){
+
+    public function updateValidation($id)
+    {
         return [
-            'name*name' =>'required|unique:items,name,'.$id,
+            'name*name' => 'required|unique:items,name,' . $id,
             'link' => 'required',
             'type' => 'required',
             'parent_id' => 'required',
-            'menu_id' =>'required',
+            'menu_id' => 'required',
             'order' => 'required'
         ];
     }
-    public function menu(){
-        return $this->belongsTo('App\Menu' , 'menu_id');
+
+    public function menu()
+    {
+        return $this->belongsTo('App\Menu', 'menu_id');
     }
 
 

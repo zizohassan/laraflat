@@ -22,6 +22,15 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <div class="form-line">
+                           <div class="controller_path">
+
+                           </div>
+                            <span  onclick="addNewControllerPath()" class="btn btn-success"> <i class="fa fa-plus"></i></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="">
                             <label for="">{{ trans('menu.type') }}</label>
                             {!! Form::select('type' , menuTarget()  , null , ['class' => 'form-control' , 'id' => 'type'] ) !!}

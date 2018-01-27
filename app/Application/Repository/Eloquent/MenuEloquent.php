@@ -29,6 +29,7 @@ class MenuEloquent extends AbstractEloquent implements MenuInterface{
         $update->icon = $request->icon;
         $update->link = $request->link;
         $update->type = $request->type;
+        $update->controller_path = json_encode($request->controller_path);
         $update->save();
     }
     protected function extractNameArray($name){
