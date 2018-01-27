@@ -336,6 +336,7 @@ class MakeAdminController extends GeneratorCommand
         $menu->order = $order + 1;
         $menu->type = '';
         $menu->icon = $icon;
+        $menu->controller_path = json_encode(["App\Application\Controllers\Admin\\".$this->getNameInput()."Controller"]);
         $menu->save();
     }
 

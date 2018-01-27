@@ -112,3 +112,9 @@ function dataTableConfig()
                 }"
     ];
 }
+
+function permissionArray(){
+    $psermisions = new  \App\Application\Controllers\Traits\UsePermissionTrait();
+    $psermisions->can(auth()->user());
+    return array_keys($psermisions->permission);
+}
