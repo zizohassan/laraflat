@@ -361,6 +361,15 @@ class AddItemsToMenu extends Seeder
             'controller_path' => json_encode(["App\\Application\\Controllers\\Admin\\Themes\\ThemeController"])
         ]);
 
+        DB::table('items')->insert([
+            'name' => encodeJson(['ar' => '  رفع / استخراج المديولات ', 'en' => ' Export \ Import Models  ']),
+            'link' => 'admin/exportImport',
+            'type' => 'blank',
+            'parent_id' => 21,
+            'menu_id' => 1,
+            'order' => 5,
+            'controller_path' => json_encode(["App\\Application\\Controllers\\Admin\\CommandsController"])
+        ]);
 
     }
 }

@@ -100,7 +100,7 @@ class MakeTransformer extends GeneratorCommand
             }else{
                 $result .= "\t\t\t".'"'.$key.'" => getLangValue($modelOrCollection->'.$key.' , "'.$lang.'")';
             }
-            $result .= count($this->colsArray)  == $i ? ',':'';
+            $result .= count($this->colsArray)  == $i ? ',':',';
             $result .= "\n";
         }
         return $result;

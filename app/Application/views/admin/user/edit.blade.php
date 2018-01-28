@@ -1,14 +1,11 @@
 @extends(layoutExtend())
-
-@section('title')
+ @section('title')
     {{ trans('user.user') }} {{  isset($item) ? trans('curd.edit')  : trans('curd.add') }}
 @endsection
-
-@section('style')
+ @section('style')
     <link rel="stylesheet" href="{{ url('/admin/plugins/multi-select/css/multi-select.css') }}">
 @endsection
-
-@section('content')
+ @section('content')
     @component(layoutForm() , ['title' => trans('user.user')  , 'model' => 'user' , 'action' => isset($item) ? trans('curd.edit') : trans('curd.add') ])
     @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/user/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post">
@@ -28,33 +25,28 @@
                     <input type="password" name="password" id="password" placeholder="{{ trans('user.password') }}"    class="form-control"/>
                 </div>
             </div>
-
-
-            <div class="form-group">
+              <div class="form-group">
                 <div class="">
                     @php $gourp = isset($item) && $item->group_id != 0 ? $item->group_id : null @endphp
                     <label for="">{{ trans('user.group') }} </label>
                     {!! Form::select('group_id' , $data['groups'] , $gourp , ['calss' => 'form-control'] ) !!}
                 </div>
             </div>
-
-            <div class="form-group">
+             <div class="form-group">
                 <div class="">
                     <label for="">{{ trans('user.role') }}</label>
                     @php $roles = isset($data['roles_permission']) ? $data['roles_permission']->role->pluck('id')->all() : null @endphp
                     {!! Form::select('roles[]' , $data['roles'] , $roles, ['multiple' => true  , 'id' => 'roles' ] ) !!}
                 </div>
             </div>
-
-            <div class="form-group">
+             <div class="form-group">
                 <div class="">
                     <label for="">{{ trans('user.permission') }}</label>
                     @php $permission = isset($data['roles_permission']) ? $data['roles_permission']->permission->pluck('id')->all()  : null @endphp
                     {!! Form::select('permission[]' , $data['permissions'] , $permission , ['multiple' => true , 'id' => 'permissions' ] ) !!}
                 </div>
             </div>
-
-            <div class="form-group">
+             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default" >
                     <i class="material-icons">check_circle</i>
                     {{ trans('home.save') }} {{ trans('user.user') }}
@@ -63,11 +55,7 @@
         </form>
     @endcomponent
 @endsection
-
-
-
-
-@section('script')
+    @section('script')
     <script src="{{ url('/admin/plugins/multi-select/js/jquery.multi-select.js') }}"></script>
     <script src="{{ url('/admin/js/search.js') }}"></script>
     <script>

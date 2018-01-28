@@ -48,7 +48,8 @@ class RollBack extends GeneratorCommand
         $this->deleteDir(app_path('Application/Requests/Admin/' . $name.'Rate'));
         $this->deleteDir(app_path('Application/Requests/Website/' . $name.'Comment'));
         $this->deleteDir(app_path('Application/Requests/Website/' . $name.'Rate'));
-
+        $this->deleteFile(app_path('Application/routes/'.mb_strtolower($name).'.php'));
+        $this->deleteFile(app_path('Application/routes/'.mb_strtolower($name).'api.php'));
         $this->deleteFile(app_path('Application/Controllers/Api/' . $name . 'Api.php'));
         $this->deleteFile(app_path('Application/Controllers/Website/' . $name . 'Controller.php'));
         $this->deleteFile(app_path('Application/DataTables/' . $name . 'sDataTable.php'));
@@ -64,6 +65,7 @@ class RollBack extends GeneratorCommand
         $this->deleteFile(base_path('config/' . strtolower($name) . '.php'));
         $this->deleteFile(app_path('Application/views/website/sidebar/' . strtolower($name) . '.blade.php'));
         $this->deleteFile(app_path('Application/views/website/homepage/' . strtolower($name) . '.blade.php'));
+        $this->deleteFile(base_path('config/'.mb_strtolower($name).'.php'));
         if (Item::where('link', '/admin/' . strtolower($name))->count() > 0) {
             Item::where('link', '/admin/' . strtolower($name))->delete();
         }
@@ -72,12 +74,15 @@ class RollBack extends GeneratorCommand
         }
         $dir = app_path('Application/routes/appendWebsite.php');
         $this->replaceFromFile($name . 'Controller@', $dir);
+        $this->replaceFromFile("require_once __DIR__ . '/".mb_strtolower($name).".php';", $dir);
         $this->replaceFromFile('#### ' . strtolower($name) . ' control', $dir);
         $dir = app_path('Application/routes/appendApi.php');
         $this->replaceFromFile($name . 'Api@', $dir);
+        $this->replaceFromFile("require_once __DIR__ . '/".mb_strtolower($name)."api.php';", $dir);
         $this->replaceFromFile('#' . strtolower($name), $dir);
         $dir = app_path('Application/routes/admin.php');
         $this->replaceFromFile($name . 'Controller@', $dir);
+        $this->replaceFromFile("require_once __DIR__ . '/".mb_strtolower($name).".php';", $dir);
         $this->replaceFromFile('#### ' . strtolower($name) . ' control', $dir);
         $migrationPath = database_path('migrations');
         foreach (scandir($migrationPath) as $file) {
@@ -85,12 +90,15 @@ class RollBack extends GeneratorCommand
             if (isset($migration[4]) && isset($migration[5]) && isset($migration[6])) {
                 $migration_name = $migration[4] . '_' . $migration[5] . '_' . $migration[6];
                 if ($migration_name == 'create_' . strtolower($name) . '_table.php') {
+                    DB::table('migrations')->where('migration' , explode('.' , $file)[0])->delete();
                     $this->deleteFile(database_path('migrations/' . $file));
                 }
                 if ($migration_name == 'create_' . strtolower($name).'comment' . '_table.php') {
+                    DB::table('migrations')->where('migration' , explode('.' , $file)[0])->delete();
                     $this->deleteFile(database_path('migrations/' . $file));
                 }
                 if ($migration_name == 'create_' . strtolower($name).'rate' . '_table.php') {
+                    DB::table('migrations')->where('migration' , explode('.' , $file)[0])->delete();
                     $this->deleteFile(database_path('migrations/' . $file));
                 }
             }
@@ -105,6 +113,7 @@ class RollBack extends GeneratorCommand
                     if (isset($migration[4]) && isset($migration[5]) && isset($migration[6]) && isset($migration[7])) {
                         $migration_name = $migration[4] . '_' . $migration[5] . '_' . $migration[6] . '_table.php';
                         if ($migration_name == 'create_' . $rel->name . '_table.php') {
+                            DB::table('migrations')->where('migration' , explode('.' , $file)[0])->delete();
                             $this->deleteFile(database_path('migrations/' . $file));
                         }
                     }
@@ -120,6 +129,7 @@ class RollBack extends GeneratorCommand
                     if (isset($migration[4]) && isset($migration[5]) && isset($migration[6]) && isset($migration[7])) {
                         $migration_name = $migration[4] . '_' . $migration[5] . '_' . $migration[6] . '_table.php';
                         if ($migration_name == 'create_' . $rel->name . '_table.php') {
+                            DB::table('migrations')->where('migration' , explode('.' , $file)[0])->delete();
                             $this->deleteFile(database_path('migrations/' . $file));
                         }
                     }
@@ -201,6 +211,19 @@ class RollBack extends GeneratorCommand
         $this->replaceFromFile(ucfirst($command->name).'Controller@deleteComment' ,$dir );
         $this->replaceFromFile('#### '.strtolower($command->options).' comment' ,$dir );
 
+        if(file_exists(app_path('Application/routes/'.mb_strtolower($command->options).'.php'))){
+            $dir = app_path('Application/routes/'.mb_strtolower($command->options).'.php');
+            $this->replaceFromFile(ucfirst($command->name).'Controller@addComment' ,$dir );
+            $this->replaceFromFile(ucfirst($command->name).'Controller@updateComment' ,$dir );
+            $this->replaceFromFile(ucfirst($command->name).'Controller@deleteComment' ,$dir );
+            $this->replaceFromFile('#### '.strtolower($command->options).' comment' ,$dir );
+        }
+
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists(strtolower($command->options.'comment'));
+        Schema::enableForeignKeyConstraints();
+
+        $this->deleteFile(base_path('config/'.mb_strtolower($command->options).'scomment.php'));
         Permission::where('name' , 'comment-'.$command->name)->delete();
 
     }
@@ -228,7 +251,18 @@ class RollBack extends GeneratorCommand
         $dir = app_path('Application/routes/admin.php');
         $this->replaceFromFile(ucfirst($command->name).'Controller@addRate' ,$dir );
         $this->replaceFromFile('#### '.strtolower($command->options).' Rate' ,$dir );
-        Permission::where('name' , 'comment-'.$command->name)->delete();
+
+        if(file_exists(app_path('Application/routes/'.mb_strtolower($command->options).'.php'))){
+            $dir = app_path('Application/routes/'.mb_strtolower($command->options).'.php');
+            $this->replaceFromFile(ucfirst($command->name).'Controller@addRate' ,$dir );
+            $this->replaceFromFile('#### '.strtolower($command->options).' comment' ,$dir );
+        }
+
+        $this->deleteFile(base_path('config/'.mb_strtolower($command->options).'rate.php'));
+        Permission::where('name' , 'rate-'.$command->name)->delete();
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists(strtolower($command->options.'rate'));
+        Schema::enableForeignKeyConstraints();
     }
 
     protected function replaceFromFile($key, $path)

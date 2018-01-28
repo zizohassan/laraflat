@@ -18,7 +18,8 @@
         "mpociot/laravel-apidoc-generator": "^2.0",
         "themsaid/laravel-langman": "dev-master",
         "uxweb/sweet-alert": "^1.4",
-        "yajra/laravel-datatables-oracle": "~6.0"
+        "yajra/laravel-datatables-oracle": "~6.0",
+        "chumper/zipper": "1.0.x"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
