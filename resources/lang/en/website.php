@@ -29,4 +29,5 @@ return [
     'post' => '',
     'likes' => '',
     'like' => '',
+    'posts' => '',
 ];

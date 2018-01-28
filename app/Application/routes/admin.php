@@ -13,6 +13,10 @@ Route::post('command/exe', 'CommandsController@exe');
 Route::get('laravel/commands', 'CommandsController@command');
 Route::post('command/otherExe', 'CommandsController@otherExe');
 Route::post('laravel/haveCommand', 'CommandsController@haveCommand');
+Route::get('exportImport', 'CommandsController@exportEmportModels');
+Route::post('export', 'CommandsController@export');
+Route::post('import', 'CommandsController@import');
+
 
 
 ### relations
@@ -102,11 +106,6 @@ Route::get('contact/{id}/delete', 'ContactController@destroy');
 Route::get('contact/{id}/view', 'ContactController@getById');
 Route::post('contact/replay/{id}', 'ContactController@replayEmail');
 
-
-
-
-
-
 #### page control
 Route::get('page' , 'PageController@index');
 Route::get('page/item/{id?}' , 'PageController@show');
@@ -126,6 +125,5 @@ Route::post('categorie/item' , 'CategorieController@store');
 Route::post('categorie/item/{id}' , 'CategorieController@update');
 Route::get('categorie/{id}/delete' , 'CategorieController@destroy');
 Route::get('categorie/{id}/view' , 'CategorieController@getById');
-
 
 

@@ -24,4 +24,3 @@ Route::post('categorie/update/{id}', 'CategorieApi@update');
 Route::get('categorie/{limit?}/{offset?}/{lang?}', 'CategorieApi@index');
 
 
-
