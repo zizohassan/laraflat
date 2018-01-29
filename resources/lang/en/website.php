@@ -24,10 +24,7 @@ return [
     'Update' => 'Update',
     'Dashboard' => 'Dashboard',
     'page' => 'Page',
+    'categorie' => 'categorie',
+    'post' => 'post',
     'DummyView' => '',
-    'categorie' => '',
-    'post' => '',
-    'likes' => '',
-    'like' => '',
-    'posts' => '',
 ];

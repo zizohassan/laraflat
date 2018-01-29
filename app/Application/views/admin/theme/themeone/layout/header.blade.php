@@ -18,5 +18,4 @@
        </span>
     @endif
     <div class="clearfix"></div>
-<h2>Just for test</h2>
 </div>

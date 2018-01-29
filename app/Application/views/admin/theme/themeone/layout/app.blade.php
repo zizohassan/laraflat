@@ -38,23 +38,30 @@
     @else
         <link rel="stylesheet" href="{{ url('style') }}/styles/app.css" id="load_styles_before"/>
         <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins.css"/>
-        @endif
-                <!-- endbuild -->
+    @endif
+<!-- endbuild -->
 
-        {{ Html::style('admin/plugins/multi-select/css/multi-select.css') }}
-        {{ Html::style('admin/plugins/bootstrap-select/css/bootstrap-select.css') }}
-        {{--{{ Html::style('admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css') }}--}}
-        <link rel="stylesheet" href="{{ url('style') }}/vendor/datatables/media/css/dataTables.bootstrap4.css"/>
+    {{ Html::style('admin/plugins/multi-select/css/multi-select.css') }}
+    {{ Html::style('admin/plugins/bootstrap-select/css/bootstrap-select.css') }}
+    {{--{{ Html::style('admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css') }}--}}
+    <link rel="stylesheet" href="{{ url('style') }}/vendor/datatables/media/css/dataTables.bootstrap4.css"/>
 
-        {{ Html::style('css/sweetalert.css') }}
-        {{ Html::style('admin/plugins/tinymce/plugins/elfinder/css/elfinder.full.css') }}
-        {{ Html::style('css/rate.css') }}
-        @yield('style')
-        <style>
-            .img-responsive {
-                width: 100%
-            }
-        </style>
+    {{ Html::style('css/sweetalert.css') }}
+    {{ Html::style('admin/plugins/tinymce/plugins/elfinder/css/elfinder.full.css') }}
+    {{ Html::style('css/rate.css') }}
+    <link rel="stylesheet" href="{{ url('css/fontawesome-iconpicker.min.css') }}">
+    @yield('style')
+    <style>
+        .img-responsive {
+            width: 100%
+        }
+        .search input{
+            width:140px !important;
+        }
+    </style>
+    <link href="{{ url('/css/mainselec2.css') }}" rel="stylesheet" />
+    <link href="{{ url('/css/select2.css') }}" rel="stylesheet" />
+    <link href="{{ url('/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" />
 </head>
 <body>
 
@@ -180,7 +187,7 @@
 {{--};--}}
 {{--</script>--}}
 
-        <!-- build:js({.tmp,app}) scripts/app.min.js -->
+<!-- build:js({.tmp,app}) scripts/app.min.js -->
 <script src="{{ url('style') }}/vendor/jquery/dist/jquery.js"></script>
 <script src="{{ url('style') }}/vendor/PACE/pace.js"></script>
 <script src="{{ url('style') }}/vendor/tether/dist/js/tether.js"></script>
@@ -211,29 +218,110 @@
 <script src="{{ url('style') }}/vendor/datatables/media/js/dataTables.bootstrap4.js"></script>
 
 {{ Html::script('js/sweetalert.min.js') }}
+
+<script src="{{ url('js/select2.min.js') }}"></script>
+<script src="{{ url('js/moment.js') }}"></script>
+<script src="{{ url('js/bootstrap-datetimepicker.js') }}"></script>
+
 <script type="application/javascript">
+    $('.select2').select2({
+        theme: "bootstrap",
+        dir:"rtl"
+    });
+    $('.datepicker').datetimepicker({
+        defaultDate: "{{ date('Y/m/d') }}",
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        },
+        format: 'Y/MM/DD'
+    });
+    $('.datepicker2').datetimepicker({
+        defaultDate: "",
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        },
+        format: 'Y/MM/DD'
+    });
+
+    $('.time').datetimepicker({
+        format: 'LT',
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        }
+    });
     function deleteThisItem(e) {
         var link = $(e).data('link');
         swal({
-                    title: "Are you sure?",
-                    text: "You will not be able to recover this Item Again!",
-                    type: "warning",
+                title: "Are you sure?",
+                text: "You will not be able to recover this Item Again!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function () {
+                window.location = link;
+            });
+    }
+
+    function checkAll() {
+        $('input[name="id[]"]').each(function () {
+            if (!$(this).prop('checked')) {
+                $(this).prop('checked' , true);
+            }
+        });
+    }
+
+    function unCheckAll() {
+        $('input[name="id[]"]').each(function () {
+            if ($(this).prop('checked')) {
+                $(this).prop('checked' , false);
+            }
+        });
+    }
+
+    function deleteThemAll(e) {
+        var link = $(e).data('link');
+        var check = [];
+        $('input[name="id[]"]').each(function () {
+            if ($(this).prop('checked')) {
+                check.push($(this).val());
+            }
+        });
+        if (check.length > 0) {
+            swal({
+                    title: "@lang('admin.Are you sure?')",
+                    text: "@lang('admin.You will not be able to recover this Item Again!')",
+                    type: "@lang('admin.warning')",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
+                    confirmButtonText: "@lang('admin.Yes, delete it!')",
                     closeOnConfirm: false
                 },
                 function () {
-                    window.location = link;
+                    window.location = link + '?id[]=' + check;
                 });
+        } else {
+            alert("@lang('admin.Please Select Some items')");
+        }
     }
 
-    $('.nav-item').on('click' , function(e){
+    $('.nav-item').on('click', function (e) {
         $(this).siblings().removeClass('active');
         $(this).siblings().find('a').removeClass('active');
         $(this).addClass('active');
         $(this).find('a').addClass('active');
-       $(this).closest('ul.nav').next('.tab-content').children('.tab-pane').each(function(){
+        $(this).closest('ul.nav').next('.tab-content').children('.tab-pane').each(function () {
             $(this).removeClass('active');
         });
         var id = $(this).find('a').attr('href');
@@ -241,10 +329,14 @@
     });
     $('#rate').barrating({
         theme: 'fontawesome-stars',
-        onSelect:function(value, text, event){
-           $('#rate').closest('form').submit();
+        onSelect: function (value, text, event) {
+            $('#rate').closest('form').submit();
         }
     });
+</script>
+<script src="{{ url('js/fontawesome-iconpicker.min.js') }}"></script>
+<script>
+    $('.icon-field').iconpicker();
 </script>
 @include('sweet::alert')
 @yield('script')

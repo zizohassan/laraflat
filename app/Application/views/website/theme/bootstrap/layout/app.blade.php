@@ -20,47 +20,87 @@
         ]) !!};
     </script>
     @stack('css')
+    <link href="{{ url('/css/mainselec2.css') }}" rel="stylesheet" />
+    <link href="{{ url('/css/select2.css') }}" rel="stylesheet" />
+    <link href="{{ url('/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" />
 </head>
 <body>
-    <div id="app">
-        @include(layoutMenu('website'))
-        @include(layoutPushHeader('website'))
-        @stack('before')
-        @include(layoutContent('website'))
-        @stack('after')
-        @include(layoutPushFooter('website'))
-        @include(layoutFooter('website'))
-    </div>
-    <script src="{{ asset('js/app.js') }}"></script>
-    {!! Links::track(true) !!}
-    {{ Html::script('js/sweetalert.min.js') }}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
-    <script type="application/javascript">
-        function deleteThisItem(e){
-            var link = $(e).data('link');
-            swal({
-                        title: "Are you sure?",
-                        text: "You will not be able to recover this Item Again!",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Yes, delete it!",
-                        closeOnConfirm: false
-                    },
-                    function(){
-                        window.location = link;
-                    });
-        }
-        $('#rate').barrating({
-            theme: 'fontawesome-stars',
-            onSelect:function(value, text, event){
-                $('#rate').closest('form').submit();
-            }
-        });
-    </script>
+<div id="app">
+    @include(layoutMenu('website'))
+    @include(layoutPushHeader('website'))
+    @stack('before')
+    @include(layoutContent('website'))
+    @stack('after')
+    @include(layoutPushFooter('website'))
+    @include(layoutFooter('website'))
+</div>
+<script src="{{ asset('js/app.js') }}"></script>
+{!! Links::track(true) !!}
+{{ Html::script('js/sweetalert.min.js') }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
+<script src="{{ url('js/select2.min.js') }}"></script>
+<script src="{{ url('js/moment.js') }}"></script>
+<script src="{{ url('js/bootstrap-datetimepicker.js') }}"></script>
+<script type="application/javascript">
+    $('.select2').select2({
+        theme: "bootstrap",
+        dir:"rtl"
+    });
+    $('.datepicker').datetimepicker({
+        defaultDate: "{{ date('Y/m/d') }}",
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        },
+        format: 'Y/MM/DD'
+    });
+    $('.datepicker2').datetimepicker({
+        defaultDate: "",
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        },
+        format: 'Y/MM/DD'
+    });
 
-    @include('sweet::alert')
-    @stack('js')
+    $('.time').datetimepicker({
+        format: 'LT',
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        }
+    });
+    function deleteThisItem(e) {
+        var link = $(e).data('link');
+        swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this Item Again!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function () {
+                window.location = link;
+            });
+    }
+    $('#rate').barrating({
+        theme: 'fontawesome-stars',
+        onSelect: function (value, text, event) {
+            $('#rate').closest('form').submit();
+        }
+    });
+</script>
+
+@include('sweet::alert')
+@stack('js')
 
 </body>
 </html>

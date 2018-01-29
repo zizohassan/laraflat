@@ -77,7 +77,12 @@ trait MainProcessTrait {
     }
     public function deleteItem($id , $callBack = null){
         try{
-            $item = $this->model->find($id);
+            if(is_array($id)){
+                $this->model->whereIn('id' , $id)->delete();
+                $item = 'Done';
+            }else{
+                $item = $this->model->find($id);
+            }
             $item = $item ? $item : null;
             if($item == null){
                 if($this->model->getTable() != 'logs') {
@@ -85,7 +90,7 @@ trait MainProcessTrait {
                 }
                 return redirect(404);
             }
-            if($item->delete()){
+            if($item == 'Done' || $item->delete()){
                 $this->doneMessage(trans('messages.deleteMessageSuccess') , trans('messages.success'));
                 if($this->model->getTable() != 'logs'){
                     $this->createLog('Delete' , 'Success' , json_encode(['Updated id' => [$id]]));

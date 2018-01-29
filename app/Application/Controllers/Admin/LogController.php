@@ -35,4 +35,8 @@ class LogController extends AbstractController
     public function destroy($id){
         return $this->deleteItem($id , 'admin/log')->with('sucess' , 'Done Delete log From system');
     }
+
+    public function pluck(\Illuminate\Http\Request $request){
+        return $this->deleteItem($request->id , 'admin/log')->with('sucess' , 'Done Delete log From system');
+    }
 }

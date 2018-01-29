@@ -18,4 +18,6 @@ return [
     'Allow' => ' السماح للوصول ',
     'NameSpace' => ' مسار الملف ',
     'Method Name' => ' اسم الدالة ',
+    'controller_name' => '',
+    'method_name' => '',
 ];
