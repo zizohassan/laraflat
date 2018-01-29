@@ -15,13 +15,15 @@ class CategoriesDataTable extends DataTable
     public function ajax()
     {
         return $this->datatables
-             ->eloquent($this->query())
-             ->addColumn('edit', 'admin.categorie.buttons.edit')
-             ->addColumn('delete', 'admin.categorie.buttons.delete')
-             ->addColumn('view', 'admin.categorie.buttons.view')
-             ->addColumn('title', 'admin.categorie.buttons.langcol')
-             ->make(true);
+            ->eloquent($this->query())
+            ->addColumn('id', 'admin.categorie.buttons.id')
+            ->addColumn('edit', 'admin.categorie.buttons.edit')
+            ->addColumn('delete', 'admin.categorie.buttons.delete')
+            ->addColumn('view', 'admin.categorie.buttons.view')
+            ->addColumn('title', 'admin.categorie.buttons.langcol')
+            ->make(true);
     }
+
     /**
      * Get the query object to be processed by dataTables.
      *
@@ -30,6 +32,18 @@ class CategoriesDataTable extends DataTable
     public function query()
     {
         $query = Categorie::query();
+
+        if(request()->has('from') && request()->get('from') != ''){
+            $query = $query->whereDate('created_at' , '>=' , request()->get('from'));
+        }
+
+        if(request()->has('to') && request()->get('to') != ''){
+            $query = $query->whereDate('created_at' , '<=' , request()->get('to'));
+        }
+
+        if(request()->has('title') && request()->get('title') != ''){
+            $query = $query->where("title", 'like' , "%".request()->get('title')."%");
+        }
 
         return $this->applyScopes($query);
     }
@@ -42,9 +56,10 @@ class CategoriesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->columns($this->getColumns())
-                    ->parameters(dataTableConfig());
+            ->columns($this->getColumns())
+            ->parameters(dataTableConfig());
     }
+
     /**
      * Get columns.
      *
@@ -53,44 +68,44 @@ class CategoriesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-              [
-                  'name' => "id",
-                  'data' => 'id',
-                  'title' => trans('curd.id'),
-             ],
-			[
+            [
+                'name' => "id",
+                'data' => 'id',
+                'title' => trans('curd.id'),
+            ],
+            [
                 'name' => 'title',
                 'data' => 'title',
                 'title' => trans('categorie.title'),
-                
-                ],
-             [
-                  'name' => 'view',
-                  'data' => 'view',
-                  'title' => trans('curd.view'),
-                  'exportable' => false,
-                  'printable' => false,
-                  'searchable' => false,
-                  'orderable' => false,
-             ],
-             [
-                  'name' => 'edit',
-                  'data' => 'edit',
-                  'title' =>  trans('curd.edit'),
-                  'exportable' => false,
-                  'printable' => false,
-                  'searchable' => false,
-                  'orderable' => false,
-             ],
-             [
-                   'name' => 'delete',
-                   'data' => 'delete',
-                   'title' => trans('curd.delete'),
-                   'exportable' => false,
-                   'printable' => false,
-                   'searchable' => false,
-                   'orderable' => false,
-             ],
+
+            ],
+            [
+                'name' => 'view',
+                'data' => 'view',
+                'title' => trans('curd.view'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
+            [
+                'name' => 'edit',
+                'data' => 'edit',
+                'title' => trans('curd.edit'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => trans('curd.delete'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
 
         ];
     }

@@ -15,13 +15,15 @@ class PermissionsDataTable extends DataTable
     public function ajax()
     {
         return $this->datatables
-             ->eloquent($this->query())
-             ->addColumn('edit', 'admin.permission.buttons.edit')
-             ->addColumn('delete', 'admin.permission.buttons.delete')
-             ->addColumn('view', 'admin.permission.buttons.view')
+            ->eloquent($this->query())
+            ->addColumn('id', 'admin.permission.buttons.id')
+            ->addColumn('edit', 'admin.permission.buttons.edit')
+            ->addColumn('delete', 'admin.permission.buttons.delete')
+            ->addColumn('view', 'admin.permission.buttons.view')
             ->addColumn('permission', 'admin.permission.buttons.permission')
-             ->make(true);
+            ->make(true);
     }
+
     /**
      * Get the query object to be processed by dataTables.
      *
@@ -30,6 +32,23 @@ class PermissionsDataTable extends DataTable
     public function query()
     {
         $query = Permission::query();
+
+
+        if(request()->has('from') && request()->get('from') != ''){
+            $query = $query->whereDate('created_at' , '>=' , request()->get('from'));
+        }
+
+        if(request()->has('to') && request()->get('to') != ''){
+            $query = $query->whereDate('created_at' , '<=' , request()->get('to'));
+        }
+
+        if(request()->has('controller_name') && request()->get('controller_name') != ''){
+            $query = $query->where('controller_name' , request()->get('controller_name'));
+        }
+
+        if(request()->has('method_name') && request()->get('method_name') != ''){
+            $query = $query->where('method_name' , request()->get('method_name'));
+        }
 
         return $this->applyScopes($query);
     }
@@ -41,10 +60,10 @@ class PermissionsDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
             ->columns($this->getColumns())
             ->parameters(dataTableConfig());
-        if(getCurrentLang() == 'ar'){
+        if (getCurrentLang() == 'ar') {
             $html = $html->parameters([
                 'language' => [
                     'url' => url('/vendor/datatables/arabic.json')
@@ -53,6 +72,7 @@ class PermissionsDataTable extends DataTable
         }
         return $html;
     }
+
     /**
      * Get columns.
      *

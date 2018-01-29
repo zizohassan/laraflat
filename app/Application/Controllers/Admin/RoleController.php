@@ -47,4 +47,8 @@ class RoleController extends AbstractController
     public function destroy($id){
         return $this->deleteItem($id , 'admin/role')->with('sucess' , 'Done Delete role From system');
     }
+
+    public function pluck(\Illuminate\Http\Request $request){
+        return $this->deleteItem($request->id , 'admin/role')->with('sucess' , 'Done Delete role From system');
+    }
 }

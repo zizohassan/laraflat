@@ -8,9 +8,23 @@
     <div class="pull-{{ getDirection() }} col-lg-9">
         <div><h1>{{ trans('website.page') }}</h1></div>
         @if(auth()->check() && auth()->user()->group_id == 1)
-        <div><a href="{{ url('page/item') }}" class="btn btn-default"><i
-                        class="fa fa-plus"></i> {{ trans('website.page') }}</a><br></div>
         @endif
+        <form method="get" class="form-inline">
+            <a href="{{ url('page/item') }}" class="btn btn-default"><i
+                        class="fa fa-plus"></i> {{ trans('website.page') }}</a>
+            <div class="form-group">
+                <input type="text" name="from" class="form-control datepicker2" placeholder="{{ trans("admin.from") }}"value="{{ request()->has("from") ? request()->get("from") : "" }}">
+            </div>
+            <div class="form-group">
+                <input type="text" name="to" class="form-control datepicker2" placeholder="{{ trans("admin.to") }}"value="{{ request()->has("to") ? request()->get("to") : "" }}">
+            </div>
+            <div class="form-group">
+                <input type="text" name="title" class="form-control " placeholder="{{ trans("page.title") }}" value="{{ request()->has("title") ? request()->get("title") : "" }}">
+            </div>
+            <button class="btn btn-success" type="submit" ><i class="fa fa-search" ></i ></button>
+            <a href="{{ url("page") }}" class="btn btn-danger" ><i class="fa fa-close" ></i></a>
+        </form>
+        <br>
         <table class="table table-responsive table-striped table-bordered">
             <thead>
             <tr>

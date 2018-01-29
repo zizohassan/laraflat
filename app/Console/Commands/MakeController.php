@@ -40,19 +40,19 @@ class MakeController extends GeneratorCommand
                             $value = $c;
                         } elseif ($key == 1) {
                             $this->cols[$value][] = $c;
-                        }elseif ($key == 2) {
+                        } elseif ($key == 2) {
                             $this->cols[$value][] = $c;
-                        }elseif ($key == 3) {
+                        } elseif ($key == 3) {
                             $this->cols[$value][] = $c;
                         }
                     }
                 }
             }
-            if(!file_exists(app_path('Application/Model/'.ucfirst($this->getNameInput())).'.php')) {
+            if (!file_exists(app_path('Application/Model/' . ucfirst($this->getNameInput())) . '.php')) {
                 $this->call('laraflat:model', ['name' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
             }
         } else {
-            if(!file_exists(app_path('Application/Model/'.ucfirst($this->getNameInput())).'.php')) {
+            if (!file_exists(app_path('Application/Model/' . ucfirst($this->getNameInput())) . '.php')) {
                 $this->call('laraflat:model', ['name' => class_basename($this->getNameInput())]);
             }
         }
@@ -67,20 +67,20 @@ class MakeController extends GeneratorCommand
     protected function addUserPermission()
     {
         $name = $this->getNameInput();
-        $methods = ['index' , 'show' , 'store' , 'update' , 'getById' , 'destroy'];
-        $id = [];
-        foreach($methods as $method){
+        $methods = ['index', 'show', 'store', 'update', 'getById', 'destroy'];
+        $id=[];
+        foreach ($methods as $method) {
             $array = [
-                'name' => 'users-website'.$method."-".$name."Controller",
-                'slug' => "App-Application-Admin-".$name."-Controller".'-'.$method,
-                'description' => "Allow admin on ". $method." in controller ". $name ." Controller",
-                'controller_name' => $name.'Controller',
+                'name' => 'users-website' . $method . "-" . $name . "Controller",
+                'slug' => "App-Application-Admin-" . $name . "-Controller" . '-' . $method,
+                'description' => "Allow admin on " . $method . " in controller " . $name . " Controller",
+                'controller_name' => $name . 'Controller',
                 'method_name' => $method,
                 'controller_type' => 'website',
-                'namespace' => "App\\Application\\Controllers\\Website\\".$name."Controller",
+                'namespace' => "App\\Application\\Controllers\\Website\\" . $name . "Controller",
                 'permission' => 1
             ];
-            $item =  \App\Application\Model\Permission::create($array);
+            $item = \App\Application\Model\Permission::create($array);
             $id[] = $item->id;
         }
         $group = Group::find(2);
@@ -90,20 +90,20 @@ class MakeController extends GeneratorCommand
     protected function addPermission()
     {
         $name = $this->getNameInput();
-        $methods = ['index' , 'show' , 'store' , 'update' , 'getById' , 'destroy'];
-        $id = [];
-        foreach($methods as $method){
+        $methods = ['index', 'show', 'store', 'update', 'getById', 'destroy'];
+        $id=[];
+        foreach ($methods as $method) {
             $array = [
-                'name' => 'admin-website-'.$method."-".$name."Controller",
-                'slug' => "App-Application-Admin-".$name."-Controller".'-'.$method,
-                'description' => "Allow admin on ". $method." in controller ". $name ." Controller",
-                'controller_name' => $name.'Controller',
+                'name' => 'admin-website-' . $method . "-" . $name . "Controller",
+                'slug' => "App-Application-Admin-" . $name . "-Controller" . '-' . $method,
+                'description' => "Allow admin on " . $method . " in controller " . $name . " Controller",
+                'controller_name' => $name . 'Controller',
                 'method_name' => $method,
                 'controller_type' => 'website',
-                'namespace' => "App\\Application\\Controllers\\Website\\".$name."Controller",
+                'namespace' => "App\\Application\\Controllers\\Website\\" . $name . "Controller",
                 'permission' => 1
             ];
-            $item =  \App\Application\Model\Permission::create($array);
+            $item = \App\Application\Model\Permission::create($array);
             $id[] = $item->id;
         }
         $group = Group::find(1);
@@ -131,8 +131,28 @@ class MakeController extends GeneratorCommand
     {
         $stub = $this->files->get($stub);
         return $this->replace($stub, 'DummyView', $modelName)
+            ->replace($stub, 'DummyRequestFilter', $this->getFilters())
             ->replaceNamespace($stub, $name)
             ->replaceClass($stub, $controllerName);
+    }
+
+    protected function getFilters()
+    {
+        if (count($this->cols) > 0) {
+            $out = '';
+            foreach ($this->cols as $key => $filter) {
+                if(!in_array($key ,notFilter() )){
+                    $out .= "\t\t\t".'if(request()->has("' . $key . '") && request()->get("' . $key . '") != ""){'."\n";
+                    if($filter[2] == 'true'){
+                        $out .= "\t\t\t\t".'$items = $items->where("' . $key . '","like", "%".request()->get("' . $key . '")."%");'."\n";
+                    }else{
+                        $out .= "\t\t\t\t".'$items = $items->where("' . $key . '","=", request()->get("' . $key . '"));'."\n";
+                    }
+                    $out .= "\t\t\t".'}' . "\n\n";
+                }
+            }
+            return $out;
+        }
     }
 
     protected function getOptions()
@@ -188,80 +208,163 @@ class MakeController extends GeneratorCommand
             $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/views/' . $view . '.stub', $this->renderForm($name)));
         } elseif ($view == 'show') {
             $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/views/' . $view . '.stub', $this->renderShow($name)));
-        } elseif($view == 'sidebar'){
+        } elseif ($view == 'sidebar') {
             $path = $this->getPath('Application\\views\\website\\sidebar\\' . strtolower($name) . '.blade');
             $this->files->put($path, $this->buildSideBar($name, __DIR__ . '/stub/views/' . $view . '.stub', $this->sideBarContent($name)));
-        } elseif($view == 'homepage'){
+        } elseif ($view == 'homepage') {
             $path = $this->getPath('Application\\views\\website\\homepage\\' . strtolower($name) . '.blade');
             $this->files->put($path, $this->buildSideBar($name, __DIR__ . '/stub/views/' . $view . '.stub', $this->homePageContent($name)));
         }
     }
 
-    protected function sideBarContent($name){
+
+    protected function buildFilterForms()
+    {
+        $name = strtolower($this->getNameInput());
+        $out = '';
+        $out .=  "\t" . '<form method="get" class="form-inline">'."\n";
+        $out .=  "\t\t" . '<div class="form-group">'."\n";
+        $out .=  "\t\t\t" . '<input type="text" name="from" class="form-control datepicker2" placeholder=';
+        $out .= '"{{ trans("admin.from") }}"';
+        $out .= 'value="';
+        $out .= '{{ request()->has("from") ? request()->get("from") : "" }}';
+        $out .= '">'."\n";
+        $out .= "\t\t" . ' </div>'."\n";
+        $out .= "\t\t" . '<div class="form-group">'."\n";
+        $out .= "\t\t\t" . '<input type="text" name="to" class="form-control datepicker2" placeholder=';
+        $out .= '"{{ trans("admin.to") }}"';
+        $out .= 'value="';
+        $out .= '{{ request()->has("to") ? request()->get("to") : "" }}';
+        $out .= '">'."\n";
+        $out .= "\t\t" . '</div>'."\n";
         if (count($this->cols) > 0) {
-            $out = '@php $sidebar'.$this->getNameInput().' = \\App\\Application\\Model\\'.ucfirst($this->getNameInput()).'::orderBy("id" , "DESC")->limit(5)->get(); @endphp' . "\n";
-            $out .= "\t\t" .'@if(count($sidebar'.$this->getNameInput().') > 0)' . "\n";
-            $out .= "\t\t\t" .'@foreach($sidebar'.$this->getNameInput().' as $d)' . "\n";
-            $out .= "\t\t\t\t" .'<div>' . "\n";
-            $i = 0;
-            foreach ($this->cols as $key => $value) {
-                $i++;
-                if($i<=1){
-                    $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
-                    if ($value[0] == 'boolean') {
-                        $out .= "\t\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
-                    } else if (in_array($key, getFileFieldsName())) {
-                        $out .= "\t\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width="80" />' . "\n";
-                    } else {
-                        if ($isMultiLang) {
-                            $out .=  "\t\t\t\t\t" . '<a href="{{ url("'.strtolower($this->getNameInput()).'/".$d->id."/view") }}" ><p>{{ str_limit(getDefaultValueKey($d->' . $key . ') , 20) }}</a></p>'. "\n";
-                        } else {
-                            $out .=  "\t\t\t\t\t" . '<p><a href="{{ url("'.strtolower($this->getNameInput()).'/".$d->id."/view") }}" >{{ str_limit($d->' . $key . ' , 20) }}</a></p>'. "\n";
+            foreach ($this->cols as $key => $filter) {
+                if (!in_array($key, notFilter())) {
+                    if ($filter[0] != 'boolean') {
+                        if ($key == 'date' || $filter[0] == 'date') {
+                            $type = 'text';
+                            $class = 'datepicker2';
+                        } else if ($key == 'url') {
+                            $type = 'url';
+                            $class = '';
+                        } else if ($key == 'youtube') {
+                            $type = 'url';
+                            $class = '';
+                        }  else if ($key == 'time') {
+                            $type = 'text';
+                            $class = 'time';
+                        }else {
+                            $type = 'text';
+                            $class = '';
                         }
+                        $out .= "\t\t" . '<div class="form-group"> ' . "\n";
+                        $out .= "\t\t\t" . '<input type="' . $type . '" name="';
+                        $out .= $key;
+                        $out .= '" class="form-control ' . $class . '" placeholder="';
+                        $out .= '{{ trans("' . $name . '.' . $key . '") }}';
+                        $out .= '" value="';
+                        $out .= '{{ request()->has("' . $key . '") ? request()->get("' . $key . '") : "" }}';
+                        $out .= '"> ' . "\n";
+                        $out .= "\t\t" . '</div> ' . "\n";
+                    } else {
+                        $out .= "\t\t" . '<div class="form-group" > ' . "\n";
+                        $out .= "\t\t\t" . '<select style="width:80px;" name="';
+                        $out .= $key;
+                        $out .= '" class="form-control select2" placeholder="';
+                        $out .= '{{ trans("' . $name . '.' . $key . '") }}" > ' . "\n";
+                        $out .= "\t\t\t\t".'<option>';
+                        $out .='{{ trans("'.$name.'.'.$key.'") }}';
+                        $out .= '</option>'."\n";
+                        $out .= "\t\t\t\t" . '<option value="1" ';
+                        $out .= '{{ request()->has("' . $key . '") && request()->get("' . $key . '") == 1 ? "selected" : "" }}';
+                        $out .= '>';
+                        $out .= '{{trans("' . $name . '.Yes") }}';
+                        $out .= ' </option> ' . "\n";
+                        $out .= "\t\t\t\t" . '<option value="0" ';
+                        $out .= '{{request()->has("' . $key . '") && request()->get("' . $key . '") == 0 ? "selected" : "" }}';
+                        $out .= '>';
+                        $out .= '{{trans("' . $name . '.No") }}';
+                        $out .= ' </option> ' . "\n";
+                        $out .= "\t\t\t" . '</select> ' . "\n";
+                        $out .= "\t\t" . '</div> ' . "\n";
                     }
                 }
             }
-            $out .=  "\t\t\t\t\t" . '<p><a href="{{ url("'.strtolower($this->getNameInput()).'/".$d->id."/view") }}" ><i class="fa fa-eye"></i></a> <small><i class="fa fa-calendar-o"></i> {{ $d->created_at }}</small></p>'. "\n";
-            $out .= "\t\t\t\t" . '<hr>'. "\n";
-            $out .= "\t\t\t\t" .'</div>' . "\n";
-            $out .= "\t\t\t".'@endforeach' . "\n";
-            $out .= "\t\t" .'@endif' . "\n\t\t\t";
+            $out .= "\t\t".' <button class="btn btn-success" type="submit" ><i class="fa fa-search" ></i ></button>'."\n";
+            $out .= "\t\t".'<a href="{{ url("' . $name . '") }}" class="btn btn-danger" ><i class="fa fa-close" ></i></a>'."\n";
+            $out .= "\t".' </form > '."\n";
             return $out;
         }
     }
 
-    protected function homePageContent($name){
+
+    protected function sideBarContent($name)
+    {
         if (count($this->cols) > 0) {
-            $out = '@php $sidebar'.$this->getNameInput().' = \\App\\Application\\Model\\'.ucfirst($this->getNameInput()).'::inRandomOrder()->limit(5)->get(); @endphp' . "\n";
-            $out .= "\t\t" .'@if(count($sidebar'.$this->getNameInput().') > 0)' . "\n";
-            $out .= "\t\t\t" .'@foreach($sidebar'.$this->getNameInput().' as $d)' . "\n";
-            $out .= "\t\t\t\t" .'<div>' . "\n";
+            $out = '@php $sidebar' . $this->getNameInput() . ' = \\App\\Application\\Model\\' . ucfirst($this->getNameInput()) . '::orderBy("id", "DESC")->limit(5)->get(); @endphp' . "\n";
+            $out .= "\t\t" . '@if (count($sidebar' . $this->getNameInput() . ') > 0)' . "\n";
+            $out .= "\t\t\t" . '@foreach ($sidebar' . $this->getNameInput() . ' as $d)' . "\n";
+            $out .= "\t\t\t\t" . ' <div>' . "\n";
             $i = 0;
             foreach ($this->cols as $key => $value) {
                 $i++;
-                if($i<=3){
+                if ($i <= 1) {
                     $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
                     if ($value[0] == 'boolean') {
                         $out .= "\t\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
                     } else if (in_array($key, getFileFieldsName())) {
-                        $out .= "\t\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width="80" />' . "\n";
+                        $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
                     } else {
-                        $start = $i != 1 ? '<p>': '<h2>';
-                        $end =$i != 1 ? '</p>': '</h2>';
-                        $limit =  $i == 1 ? 50: 300;
                         if ($isMultiLang) {
-                            $out .=  "\t\t\t\t\t" .$start .'{{ str_limit(getDefaultValueKey($d->' . $key . ') , '.$limit.') }}'.$end. "\n";
+                            $out .= "\t\t\t\t\t" . '<a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" ><p>{{ str_limit(getDefaultValueKey($d->' . $key . ') , 20) }}</a></p > ' . "\n";
                         } else {
-                            $out .=  "\t\t\t\t\t" .$start .'{{ str_limit($d->' . $key . ' , '.$limit.') }}'.$end. "\n";
+                            $out .= "\t\t\t\t\t" . '<p><a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" >{{ str_limit($d->' . $key . ' , 20) }}</a></p > ' . "\n";
                         }
                     }
                 }
             }
-            $out .=  "\t\t\t\t\t" . '<p><a href="{{ url("'.strtolower($this->getNameInput()).'/".$d->id."/view") }}" ><i class="fa fa-eye"></i></a> <small><i class="fa fa-calendar-o"></i> {{ $d->created_at }}</small></p>'. "\n";
-            $out .= "\t\t\t\t" . '<hr>'. "\n";
-            $out .= "\t\t\t\t" .'</div>' . "\n";
-            $out .= "\t\t\t".'@endforeach' . "\n";
-            $out .= "\t\t" .'@endif' . "\n\t\t\t";
+            $out .= "\t\t\t\t\t" . '<p><a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" ><i class="fa fa-eye" ></i ></a> <small ><i class="fa fa-calendar-o" ></i > {{ $d->created_at }}</small ></p > ' . "\n";
+            $out .= "\t\t\t\t" . '<hr > ' . "\n";
+            $out .= "\t\t\t\t" . '</div> ' . "\n";
+            $out .= "\t\t\t" . '@endforeach' . "\n";
+            $out .= "\t\t" . '@endif' . "\n\t\t\t";
+            return $out;
+        }
+    }
+
+    protected function homePageContent($name)
+    {
+        if (count($this->cols) > 0) {
+            $out = '@php $sidebar' . $this->getNameInput() . ' = \\App\\Application\\Model\\' . ucfirst($this->getNameInput()) . '::inRandomOrder()->limit(5)->get(); @endphp' . "\n";
+            $out .= "\t\t" . '@if (count($sidebar' . $this->getNameInput() . ') > 0)' . "\n";
+            $out .= "\t\t\t" . '@foreach ($sidebar' . $this->getNameInput() . ' as $d)' . "\n";
+            $out .= "\t\t\t\t" . ' <div>' . "\n";
+            $i = 0;
+            foreach ($this->cols as $key => $value) {
+                $i++;
+                if ($i <= 3) {
+                    $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
+                    if ($value[0] == 'boolean') {
+                        $out .= "\t\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
+                    } else if (in_array($key, getFileFieldsName())) {
+                        $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
+                    } else {
+                        $start = $i != 1 ? '<p> ' : '<h2 > ';
+                        $end = $i != 1 ? '</p > ' : '</h2 > ';
+                        $limit = $i == 1 ? 50 : 300;
+                        if ($isMultiLang) {
+                            $out .= "\t\t\t\t\t" . $start . '{{ str_limit(getDefaultValueKey($d->' . $key . ') , ' . $limit . ') }}' . $end . "\n";
+                        } else {
+                            $out .= "\t\t\t\t\t" . $start . '{{ str_limit($d->' . $key . ' , ' . $limit . ') }}' . $end . "\n";
+                        }
+                    }
+                }
+            }
+            $out .= "\t\t\t\t\t" . ' <p><a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" ><i class="fa fa-eye" ></i ></a> <small ><i class="fa fa-calendar-o" ></i > {{ $d->created_at }}</small ></p > ' . "\n";
+            $out .= "\t\t\t\t" . '<hr > ' . "\n";
+            $out .= "\t\t\t\t" . '</div> ' . "\n";
+            $out .= "\t\t\t" . '@endforeach' . "\n";
+            $out .= "\t\t" . '@endif' . "\n\t\t\t";
             return $out;
         }
     }
@@ -270,15 +373,15 @@ class MakeController extends GeneratorCommand
     {
         $name = strtolower($this->getNameInput());
         $path = $this->getPath('Application\\views\\website\\' . strtolower($this->getNameInput()) . '\\buttons\\' . $view . '.blade');
-        $this->line('Done create action button view at Application view website ' . $this->getNameInput() . ' button');
+        $this->line('Done create action button view at Application view website ' . $this->getNameInput() . 'button');
         $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/views/buttons/' . $view . '.stub'));
     }
 
     protected function buildSideBar($name, $stub, $table = null)
     {
         $stub = $this->files->get($stub);
-            return $this->replace($stub, 'DUMMYHEADER', $name)
-                ->replaceView($stub, 'DUMMYCONTENT', $table);
+        return $this->replace($stub, 'DUMMYHEADER', $name)
+            ->replaceView($stub, 'DUMMYCONTENT', $table);
     }
 
     protected function buildView($name, $stub, $table = null)
@@ -298,186 +401,208 @@ class MakeController extends GeneratorCommand
         if (count($this->cols) > 0) {
             foreach ($this->cols as $key => $value) {
                 $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
-                $out .= "\t\t".'<div class="form-group">'."\n";
-                $out .= "\t\t\t".'<label for="' . $key . '">{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}</label>'."\n";
-                if(in_array($key , getFileFieldsName())){
-                    $out .= "\t\t\t\t".'@if(isset($item) && $item->'.$key.' != "")'."\n";
-                    $out .= "\t\t\t\t".'<br>'."\n";
-                    $out .= "\t\t\t\t".'<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->'.$key.') }}" class="thumbnail" alt="" width="200">'."\n";
-                    $out .= "\t\t\t\t".'<br>'."\n";
-                    $out .= "\t\t\t\t"."@endif"."\n";
-                    $out .= "\t\t\t\t".'<input type="file" name="'.$key.'" >'."\n";
-                }elseif($key == 'youtube'){
-                    $out .= "\t\t\t\t".'@if(isset($item) && $item->'.$key.' != "")'."\n";
-                    $out .= "\t\t\t\t".'<br>'."\n";
-                    $out .= "\t\t\t\t".'<iframe width="420" height="315" src="https://www.youtube.com/embed/{{ isset($item->'.$key.') ? getYouTubeId($item->'.$key.') : old("'.$key.'")  }}"></iframe>'."\n";
-                    $out .= "\t\t\t\t".'<br>'."\n";
-                    $out .= "\t\t\t\t"."@endif"."\n";
-                    $out .= "\t\t\t\t".'<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'")  }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
-                }else{
+                $out .= "\t\t" . ' <div class="form-group" > ' . "\n";
+                $out .= "\t\t\t" . '<label for="' . $key . '" >{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}</label > ' . "\n";
+                if (in_array($key, getFileFieldsName())) {
+                    $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
+                    $out .= "\t\t\t\t" . ' <br>' . "\n";
+                    $out .= "\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->' . $key . ') }}" class="thumbnail" alt = "" width = "200" > ' . "\n";
+                    $out .= "\t\t\t\t" . '<br> ' . "\n";
+                    $out .= "\t\t\t\t" . "@endif" . "\n";
+                    $out .= "\t\t\t\t" . '<input type="file" name="' . $key . '" > ' . "\n";
+                } elseif ($key == 'youtube') {
+                    $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
+                    $out .= "\t\t\t\t" . ' <br>' . "\n";
+                    $out .= "\t\t\t\t" . ' <iframe width = "420" height = "315" src="https://www.youtube.com/embed/{{ isset($item->' . $key . ') ? getYouTubeId($item->' . $key . ') : old("' . $key . '")  }}" ></iframe > ' . "\n";
+                    $out .= "\t\t\t\t" . '<br > ' . "\n";
+                    $out .= "\t\t\t\t" . "@endif" . "\n";
+                    $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                } elseif ($key == 'icon') {
+                    $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control icon-field" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                } elseif ($key == 'url') {
+                    $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                } elseif ($key == 'date') {
+                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control datepicker2" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                }elseif ($key == 'time') {
+                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control time" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                }else {
                     if ($value[0] == 'string' && $isMultiLang) {
-                        $out .= "\t\t\t\t".'{!! extractFiled("'.$key.'" , isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") , "text" , "'.strtolower($this->getNameInput()).'") !!}'."\n";
-                    } elseif ($value[0]  == 'email' && $isMultiLang) {
-                        $out .= "\t\t\t\t".'{!! extractFiled("'.$key.'" , isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") , "email" , "'.strtolower($this->getNameInput()).'") !!}'."\n";
-                    } elseif ($value[0]  == 'date' && $isMultiLang) {
-                        $out .= "\t\t\t\t".'{!! extractFiled("'.$key.'" , isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") , "date" , "'.strtolower($this->getNameInput()).'") !!}'."\n";
-                    } elseif ($value[0]  == 'text' && $isMultiLang) {
-                        $out .= "\t\t\t\t".'{!! extractFiled("'.$key.'" , isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") , "textarea" , "'.strtolower($this->getNameInput()).'") !!}'."\n";
-                    } elseif ($value[0]  == 'boolean') {
-                        $out .= "\t\t\t\t".'<div class="form-check">'."\n";
-                        $out .= "\t\t\t\t\t".'<label class="form-check-label">'."\n";
-                        $out .= "\t\t\t\t\t".'<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . '  == 0 ? "checked" : "" }} type="radio" value="0">'."\n";
-                        $out .= "\t\t\t\t\t".'{{ trans("'.strtolower($this->getNameInput()).'.No")}}'."\n";
-                        $out .= "\t\t\t\t".'</label>'."\n";
-                        $out .= "\t\t\t\t".'<label class="form-check-label">'."\n";
-                        $out .= "\t\t\t\t".'<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . ' == 1 ? "checked" : "" }} type="radio" value="1" >'."\n\t\t\t\t";
-                        $out .= "\t\t\t\t\t".'{{ trans("'.strtolower($this->getNameInput()).'.Yes")}}'."\n";
-                        $out .= "\t\t\t\t".'</label>'."\n";
-                        $out .= "\t\t\t\t".'</div>';
-                    }else{
-                        if ($value[0]  == 'string') {
-                            $out .= "\t\t\t\t".'<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
-                        } elseif ($value[0] ==  'email') {
-                            $out .= "\t\t\t\t".'<input type="email" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
-                        }elseif ($value[0] ==  'url') {
-                            $out .= "\t\t\t\t".'<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
-                        } elseif ($value[0]  == 'date') {
-                            $out .= "\t\t\t\t".'<input type="date" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
-                        } elseif ($value[0]  == 'text') {
-                            $out .= "\t\t\t\t".'<textarea name="' . $key . '" class="form-control" id="' . $key . '"   placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}</textarea>'."\n";
-                        }else{
-                            $out .= "\t\t\t\t".'<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
+                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "text" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+                    } elseif ($value[0] == 'email' && $isMultiLang) {
+                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "email" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+                    } elseif ($value[0] == 'date' && $isMultiLang) {
+                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "date" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+                    } elseif ($value[0] == 'text' && $isMultiLang) {
+                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "textarea" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+                    } elseif ($value[0] == 'boolean') {
+                        $out .= "\t\t\t\t" . ' <div class="form-check">' . "\n";
+                        $out .= "\t\t\t\t\t" . '<label class="form-check-label">' . "\n";
+                        $out .= "\t\t\t\t\t" . '<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . ' == 0 ? "checked" : "" }} type="radio" value="0" > ' . "\n";
+                        $out .= "\t\t\t\t\t" . '{{ trans("' . strtolower($this->getNameInput()) . '.No")}}' . "\n";
+                        $out .= "\t\t\t\t" . ' </label > ' . "\n";
+                        $out .= "\t\t\t\t" . '<label class="form-check-label">' . "\n";
+                        $out .= "\t\t\t\t" . '<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . ' == 1 ? "checked" : "" }} type="radio" value="1" > ' . "\n\t\t\t\t";
+                        $out .= "\t\t\t\t\t" . '{{ trans("' . strtolower($this->getNameInput()) . '.Yes")}}' . "\n";
+                        $out .= "\t\t\t\t" . ' </label> ' . "\n";
+                        $out .= "\t\t\t\t" . '</div> ';
+                    } else {
+                        if ($value[0] == 'string') {
+                            $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                        } elseif ($value[0] == 'email') {
+                            $out .= "\t\t\t\t" . '<input type="email" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                        } elseif ($value[0] == 'youtube') {
+                            $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                        } elseif ($value[0] == 'date') {
+                            $out .= "\t\t\t\t" . '<input type="date" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                        } elseif ($value[0] == 'text') {
+                            $out .= "\t\t\t\t" . '<textarea name="' . $key . '" class="form-control" id="' . $key . '"   placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" >{{isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}</textarea >'."\n";
+                        } else {
+                            $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">'."\n";
                         }
                     }
                 }
-                $out .= "\t\t\t".'</label>'."\n";
-                $out .= "\t\t".'</div>'."\n";
+                $out .= "\t\t" . '</div>' . "\n";
             }
         }
         return $out;
     }
 
-    protected function renderShow($name){
+    protected function renderShow($name)
+    {
         $out = '';
         if (count($this->cols) > 0) {
-            $out .= "\t\t".'<table class="table table-bordered table-responsive table-striped">'."\n";
-            $out .= "\t\t\t".'</tr>'."\n";
+            $out .= "\t\t" . ' <table class="table table-bordered table-responsive table-striped" > ' . "\n";
             foreach ($this->cols as $key => $value) {
                 $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
-                $out .=  "\t\t\t\t".'<tr><th>{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '") }}</th>'."\n";
-                $out .=  "\t\t\t\t".'@php $type =  getFileType("'.$key.'" , $item->'.$key.') @endphp'."\n";
-                $out .= "\t\t\t\t".'@if($type == "File")'."\n";
-                $out .= "\t\t\t\t\t".'<td> <a href="{{ url(env("UPLOAD_PATH")."/".$item->'.$key.') }}">{{ $item->'.$key.' }}</a></td>'."\n";
-                $out .= "\t\t\t\t".'@elseif($type == "Image")'."\n";
-                $out .= "\t\t\t\t\t".'<td> <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->'.$key.') }}" /></td>'."\n";
-                $out .= "\t\t\t\t".'@else'."\n";
-                if($key == 'youtube'){
-                    $out .= "\t\t\t\t".'@if(isset($item) && $item->'.$key.' != "")'."\n";
-                    $out .= "\t\t\t\t\t".'<td>'."\n";
-                    $out .= "\t\t\t\t".'<iframe width="420" height="315" src="https://www.youtube.com/embed/{{ isset($item->'.$key.') ? getYouTubeId($item->'.$key.') : old("'.$key.'")  }}"></iframe>'."\n";
-                    $out .= "\t\t\t\t\t".'</td>'."\n";
-                    $out .= "\t\t\t\t"."@endif"."\n";
-                }else if($value[0] == 'boolean'){
-                    $out .= "\t\t\t\t\t".'<td>'."\n";
-                    $out .= "\t\t\t\t".'{{ $item->'.$key.' == 1 ? trans("'.strtolower($this->getNameInput()).'.Yes") : trans("'.strtolower($this->getNameInput()).'.No")  }}'."\n";
-                    $out .= "\t\t\t\t\t".'</td>'."\n";
-                }else{
-                    if($isMultiLang){
-                        $out .=  "\t\t\t\t\t".'<td>{{ getDefaultValueKey(nl2br($item->'.$key.')) }}</td>'."\n";
-                    }else{
-                        $out .=  "\t\t\t\t\t".'<td>{{ nl2br($item->'.$key.') }}</td>'."\n";
+                $out .= "\t\t\t\t" . ' <tr>' . "\n\t\t\t\t" . ' <th>{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '") }}</th> ' . "\n";
+                $out .= "\t\t\t\t" . '@php $type = getFileType("' . $key . '", $item->' . $key . ') @endphp' . "\n";
+                $out .= "\t\t\t\t" . '@if ($type == "File") ' . "\n";
+                $out .= "\t\t\t\t\t" . ' <td> <a href="{{ url(env("UPLOAD_PATH")."/".$item->' . $key . ') }}" >{{ $item->' . $key . ' }}</a></td> ' . "\n";
+                $out .= "\t\t\t\t" . '@elseif($type == "Image")' . "\n";
+                $out .= "\t\t\t\t\t" . ' <td> <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->' . $key . ') }}" /></td> ' . "\n";
+                $out .= "\t\t\t\t" . '@else' . "\n";
+                if ($key == 'youtube') {
+                    $out .= "\t\t\t\t" . '@if (isset($item) && $item->' . $key . ' != "")' . "\n";
+                    $out .= "\t\t\t\t\t" . ' <td>' . "\n";
+                    $out .= "\t\t\t\t" . ' <iframe width = "420" height = "315" src="https://www.youtube.com/embed/{{ isset($item->' . $key . ') ? getYouTubeId($item->' . $key . ') : old("' . $key . '")  }}" ></iframe > ' . "\n";
+                    $out .= "\t\t\t\t\t" . '</td> ' . "\n";
+                    $out .= "\t\t\t\t" . "@endif" . "\n";
+                } else if ($value[0] == 'boolean') {
+                    $out .= "\t\t\t\t\t" . ' <td>' . "\n";
+                    $out .= "\t\t\t\t" . '{{ $item->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
+                    $out .= "\t\t\t\t\t" . ' </td> ' . "\n";
+                } else if ($key == 'url') {
+                    $out .= "\t\t\t\t\t" . ' <td>' . "\n";
+                    $out .= "\t\t\t\t" . ' <a href="{{  $item->' . $key . ' }}" ><i class="fa fa-link" ></i ></a> ' . "\n";
+                    $out .= "\t\t\t\t\t" . '</td> ' . "\n";
+                } else if ($key == 'icon') {
+                    $out .= "\t\t\t\t\t" . ' <td>' . "\n";
+                    $out .= "\t\t\t\t" . ' <i class="fa {{ $item->' . $key . '}}" ></i> ' . "\n";
+                    $out .= "\t\t\t\t\t" . '</td> ' . "\n";
+                } else {
+                    if ($isMultiLang) {
+                        $out .= "\t\t\t\t\t" . '<td>{{ getDefaultValueKey(nl2br($item->' . $key . ')) }}</td> ' . "\n";
+                    } else {
+                        $out .= "\t\t\t\t\t" . '<td>{{nl2br($item->' . $key . ') }}</td> ' . "\n";
                     }
                 }
-                $out .= "\t\t\t\t".'@endif</tr>'."\n";
+                $out .= "\t\t\t\t" . '@endif</tr> ' . "\n";
             }
-            $out .= "\t\t\t".'</tr>'."\n";
-            $out .= "\t\t".'</table>'."\n";
-        }else{
-            $out .= "\t\t".'<table class="table table-bordered table-responsive table-striped">'."\n";
-            $out .= "\t\t".'@php'."\n";
-            $out .= "\t\t".'$fields = rename_keys('."\n";
-            $out .= "\t\t".'removeFromArray($item["fields"] , ["updated_at"]) ,'."\n";
-            $out .= "\t\t".'["UserName"]'."\n";
-            $out .= "\t\t".');'."\n";
-            $out .= "\t\t".'@endphp'."\n";
-            $out .= "\t\t".'@foreach($fields as $key =>  $field)'."\n";
-            $out .= "\t\t\t".'<tr>'."\n";
-            $out .= "\t\t\t\t".'<th>{{ $key }}</th>'."\n";
-            $out .= "\t\t\t\t".'@php $type =  getFileType($field , $item[$field]) @endphp'."\n";
-            $out .= "\t\t\t\t".'@if($type == "File")'."\n";
-            $out .= "\t\t\t\t\t".'<td> <a href="{{ url(env("UPLOAD_PATH")."/".$item[$field]) }}">{{ $item[$field] }}</a></td>'."\n";
-            $out .= "\t\t\t\t".'@elseif($type == "Image")'."\n";
-            $out .= "\t\t\t\t\t".'<td> <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item[$field]) }}" /></td>'."\n";
-            $out .= "\t\t\t\t".'@else'."\n";
-            $out .= "\t\t\t\t\t".' <td>{!!  getDefaultValueKey(nl2br($item[$field]))  !!}</td>'."\n";
-            $out .= "\t\t\t\t".'@endif'."\n";
-            $out .= "\t\t\t".'</tr>'."\n";
-            $out .= "\t\t".'@endforeach'."\n";
-            $out .= "\t\t".'</table>'."\n";
+            $out .= "\t\t" . '</table > ' . "\n";
+        } else {
+            $out .= "\t\t" . '<table class="table table-bordered table-responsive table-striped" > ' . "\n";
+            $out .= "\t\t" . '@php' . "\n";
+            $out .= "\t\t" . '$fields = rename_keys(' . "\n";
+            $out .= "\t\t" . 'removeFromArray($item["fields"], ["updated_at"]) ,' . "\n";
+            $out .= "\t\t" . '["UserName"]' . "\n";
+            $out .= "\t\t" . ');' . "\n";
+            $out .= "\t\t" . '@endphp' . "\n";
+            $out .= "\t\t" . '@foreach ($fields as $key => $field) ' . "\n";
+            $out .= "\t\t\t" . ' <tr>' . "\n";
+            $out .= "\t\t\t\t" . ' <th>{{ $key }}</th> ' . "\n";
+            $out .= "\t\t\t\t" . '@php $type = getFileType($field, $item[$field]) @endphp' . "\n";
+            $out .= "\t\t\t\t" . '@if ($type == "File") ' . "\n";
+            $out .= "\t\t\t\t\t" . ' <td> <a href="{{ url(env("UPLOAD_PATH")."/".$item[$field]) }}" >{{ $item[$field] }}</a></td> ' . "\n";
+            $out .= "\t\t\t\t" . '@elseif($type == "Image")' . "\n";
+            $out .= "\t\t\t\t\t" . ' <td> <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item[$field]) }}" /></td> ' . "\n";
+            $out .= "\t\t\t\t" . '@else' . "\n";
+            $out .= "\t\t\t\t\t" . ' <td> {!!getDefaultValueKey(nl2br($item[$field]))  !!}</td> ' . "\n";
+            $out .= "\t\t\t\t" . '@endif' . "\n";
+            $out .= "\t\t\t" . ' </tr> ' . "\n";
+            $out .= "\t\t" . '@endforeach' . "\n";
+            $out .= "\t\t" . ' </table > ' . "\n";
         }
         return $out;
 
     }
 
 
-
-
-
-
-    protected function homePage($name){
+    protected function homePage($name)
+    {
 
     }
 
     protected function renderTable($name)
     {
-        $out = '<table class="table table-responsive table-striped table-bordered">' . "\n\t\t";
-        $out .= '<thead>' . "\n\t\t\t";
+
+        $out = $this->buildFilterForms();
+
+        $out .= '<br ><table class="table table-responsive table-striped table-bordered"> ' . "\n\t\t";
+        $out .= '<thead > ' . "\n\t\t\t";
         if (count($this->cols) > 0) {
-            $out .= '<tr>' . "\n\t\t\t\t";
+            $out .= '<tr> ' . "\n\t\t\t\t";
             foreach ($this->cols as $key => $value) {
-                $out .= '<th>{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '") }}</th>' . "\n\t\t\t\t";
-            }
-            $out .= '<th>{{ trans("'.strtolower($this->getNameInput()).'.edit") }}</th>' . "\n\t\t\t\t";
-            $out .= '<th>{{ trans("'.strtolower($this->getNameInput()).'.show") }}</th>' . "\n\t\t\t\t";
-            $out .= '<th>{{ trans("'.strtolower($this->getNameInput()).'.delete") }}</th>' . "\n\t\t\t\t";
+                $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '") }}</th> ' . "\n\t\t\t\t";}
+            $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.edit") }}</th> ' . "\n\t\t\t\t";
+            $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.show") }}</th> ' . "\n\t\t\t\t";
+            $out .= '<th>{{
+            trans("' . strtolower($this->getNameInput()) . '.delete") }}</th> ' . "\n\t\t\t\t";
         } else {
-            $out .= '<tr><th></th></tr>' . "\n\t\t\t\t";
+            $out .= '<tr><th></th></tr> ' . "\n\t\t\t\t";
         }
-        $out .= '</thead>' . "\n\t\t";
-        $out .= '<tbody>' . "\n\t\t";
-        $out .= '@if(count($items) > 0)' . "\n\t\t\t";
-        $out .= '@foreach($items as $d)' . "\n\t\t\t\t";
+        $out .= '</thead > ' . "\n\t\t";
+        $out .= '<tbody > ' . "\n\t\t";
+        $out .= '@if (count($items) > 0) ' . "\n\t\t\t";
+        $out .= '@foreach ($items as $d) ' . "\n\t\t\t\t";
         if (count($this->cols) > 0) {
-            $out .= '<tr>'."\n\t\t\t\t\t";
+            $out .= ' <tr>' . "\n\t\t\t\t\t";
             foreach ($this->cols as $key => $value) {
                 $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
-                if($value[0] == 'boolean'){
-                    $out .= "\t\t\t\t\t".'<td>'."\n";
-                    $out .= "\t\t\t\t".'{{ $d->'.$key.' == 1 ? trans("'.strtolower($this->getNameInput()).'.Yes") : trans("'.strtolower($this->getNameInput()).'.No")  }}'."\n";
-                    $out .= "\t\t\t\t\t".'</td>'."\n";
-                }else if(in_array($key , getFileFieldsName())){
-                    $out .= "\t\t\t\t\t".'<td>'."\n";
-                    $out .= "\t\t\t\t".'<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->'.$key.')}}"  width="80" />'."\n";
-                    $out .= "\t\t\t\t\t".'</td>'."\n";
-                }else{
-                    if($isMultiLang){
-                        $out .= '<td>{{ str_limit(getDefaultValueKey($d->' . $key . ') , 20) }}</td>' . "\n\t\t\t\t";
-                    }else{
-                        $out .= '<td>{{ str_limit($d->' . $key . ' , 20) }}</td>' . "\n\t\t\t\t";
+                if ($value[0] == 'boolean') {
+                    $out .= "\t\t\t\t\t" . ' <td>' . "\n";
+                    $out .= "\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
+                    $out .= "\t\t\t\t\t" . ' </td> ' . "\n";
+                } else if (in_array($key, getFileFieldsName())) {
+                    $out .= "\t\t\t\t\t" . '<td> ' . "\n";
+                    $out .= "\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
+                    $out .= "\t\t\t\t\t" . '</td> ' . "\n";
+                } else if ($key  == 'icon') {
+                    $out .= "\t\t\t\t\t" . '<td> ' . "\n";
+                    $out .= "\t\t\t\t" . '<i class="fa {{ $d->'.$key.' }}"></i>' . "\n";
+                    $out .= "\t\t\t\t\t" . '</td> ' . "\n";
+                } else if ($key  == 'url') {
+                    $out .= "\t\t\t\t\t" . '<td> ' . "\n";
+                    $out .= "\t\t\t\t" . '<a href="{{ $d->'.$key.' }}"><i class="fa fa-link }}"></i></a>' . "\n";
+                    $out .= "\t\t\t\t\t" . '</td> ' . "\n";
+                }else {
+                    if ($isMultiLang) {
+                        $out .= '<td>{{str_limit(getDefaultValueKey($d->' . $key . ') , 20) }}</td> ' . "\n\t\t\t\t";
+                    } else {
+                        $out .= '<td>{{ str_limit($d->' . $key . ' , 20) }}</td> ' . "\n\t\t\t\t";
                     }
                 }
             }
-            $out .= '<td>@include("website.' . $name . '.buttons.edit", ["id" => $d->id ])</td>' . "\n\t\t\t\t\t";
-            $out .= '<td>@include("website.' . $name . '.buttons.view", ["id" => $d->id ])</td>' . "\n\t\t\t\t\t";
-            $out .= '<td>@include("website.' . $name . '.buttons.delete", ["id" => $d->id ])</td>' . "\n\t\t\t\t\t";
-            $out .= '</tr>'."\n\t\t\t\t\t";
+            $out .= '<td> @include("website.' . $name . '.buttons.edit", ["id" => $d->id])</td> ' . "\n\t\t\t\t\t";
+            $out .= '<td> @include("website.' . $name . '.buttons.view", ["id" => $d->id])</td> ' . "\n\t\t\t\t\t";
+            $out .= '<td> @include("website.' . $name . '.buttons.delete", ["id" => $d->id])</td> ' . "\n\t\t\t\t\t";
+            $out .= '</tr> ' . "\n\t\t\t\t\t";
         } else {
-            $out .= '<tr><th></th></tr>' . "\n\t\t\t\t\t";
+            $out .= '<tr><th></th></tr> ' . "\n\t\t\t\t\t";
         }
         $out .= '@endforeach' . "\n\t\t\t\t";
         $out .= '@endif' . "\n\t\t\t";
-        $out .= '</tbody>' . "\n\t\t";
-        $out .= '</table>' . "\n\t";
+        $out .= ' </tbody > ' . "\n\t\t";
+        $out .= '</table > ' . "\n\t";
         $out .= '@include(layoutPaginate() , ["items" => $items])' . "\n\t\t";
         return $out;
     }

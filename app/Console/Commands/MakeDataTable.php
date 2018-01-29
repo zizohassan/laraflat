@@ -25,31 +25,32 @@ class MakeDataTable extends GeneratorCommand
 
 
     protected $colsArray = [];
+    protected $firstElemnt = [];
 
-    public function handle(){
-        if($this->option('cols')){
+    public function handle()
+    {
+        if ($this->option('cols')) {
             $cols = $this->option('cols');
-            $cols = explode(',' , $cols);
-            if($cols){
-                foreach($cols as $col){
-                    $col = explode(':' , $col);
-                    $i=0;
-                    foreach($col as $key => $c){
-                        if($key == 0){
-                            $this->colsArray[$i][] = $c;
-                        }elseif($key == 1){
-                            $this->colsArray[$i][]= $c;
-                        }elseif($key == 2){
-                            $this->colsArray[$i][]= $c;
-                        }elseif($key == 3){
-                            $this->colsArray[$i][]= $c;
+            $cols = explode(',', $cols);
+            if ($cols) {
+                foreach ($cols as $col) {
+                    $col = explode(':', $col);
+                    foreach ($col as $key => $c) {
+                        if ($key == 0) {
+                            $value = $c;
+                            $this->colsArray[$value][] = $c;
+                        } elseif ($key == 1) {
+                            $this->colsArray[$value][] = $c;
+                        } elseif ($key == 2) {
+                            $this->colsArray[$value][] = $c;
+                        } elseif ($key == 3) {
+                            $this->colsArray[$value][] = $c;
                         }
                     }
-                    $i++;
-
                 }
             }
         }
+
         $this->createDataTable();
     }
 
@@ -67,11 +68,32 @@ class MakeDataTable extends GeneratorCommand
     {
         $stub = $this->files->get($stub);
         return $this->replace($stub, 'DummyDatatable', $nameDatatable)
+            ->replace($stub, 'DummyRequestFilter', $this->getFilters())
             ->replace($stub, 'DummyModelSmall', strtolower($name))
             ->replace($stub, 'DummyDefaultCols', $this->getDefaultCols())
             ->replaceView($stub, 'DummyModel', ucfirst($name));
     }
 
+
+    protected function getFilters()
+    {
+        if (count($this->colsArray) > 0) {
+            $out = '';
+            foreach ($this->colsArray as $filter) {
+                if(!in_array($filter[0] ,notFilter() )){
+                    $out .= "\t\t".'if(request()->has("' . $filter[0] . '") && request()->get("' . $filter[0] . '") != ""){'."\n";
+                    if($filter[3] == 'true'){
+                        $out .= "\t\t\t\t".'$query = $query->where("' . $filter[0] . '","like", "%".request()->get("' . $filter[0] . '")."%");'."\n";
+                    }else{
+                        $out .= "\t\t\t\t".'$query = $query->where("' . $filter[0] . '","=", request()->get("' . $filter[0] . '"));'."\n";
+                    }
+                    $out .= "\t\t".'}' . "\n\n";
+                }
+            }
+            $this->firstElemnt = array_shift($this->colsArray);
+            return $out;
+        }
+    }
 
     protected function getStub()
     {
@@ -111,30 +133,31 @@ class MakeDataTable extends GeneratorCommand
 
     protected function getDefaultCols()
     {
-        if (count($this->colsArray) > 0){
-            if(isset($this->colsArray[0][0])){
-                $multiLanguage = isset($this->colsArray[0][3]) && $this->colsArray[0][3] == 'true' ? 'trans("'.strtolower($this->getNameInput()).'.'.$this->colsArray[0][0].'")' : '"'.$this->colsArray[0][0].'"';
-                return "\t\t\t"."[
-                'name' => '".$this->colsArray[0][0]."',
-                'data' => '".$this->colsArray[0][0]."',
-                'title' => ".$multiLanguage.",
-                ".$this->getLangValue()."
+        if (count($this->firstElemnt) > 0) {
+            if (isset($this->firstElemnt[0])) {
+                $multiLanguage = isset($this->firstElemnt[3]) && $this->firstElemnt[3] == 'true' ? 'trans("' . strtolower($this->getNameInput()) . '.' . $this->firstElemnt[0] . '")' : '"' . $this->firstElemnt[0] . '"';
+                return "\t\t\t" . "[
+                'name' => '" . $this->firstElemnt[0] . "',
+                'data' => '" . $this->firstElemnt[0] . "',
+                'title' => " . $multiLanguage . ",
+                " . $this->getLangValue() . "
                 ],";
             }
-          }
-        return "\t\t\t"."[
+        }
+        return "\t\t\t" . "[
                 'name' => 'name',
                 'data' =>  'name',
                 'title' =>  'name',
         ],";
     }
 
-    protected function getLangValue(){
-        if (count($this->colsArray) > 0) {
-            if (isset($this->colsArray[0][0])) {
-                if(isset($this->colsArray[0][3]) && $this->colsArray[0][3] == 'true'){
-                    return   "'render' => 'function(){
-                        return JSON.parse(this.".$this->colsArray[0][0].").'.getCurrentLang().';
+    protected function getLangValue()
+    {
+        if (count($this->firstElemnt) > 0) {
+            if (isset($this->firstElemnt[0])) {
+                if (isset($this->firstElemnt[3]) && $this->firstElemnt[3] == 'true') {
+                    return "'render' => 'function(){
+                        return JSON.parse(this." . $this->firstElemnt[0] . ").'.getCurrentLang().';
                     }',";
                 }
             }

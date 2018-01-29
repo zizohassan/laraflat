@@ -16,11 +16,13 @@ class SettingsDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
+            ->addColumn('id', 'admin.setting.buttons.id')
             ->addColumn('edit', 'admin.setting.buttons.edit')
             ->addColumn('delete', 'admin.setting.buttons.delete')
             ->addColumn('view', 'admin.setting.buttons.view')
             ->make(true);
     }
+
     /**
      * Get the query object to be processed by dataTables.
      *
@@ -29,6 +31,18 @@ class SettingsDataTable extends DataTable
     public function query()
     {
         $query = Setting::query();
+
+        if(request()->has('from') && request()->get('from') != ''){
+            $query = $query->whereDate('created_at' , '>=' , request()->get('from'));
+        }
+
+        if(request()->has('to') && request()->get('to') != ''){
+            $query = $query->whereDate('created_at' , '<=' , request()->get('to'));
+        }
+
+        if(request()->has('name') && request()->get('name') != ''){
+            $query = $query->where('name' , request()->get('name'));
+        }
 
         return $this->applyScopes($query);
     }
@@ -40,10 +54,10 @@ class SettingsDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
             ->columns($this->getColumns())
             ->parameters(dataTableConfig());
-        if(getCurrentLang() == 'ar'){
+        if (getCurrentLang() == 'ar') {
             $html = $html->parameters([
                 'language' => [
                     'url' => url('/vendor/datatables/arabic.json')
@@ -52,6 +66,7 @@ class SettingsDataTable extends DataTable
         }
         return $html;
     }
+
     /**
      * Get columns.
      *
@@ -59,7 +74,7 @@ class SettingsDataTable extends DataTable
      */
     protected function getColumns()
     {
-        $array  =  [
+        $array = [
             [
                 'name' => "id",
                 'data' => 'id',
@@ -89,8 +104,8 @@ class SettingsDataTable extends DataTable
                 'orderable' => false,
             ],
         ];
-        if(env('APP_ENV') == 'local'){
-            array_push( $array , [
+        if (env('APP_ENV') == 'local') {
+            array_push($array, [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' => trans('curd.delete'),

@@ -6,9 +6,9 @@
 
 @section('content')
     @component(layoutForm() , ['title' => trans('categorie.categorie') , 'model' => 'categorie' , 'action' => trans('home.view')  ])
-        <table class="table table-bordered table-responsive table-striped">
+        <table class="table table-bordered table-striped">
             <tr>
-                <th>{{ trans("categorie.title") }}</th>
+                <th width="150">{{ trans("categorie.title") }}</th>
                 <td>{{ nl2br($item->title) }}</td>
             </tr>
         </table>

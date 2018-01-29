@@ -92,29 +92,35 @@ function dataTableConfig()
         'responsive' => true,
 //        'autoWidth' =>  true,
         'stateSave' => 'saveState',
-        'initComplete' => "function () {
-                            var allColumns = this.api().column().columns()[0].length -4 ;
-                            var width = 50;
-                            this.api().columns().every(function (index) {
-                                var column = this;
-                                if(index  <=  allColumns){
-                                if(index != 0){
-                                    width=100;
-                                }
-                                    var title = $('#dataTableBuilder thead th').eq(index).text()
-                                    var input = '<input type=\"text\" class=\"form-control\" style=\"width: '+width+'px;\" placeholder=\"'+title+'\" />';
-                                    $(input).appendTo($(column.footer()).empty())
-                                    .on('change', function () {
-                                        column.search($(this).val(), false, false, true).draw();
-                                    });
-                                }
-                            });
-                }"
+//        'initComplete' => "function () {
+//                            var allColumns = this.api().column().columns()[0].length -4 ;
+//                            var width = 50;
+//                            this.api().columns().every(function (index) {
+//                                var column = this;
+//                                if(index  <=  allColumns){
+//                                if(index != 0){
+//                                    width=100;
+//                                }
+//                                    var title = $('#dataTableBuilder thead th').eq(index).text()
+//                                    var input = '<input type=\"text\" class=\"form-control\" style=\"width: '+width+'px;\" placeholder=\"'+title+'\" />';
+//                                    $(input).appendTo($(column.footer()).empty())
+//                                    .on('change', function () {
+//                                        column.search($(this).val(), false, false, true).draw();
+//                                    });
+//                                }
+//                            });
+//                }"
     ];
 }
 
-function permissionArray(){
+function permissionArray()
+{
     $psermisions = new  \App\Application\Controllers\Traits\UsePermissionTrait();
     $psermisions->can(auth()->user());
     return array_keys($psermisions->permission);
+}
+
+function notFilter()
+{
+    return ['icon', 'body', 'des', 'meta', 'keywords', 'image', 'file', 'image_ar', 'image_en', 'logo', 'avatar'];
 }

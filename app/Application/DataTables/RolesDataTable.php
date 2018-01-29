@@ -15,12 +15,14 @@ class RolesDataTable extends DataTable
     public function ajax()
     {
         return $this->datatables
-             ->eloquent($this->query())
-             ->addColumn('edit', 'admin.role.buttons.edit')
-             ->addColumn('delete', 'admin.role.buttons.delete')
-             ->addColumn('view', 'admin.role.buttons.view')
-             ->make(true);
+            ->eloquent($this->query())
+            ->addColumn('id', 'admin.role.buttons.id')
+            ->addColumn('edit', 'admin.role.buttons.edit')
+            ->addColumn('delete', 'admin.role.buttons.delete')
+            ->addColumn('view', 'admin.role.buttons.view')
+            ->make(true);
     }
+
     /**
      * Get the query object to be processed by dataTables.
      *
@@ -29,6 +31,23 @@ class RolesDataTable extends DataTable
     public function query()
     {
         $query = Role::query();
+
+
+        if(request()->has('from') && request()->get('from') != ''){
+            $query = $query->whereDate('created_at' , '>=' , request()->get('from'));
+        }
+
+        if(request()->has('to') && request()->get('to') != ''){
+            $query = $query->whereDate('created_at' , '<=' , request()->get('to'));
+        }
+
+        if(request()->has('name') && request()->get('name') != ''){
+            $query = $query->where('name' ,'like' , "%".request()->get('name')."%");
+        }
+
+        if(request()->has('slug') && request()->get('slug') != ''){
+            $query = $query->where('slug' , request()->get('slug'));
+        }
 
         return $this->applyScopes($query);
     }
@@ -40,10 +59,10 @@ class RolesDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
             ->columns($this->getColumns())
             ->parameters(dataTableConfig());
-        if(getCurrentLang() == 'ar'){
+        if (getCurrentLang() == 'ar') {
             $html = $html->parameters([
                 'language' => [
                     'url' => url('/vendor/datatables/arabic.json')
@@ -52,6 +71,7 @@ class RolesDataTable extends DataTable
         }
         return $html;
     }
+
     /**
      * Get columns.
      *

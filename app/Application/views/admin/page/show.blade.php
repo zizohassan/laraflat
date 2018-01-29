@@ -6,7 +6,7 @@
     @component(layoutForm() , ['title' => trans('page.page') , 'model' => 'page' , 'action' => trans('home.view')  ])
         <table class="table table-bordered  table-striped">
             <tr>
-                <th>{{ trans("page.title") }}</th>
+                <th width="150">{{ trans("page.title") }}</th>
                 <td>{{ getDefaultValueKey(nl2br($item->title)) }}</td>
             </tr>
             <tr>

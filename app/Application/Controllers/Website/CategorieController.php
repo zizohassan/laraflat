@@ -17,7 +17,21 @@ class CategorieController extends AbstractController
         }
 
         public function index(){
-            $items = $this->model->paginate(env('PAGINATE'));
+            $items = $this->model;
+
+            if(request()->has('from') && request()->get('from') != ''){
+                $items = $items->whereDate('created_at' , '>=' , request()->get('from'));
+            }
+
+            if(request()->has('to') && request()->get('to') != ''){
+                $items = $items->whereDate('created_at' , '<=' , request()->get('to'));
+            }
+
+            if(request()->has("title") && request()->get("title") != ""){
+                $items = $items->where("title","like", "%".request()->get("title")."%");
+            }
+
+            $items = $items->paginate(env('PAGINATE'));
             return view('website.categorie.index' , compact('items'));
         }
 

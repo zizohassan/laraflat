@@ -24,10 +24,7 @@ return [
     'Update' => 'حفظ',
     'Dashboard' => 'لوحة تحكم المدير',
     'page' => 'الصفحات',
-    'DummyView' => '',
     'categorie' => '',
     'post' => '',
-    'likes' => '',
-    'like' => '',
-    'posts' => '',
+    'DummyView' => '',
 ];

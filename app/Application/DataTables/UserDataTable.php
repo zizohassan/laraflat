@@ -17,6 +17,7 @@ class UserDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
+            ->addColumn('id', 'admin.user.buttons.id')
             ->addColumn('edit', 'admin.user.buttons.edit')
             ->addColumn('delete', 'admin.user.buttons.delete')
             ->addColumn('view', 'admin.user.buttons.view')
@@ -32,6 +33,23 @@ class UserDataTable extends DataTable
     {
         $query = User::query();
 
+        if(request()->has('from') && request()->get('from') != ''){
+            $query = $query->whereDate('created_at' , '>=' , request()->get('from'));
+        }
+
+        if(request()->has('to') && request()->get('to') != ''){
+            $query = $query->whereDate('created_at' , '<=' , request()->get('to'));
+        }
+
+        if(request()->has('name') && request()->get('name') != ''){
+            $query = $query->where('name' ,'like' , "%".request()->get('name')."%");
+        }
+
+        if(request()->has('email') && request()->get('email') != ''){
+            $query = $query->where('email' , request()->get('email'));
+        }
+
+
         return $this->applyScopes($query);
     }
 
@@ -42,10 +60,10 @@ class UserDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
             ->columns($this->getColumns())
             ->parameters(dataTableConfig());
-        if(getCurrentLang() == 'ar'){
+        if (getCurrentLang() == 'ar') {
             $html = $html->parameters([
                 'language' => [
                     'url' => url('/vendor/datatables/arabic.json')

@@ -15,13 +15,15 @@ class ContactsDataTable extends DataTable
     public function ajax()
     {
         return $this->datatables
-             ->eloquent($this->query())
-             ->addColumn('edit', 'admin.contact.buttons.edit')
-             ->addColumn('delete', 'admin.contact.buttons.delete')
-             ->addColumn('view', 'admin.contact.buttons.view')
+            ->eloquent($this->query())
+            ->addColumn('id', 'admin.contact.buttons.id')
+            ->addColumn('edit', 'admin.contact.buttons.edit')
+            ->addColumn('delete', 'admin.contact.buttons.delete')
+            ->addColumn('view', 'admin.contact.buttons.view')
             ->addColumn('user_id', 'admin.contact.buttons.langcol')
-             ->make(true);
+            ->make(true);
     }
+
     /**
      * Get the query object to be processed by dataTables.
      *
@@ -30,6 +32,20 @@ class ContactsDataTable extends DataTable
     public function query()
     {
         $query2 = Contact::query();
+
+        if(request()->has('from') && request()->get('from') != ''){
+            $query2 = $query2->whereDate('created_at' , '>=' , request()->get('from'));
+        }
+
+        if(request()->has('to') && request()->get('to') != ''){
+            $query2 = $query2->whereDate('created_at' , '<=' , request()->get('to'));
+        }
+
+        if(request()->has('email') && request()->get('email') != ''){
+            $query2 = $query2->where('email' , request()->get('email'));
+        }
+
+
         return $this->applyScopes($query2);
     }
 
@@ -41,9 +57,10 @@ class ContactsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->columns($this->getColumns())
-                    ->parameters(dataTableConfig());
+            ->columns($this->getColumns())
+            ->parameters(dataTableConfig());
     }
+
     /**
      * Get columns.
      *
@@ -52,16 +69,16 @@ class ContactsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-              [
-                  'name' => "id",
-                  'data' => 'id',
-                  'title' => trans('curd.id'),
-             ],
-             [
+            [
+                'name' => "id",
+                'data' => 'id',
+                'title' => trans('curd.id'),
+            ],
+            [
                 'name' => "name",
                 'data' => 'name',
                 'title' => trans('contact.name'),
-             ],
+            ],
             [
                 'name' => "email",
                 'data' => 'email',
@@ -77,33 +94,33 @@ class ContactsDataTable extends DataTable
                 'data' => 'user_id',
                 'title' => trans('contact.user_id'),
             ],
-             [
-                  'name' => 'view',
-                  'data' => 'view',
-                  'title' => trans('curd.view'),
-                  'exportable' => false,
-                  'printable' => false,
-                  'searchable' => false,
-                  'orderable' => false,
-             ],
-             [
-                  'name' => 'edit',
-                  'data' => 'edit',
-                  'title' =>  trans('curd.edit'),
-                  'exportable' => false,
-                  'printable' => false,
-                  'searchable' => false,
-                  'orderable' => false,
-             ],
-             [
-                   'name' => 'delete',
-                   'data' => 'delete',
-                   'title' => trans('curd.delete'),
-                   'exportable' => false,
-                   'printable' => false,
-                   'searchable' => false,
-                   'orderable' => false,
-             ],
+            [
+                'name' => 'view',
+                'data' => 'view',
+                'title' => trans('curd.view'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
+            [
+                'name' => 'edit',
+                'data' => 'edit',
+                'title' => trans('curd.edit'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => trans('curd.delete'),
+                'exportable' => false,
+                'printable' => false,
+                'searchable' => false,
+                'orderable' => false,
+            ],
 
         ];
     }

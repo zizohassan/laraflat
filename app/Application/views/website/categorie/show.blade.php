@@ -8,10 +8,11 @@
     <div class="pull-{{ getDirection() }} col-lg-9">
         <a href="{{ url('categorie') }}" class="btn btn-danger"><i
                     class="fa fa-arrow-left"></i> {{ trans('website.Back') }}  </a>
+        <br>
         <table class="table table-bordered table-responsive table-striped">
             <tr>
-                <th>{{ trans("categorie.title") }}</th>
-                <td>{{ nl2br($item->title) }}</td>
+                <th width="150">{{ trans("categorie.title") }}</th>
+                <td>{{ nl2br(getDefaultValueKey($item->title)) }}</td>
             </tr>
         </table>
         @if(auth()->check() && auth()->user()->group_id == 1)
