@@ -23,5 +23,12 @@ class AddSetting extends Seeder
             'body_setting' => 'LaraFlat'
         ]);
 
+        DB::table('setting')->insert([
+            'name' => 'GOOGLE_API_MAP',
+            'type'=> 'text',
+            'body_setting' => ''
+        ]);
+
+
     }
 }

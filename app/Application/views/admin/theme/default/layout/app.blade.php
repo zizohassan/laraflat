@@ -40,6 +40,9 @@
     <link href="{{ url('/css/mainselec2.css') }}" rel="stylesheet" />
     <link href="{{ url('/css/select2.css') }}" rel="stylesheet" />
     <link href="{{ url('/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" />
+    <!-- if you not use map remove this -->
+    {{ Html::style('css/map.css') }}
+    <!-- if you not use map remove this -->
 </head>
 
 <body class="theme-red">
@@ -292,6 +295,11 @@
 <script>
     $('.icon-field').iconpicker();
 </script>
+<!-- if you not use map remove this -->
+<script src="{{ url('js/map.js') }}" ></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ getSetting('GOOGLE_API_MAP') }}&libraries=places&callback=initMap" async defer></script>
+<script src="{{ url('js/showMap.js') }}" async defer></script>
+<!-- if you not use map remove this -->
 @include('sweet::alert')
 @yield('script')
 </body>

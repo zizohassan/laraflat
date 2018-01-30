@@ -96,4 +96,12 @@
 		'from'=>'من',
 		'to'=>'الي',
 		'ٍSearch'=>'ابحث',
+		'Autocomplete search'=>'اكمال تلقائي',
+		'All'=>'الكل',
+		'Establishments'=>'المؤسسات',
+		'Addresses'=>'العنوان',
+		'Geocodes'=>'الكود',
+		'Strict Bounds'=>'حدود صارمة',
+		'Enter a location'=>'ادخل المكان',
+		'location'=>'المكان',
 	];
