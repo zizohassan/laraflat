@@ -96,4 +96,12 @@
 		'from'=>'From',
 		'to'=>'To',
 		'ٍSearch'=>'Search',
+		'Autocomplete search'=>'Autocomplete search',
+		'All'=>'All',
+		'Establishments'=>'Establishments',
+		'Addresses'=>'Addresses',
+		'Geocodes'=>'Geocodes',
+		'Strict Bounds'=>'Strict Bounds',
+		'Enter a location'=>'Enter a location',
+		'location'=>'Location',
 	];

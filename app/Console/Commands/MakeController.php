@@ -425,6 +425,11 @@ class MakeController extends GeneratorCommand
                     $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control datepicker2" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
                 }elseif ($key == 'time') {
                     $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control time" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                }elseif ($key == 'lat') {
+                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lat" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                    $out .= $this->map();
+                }elseif ($key == 'lng') {
+                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lng" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
                 }else {
                     if ($value[0] == 'string' && $isMultiLang) {
                         $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "text" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
@@ -471,7 +476,8 @@ class MakeController extends GeneratorCommand
     {
         $out = '';
         if (count($this->cols) > 0) {
-            $out .= "\t\t" . ' <table class="table table-bordered table-responsive table-striped" > ' . "\n";
+            $tableClass = env('THEME') == 'themeone' ? '' : 'table-responsive';
+            $out .= "\t\t" . ' <table class="table table-bordered '.$tableClass.' table-striped" > ' . "\n";
             foreach ($this->cols as $key => $value) {
                 $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
                 $out .= "\t\t\t\t" . ' <tr>' . "\n\t\t\t\t" . ' <th>{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '") }}</th> ' . "\n";
@@ -499,6 +505,13 @@ class MakeController extends GeneratorCommand
                     $out .= "\t\t\t\t\t" . ' <td>' . "\n";
                     $out .= "\t\t\t\t" . ' <i class="fa {{ $item->' . $key . '}}" ></i> ' . "\n";
                     $out .= "\t\t\t\t\t" . '</td> ' . "\n";
+                }else if ($key == 'lat') {
+                    $out .= "\t\t\t\t\t" . '<td>' . "\n";
+                    $out .= "\t\t\t\t" . '{{nl2br($item->' . $key . ') }}' . "\n";
+                    $out .= "\t\t\t\t\t" . '</td></tr><tr>{{ trans("admin.location") }}<th></th>' . "\n";
+                    $out .= "\t\t\t\t\t" . '<td>' . "\n";
+                    $out .= "\t\t\t\t" . '<div id="showMap" style="width:100%;height: 500px;" data-lat="{{ $item->lat }}"  data-lng="{{ $item->lng }}"></div>' . "\n";
+                    $out .= "\t\t\t\t\t" . '</td>' . "\n";
                 } else {
                     if ($isMultiLang) {
                         $out .= "\t\t\t\t\t" . '<td>{{ getDefaultValueKey(nl2br($item->' . $key . ')) }}</td> ' . "\n";
@@ -625,6 +638,40 @@ class MakeController extends GeneratorCommand
             $stub
         );
         return $stub;
+    }
+
+    protected function map(){
+        $out = "\t\t\t\t".'<div class="pac-card" id="pac-card">'. "\n\t\t\t\t\t";
+        $out .= '<div>'. "\n\t\t\t\t\t\t";
+        $out .= '<div id="title">'. "\n\t\t\t\t\t\t\t";
+        $out .= '{{ trans("admin.Autocomplete search") }}'. "\n\t\t\t\t\t\t";
+        $out .= '</div>'. "\n\t\t\t\t\t\t";
+        $out .= '<div id="type-selector" class="pac-controls">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<input type="radio" name="type" id="changetype-all" checked="checked">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<label for="changetype-all">{{ trans("admin.All") }}</label>'. "\n\t\t\t\t\t\t\t";
+        $out .= '<input type="radio" name="type" id="changetype-establishment">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<label for="changetype-establishment">{{ trans("admin.Establishments") }}</label>'. "\n\t\t\t\t\t\t\t";
+        $out .= '<input type="radio" name="type" id="changetype-address">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<label for="changetype-address">{{ trans("admin.Addresses") }}</label>'. "\n\t\t\t\t\t\t\t";
+        $out .= '<input type="radio" name="type" id="changetype-geocode">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<label for="changetype-geocode">{{ trans("admin.Geocodes") }}</label>'. "\n\t\t\t\t\t\t";
+        $out .= '</div>'. "\n\t\t\t\t\t\t";
+        $out .= ' <div id="strict-bounds-selector" class="pac-controls" > '. "\n\t\t\t\t\t\t\t";
+        $out .= '<input type="checkbox" id="use-strict-bounds" value ="" > '. "\n\t\t\t\t\t\t\t";
+        $out .= '<label for="use-strict-bounds" > {{ trans("admin.Strict Bounds") }} </label > '. "\n\t\t\t\t\t\t";
+        $out .= '</div>'. "\n\t\t\t\t\t\t";
+        $out .= '</div>'. "\n\t\t\t\t\t\t";
+        $out .= '<div id="pac-container">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<input id="pac-input" type="text" placeholder="{{ trans("admin.Enter a location") }}">'."\n\t\t\t\t\t\t";
+        $out .= '</div> '."\n\t\t\t\t\t\t";
+        $out .= '</div> '."\n\t\t\t\t\t\t";
+        $out .= '<div id="map" style="width: 100%;height: 500px;"></div>'."\n\t\t\t\t\t\t";
+        $out .= '<div id="infowindow-content">'."\n\t\t\t\t\t\t";
+        $out .= ' <img src="" width ="16" height ="16" id="place-icon">'."\n\t\t\t\t\t\t";
+        $out .= '<span id="place-name"  class="title"></span><br> '."\n\t\t\t\t\t\t";
+        $out .= '<span id="place-address"></span> '."\n\t\t\t\t";
+        $out .= '</div>';
+        return $out;
     }
 
 }

@@ -20,9 +20,12 @@
         ]) !!};
     </script>
     @stack('css')
-    <link href="{{ url('/css/mainselec2.css') }}" rel="stylesheet" />
-    <link href="{{ url('/css/select2.css') }}" rel="stylesheet" />
-    <link href="{{ url('/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" />
+    <link href="{{ url('/css/mainselec2.css') }}" rel="stylesheet"/>
+    <link href="{{ url('/css/select2.css') }}" rel="stylesheet"/>
+    <link href="{{ url('/css/bootstrap-datetimepicker.css') }}" rel="stylesheet"/>
+    <!-- if you not use map remove this -->
+        {{ Html::style('css/map.css') }}
+    <!-- if you not use map remove this -->
 </head>
 <body>
 <div id="app">
@@ -44,7 +47,7 @@
 <script type="application/javascript">
     $('.select2').select2({
         theme: "bootstrap",
-        dir:"rtl"
+        dir: "rtl"
     });
     $('.datepicker').datetimepicker({
         defaultDate: "{{ date('Y/m/d') }}",
@@ -98,7 +101,11 @@
         }
     });
 </script>
-
+<!-- if you not use map remove this -->
+    <script src="{{ url('js/map.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ getSetting('GOOGLE_API_MAP') }}&libraries=places&callback=initMap" async defer></script>
+    <script src="{{ url('js/showMap.js') }}" async defer></script>
+<!-- if you not use map remove this -->
 @include('sweet::alert')
 @stack('js')
 
