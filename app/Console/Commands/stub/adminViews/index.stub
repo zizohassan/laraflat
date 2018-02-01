@@ -24,7 +24,7 @@
         </div>
 DummyFilterFields
         <button class="btn btn-success" type="submit" ><i class="fa fa-search"></i></button>
-        <a href="{{ url('admin/user') }}" class="btn btn-danger" ><i class="fa fa-close"></i></a>
+        <a href="{{ url('admin/DummyView') }}" class="btn btn-danger" ><i class="fa fa-close"></i></a>
     </form>
 @endpush
 

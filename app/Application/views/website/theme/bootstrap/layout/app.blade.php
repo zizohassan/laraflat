@@ -106,6 +106,10 @@
     <script src="https://maps.googleapis.com/maps/api/js?key={{ getSetting('GOOGLE_API_MAP') }}&libraries=places&callback=initMap" async defer></script>
     <script src="{{ url('js/showMap.js') }}" async defer></script>
 <!-- if you not use map remove this -->
+<script src="{{ url('js/fontawesome-iconpicker.min.js') }}"></script>
+<script>
+    $('.icon-field').iconpicker();
+</script>
 @include('sweet::alert')
 @stack('js')
 

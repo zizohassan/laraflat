@@ -109,7 +109,11 @@ class MakeModel extends GeneratorCommand
      protected function appdenToFillable()
     {
         if(count($this->colsArray) > 0){
-            return "'".implode("','" , array_keys($this->colsArray))."'";
+            $out =  "'".implode("','" , array_keys($this->colsArray))."'";
+            if(str_contains($out , '[]')){
+                $out = str_replace('[]' ,'' , $out);
+            }
+            return $out;
         }
         return ' ';
     }

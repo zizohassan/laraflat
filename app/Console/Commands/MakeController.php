@@ -4,12 +4,15 @@ namespace App\Console\Commands;
 
 
 use App\Application\Model\Group;
+use App\Console\Commands\Helpers\ControllerTrait;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Support\Facades\File;
 
 class MakeController extends GeneratorCommand
 {
+    use ControllerTrait;
+    
     /**
      * The name and signature of the console command.
      *
@@ -126,12 +129,12 @@ class MakeController extends GeneratorCommand
         return __DIR__ . '/stub/usercontroller.stub';
     }
 
-
     protected function buildClassController($name, $controllerName, $stub, $modelName)
     {
         $stub = $this->files->get($stub);
         return $this->replace($stub, 'DummyView', $modelName)
             ->replace($stub, 'DummyRequestFilter', $this->getFilters())
+            ->replace($stub , 'DummyUpdateFunction' , $this->controllerUpdateImageBeforeStore())
             ->replaceNamespace($stub, $name)
             ->replaceClass($stub, $controllerName);
     }
@@ -142,11 +145,12 @@ class MakeController extends GeneratorCommand
             $out = '';
             foreach ($this->cols as $key => $filter) {
                 if(!in_array($key ,notFilter() )){
-                    $out .= "\t\t\t".'if(request()->has("' . $key . '") && request()->get("' . $key . '") != ""){'."\n";
-                    if($filter[2] == 'true'){
-                        $out .= "\t\t\t\t".'$items = $items->where("' . $key . '","like", "%".request()->get("' . $key . '")."%");'."\n";
+                    $f = str_contains($key , '[]') ? str_replace('[]' , '' , $key) : $key;
+                    $out .= "\t\t\t".'if(request()->has("' . $f . '") && request()->get("' . $f . '") != ""){'."\n";
+                    if($filter[2] == 'true' || str_contains($key , '[]')){
+                        $out .= "\t\t\t\t".'$items = $items->where("' . $f . '","like", "%".request()->get("' . $f . '")."%");'."\n";
                     }else{
-                        $out .= "\t\t\t\t".'$items = $items->where("' . $key . '","=", request()->get("' . $key . '"));'."\n";
+                        $out .= "\t\t\t\t".'$items = $items->where("' . $f . '","=", request()->get("' . $f . '"));'."\n";
                     }
                     $out .= "\t\t\t".'}' . "\n\n";
                 }
@@ -217,7 +221,6 @@ class MakeController extends GeneratorCommand
         }
     }
 
-
     protected function buildFilterForms()
     {
         $name = strtolower($this->getNameInput());
@@ -253,6 +256,10 @@ class MakeController extends GeneratorCommand
                         }  else if ($key == 'time') {
                             $type = 'text';
                             $class = 'time';
+                        }elseif( str_contains($key , '[]')){
+                            $key = str_replace('[]' , '' , $key);
+                            $type = 'text';
+                            $class = '';
                         }else {
                             $type = 'text';
                             $class = '';
@@ -297,7 +304,6 @@ class MakeController extends GeneratorCommand
         }
     }
 
-
     protected function sideBarContent($name)
     {
         if (count($this->cols) > 0) {
@@ -313,12 +319,36 @@ class MakeController extends GeneratorCommand
                     if ($value[0] == 'boolean') {
                         $out .= "\t\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
                     } else if (in_array($key, getFileFieldsName())) {
-                        $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
+                        if(in_array($key, getImageFields())){
+                            if(str_contains($key , '[]')){
+                                $keyWithoutBracktes = str_replace('[]' , '' , $key);
+                                $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".getImageFromJson($d ,  "'.$keyWithoutBracktes.'"))}}"  width = "80" />' . "\n";
+                            } else{
+                                $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
+                            }
+                        }else{
+                            if(str_contains($key , '[]')){
+                                $keyWithoutBracktes = str_replace('[]' , '' , $key);
+                                $out .= "\t\t\t\t\t" . ' <a href="{{ url(env("UPLOAD_PATH")."/".getImageFromJson($d ,  "'.$keyWithoutBracktes.'"))}}"><i class="fa fa-file"></i></a>' . "\n";
+                            } else{
+                                $out .= "\t\t\t\t\t" . ' <a href="{{ url(env("UPLOAD_PATH")."/".$d->' . $key . ')}}" ><i class="fa fa-file"></i></a>' . "\n";
+                            }
+                        }
                     } else {
                         if ($isMultiLang) {
-                            $out .= "\t\t\t\t\t" . '<a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" ><p>{{ str_limit(getDefaultValueKey($d->' . $key . ') , 20) }}</a></p > ' . "\n";
+                            if(str_contains($key , '[]')){
+                                $key = str_replace('[]' ,'' , $key);
+                                $out .= "\t\t\t\t\t" . '<a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" ><p>{{ str_limit(implode("," , json_decode($d->' . $key . ')) , 20) }}</a></p > ' . "\n";
+                            }else{
+                                $out .= "\t\t\t\t\t" . '<a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" ><p>{{ str_limit(getDefaultValueKey($d->' . $key . ') , 20) }}</a></p > ' . "\n";
+                            }
                         } else {
-                            $out .= "\t\t\t\t\t" . '<p><a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" >{{ str_limit($d->' . $key . ' , 20) }}</a></p > ' . "\n";
+                            if(str_contains($key , '[]')){
+                                $key = str_replace('[]' ,'' , $key);
+                                $out .= "\t\t\t\t\t" . '<p><a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}">{{ str_limit(implode("," , json_decode($d->' . $key . ')) , 20) }}</a></p > ' . "\n";
+                            }else{
+                                $out .= "\t\t\t\t\t" . '<p><a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}">{{ str_limit($d->' . $key . ' , 20) }}</a></p > ' . "\n";
+                            }
                         }
                     }
                 }
@@ -347,15 +377,40 @@ class MakeController extends GeneratorCommand
                     if ($value[0] == 'boolean') {
                         $out .= "\t\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
                     } else if (in_array($key, getFileFieldsName())) {
-                        $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
+                        if(in_array($key, getImageFields())){
+                            if(str_contains($key , '[]')){
+                                $keyWithoutBracktes = str_replace('[]' , '' , $key);
+                                $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".getImageFromJson($d ,"'.$keyWithoutBracktes.'"))}}"  width = "80" />' . "\n";
+                            } else{
+                                $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
+                            }
+                        }else{
+                            if(str_contains($key , '[]')){
+                                $keyWithoutBracktes = str_replace('[]' , '' , $key);
+                                $out .= "\t\t\t\t\t" . ' <a href="{{ url(env("UPLOAD_PATH")."/".getImageFromJson($d , "'.$keyWithoutBracktes.'"))}}"><i class="fa fa-file"></i></a>' . "\n";
+                            } else{
+                                $out .= "\t\t\t\t\t" . ' <a href="{{ url(env("UPLOAD_PATH")."/".$d->' . $key . ')}}" ><i class="fa fa-file"></i></a>' . "\n";
+                            }
+                        }
                     } else {
                         $start = $i != 1 ? '<p> ' : '<h2 > ';
                         $end = $i != 1 ? '</p > ' : '</h2 > ';
                         $limit = $i == 1 ? 50 : 300;
                         if ($isMultiLang) {
-                            $out .= "\t\t\t\t\t" . $start . '{{ str_limit(getDefaultValueKey($d->' . $key . ') , ' . $limit . ') }}' . $end . "\n";
+                            if(str_contains($key , '[]')){
+                                $key = str_replace('[]' ,'' , $key);
+                                $out .= "\t\t\t\t\t" . $start . '{{ str_limit(implode("," , json_decode($d->' . $key . ')) , ' . $limit . ') }}' . $end . "\n";
+                            }else{
+                                $out .= "\t\t\t\t\t" . $start . '{{ str_limit(getDefaultValueKey($d->' . $key . ') , ' . $limit . ') }}' . $end . "\n";
+                            }
+
                         } else {
-                            $out .= "\t\t\t\t\t" . $start . '{{ str_limit($d->' . $key . ' , ' . $limit . ') }}' . $end . "\n";
+                            if(str_contains($key , '[]')){
+                                $key = str_replace('[]' ,'' , $key);
+                                $out .= "\t\t\t\t\t" . $start . '{{ str_limit(implode("," , json_decode($d->' . $key . ')) , ' . $limit . ') }}' . $end . "\n";
+                            }else{
+                                $out .= "\t\t\t\t\t" . $start . '{{ str_limit($d->' . $key . ' , ' . $limit . ') }}' . $end . "\n";
+                            }
                         }
                     }
                 }
@@ -402,14 +457,19 @@ class MakeController extends GeneratorCommand
             foreach ($this->cols as $key => $value) {
                 $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
                 $out .= "\t\t" . ' <div class="form-group" > ' . "\n";
-                $out .= "\t\t\t" . '<label for="' . $key . '" >{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}</label > ' . "\n";
+                $k = str_contains( $key , '[]') ? str_replace('[]' ,'', $key) : $key;
+                $out .= "\t\t\t" . '<label for="' . $k . '">{{ trans("' . strtolower($this->getNameInput()) . '.' . $k . '")}}</label>' . "\n";
                 if (in_array($key, getFileFieldsName())) {
-                    $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
-                    $out .= "\t\t\t\t" . ' <br>' . "\n";
-                    $out .= "\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->' . $key . ') }}" class="thumbnail" alt = "" width = "200" > ' . "\n";
-                    $out .= "\t\t\t\t" . '<br> ' . "\n";
-                    $out .= "\t\t\t\t" . "@endif" . "\n";
-                    $out .= "\t\t\t\t" . '<input type="file" name="' . $key . '" > ' . "\n";
+                    if(str_contains($key , '[]')){
+                        $out .= $this->inputAsArray($key , 'file');
+                    }else{
+                        $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
+                        $out .= "\t\t\t\t" . '<br>' . "\n";
+                        $out .= "\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->' . $key . ') }}" class="thumbnail" alt="" width="200">' . "\n";
+                        $out .= "\t\t\t\t" . '<br>' . "\n";
+                        $out .= "\t\t\t\t" . "@endif" . "\n";
+                        $out .= "\t\t\t\t" . '<input type="file" name="' . $key . '" >' . "\n";
+                    }
                 } elseif ($key == 'youtube') {
                     $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
                     $out .= "\t\t\t\t" . ' <br>' . "\n";
@@ -430,15 +490,17 @@ class MakeController extends GeneratorCommand
                     $out .= $this->map();
                 }elseif ($key == 'lng') {
                     $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lng" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
-                }else {
+                }elseif (str_contains($key , '[]')) {
+                    $out .= $this->inputAsArray($key);
+                } else {
                     if ($value[0] == 'string' && $isMultiLang) {
                         $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "text" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
                     } elseif ($value[0] == 'email' && $isMultiLang) {
                         $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "email" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
                     } elseif ($value[0] == 'date' && $isMultiLang) {
-                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "date" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "date" , "' . strtolower($this->getNameInput()) . '" , "datepicker") !!}' . "\n";
                     } elseif ($value[0] == 'text' && $isMultiLang) {
-                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "textarea" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "textarea" , "' . strtolower($this->getNameInput()) . '" ) !!}' . "\n";
                     } elseif ($value[0] == 'boolean') {
                         $out .= "\t\t\t\t" . ' <div class="form-check">' . "\n";
                         $out .= "\t\t\t\t\t" . '<label class="form-check-label">' . "\n";
@@ -458,7 +520,7 @@ class MakeController extends GeneratorCommand
                         } elseif ($value[0] == 'youtube') {
                             $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
                         } elseif ($value[0] == 'date') {
-                            $out .= "\t\t\t\t" . '<input type="date" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                            $out .= "\t\t\t\t" . '<input type="date" name="' . $key . '" class="form-control datepicker" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
                         } elseif ($value[0] == 'text') {
                             $out .= "\t\t\t\t" . '<textarea name="' . $key . '" class="form-control" id="' . $key . '"   placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" >{{isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}</textarea >'."\n";
                         } else {
@@ -472,6 +534,46 @@ class MakeController extends GeneratorCommand
         return $out;
     }
 
+    protected function controllerUpdateImageBeforeStore(){
+        $out ='';
+        if (count($this->cols) > 0) {
+            $files = array_intersect_key($this->cols, getFileFieldsName());
+            if(count($files) > 0){
+                foreach($files as $key => $file){
+                    if(str_contains($key , '[]')){
+                        $key  = str_replace('[]' , '' , $key);
+                        $out .=  'if ($request->has("oldFiles_'.$key.'") && $request->oldFiles_'.$key.' != "") {
+                                        $oldImage_'.$key.' = $request->oldFiles_'.$key.';
+                                        $request->request->remove("oldFiles_'.$key.'");
+                                    } else {
+                                        $oldImage_'.$key.' = json_encode([]);
+                                    }'."\n";
+                    }
+                }
+            }
+            $out .='$item = $this->storeOrUpdate($request, $id, true);'."\n";
+            if(count($files) > 0){
+                foreach($files as $key => $file) {
+                    if(str_contains($key , '[]')){
+                        $key  = str_replace('[]' , '' , $key);
+                        $out .='if ($item) {
+                                    $image = json_decode($item->'.$key.') ?? [];
+                                    $newIamge = json_decode($oldImage_'.$key.') ?? [];
+                                    $item_image = array_unique(array_merge($image, $newIamge));
+                                    $item->'.$key.' = json_encode($item_image);
+                                    $item->save();
+                                }'."\n";
+                    }
+                }
+            }
+        }else{
+            $out .='$item = $this->storeOrUpdate($request, $id, true);'."\n";
+        }
+        $out .='return redirect()->back();'."\n";
+        return $out;
+
+    }
+
     protected function renderShow($name)
     {
         $out = '';
@@ -480,6 +582,8 @@ class MakeController extends GeneratorCommand
             $out .= "\t\t" . ' <table class="table table-bordered '.$tableClass.' table-striped" > ' . "\n";
             foreach ($this->cols as $key => $value) {
                 $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
+                $k = $key;
+                $key = str_contains($key , '[]') ? str_replace('[]' , '' , $key) : $key;
                 $out .= "\t\t\t\t" . ' <tr>' . "\n\t\t\t\t" . ' <th>{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '") }}</th> ' . "\n";
                 $out .= "\t\t\t\t" . '@php $type = getFileType("' . $key . '", $item->' . $key . ') @endphp' . "\n";
                 $out .= "\t\t\t\t" . '@if ($type == "File") ' . "\n";
@@ -487,7 +591,7 @@ class MakeController extends GeneratorCommand
                 $out .= "\t\t\t\t" . '@elseif($type == "Image")' . "\n";
                 $out .= "\t\t\t\t\t" . ' <td> <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->' . $key . ') }}" /></td> ' . "\n";
                 $out .= "\t\t\t\t" . '@else' . "\n";
-                if ($key == 'youtube') {
+                if ($k == 'youtube') {
                     $out .= "\t\t\t\t" . '@if (isset($item) && $item->' . $key . ' != "")' . "\n";
                     $out .= "\t\t\t\t\t" . ' <td>' . "\n";
                     $out .= "\t\t\t\t" . ' <iframe width = "420" height = "315" src="https://www.youtube.com/embed/{{ isset($item->' . $key . ') ? getYouTubeId($item->' . $key . ') : old("' . $key . '")  }}" ></iframe > ' . "\n";
@@ -497,21 +601,52 @@ class MakeController extends GeneratorCommand
                     $out .= "\t\t\t\t\t" . ' <td>' . "\n";
                     $out .= "\t\t\t\t" . '{{ $item->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
                     $out .= "\t\t\t\t\t" . ' </td> ' . "\n";
-                } else if ($key == 'url') {
+                } else if ($k == 'url') {
                     $out .= "\t\t\t\t\t" . ' <td>' . "\n";
                     $out .= "\t\t\t\t" . ' <a href="{{  $item->' . $key . ' }}" ><i class="fa fa-link" ></i ></a> ' . "\n";
                     $out .= "\t\t\t\t\t" . '</td> ' . "\n";
-                } else if ($key == 'icon') {
+                } else if ($k == 'icon') {
                     $out .= "\t\t\t\t\t" . ' <td>' . "\n";
                     $out .= "\t\t\t\t" . ' <i class="fa {{ $item->' . $key . '}}" ></i> ' . "\n";
                     $out .= "\t\t\t\t\t" . '</td> ' . "\n";
-                }else if ($key == 'lat') {
+                }else if(str_contains($k , '[]')){
+                    if (in_array($k, getFileFieldsName())) {
+                        $out .= "\t\t\t\t\t" . '<td>' . "\n";
+                        $out .= "\t\t\t\t\t" . '@isset($item)' . "\n";
+                        $out .= "\t\t\t\t\t\t" . '@if(json_decode($item->' . $key . '))' . "\n";
+                        $out .= "\t\t\t\t\t\t\t" . '<input type="hidden" name="oldFiles_' . $key . '" value="{{ $item->' . $key . ' }}">' . "\n";
+                        $out .= "\t\t\t\t\t\t\t" . '@php $files = returnFilesImages($item , "' . $key . '"); @endphp' . "\n";
+                        $out .= "\t\t\t\t\t\t\t" . '<div class="row text-center">' . "\n";
+                        $out .= "\t\t\t\t\t\t\t" . '@foreach($files["image"] as $jsonimage )' . "\n";
+                        $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><img src="{{ url(env("SMALL_IMAGE_PATH")."/".$jsonimage) }}" class="img-responsive" /><br>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t\t" . '<a class="btn btn-danger" href="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i></a></div>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t" . '@endforeach' . "\n";
+                        $out .= "\t\t\t\t\t\t\t" . '</div>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t" . '<div class="row text-center">' . "\n";
+                        $out .= "\t\t\t\t\t\t\t" . '@foreach($files["file"] as $jsonimage )' . "\n";
+                        $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><a href="{{ url(env("UPLOAD_PATH")."/".$jsonimage) }}" ><i class="fa fa-file"></i></a>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t\t" . '<a  href="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i> {{ $jsonimage }} </a></div>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t" . '@endforeach' . "\n";
+                        $out .= "\t\t\t\t\t" . '</div>' . "\n";
+                        $out .= "\t\t\t\t\t\t" . '@endif' . "\n";
+                        $out .= "\t\t\t\t\t" . '@endisset' . "\n";
+                        $out .= "\t\t\t\t\t" . '</td>' . "\n";
+                    }else{
+                        $out .= "\t\t\t\t\t". '<td><span class="label label-default">{!! implode("</span> <br> <span class=';
+                        $out .= "'label label-default'";
+                        $out .= '>" , json_decode($item->' . $key . ')) !!}</span></td> ' . "\n\t\t\t\t";
+                    }
+                }else if ($k == 'lat') {
                     $out .= "\t\t\t\t\t" . '<td>' . "\n";
                     $out .= "\t\t\t\t" . '{{nl2br($item->' . $key . ') }}' . "\n";
                     $out .= "\t\t\t\t\t" . '</td></tr><tr>{{ trans("admin.location") }}<th></th>' . "\n";
                     $out .= "\t\t\t\t\t" . '<td>' . "\n";
                     $out .= "\t\t\t\t" . '<div id="showMap" style="width:100%;height: 500px;" data-lat="{{ $item->lat }}"  data-lng="{{ $item->lng }}"></div>' . "\n";
                     $out .= "\t\t\t\t\t" . '</td>' . "\n";
+                }else if(str_contains($k , '[]')){
+                    $out .= '<td><span class="label label-default">{!! implode("</span> <br> <span class=';
+                    $out .= "'label label-default'";
+                    $out .= '>" , json_decode($item->' . $key . ')) !!}</span></td> ' . "\n\t\t\t\t";
                 } else {
                     if ($isMultiLang) {
                         $out .= "\t\t\t\t\t" . '<td>{{ getDefaultValueKey(nl2br($item->' . $key . ')) }}</td> ' . "\n";
@@ -549,7 +684,6 @@ class MakeController extends GeneratorCommand
 
     }
 
-
     protected function homePage($name)
     {
 
@@ -565,7 +699,10 @@ class MakeController extends GeneratorCommand
         if (count($this->cols) > 0) {
             $out .= '<tr> ' . "\n\t\t\t\t";
             foreach ($this->cols as $key => $value) {
-                $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '") }}</th> ' . "\n\t\t\t\t";}
+                if(str_contains($key , '[]')){
+                    $key = str_replace('[]' , '' , $key);
+                }
+            $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '") }}</th> ' . "\n\t\t\t\t";}
             $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.edit") }}</th> ' . "\n\t\t\t\t";
             $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.show") }}</th> ' . "\n\t\t\t\t";
             $out .= '<th>{{
@@ -585,10 +722,29 @@ class MakeController extends GeneratorCommand
                     $out .= "\t\t\t\t\t" . ' <td>' . "\n";
                     $out .= "\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
                     $out .= "\t\t\t\t\t" . ' </td> ' . "\n";
+                } else if(str_contains($key , '[]') && !in_array($key, getFileFieldsName())){
+                    $key = str_replace('[]' , '' , $key);
+                    $out .= '<td><span class="label label-default">{!! implode("</span><br><span class=';
+                    $out .= "'label label-default'";
+                    $out .= '>" , json_decode($d->' . $key . ')) !!}</span></td> ' . "\n\t\t\t\t";
                 } else if (in_array($key, getFileFieldsName())) {
-                    $out .= "\t\t\t\t\t" . '<td> ' . "\n";
-                    $out .= "\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
-                    $out .= "\t\t\t\t\t" . '</td> ' . "\n";
+                    $out .= "\t\t\t\t\t" . ' <td>' . "\n";
+                    if(in_array($key, getImageFields())){
+                        if(str_contains($key , '[]')){
+                            $keyWithoutBracktes = str_replace('[]' , '' , $key);
+                            $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".getImageFromJson($d ,"'.$keyWithoutBracktes.'"))}}"  width = "80" />' . "\n";
+                        } else{
+                            $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
+                        }
+                    }else{
+                        if(str_contains($key , '[]')){
+                            $keyWithoutBracktes = str_replace('[]' , '' , $key);
+                            $out .= "\t\t\t\t\t" . ' <a href="{{ url(env("UPLOAD_PATH")."/".getImageFromJson($d , "'.$keyWithoutBracktes.'"))}}"><i class="fa fa-file"></i></a>' . "\n";
+                        } else{
+                            $out .= "\t\t\t\t\t" . ' <a href="{{ url(env("UPLOAD_PATH")."/".$d->' . $key . ')}}" ><i class="fa fa-file"></i></a>' . "\n";
+                        }
+                    }
+                    $out .= "\t\t\t\t\t" . ' </td> ' . "\n";
                 } else if ($key  == 'icon') {
                     $out .= "\t\t\t\t\t" . '<td> ' . "\n";
                     $out .= "\t\t\t\t" . '<i class="fa {{ $d->'.$key.' }}"></i>' . "\n";

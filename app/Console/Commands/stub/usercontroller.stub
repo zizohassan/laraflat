@@ -44,8 +44,7 @@ DummyRequestFilter
      }
 
      public function update($id , UpdateRequestDummyClass $request){
-          $item =  $this->storeOrUpdate($request , $id , true);
-          return redirect()->back();
+          DummyUpdateFunction
      }
 
 

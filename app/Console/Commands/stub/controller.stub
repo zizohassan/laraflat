@@ -31,8 +31,7 @@ class DummyClass extends AbstractController
      }
 
      public function update($id , UpdateRequestDummyModel $request){
-          $item =  $this->storeOrUpdate($request , $id , true);
-          return redirect()->back();
+          DummyUpdateFunction
      }
 
 

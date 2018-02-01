@@ -119,8 +119,3 @@ function permissionArray()
     $psermisions->can(auth()->user());
     return array_keys($psermisions->permission);
 }
-
-function notFilter()
-{
-    return ['icon', 'body', 'des', 'meta', 'keywords', 'image', 'file', 'image_ar', 'image_en', 'logo', 'avatar'];
-}

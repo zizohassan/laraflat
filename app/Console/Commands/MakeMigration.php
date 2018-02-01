@@ -106,14 +106,14 @@ class MakeMigration extends GeneratorCommand
     }
 
     protected function reFormatRequest(){
-        $array = [
-            'string',
-            'text',
-            'date'
-        ];
+        $array = getMigrationType();
         $reuslt = '';
         foreach($this->colsMigration as $key => $value){
             $nullable = in_array($value  , $array) ? "->nullable()" : '';
+            if(str_contains( $key , '[]')){
+                $key = str_replace('[]' ,'', $key);
+                $value = 'text';
+            }
             $reuslt .= '$table->'.$value.'("'.$key.'")'.$nullable.';'."\n\t\t\t";
         }
         return $reuslt;
