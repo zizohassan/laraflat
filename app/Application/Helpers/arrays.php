@@ -69,4 +69,27 @@ function extractJsonInfo($data)
     return $newData;
 }
 
+function getMigrationType(){
+    return [
+        'string',
+        'boolean',
+        'char',
+        'date',
+        'double',
+        'text',
+        'mediumText',
+        'longText',
+        'float',
+        'integer',
+        'ipAddress',
+        'tinyInteger'
+    ];
+}
+
+
+function notFilter()
+{
+    return ['icon', 'body', 'des', 'meta', 'keywords'] + getFileFieldsName();
+}
+
 

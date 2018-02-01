@@ -81,11 +81,12 @@ class MakeDataTable extends GeneratorCommand
             $out = '';
             foreach ($this->colsArray as $filter) {
                 if(!in_array($filter[0] ,notFilter() )){
-                    $out .= "\t\t".'if(request()->has("' . $filter[0] . '") && request()->get("' . $filter[0] . '") != ""){'."\n";
-                    if($filter[3] == 'true'){
-                        $out .= "\t\t\t\t".'$query = $query->where("' . $filter[0] . '","like", "%".request()->get("' . $filter[0] . '")."%");'."\n";
+                    $f = str_contains($filter[0] , '[]') ? str_replace('[]' , '' , $filter[0]) : $filter[0];
+                    $out .= "\t\t".'if(request()->has("' . $f . '") && request()->get("' . $f . '") != ""){'."\n";
+                    if($filter[3] == 'true' || str_contains($filter[0] , '[]')){
+                        $out .= "\t\t\t\t".'$query = $query->where("' . $f . '","like", "%".request()->get("' . $f . '")."%");'."\n";
                     }else{
-                        $out .= "\t\t\t\t".'$query = $query->where("' . $filter[0] . '","=", request()->get("' . $filter[0] . '"));'."\n";
+                        $out .= "\t\t\t\t".'$query = $query->where("' . $f . '","=", request()->get("' . $f . '"));'."\n";
                     }
                     $out .= "\t\t".'}' . "\n\n";
                 }
@@ -135,10 +136,11 @@ class MakeDataTable extends GeneratorCommand
     {
         if (count($this->firstElemnt) > 0) {
             if (isset($this->firstElemnt[0])) {
-                $multiLanguage = isset($this->firstElemnt[3]) && $this->firstElemnt[3] == 'true' ? 'trans("' . strtolower($this->getNameInput()) . '.' . $this->firstElemnt[0] . '")' : '"' . $this->firstElemnt[0] . '"';
+                $title = str_contains($this->firstElemnt[0] , '[]') ? str_replace('[]' , '' , $this->firstElemnt[0]) : $this->firstElemnt[0];
+                $multiLanguage = isset($this->firstElemnt[3]) && $this->firstElemnt[3] == 'true' ? 'trans("' . strtolower($this->getNameInput()) . '.' .$title . '")' : '"' . $title . '"';
                 return "\t\t\t" . "[
-                'name' => '" . $this->firstElemnt[0] . "',
-                'data' => '" . $this->firstElemnt[0] . "',
+                'name' => '" . $title. "',
+                'data' => '" . $title . "',
                 'title' => " . $multiLanguage . ",
                 " . $this->getLangValue() . "
                 ],";
@@ -159,9 +161,41 @@ class MakeDataTable extends GeneratorCommand
                     return "'render' => 'function(){
                         return JSON.parse(this." . $this->firstElemnt[0] . ").'.getCurrentLang().';
                     }',";
+                }elseif (in_array($this->firstElemnt[0], getFileFieldsName())){
+                    $title = str_contains($this->firstElemnt[0] , '[]') ? str_replace('[]' , '' , $this->firstElemnt[0]) : $this->firstElemnt[0];
+                    if(in_array($this->firstElemnt[0], getImageFields())){
+                        $url = url(env('SMALL_IMAGE_PATH')).'/';
+                        if(str_contains($this->firstElemnt[0] , '[]')){
+                            return "'render' => 'function( ){
+                                       return \'<img src=\"".$url."\'+JSON.parse(this.".$title.")[0]+\'\" /> \';
+                                    }',";
+                        } else{
+                            return "'render' => 'function( ){
+                                       return \'<img src=\"".$url."\'+JSON.parse(this.".$title.")+\'\" /> \';
+                                    }',";
+                        }
+                    }else{
+                        $url = url(env('UPLOAD_PATH')).'/';
+                        if(str_contains($this->firstElemnt[0] , '[]')){
+                            return "'render' => 'function( ){
+                                       return \'<a href=\"".$url."\'+JSON.parse(this.".$title.")[0]+\'\"><i class=\"fa fa-file\"></i></a> \';
+                                    }',";
+
+                        } else{
+                            return "'render' => 'function( ){
+                                       return \'<a href=\"".$url."\'+JSON.parse(this.".$title.")+\'\"><i class=\"fa fa-file\"></i></a> \';
+                                    }',";
+                        }
+                    }
+                }elseif (str_contains($this->firstElemnt[0] , '[]') && !in_array($this->firstElemnt[0], getFileFieldsName())){
+                    $title = str_contains($this->firstElemnt[0] , '[]') ? str_replace('[]' , '' , $this->firstElemnt[0]) : $this->firstElemnt[0];
+                    return "'render' => 'function(){
+                       return JSON.parse(this." . $title . ");
+                    }',";
                 }
             }
         }
         return '';
     }
+
 }

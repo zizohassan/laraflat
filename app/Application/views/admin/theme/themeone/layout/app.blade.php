@@ -349,5 +349,6 @@
 </script>
 @include('sweet::alert')
 @yield('script')
+@stack('js')
 </body>
 </html>

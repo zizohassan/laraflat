@@ -169,20 +169,7 @@ class CommandsController extends AbstractController
 
     protected function migrationType()
     {
-        return [
-            'string',
-            'boolean',
-            'char',
-            'date',
-            'double',
-            'text',
-            'mediumText',
-            'longText',
-            'float',
-            'integer',
-            'ipAddress',
-            'tinyInteger'
-        ];
+        return getMigrationType();
     }
 
     protected function validationTypes()

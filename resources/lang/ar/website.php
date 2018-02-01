@@ -27,4 +27,5 @@ return [
     'categorie' => '',
     'post' => '',
     'DummyView' => '',
+    'product' => '',
 ];

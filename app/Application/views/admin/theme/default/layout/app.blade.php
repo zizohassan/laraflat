@@ -302,6 +302,7 @@
 <!-- if you not use map remove this -->
 @include('sweet::alert')
 @yield('script')
+@stack('js')
 </body>
 
 </html>

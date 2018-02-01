@@ -4,6 +4,7 @@ Route::get('/', 'HomeController@welcome');
 
 Route::get('contact' , 'ContactController@index');
 Route::post('contact' , 'ContactController@storeContact');
+Route::get('deleteFile/{model}/{id}', 'HomeController@deleteImage');
 
 Auth::routes();
 

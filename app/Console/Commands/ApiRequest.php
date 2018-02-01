@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Helpers\RequestTrait;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputArgument;
