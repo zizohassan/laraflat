@@ -351,3 +351,59 @@ Route::get('categorie/{limit?}/{offset?}/{lang?}', 'CategorieApi@index');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#post
+Route::get('post/getById/{id}/{lang?}', 'PostApi@getById');
+Route::get('post/delete/{id}', 'PostApi@delete');
+Route::post('post/add', 'PostApi@add');
+Route::post('post/update/{id}', 'PostApi@update');
+Route::get('post/{limit?}/{offset?}/{lang?}', 'PostApi@index');

@@ -340,7 +340,7 @@ class MakeController extends GeneratorCommand
                                 $key = str_replace('[]' ,'' , $key);
                                 $out .= "\t\t\t\t\t" . '<a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" ><p>{{ str_limit(implode("," , json_decode($d->' . $key . ')) , 20) }}</a></p > ' . "\n";
                             }else{
-                                $out .= "\t\t\t\t\t" . '<a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" ><p>{{ str_limit(getDefaultValueKey($d->' . $key . ') , 20) }}</a></p > ' . "\n";
+                                $out .= "\t\t\t\t\t" . '<a href="{{ url("' . strtolower($this->getNameInput()) . '/".$d->id."/view") }}" ><p>{{ str_limit($d->' . $key . '_lang , 20) }}</a></p > ' . "\n";
                             }
                         } else {
                             if(str_contains($key , '[]')){
@@ -401,7 +401,7 @@ class MakeController extends GeneratorCommand
                                 $key = str_replace('[]' ,'' , $key);
                                 $out .= "\t\t\t\t\t" . $start . '{{ str_limit(implode("," , json_decode($d->' . $key . ')) , ' . $limit . ') }}' . $end . "\n";
                             }else{
-                                $out .= "\t\t\t\t\t" . $start . '{{ str_limit(getDefaultValueKey($d->' . $key . ') , ' . $limit . ') }}' . $end . "\n";
+                                $out .= "\t\t\t\t\t" . $start . '{{ str_limit($d->' . $key . '_lang , ' . $limit . ') }}' . $end . "\n";
                             }
 
                         } else {
@@ -494,13 +494,13 @@ class MakeController extends GeneratorCommand
                     $out .= $this->inputAsArray($key);
                 } else {
                     if ($value[0] == 'string' && $isMultiLang) {
-                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "text" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "text" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
                     } elseif ($value[0] == 'email' && $isMultiLang) {
-                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "email" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "email" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
                     } elseif ($value[0] == 'date' && $isMultiLang) {
-                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "date" , "' . strtolower($this->getNameInput()) . '" , "datepicker") !!}' . "\n";
+                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "date" , "' . strtolower($this->getNameInput()) . '" , "datepicker") !!}' . "\n";
                     } elseif ($value[0] == 'text' && $isMultiLang) {
-                        $out .= "\t\t\t\t" . '{!! extractFiled("' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "textarea" , "' . strtolower($this->getNameInput()) . '" ) !!}' . "\n";
+                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "textarea" , "' . strtolower($this->getNameInput()) . '" ) !!}' . "\n";
                     } elseif ($value[0] == 'boolean') {
                         $out .= "\t\t\t\t" . ' <div class="form-check">' . "\n";
                         $out .= "\t\t\t\t\t" . '<label class="form-check-label">' . "\n";
@@ -649,7 +649,7 @@ class MakeController extends GeneratorCommand
                     $out .= '>" , json_decode($item->' . $key . ')) !!}</span></td> ' . "\n\t\t\t\t";
                 } else {
                     if ($isMultiLang) {
-                        $out .= "\t\t\t\t\t" . '<td>{{ getDefaultValueKey(nl2br($item->' . $key . ')) }}</td> ' . "\n";
+                        $out .= "\t\t\t\t\t" . '<td>{{ nl2br($item->' . $key . '_lang) }}</td> ' . "\n";
                     } else {
                         $out .= "\t\t\t\t\t" . '<td>{{nl2br($item->' . $key . ') }}</td> ' . "\n";
                     }
@@ -674,7 +674,7 @@ class MakeController extends GeneratorCommand
             $out .= "\t\t\t\t" . '@elseif($type == "Image")' . "\n";
             $out .= "\t\t\t\t\t" . ' <td> <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item[$field]) }}" /></td> ' . "\n";
             $out .= "\t\t\t\t" . '@else' . "\n";
-            $out .= "\t\t\t\t\t" . ' <td> {!!getDefaultValueKey(nl2br($item[$field]))  !!}</td> ' . "\n";
+            $out .= "\t\t\t\t\t" . ' <td> {!! nl2br($item[$field])  !!}</td> ' . "\n";
             $out .= "\t\t\t\t" . '@endif' . "\n";
             $out .= "\t\t\t" . ' </tr> ' . "\n";
             $out .= "\t\t" . '@endforeach' . "\n";
@@ -755,7 +755,7 @@ class MakeController extends GeneratorCommand
                     $out .= "\t\t\t\t\t" . '</td> ' . "\n";
                 }else {
                     if ($isMultiLang) {
-                        $out .= '<td>{{str_limit(getDefaultValueKey($d->' . $key . ') , 20) }}</td> ' . "\n\t\t\t\t";
+                        $out .= '<td>{{str_limit($d->' . $key . '_lang , 20) }}</td> ' . "\n\t\t\t\t";
                     } else {
                         $out .= '<td>{{ str_limit($d->' . $key . ' , 20) }}</td> ' . "\n\t\t\t\t";
                     }

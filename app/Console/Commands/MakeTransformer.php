@@ -98,7 +98,7 @@ class MakeTransformer extends GeneratorCommand
             if(!$multiLanguage){
                 $result .= "\t\t\t".'"'.$key.'" => $modelOrCollection->'.$key;
             }else{
-                $result .= "\t\t\t".'"'.$key.'" => getLangValue($modelOrCollection->'.$key.' , "'.$lang.'")';
+                $result .= "\t\t\t".'"'.$key.'" => $modelOrCollection->{lang("'.$key.'" , "'.$lang.'")}';
             }
             $result .= count($this->colsArray)  == $i ? ',':',';
             $result .= "\n";
@@ -116,7 +116,7 @@ class MakeTransformer extends GeneratorCommand
     protected function defaultData($lang = 'ar'){
         return
             '"id" => $modelOrCollection->id,
-            "name" => getLangValue($modelOrCollection->name , "'.$lang.'"),
+            "name" =>  $modelOrCollection->{lang("name" , "'.$lang.'")},
             "image" => url(env("UPLOAD_PATH")."/".$modelOrCollection->image),';
     }
 

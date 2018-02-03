@@ -9,8 +9,10 @@ class DummyClass extends Model
 
   public $table = "DummyTable";
 
+
    protected $fillable = [
         DummyFillAbel
    ];
 
+DummyMultiFiles
 }
