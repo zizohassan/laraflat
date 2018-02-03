@@ -53,7 +53,7 @@ function layoutPushFooter($type = 'admin')
 
 function layoutPaginate($type = 'website')
 {
-    return layoutPath("layout.before-footer", $type);
+    return layoutPath("layout.paginate", $type);
 }
 
 function layoutForm()
