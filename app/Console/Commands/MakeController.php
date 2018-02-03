@@ -619,13 +619,13 @@ class MakeController extends GeneratorCommand
                         $out .= "\t\t\t\t\t\t\t" . '<div class="row text-center">' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@foreach($files["image"] as $jsonimage )' . "\n";
                         $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><img src="{{ url(env("SMALL_IMAGE_PATH")."/".$jsonimage) }}" class="img-responsive" /><br>' . "\n";
-                        $out .= "\t\t\t\t\t\t\t\t" . '<a class="btn btn-danger" href="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i></a></div>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t\t" . '<span class="btn btn-danger" onclick="deleteThisItem(this)" data-link="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i></span></div>' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@endforeach' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '</div>' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '<div class="row text-center">' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@foreach($files["file"] as $jsonimage )' . "\n";
                         $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><a href="{{ url(env("UPLOAD_PATH")."/".$jsonimage) }}" ><i class="fa fa-file"></i></a>' . "\n";
-                        $out .= "\t\t\t\t\t\t\t\t" . '<a  href="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i> {{ $jsonimage }} </a></div>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t\t" . '<span  onclick="deleteThisItem(this)" data-link="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i> {{ $jsonimage }} </span></div>' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@endforeach' . "\n";
                         $out .= "\t\t\t\t\t" . '</div>' . "\n";
                         $out .= "\t\t\t\t\t\t" . '@endif' . "\n";
@@ -693,16 +693,20 @@ class MakeController extends GeneratorCommand
     {
 
         $out = $this->buildFilterForms();
-
+        $count = 0;
         $out .= '<br ><table class="table table-responsive table-striped table-bordered"> ' . "\n\t\t";
         $out .= '<thead > ' . "\n\t\t\t";
         if (count($this->cols) > 0) {
             $out .= '<tr> ' . "\n\t\t\t\t";
             foreach ($this->cols as $key => $value) {
-                if(str_contains($key , '[]')){
-                    $key = str_replace('[]' , '' , $key);
+                $count++;
+                if($count < env('TABLE_COLS')){
+                    if(str_contains($key , '[]')){
+                        $key = str_replace('[]' , '' , $key);
+                    }
+                    $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '") }}</th> ' . "\n\t\t\t\t";
                 }
-            $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '") }}</th> ' . "\n\t\t\t\t";}
+            }
             $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.edit") }}</th> ' . "\n\t\t\t\t";
             $out .= '<th>{{ trans("' . strtolower($this->getNameInput()) . '.show") }}</th> ' . "\n\t\t\t\t";
             $out .= '<th>{{
@@ -710,6 +714,7 @@ class MakeController extends GeneratorCommand
         } else {
             $out .= '<tr><th></th></tr> ' . "\n\t\t\t\t";
         }
+        $count = 0;
         $out .= '</thead > ' . "\n\t\t";
         $out .= '<tbody > ' . "\n\t\t";
         $out .= '@if (count($items) > 0) ' . "\n\t\t\t";
@@ -717,47 +722,50 @@ class MakeController extends GeneratorCommand
         if (count($this->cols) > 0) {
             $out .= ' <tr>' . "\n\t\t\t\t\t";
             foreach ($this->cols as $key => $value) {
-                $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
-                if ($value[0] == 'boolean') {
-                    $out .= "\t\t\t\t\t" . ' <td>' . "\n";
-                    $out .= "\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
-                    $out .= "\t\t\t\t\t" . ' </td> ' . "\n";
-                } else if(str_contains($key , '[]') && !in_array($key, getFileFieldsName())){
-                    $key = str_replace('[]' , '' , $key);
-                    $out .= '<td><span class="label label-default">{!! implode("</span><br><span class=';
-                    $out .= "'label label-default'";
-                    $out .= '>" , json_decode($d->' . $key . ')) !!}</span></td> ' . "\n\t\t\t\t";
-                } else if (in_array($key, getFileFieldsName())) {
-                    $out .= "\t\t\t\t\t" . ' <td>' . "\n";
-                    if(in_array($key, getImageFields())){
-                        if(str_contains($key , '[]')){
-                            $keyWithoutBracktes = str_replace('[]' , '' , $key);
-                            $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".getImageFromJson($d ,"'.$keyWithoutBracktes.'"))}}"  width = "80" />' . "\n";
-                        } else{
-                            $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
+                $count++;
+                if($count < env('TABLE_COLS')){
+                    $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
+                    if ($value[0] == 'boolean') {
+                        $out .= "\t\t\t\t\t" . ' <td>' . "\n";
+                        $out .= "\t\t\t\t" . '{{ $d->' . $key . ' == 1 ? trans("' . strtolower($this->getNameInput()) . '.Yes") : trans("' . strtolower($this->getNameInput()) . '.No")  }}' . "\n";
+                        $out .= "\t\t\t\t\t" . ' </td> ' . "\n";
+                    } else if(str_contains($key , '[]') && !in_array($key, getFileFieldsName())){
+                        $key = str_replace('[]' , '' , $key);
+                        $out .= '<td><span class="label label-default">{!! implode("</span><br><span class=';
+                        $out .= "'label label-default'";
+                        $out .= '>" , json_decode($d->' . $key . ')) !!}</span></td> ' . "\n\t\t\t\t";
+                    } else if (in_array($key, getFileFieldsName())) {
+                        $out .= "\t\t\t\t\t" . ' <td>' . "\n";
+                        if(in_array($key, getImageFields())){
+                            if(str_contains($key , '[]')){
+                                $keyWithoutBracktes = str_replace('[]' , '' , $key);
+                                $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".getImageFromJson($d ,"'.$keyWithoutBracktes.'"))}}"  width = "80" />' . "\n";
+                            } else{
+                                $out .= "\t\t\t\t\t" . ' <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$d->' . $key . ')}}"  width = "80" />' . "\n";
+                            }
+                        }else{
+                            if(str_contains($key , '[]')){
+                                $keyWithoutBracktes = str_replace('[]' , '' , $key);
+                                $out .= "\t\t\t\t\t" . ' <a href="{{ url(env("UPLOAD_PATH")."/".getImageFromJson($d , "'.$keyWithoutBracktes.'"))}}"><i class="fa fa-file"></i></a>' . "\n";
+                            } else{
+                                $out .= "\t\t\t\t\t" . ' <a href="{{ url(env("UPLOAD_PATH")."/".$d->' . $key . ')}}" ><i class="fa fa-file"></i></a>' . "\n";
+                            }
                         }
-                    }else{
-                        if(str_contains($key , '[]')){
-                            $keyWithoutBracktes = str_replace('[]' , '' , $key);
-                            $out .= "\t\t\t\t\t" . ' <a href="{{ url(env("UPLOAD_PATH")."/".getImageFromJson($d , "'.$keyWithoutBracktes.'"))}}"><i class="fa fa-file"></i></a>' . "\n";
-                        } else{
-                            $out .= "\t\t\t\t\t" . ' <a href="{{ url(env("UPLOAD_PATH")."/".$d->' . $key . ')}}" ><i class="fa fa-file"></i></a>' . "\n";
+                        $out .= "\t\t\t\t\t" . ' </td> ' . "\n";
+                    } else if ($key  == 'icon') {
+                        $out .= "\t\t\t\t\t" . '<td> ' . "\n";
+                        $out .= "\t\t\t\t" . '<i class="fa {{ $d->'.$key.' }}"></i>' . "\n";
+                        $out .= "\t\t\t\t\t" . '</td> ' . "\n";
+                    } else if ($key  == 'url') {
+                        $out .= "\t\t\t\t\t" . '<td> ' . "\n";
+                        $out .= "\t\t\t\t" . '<a href="{{ $d->'.$key.' }}"><i class="fa fa-link }}"></i></a>' . "\n";
+                        $out .= "\t\t\t\t\t" . '</td> ' . "\n";
+                    }else {
+                        if ($isMultiLang) {
+                            $out .= '<td>{{str_limit($d->' . $key . '_lang , 20) }}</td> ' . "\n\t\t\t\t";
+                        } else {
+                            $out .= '<td>{{ str_limit($d->' . $key . ' , 20) }}</td> ' . "\n\t\t\t\t";
                         }
-                    }
-                    $out .= "\t\t\t\t\t" . ' </td> ' . "\n";
-                } else if ($key  == 'icon') {
-                    $out .= "\t\t\t\t\t" . '<td> ' . "\n";
-                    $out .= "\t\t\t\t" . '<i class="fa {{ $d->'.$key.' }}"></i>' . "\n";
-                    $out .= "\t\t\t\t\t" . '</td> ' . "\n";
-                } else if ($key  == 'url') {
-                    $out .= "\t\t\t\t\t" . '<td> ' . "\n";
-                    $out .= "\t\t\t\t" . '<a href="{{ $d->'.$key.' }}"><i class="fa fa-link }}"></i></a>' . "\n";
-                    $out .= "\t\t\t\t\t" . '</td> ' . "\n";
-                }else {
-                    if ($isMultiLang) {
-                        $out .= '<td>{{str_limit($d->' . $key . '_lang , 20) }}</td> ' . "\n\t\t\t\t";
-                    } else {
-                        $out .= '<td>{{ str_limit($d->' . $key . ' , 20) }}</td> ' . "\n\t\t\t\t";
                     }
                 }
             }

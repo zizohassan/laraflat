@@ -7,11 +7,11 @@
         <table class="table table-bordered  table-striped">
             <tr>
                 <th width="150">{{ trans("page.title") }}</th>
-                <td>{{ getDefaultValueKey(nl2br($item->title)) }}</td>
+                <td>{{ nl2br($item->title_lang) }}</td>
             </tr>
             <tr>
                 <th>{{ trans("page.body") }}</th>
-                <td>{!! getDefaultValueKey(nl2br($item->body))  !!} </td>
+                <td>{!! nl2br($item->body_lang)  !!} </td>
             </tr>
             <tr>
                 <th>{{ trans("page.active") }}</th>
