@@ -9,7 +9,7 @@
         <table class="table table-bordered table-striped">
             <tr>
                 <th width="150">{{ trans("categorie.title") }}</th>
-                <td>{{ nl2br($item->title) }}</td>
+                <td>{{ nl2br($item->title_lang) }}</td>
             </tr>
         </table>
 

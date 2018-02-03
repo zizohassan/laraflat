@@ -326,3 +326,7 @@ Route::get('categorie/pluck', 'CategorieController@pluck');
 
 
 
+
+
+
+

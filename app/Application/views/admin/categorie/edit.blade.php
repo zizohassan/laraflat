@@ -12,7 +12,7 @@
 
             <div class="form-group">
                 <label for="title">{{ trans("categorie.title")}}</label>
-                {!! extractFiled("title" , isset($item->title) ? $item->title : old("title") , "text" , "categorie") !!}
+                {!! extractFiled(isset($item) ? $item : null ,"title" , isset($item->title) ? $item->title : old("title") , "text" , "categorie") !!}
             </div>
 
 

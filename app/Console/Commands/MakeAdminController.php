@@ -392,13 +392,13 @@ class MakeAdminController extends GeneratorCommand
                         $out .= "\t\t\t\t\t\t\t" . '<div class="row text-center">' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@foreach($files["image"] as $jsonimage )' . "\n";
                         $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><img src="{{ url(env("SMALL_IMAGE_PATH")."/".$jsonimage) }}" class="img-responsive" /><br>' . "\n";
-                        $out .= "\t\t\t\t\t\t\t\t" . '<a class="btn btn-danger" href="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i></a></div>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t\t" . '<span class="btn btn-danger" onclick="deleteThisItem(this)" data-link="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i></span></div>' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@endforeach' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '</div>' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '<div class="row text-center">' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@foreach($files["file"] as $jsonimage )' . "\n";
                         $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><a href="{{ url(env("UPLOAD_PATH")."/".$jsonimage) }}" ><i class="fa fa-file"></i></a>' . "\n";
-                        $out .= "\t\t\t\t\t\t\t\t" . '<a  href="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i> {{ $jsonimage }} </a></div>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t\t" . '<span  onclick="deleteThisItem(this)" data-link="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i> {{ $jsonimage }} </span></div>' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@endforeach' . "\n";
                         $out .= "\t\t\t\t\t" . '</div>' . "\n";
                         $out .= "\t\t\t\t\t\t" . '@endif' . "\n";
