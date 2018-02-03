@@ -9,12 +9,18 @@
     @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/setting/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+
+
+            @if(env('APP_ENV') == 'local' || !isset($item))
             <div class="form-group">
                 <div class="form-line">
                     <label for="">{{ trans('setting.name') }}</label>
                     <input type="text" name="name" id="name" class="form-control" value="{{ isset($item) ? $item->name : old('name')}}"/>
                 </div>
             </div>
+            @else
+                {{ $item->name  }}
+            @endif
 
 
 

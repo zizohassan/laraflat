@@ -13,11 +13,11 @@
             {{ csrf_field() }}
              <div class="form-group">
                 <label for="title">{{ trans("page.title")}}</label>
-                {!! extractFiled("title" , isset($item->title) ? $item->title : old("title") , "text" , "page") !!}
+                {!! extractFiled(isset($item) ? $item : null,  "title" , isset($item->title) ? $item->title : old("title") , "text" , "page") !!}
             </div>
             <div class="form-group">
                 <label for="body">{{ trans("page.body")}}</label>
-                {!! extractFiled("body" , isset($item->body) ? $item->body : old("body") , "textarea" , "page" , 'tinymce' ) !!}
+                {!! extractFiled(isset($item) ? $item : null , "body" , isset($item->body) ? $item->body : old("body") , "textarea" , "page" , 'tinymce' ) !!}
             </div>
             <div class="form-group">
                 <label for="active">{{ trans("page.active")}}</label>

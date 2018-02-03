@@ -25,14 +25,14 @@ function getAvLang()
       return \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getSupportedLocales();
 }
 
-function extractFiled( $name = 'name', $value = null, $type = 'text', $transeFile = null, $class = '',  $rows = 8)
+function extractFiled($item = null , $name = 'name', $value = null, $type = 'text', $transeFile = null, $class = '',  $rows = 8)
 {
       $lang  = getAvLang();
       if($type == 'text')
       {
-            return extractTextFiled($lang, $name, $class, $value, $transeFile);
+            return extractTextFiled($item , $lang, $name, $class, $value, $transeFile);
       } elseif($type == 'textarea') {
-            return extractTexArea($lang, $name, $rows, $class, $value, $transeFile);
+            return extractTexArea($item , $lang, $name, $rows, $class, $value, $transeFile);
       }
 }
 
@@ -53,7 +53,7 @@ function getDefaultValueKey($value)
     return null;
 }
 
-function extractTextFiled ($lang, $name,  $class = '', $value, $transeFile = null)
+function extractTextFiled ($item = null , $lang, $name,  $class = '', $value, $transeFile = null)
 {
 
       $title  = $transeFile != null ? adminTrans($transeFile , $name)  : $name;
@@ -76,6 +76,7 @@ function extractTextFiled ($lang, $name,  $class = '', $value, $transeFile = nul
       $out .= '</ul><div class="tab-content">';
       foreach($lang as $key => $ln)
       {
+          $value = $item != null && $item->{$name.'_'.$key} ? $item->{$name.'_'.$key}  : '';
             $active = $i == 0 ? 'active' : '';
             $out .= '<div role="tabpanel" class="tab-pane fade '
                  . $active
@@ -102,7 +103,8 @@ function extractTextFiled ($lang, $name,  $class = '', $value, $transeFile = nul
                   . '" class="form-control '
                   . $class 
                   . '" value="'
-                  . checkValueBeforeSet($value, $key)
+//                  . checkValueBeforeSet($value, $key)
+                .$value
                   . '" />';
             $out .= '</div>';
             $out .= '</div></div>';
@@ -122,7 +124,7 @@ function checkValueBeforeSet($value , $key){
     }
 }
 
-function extractTexArea($lang, $name, $rows=8, $class = '', $value,  $transeFile = null)
+function extractTexArea($item = null , $lang, $name, $rows=8, $class = '', $value,  $transeFile = null)
 {
       $title  = $transeFile != null ? adminTrans($transeFile , $name)  : $name;
       $out = '<ul class="nav nav-tabs tab-nav-right" role="tablist">';
@@ -144,6 +146,7 @@ function extractTexArea($lang, $name, $rows=8, $class = '', $value,  $transeFile
       $out .= '</ul><div class="tab-content">';
       foreach($lang as $key => $ln)
       {
+          $value = $item != null && $item->{$name.'_'.$key} ? $item->{$name.'_'.$key}  : '';
             $active = $i == 0 ? 'active' : '';
             $out .= '<div role="tabpanel" class="tab-pane fade '
                  . $active
@@ -172,7 +175,8 @@ function extractTexArea($lang, $name, $rows=8, $class = '', $value,  $transeFile
                  . '" class="form-control '
                  . $class
                  . '">'
-                . checkValueBeforeSet($value, $key)
+//                . checkValueBeforeSet($value, $key)
+                 .$value
                  . '</textarea>';
             $out .= '</div>';
             $out .= ' </div></div>';
@@ -225,4 +229,9 @@ function getReverseDirection()
 {
       $cD = getDir();
       return $cD == 'rtl' ? 'left' : 'right';
+}
+
+function lang($filed , $lang = null){
+      $lang  = $lang != null ? $lang : getCurrentLang();
+      return $filed.'_'.$lang;
 }

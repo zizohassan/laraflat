@@ -25,7 +25,6 @@ return [
     'Dashboard' => 'Dashboard',
     'page' => 'Page',
     'categorie' => 'categorie',
-    'post' => 'post',
+    'post' => '',
     'DummyView' => '',
-    'product' => '',
 ];
