@@ -406,3 +406,22 @@ Route::get('categorie/{id}/view', 'CategorieController@getById');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+#### post control
+Route::get('post' , 'PostController@index');
+Route::get('post/item/{id?}' , 'PostController@show');
+Route::post('post/item' , 'PostController@store');
+Route::post('post/item/{id}' , 'PostController@update');
+Route::get('post/{id}/delete' , 'PostController@destroy');
+Route::get('post/{id}/view' , 'PostController@getById');

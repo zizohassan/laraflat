@@ -229,7 +229,7 @@
 <script type="application/javascript">
     $('.select2').select2({
         theme: "bootstrap",
-        dir:"rtl"
+        dir:"{{ getDirection() }}"
     });
     $('.datepicker').datetimepicker({
         defaultDate: "{{ date('Y/m/d') }}",
