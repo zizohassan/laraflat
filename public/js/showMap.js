@@ -6,7 +6,7 @@ function showMap() {
         }
         map = new google.maps.Map(document.getElementById('showMap'), {
             center: pos,
-            zoom: 6
+            zoom: 15
         });
         var marker = new google.maps.Marker({
             map: map

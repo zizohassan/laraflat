@@ -94,12 +94,12 @@ class MakeRelation extends GeneratorCommand
     protected function mtm()
     {
         $this->createRelationFolder();
-        $this->mtmMigration();
         $this->addRelationsMtM();
         $this->adminMtmHtml();
         $this->websiteMtmHtml();
         $this->addSaveToControllers();
         $this->addToViews();
+        $this->mtmMigration();
     }
 
     protected function addToViews()
@@ -299,18 +299,18 @@ class MakeRelation extends GeneratorCommand
     {
         $this->createRelationFolder();
         $this->addHtml();
-        $this->makeMigration();
         $this->makeValidation();
         $this->addRelationsOtO();
+        $this->makeMigration();
     }
 
     protected function otm()
     {
         $this->createRelationFolder();
         $this->addHtml();
-        $this->makeMigration();
         $this->makeValidation();
         $this->addRelationsOtM();
+        $this->makeMigration();
     }
 
     protected function createRelationFolder()
@@ -487,12 +487,15 @@ class MakeRelation extends GeneratorCommand
             });
         }
         $data = '';
+        $data .= "\t\t" . 'if (Schema::hasColumn("' . $ft . '", "' . $pk . '_id"))' . "\n";
+        $data .= "\t\t" . '{' . "\n";
         $data .= "\t" . 'Schema::table("' . $ft . '", function (Blueprint $table)  {' . "\n";
         $data .= "\t\t" . '$table->integer("' . $pk . '_id")->unsigned();' . "\n";
         if ($fk === "true") {
             $data .= "\t\t" . '$table->foreign("' . $pk . '_id")->references("' . $key . '")->on("' . $pt . '")->onDelete("cascade");' . "\n";
         }
         $data .= "\n\t" . '});';
+        $data .= "\t\t" . '}' . "\n";
         $dataDown = '';
         $dataDown .= "\t" . 'Schema::disableForeignKeyConstraints();' . "\n";
         $dataDown .= "\t\t" . 'if (Schema::hasColumn("' . $ft . '", "' . $pk . '_id"))' . "\n";

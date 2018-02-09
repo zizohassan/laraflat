@@ -89,7 +89,7 @@ function getMigrationType(){
 
 function notFilter()
 {
-    return ['icon', 'body', 'des', 'meta', 'keywords'] + getFileFieldsName();
+    return ['icon', 'body', 'des', 'meta', 'keywords' , 'lng' , 'lat' , 'youtube' , 'url'] + getFileFieldsName();
 }
 
 
