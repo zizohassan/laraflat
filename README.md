@@ -91,6 +91,41 @@ https://www.youtube.com/watch?v=TqAQilctSLI
 https://www.youtube.com/watch?v=Fa229mEGyzc
 
 
+## File Manager
+
+https://www.youtube.com/watch?v=rjkAoVlAVdg
+
+
+## Theme Manager
+
+https://www.youtube.com/watch?v=vyZt1uhqtYM
+
+
+## Multi Upload Image Files
+
+https://www.youtube.com/watch?v=_SuOI5L7yLQ
+
+
+## Add Rate to any module
+
+https://www.youtube.com/watch?v=C9JAG7698XM
+
+
+## Icons Google Map
+
+https://www.youtube.com/watch?v=r-Xr8VCCeCE
+
+
+## Advanced Search 
+
+https://www.youtube.com/watch?v=xO58xgWSZLo
+
+
+## Export Import Modules
+
+https://www.youtube.com/watch?v=8wLgKAu3C-U
+
+
 ## For More 
 see this videos 
 <a href="https://www.youtube.com/playlist?list=PLYp_Kd32XvcrdYfidiS1_vnHtUMa96VI2&disable_polymer=true">Youtube</a> or 
