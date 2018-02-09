@@ -2,7 +2,8 @@
     var commands = $('#commands'), form = $('#form'), command_val, cols_val, output, cols = $('#cols'), commandName = $('.name');
 
     commands.on('change', function () {
-        command_val = commands.val()
+        command_val = commands.val();
+        cols.html('');
         if (command_val == 'laraflat:admin_model') {
             adminModel();
         } else if (command_val == 'laraflat:comment') {
@@ -34,7 +35,7 @@
                 ' <input type="text" name="name" id="name"  class="form-control" value="' + v + '"/>' +
                 '</div>';
         if (showModel === undefined && showModel == null) {
-            output += '<span  class="btn btn-danger" onclick="addNewColumn();"><i class="fa fa-plus"></i></span>';
+            output += '<span  class="btn btn-danger" onclick="addNewColumn();" style="position: fixed;left: 270px;z-index: 10000"><i class="fa fa-plus"></i></span>';
         } else {
             output += showModel === undefined && showModel == null ? '' : appendModels();
         }
