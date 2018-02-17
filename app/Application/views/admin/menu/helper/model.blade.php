@@ -9,7 +9,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    {!! extractFiled('name' , null , $type = 'text' , 'ItemName') !!}
+                    {!! extractFiled(null,'name' , null , $type = 'text' , 'ItemName') !!}
 
                     <div class="form-group">
                         <div class="form-line">
