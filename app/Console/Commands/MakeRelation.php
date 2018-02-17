@@ -487,7 +487,7 @@ class MakeRelation extends GeneratorCommand
             });
         }
         $data = '';
-        $data .= "\t\t" . 'if (Schema::hasColumn("' . $ft . '", "' . $pk . '_id"))' . "\n";
+        $data .= "\t\t" . 'if (!Schema::hasColumn("' . $ft . '", "' . $pk . '_id"))' . "\n";
         $data .= "\t\t" . '{' . "\n";
         $data .= "\t" . 'Schema::table("' . $ft . '", function (Blueprint $table)  {' . "\n";
         $data .= "\t\t" . '$table->integer("' . $pk . '_id")->unsigned();' . "\n";
