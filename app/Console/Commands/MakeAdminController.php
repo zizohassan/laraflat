@@ -222,87 +222,87 @@ class MakeAdminController extends GeneratorCommand
 
     }
 
-    protected function renderForm($name)
-    {
-        $out = ' ';
-        if (count($this->cols) > 0) {
-            foreach ($this->cols as $key => $value) {
-                $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
-                $out .= "\t\t" . '<div class="form-group">' . "\n";
-                $k = str_contains( $key , '[]') ? str_replace('[]' ,'', $key) : $key;
-                $out .= "\t\t\t" . '<label for="' . $k . '">{{ trans("' . strtolower($this->getNameInput()) . '.' . $k . '")}}</label>' . "\n";
-                if (in_array($key, getFileFieldsName())) {
-                    if(str_contains($key , '[]')){
-                        $out .= $this->inputAsArray($key , 'file');
-                    }else{
-                        $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
-                        $out .= "\t\t\t\t" . '<br>' . "\n";
-                        $out .= "\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->' . $key . ') }}" class="thumbnail" alt="" width="200">' . "\n";
-                        $out .= "\t\t\t\t" . '<br>' . "\n";
-                        $out .= "\t\t\t\t" . "@endif" . "\n";
-                        $out .= "\t\t\t\t" . '<input type="file" name="' . $key . '" >' . "\n";
-                    }
-                } elseif ($key == 'youtube') {
-                    $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
-                    $out .= "\t\t\t\t" . '<br>' . "\n";
-                    $out .= "\t\t\t\t" . '<iframe width="420" height="315" src="https://www.youtube.com/embed/{{ isset($item->' . $key . ') ? getYouTubeId($item->' . $key . ') : old("' . $key . '")  }}"></iframe>' . "\n";
-                    $out .= "\t\t\t\t" . '<br>' . "\n";
-                    $out .= "\t\t\t\t" . "@endif" . "\n";
-                    $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
-                } elseif ($key == 'icon') {
-                    $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control icon-field" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
-                } elseif ($key == 'url') {
-                    $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
-                } elseif ($key == 'date') {
-                    $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control datepicker" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
-                } elseif ($key == 'time') {
-                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control time" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
-                }elseif ($key == 'lat') {
-                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lat" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
-                    $out .= $this->map();
-                }elseif ($key == 'lng') {
-                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lng" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
-                }elseif (str_contains($key , '[]')) {
-                    $out .= $this->inputAsArray($key);
-                } else {
-                    if ($value[0] == 'string' && $isMultiLang) {
-                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "text" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
-                    } elseif ($value[0] == 'email' && $isMultiLang) {
-                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "email" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
-                    } elseif ($value[0] == 'date' && $isMultiLang) {
-                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "date" , "' . strtolower($this->getNameInput()) . '" , "datepicker") !!}' . "\n";
-                    } elseif ($value[0] == 'text' && $isMultiLang) {
-                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "textarea" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
-                    } elseif ($value[0] == 'boolean') {
-                        $out .= "\t\t\t\t" . '<div class="form-check">' . "\n";
-                        $out .= "\t\t\t\t\t" . '<label class="form-check-label">' . "\n";
-                        $out .= "\t\t\t\t\t" . '<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . '  == 0 ? "checked" : "" }} type="radio" value="0">' . "\n";
-                        $out .= "\t\t\t\t\t" . '{{ trans("' . strtolower($this->getNameInput()) . '.No")}}' . "\n";
-                        $out .= "\t\t\t\t" . '</label>' . "\n";
-                        $out .= "\t\t\t\t" . '<label class="form-check-label">' . "\n";
-                        $out .= "\t\t\t\t" . '<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . '  == 1 ? "checked" : "" }} type="radio" value="1" >' . "\n\t\t\t\t";
-                        $out .= "\t\t\t\t\t" . '{{ trans("' . strtolower($this->getNameInput()) . '.Yes")}}' . "\n";
-                        $out .= "\t\t\t\t" . '</label>' . "\n";
-                        $out .= "\t\t\t\t" . '</div>';
-                    } else {
-                        if ($value[0] == 'string') {
-                            $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
-                        } elseif ($value[0] == 'email') {
-                            $out .= "\t\t\t\t" . '<input type="email" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
-                        } elseif ($value[0] == 'youtube') {
-                            $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
-                        } elseif ($value[0] == 'text') {
-                            $out .= "\t\t\t\t" . '<textarea name="' . $key . '" class="form-control" id="' . $key . '"   placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}</textarea>' . "\n";
-                        } else {
-                            $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
-                        }
-                    }
-                }
-                $out .= "\t\t" . '</div>' . "\n";
-            }
-        }
-        return $out;
-    }
+//    protected function renderForm($name)
+//    {
+//        $out = ' ';
+//        if (count($this->cols) > 0) {
+//            foreach ($this->cols as $key => $value) {
+//                $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
+//                $out .= "\t\t" . '<div class="form-group">' . "\n";
+//                $k = str_contains( $key , '[]') ? str_replace('[]' ,'', $key) : $key;
+//                $out .= "\t\t\t" . '<label for="' . $k . '">{{ trans("' . strtolower($this->getNameInput()) . '.' . $k . '")}}</label>' . "\n";
+//                if (in_array($key, getFileFieldsName())) {
+//                    if(str_contains($key , '[]')){
+//                        $out .= $this->inputAsArray($key , 'file');
+//                    }else{
+//                        $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
+//                        $out .= "\t\t\t\t" . '<br>' . "\n";
+//                        $out .= "\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->' . $key . ') }}" class="thumbnail" alt="" width="200">' . "\n";
+//                        $out .= "\t\t\t\t" . '<br>' . "\n";
+//                        $out .= "\t\t\t\t" . "@endif" . "\n";
+//                        $out .= "\t\t\t\t" . '<input type="file" name="' . $key . '" >' . "\n";
+//                    }
+//                } elseif ($key == 'youtube') {
+//                    $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
+//                    $out .= "\t\t\t\t" . '<br>' . "\n";
+//                    $out .= "\t\t\t\t" . '<iframe width="420" height="315" src="https://www.youtube.com/embed/{{ isset($item->' . $key . ') ? getYouTubeId($item->' . $key . ') : old("' . $key . '")  }}"></iframe>' . "\n";
+//                    $out .= "\t\t\t\t" . '<br>' . "\n";
+//                    $out .= "\t\t\t\t" . "@endif" . "\n";
+//                    $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                } elseif ($key == 'icon') {
+//                    $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control icon-field" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                } elseif ($key == 'url') {
+//                    $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                } elseif ($key == 'date') {
+//                    $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control datepicker" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                } elseif ($key == 'time') {
+//                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control time" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+//                }elseif ($key == 'lat') {
+//                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lat" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+//                    $out .= $this->map();
+//                }elseif ($key == 'lng') {
+//                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lng" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+//                }elseif (str_contains($key , '[]')) {
+//                    $out .= $this->inputAsArray($key);
+//                } else {
+//                    if ($value[0] == 'string' && $isMultiLang) {
+//                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "text" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+//                    } elseif ($value[0] == 'email' && $isMultiLang) {
+//                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "email" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+//                    } elseif ($value[0] == 'date' && $isMultiLang) {
+//                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "date" , "' . strtolower($this->getNameInput()) . '" , "datepicker") !!}' . "\n";
+//                    } elseif ($value[0] == 'text' && $isMultiLang) {
+//                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "textarea" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+//                    } elseif ($value[0] == 'boolean') {
+//                        $out .= "\t\t\t\t" . '<div class="form-check">' . "\n";
+//                        $out .= "\t\t\t\t\t" . '<label class="form-check-label">' . "\n";
+//                        $out .= "\t\t\t\t\t" . '<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . '  == 0 ? "checked" : "" }} type="radio" value="0">' . "\n";
+//                        $out .= "\t\t\t\t\t" . '{{ trans("' . strtolower($this->getNameInput()) . '.No")}}' . "\n";
+//                        $out .= "\t\t\t\t" . '</label>' . "\n";
+//                        $out .= "\t\t\t\t" . '<label class="form-check-label">' . "\n";
+//                        $out .= "\t\t\t\t" . '<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . '  == 1 ? "checked" : "" }} type="radio" value="1" >' . "\n\t\t\t\t";
+//                        $out .= "\t\t\t\t\t" . '{{ trans("' . strtolower($this->getNameInput()) . '.Yes")}}' . "\n";
+//                        $out .= "\t\t\t\t" . '</label>' . "\n";
+//                        $out .= "\t\t\t\t" . '</div>';
+//                    } else {
+//                        if ($value[0] == 'string') {
+//                            $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                        } elseif ($value[0] == 'email') {
+//                            $out .= "\t\t\t\t" . '<input type="email" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                        } elseif ($value[0] == 'youtube') {
+//                            $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                        } elseif ($value[0] == 'text') {
+//                            $out .= "\t\t\t\t" . '<textarea name="' . $key . '" class="form-control" id="' . $key . '"   placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}</textarea>' . "\n";
+//                        } else {
+//                            $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                        }
+//                    }
+//                }
+//                $out .= "\t\t" . '</div>' . "\n";
+//            }
+//        }
+//        return $out;
+//    }
 
     protected function controllerUpdateImageBeforeStore(){
         $out ='';

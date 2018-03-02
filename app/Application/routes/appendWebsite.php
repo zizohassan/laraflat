@@ -418,3 +418,33 @@ Route::get('categorie/{id}/view', 'CategorieController@getById');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

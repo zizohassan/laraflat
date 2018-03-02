@@ -11,8 +11,8 @@
             <div class="">
                 <label for="">{{ trans('user.Laraflat Commands') }}</label>
                 <select name="commands" id="commands" class="form-control">
-                    @foreach($commands as $command)
-                        <option value="{{ $command }}">{{ $command }}</option>
+                    @foreach($commands as $keyCommandArray => $command)
+                        <option value="{{ $keyCommandArray }}">{{ $command }}</option>
                     @endforeach
                 </select>
             </div>

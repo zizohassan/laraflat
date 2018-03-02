@@ -44,7 +44,7 @@ function getMenu($name)
 function get($name)
 {
     return \App\Application\Model\Menu::where('name', $name)->with(['item' => function ($query) {
-        return $query->orderBy('order', 'asc');
+        return $query->orderBy('parent_id' , 'asc')->orderBy('order', 'asc');
     }])->first()->item->groupBy('parent_id');
 }
 

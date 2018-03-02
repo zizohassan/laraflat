@@ -10,26 +10,54 @@
     @include(layoutMessage())
         <form action="{{ concatenateLangToUrl('admin/user/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post">
             {{ csrf_field() }}
-            <div class="form-group">
+            <div class="form-group {{  $errors->has("name")   ? "has-error" : "" }}">
                 <div class="form-line">
                     <input type="text" name="name" id="name" placeholder="{{ trans('user.name') }}" class="form-control" value="{{ isset($item) ? $item->name : old('name') }}"/>
+                    @if ($errors->has("name"))
+                        <div class="alert alert-danger">
+                        <span class='help-block'>
+                            <strong>{{ $errors->first("name") }}</strong>
+                        </span>
+                        </div>
+                    @endif
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group {{  $errors->has("email")   ? "has-error" : "" }}">
                 <div class="form-line">
                      <input type="email" name="email" id="email" {{ isset($item) ? '' : 'required' }} placeholder="{{ trans('user.email') }}"  class="form-control" value="{{ isset($item) ? $item->email : old('email')  }}"/>
+                    @if ($errors->has("email"))
+                        <div class="alert alert-danger">
+                        <span class='help-block'>
+                            <strong>{{ $errors->first("email") }}</strong>
+                        </span>
+                        </div>
+                    @endif
                  </div>
             </div>
-            <div class="form-group">
+            <div class="form-group {{  $errors->has("password")   ? "has-error" : "" }}">
                 <div class="form-line">
                     <input type="password" name="password" id="password" placeholder="{{ trans('user.password') }}"    class="form-control"/>
+                    @if ($errors->has("password"))
+                        <div class="alert alert-danger">
+                        <span class='help-block'>
+                            <strong>{{ $errors->first("password") }}</strong>
+                        </span>
+                        </div>
+                    @endif
                 </div>
             </div>
-              <div class="form-group">
+            <div class="form-group {{  $errors->has("group_id")   ? "has-error" : "" }}">
                 <div class="">
                     @php $gourp = isset($item) && $item->group_id != 0 ? $item->group_id : null @endphp
                     <label for="">{{ trans('user.group') }} </label>
-                    {!! Form::select('group_id' , $data['groups'] , $gourp , ['calss' => 'form-control'] ) !!}
+                    {!! Form::select('group_id' , $data['groups'] , $gourp , ['class' => 'form-control'] ) !!}
+                    @if ($errors->has("group_id"))
+                        <div class="alert alert-danger">
+                        <span class='help-block'>
+                            <strong>{{ $errors->first("group_id") }}</strong>
+                        </span>
+                        </div>
+                    @endif
                 </div>
             </div>
              <div class="form-group">

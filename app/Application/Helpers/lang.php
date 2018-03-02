@@ -17,7 +17,7 @@ function getCurrentLang()
 
 function concatenateLangToUrl($url)
 {
-      return url(getCurrentLang().'/'.$url);
+      return url(getCurrentLang().'/'.ltrim($url , '\\'));
 }
 
 function getAvLang()

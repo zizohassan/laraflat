@@ -104,4 +104,7 @@
 		'Strict Bounds'=>'حدود صارمة',
 		'Enter a location'=>'ادخل المكان',
 		'location'=>'المكان',
+		'Form Builder'=>'بناء المديولات',
+		'Add Comment to Module'=>'اضافة التعليق علي مديول',
+		'Add Rate to Module'=>'اضافة التقيم الي مديول',
 	];
