@@ -85,7 +85,8 @@ class CommandsController extends AbstractController
             if (in_array($request->commands, $this->commands()) && $request->commands != 'laraflat:admin_model') {
                 $this->artisanCall($request->commands, ucfirst($request->name));
             } else {
-                if (count($request->colsName) > 0 || $request->has('foreign_key')) {
+                $check = is_array($request->colsName) ? $request->colsName : [];
+                if (count($check) > 0 || $request->has('foreign_key')) {
                     $cols = $this->handelRequest($request);
                     $name = $request->has('foreign_key') ? ucfirst($request->foreign_key) . ucfirst($request->name) : ucfirst($request->name);
                     $this->artisanCall($request->commands, ucfirst($request->name), $cols, $name);
