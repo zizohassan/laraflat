@@ -168,5 +168,5 @@ function getImageFromJson($item, $name = "image", $index = 0)
             }
         }
     }
-    return env('NONE_IAMGE');
+    return env('NONE_IMAGE');
 }

@@ -27,8 +27,9 @@ function checkApiHaveImage($request){
     if(isset($imagesOnly[$getKey])){
         if(count($imagesOnly[$getKey]) == 1){
             $array[$getKey] = $imagesOnly[$getKey][0];
+        }else{
+            $array[$getKey] = '';
         }
     }
-
     return $array;
 }

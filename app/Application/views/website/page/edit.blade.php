@@ -10,15 +10,43 @@
         <form action="{{ concatenateLangToUrl('page/item') }}{{ isset($item) ? '/'.$item->id : '' }}" method="post"
               enctype="multipart/form-data">
             {{ csrf_field() }}
-            <div class="form-group">
+            <div class="form-group {{  $errors->has("title.en")  &&  $errors->has("title.ar")  ? "has-error" : "" }}">
                 <label for="title">{{ trans("page.title")}}</label>
-                {!! extractFiled("title" , isset($item->title) ? $item->title : old("title") , "text" , "page") !!}
+                {!! extractFiled(isset($item) ? $item : null,  "title" , isset($item->title) ? $item->title : old("title") , "text" , "page") !!}
+            @if ($errors->has("title.en"))
+                    <div class="alert alert-danger">
+                            <span class='help-block'>
+                                <strong>{{ $errors->first("title.en") }}</strong>
+                             </span>
+                    </div>
+                @endif
+                @if ($errors->has("title.ar"))
+                    <div class="alert alert-danger">
+                            <span class='help-block'>
+                                <strong>{{ $errors->first("title.ar") }}</strong>
+                            </span>
+                    </div>
+                @endif
             </div>
-            <div class="form-group">
+            <div class="form-group {{  $errors->has("body.en")  &&  $errors->has("body.ar")  ? "has-error" : "" }}">
                 <label for="body">{{ trans("page.body")}}</label>
-                {!! extractFiled("body" , isset($item->body) ? $item->body : old("body") , "textarea" , "page") !!}
+                {!! extractFiled(isset($item) ? $item : null , "body" , isset($item->body) ? $item->body : old("body") , "textarea" , "page" , 'tinymce' ) !!}
+                @if ($errors->has("body.en"))
+                    <div class="alert alert-danger">
+                            <span class='help-block'>
+                                <strong>{{ $errors->first("body.en") }}</strong>
+                             </span>
+                    </div>
+                @endif
+                @if ($errors->has("body.ar"))
+                    <div class="alert alert-danger">
+                            <span class='help-block'>
+                                <strong>{{ $errors->first("body.ar") }}</strong>
+                            </span>
+                    </div>
+                @endif
             </div>
-            <div class="form-group">
+            <div class="form-group {{  $errors->has("active")   ? "has-error" : "" }}">
                 <label for="active">{{ trans("page.active")}}</label>
                 <div class="form-check">
                     <label class="form-check-label">
@@ -33,6 +61,13 @@
                         {{ trans("page.Yes")}}
                     </label>
                 </div>
+                @if ($errors->has("active"))
+                    <div class="alert alert-danger">
+                        <span class='help-block'>
+                            <strong>{{ $errors->first("active") }}</strong>
+                        </span>
+                    </div>
+                @endif
             </div>
             <div class="form-group">
                 <button type="submit" name="submit" class="btn btn-default">

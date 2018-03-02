@@ -12,3 +12,15 @@ function getYouTubeId($url){
     }
     return false;
 }
+
+function small($image = ''){
+    return $image == '' ? env('NONE_IMAGE') : imageExist($image) ? url('/'.env('SMALL_IMAGE_PATH').'/'.$image) : large($image);
+}
+
+function imageExist($imageName , $env = 'SMALL_IMAGE_PATH'){
+    return file_exists(public_path(env($env).'/'.$imageName)) ? true : false;
+}
+
+function large($image= ''){
+    return $image == '' ? env('NONE_IMAGE') : imageExist($image , 'UPLOAD_PATH') ?  url('/'.env('UPLOAD_PATH').'/'.$image) :  env('NONE_IMAGE')  ;
+}

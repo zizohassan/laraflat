@@ -46,7 +46,7 @@ trait ControllerTrait
             $out .= "\t\t\t\t\t\t\t" . '@php $files = returnFilesImages($item , "' . $keyWithOutBrakets . '"); @endphp' . "\n";
             $out .= "\t\t\t\t\t\t\t" . '<div class="row text-center">' . "\n";
             $out .= "\t\t\t\t\t\t\t" . '@foreach($files["image"] as $jsonimage )' . "\n";
-            $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><img src="{{ url(env("SMALL_IMAGE_PATH")."/".$jsonimage) }}" class="img-responsive" /><br>' . "\n";
+            $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><img src="{{ small($jsonimage) }}" class="img-responsive" /><br>' . "\n";
             $out .= "\t\t\t\t\t\t\t\t" . '<a class="btn btn-danger" onclick="deleteThisItem(this)" data-link="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $keyWithOutBrakets . '") }}"><i class="fa fa-trash"></i></a></div>' . "\n";
             $out .= "\t\t\t\t\t\t\t" . '@endforeach' . "\n";
             $out .= "\t\t\t\t\t\t\t" . '</div>' . "\n";
@@ -104,7 +104,7 @@ trait ControllerTrait
                         $out .= "\t\t\t\t\t\t\t" . '@php $files = returnFilesImages($item , "' . $key . '"); @endphp' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '<div class="row text-center">' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@foreach($files["image"] as $jsonimage )' . "\n";
-                        $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><img src="{{ url(env("SMALL_IMAGE_PATH")."/".$jsonimage) }}" class="img-responsive" /><br>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><img src="{{ small($jsonimage) }}" class="img-responsive" /><br>' . "\n";
                         $out .= "\t\t\t\t\t\t\t\t" . '<span class="btn btn-danger" onclick="deleteThisItem(this)" data-link="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i></span></div>' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@endforeach' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '</div>' . "\n";
@@ -124,7 +124,7 @@ trait ControllerTrait
                     }
                 }else if (!str_contains($k , '[]') && in_array($k , getImageFields()) ) {
                     $out .= "\t\t\t\t\t" . '<td>' . "\n";
-                    $out .= "\t\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->' . $key . ') }}" class="img-responsive" />' . "\n";
+                    $out .= "\t\t\t\t\t" . '<img src="{{ small($item->' . $key . ') }}" class="img-responsive" />' . "\n";
                     $out .= "\t\t\t\t\t" . '</td>' . "\n";
                 }else if (!str_contains($k , '[]') && in_array($k , fileFields()) ) {
                     $out .= "\t\t\t\t\t" . '<td>' . "\n";
@@ -162,7 +162,7 @@ trait ControllerTrait
             $out .= "\t\t\t\t" . '@if($type == "File")' . "\n";
             $out .= "\t\t\t\t\t" . '<td> <a href="{{ url(env("UPLOAD_PATH")."/".$item[$field]) }}">{{ $item[$field] }}</a></td>' . "\n";
             $out .= "\t\t\t\t" . '@elseif($type == "Image")' . "\n";
-            $out .= "\t\t\t\t\t" . '<td> <img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item[$field]) }}" /></td>' . "\n";
+            $out .= "\t\t\t\t\t" . '<td> <img src="{{ small($item[$field]) }}" /></td>' . "\n";
             $out .= "\t\t\t\t" . '@else' . "\n";
             $out .= "\t\t\t\t\t" . ' <td>{!!  nl2br($item[$field])  !!}</td>' . "\n";
             $out .= "\t\t\t\t" . '@endif' . "\n";
@@ -172,6 +172,123 @@ trait ControllerTrait
         }
         return $out;
 
+    }
+
+    protected function renderForm($name)
+    {
+        $out = ' ';
+        if (count($this->cols) > 0) {
+            foreach ($this->cols as $key => $value) {
+                $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
+                if(!$isMultiLang){
+                    $out .= "\t\t" . ' <div class="form-group {{ $errors->has("'.$key.'") ? "has-error" : "" }}" > ' . "\n";
+                }else{
+                    $out .= "\t\t" . ' <div class="form-group  ';
+                    $ilang=1;
+                    $condetion = '{{ ';
+                    foreach (getAvLang() as $keyLang => $langValue){
+                        $condetion .=  ' $errors->has("'.$key.'.'.$keyLang.'") ';
+                        $condetion .= ($ilang != count(getAvLang()) ? " && " : '');
+                        $ilang++;
+                    }
+                    $condetion .= ' ? "has-error" : "" }}';
+                    $out .= $condetion;
+                    $out .= '" >' . "\n";
+                }
+                $k = str_contains( $key , '[]') ? str_replace('[]' ,'', $key) : $key;
+                $out .= "\t\t\t" . '<label for="' . $k . '">{{ trans("' . strtolower($this->getNameInput()) . '.' . $k . '")}}</label>' . "\n";
+                if (in_array($key, getFileFieldsName())) {
+                    if(str_contains($key , '[]')){
+                        $out .= $this->inputAsArray($key , 'file');
+                    }else{
+                        $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
+                        $out .= "\t\t\t\t" . '<br>' . "\n";
+                        $out .= "\t\t\t\t" . '<img src="{{ small($item->' . $key . ') }}" class="thumbnail" alt="" width="200">' . "\n";
+                        $out .= "\t\t\t\t" . '<br>' . "\n";
+                        $out .= "\t\t\t\t" . "@endif" . "\n";
+                        $out .= "\t\t\t\t" . '<input type="file" name="' . $key . '" >' . "\n";
+                    }
+                } elseif ($key == 'youtube') {
+                    $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
+                    $out .= "\t\t\t\t" . ' <br>' . "\n";
+                    $out .= "\t\t\t\t" . ' <iframe width = "420" height = "315" src="https://www.youtube.com/embed/{{ isset($item->' . $key . ') ? getYouTubeId($item->' . $key . ') : old("' . $key . '")  }}" ></iframe > ' . "\n";
+                    $out .= "\t\t\t\t" . '<br > ' . "\n";
+                    $out .= "\t\t\t\t" . "@endif" . "\n";
+                    $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                } elseif ($key == 'icon') {
+                    $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control icon-field" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                } elseif ($key == 'url') {
+                    $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                } elseif ($key == 'date') {
+                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control datepicker2" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                }elseif ($key == 'time') {
+                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control time" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                }elseif ($key == 'lat') {
+                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lat" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                    $out .= $this->map();
+                }elseif ($key == 'lng') {
+                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lng" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+                }elseif (str_contains($key , '[]')) {
+                    $out .= $this->inputAsArray($key);
+                } else {
+                    if ($value[0] == 'string' && $isMultiLang) {
+                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "text" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+                    } elseif ($value[0] == 'email' && $isMultiLang) {
+                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "email" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+                    } elseif ($value[0] == 'date' && $isMultiLang) {
+                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "date" , "' . strtolower($this->getNameInput()) . '" , "datepicker") !!}' . "\n";
+                    } elseif ($value[0] == 'text' && $isMultiLang) {
+                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '", isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "textarea" , "' . strtolower($this->getNameInput()) . '" ) !!}' . "\n";
+                    } elseif ($value[0] == 'boolean') {
+                        $out .= "\t\t\t\t" . ' <div class="form-check">' . "\n";
+                        $out .= "\t\t\t\t\t" . '<label class="form-check-label">' . "\n";
+                        $out .= "\t\t\t\t\t" . '<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . ' == 0 ? "checked" : "" }} type="radio" value="0" > ' . "\n";
+                        $out .= "\t\t\t\t\t" . '{{ trans("' . strtolower($this->getNameInput()) . '.No")}}' . "\n";
+                        $out .= "\t\t\t\t" . ' </label > ' . "\n";
+                        $out .= "\t\t\t\t" . '<label class="form-check-label">' . "\n";
+                        $out .= "\t\t\t\t" . '<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . ' == 1 ? "checked" : "" }} type="radio" value="1" > ' . "\n\t\t\t\t";
+                        $out .= "\t\t\t\t\t" . '{{ trans("' . strtolower($this->getNameInput()) . '.Yes")}}' . "\n";
+                        $out .= "\t\t\t\t" . ' </label> ' . "\n";
+                        $out .= "\t\t\t\t" . '</div> ';
+                    } else {
+                        if ($value[0] == 'string') {
+                            $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                        } elseif ($value[0] == 'email') {
+                            $out .= "\t\t\t\t" . '<input type="email" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                        } elseif ($value[0] == 'youtube') {
+                            $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                        } elseif ($value[0] == 'date') {
+                            $out .= "\t\t\t\t" . '<input type="date" name="' . $key . '" class="form-control datepicker" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+                        } elseif ($value[0] == 'text') {
+                            $out .= "\t\t\t\t" . '<textarea name="' . $key . '" class="form-control" id="' . $key . '"   placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" >{{isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}</textarea >'."\n";
+                        } else {
+                            $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">'."\n";
+                        }
+                    }
+                }
+                $out .= "\t\t" . '</div>' . "\n";
+                if(!$isMultiLang){
+                    $out .=  $this->returnErrorLoop($key);
+                }else{
+                    foreach (getAvLang() as $keyLang => $value){
+                        $out .=  $this->returnErrorLoop($key.'.'.$keyLang);
+                    }
+                }
+            }
+        }
+        return $out;
+    }
+
+
+    protected function returnErrorLoop($key){
+        $out = "\t\t\t".'@if ($errors->has("'.$key.'"))'."\n";
+        $out .= "\t\t\t\t".'<div class="alert alert-danger">'."\n";
+        $out .= "\t\t\t\t\t"."<span class='help-block'>"."\n";
+        $out .= "\t\t\t\t\t\t".'<strong>{{ $errors->first("'.$key.'") }}</strong>'."\n";
+        $out .= "\t\t\t\t\t"."</span>"."\n";
+        $out .= "\t\t\t\t".'</div>'."\n";
+        $out .= "\t\t\t"."@endif"."\n";
+        return $out;
     }
 
 }

@@ -45,8 +45,9 @@ class CategorieController extends AbstractController
         return $this->deleteItem($id , 'admin/categorie')->with('sucess' , 'Done Delete categorie From system');
     }
 
-    public function pluck(\Illuminate\Http\Request $request){
-        return $this->deleteItem($request->id , 'admin/categorie')->with('sucess' , 'Done Delete categorie From system');
+    public function pluck(\Illuminate\Http\Request $request)
+    {
+        return $this->deleteItem($request->id, 'admin/categorie')->with('sucess', 'Done Delete categorie From system');
     }
 
 }

@@ -186,27 +186,28 @@ class CommandsController extends AbstractController
             'ip' => false,
             'integer' => false,
             'url' => false,
+            'array' => false,
         ];
     }
 
     protected function laraFlatCommands()
     {
         return [
-            'laraflat:admin_controller',
-            'laraflat:admin_model',
-            'laraflat:comment',
-            'laraflat:rate',
-            'laraflat:admin_request',
-            'laraflat:api_controller',
-            'laraflat:api_request',
-            'laraflat:controller',
-            'laraflat:datatable',
-            'laraflat:interface',
-            'laraflat:migrate',
-            'laraflat:model',
-            'laraflat:request',
-            'laraflat:rollback',
-            'laraflat:transformer'
+//            'laraflat:admin_controller',
+                'laraflat:admin_model' => trans('admin.Form Builder'),
+                'laraflat:comment' => trans('admin.Add Comment to Module'),
+                'laraflat:rate' => trans('admin.Add Rate to Module'),
+//            'laraflat:admin_request',
+//            'laraflat:api_controller',
+//            'laraflat:api_request',
+//            'laraflat:controller',
+//            'laraflat:datatable',
+//            'laraflat:interface',
+//            'laraflat:migrate',
+//            'laraflat:model',
+//            'laraflat:request',
+//            'laraflat:rollback',
+//            'laraflat:transformer'
         ];
     }
 
