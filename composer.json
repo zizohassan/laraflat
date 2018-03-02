@@ -1,6 +1,6 @@
 {
     "name": "laraflat/laraflat",
-    "description": "The easy laravel admin panel",
+    "description": "The easy laravel admin panel version 3.0.0",
     "keywords": ["adminpanel", "laravel" , "laraflat"],
     "license": "MIT",
     "type": "project",
