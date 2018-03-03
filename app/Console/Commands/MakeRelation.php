@@ -223,7 +223,7 @@ class MakeRelation extends GeneratorCommand
         $out .= "\t\t\t" . '<label for="' . $key . '">{{ trans( "' . $key . '.' . $key . '") }}</label>' . "\n";
         $out .= "\t\t\t" . '@php $' . str_plural($key) . ' = App\\Application\\Model\\' . ucfirst($key) . '::pluck("' . $this->pluckFone . '" ,"' . $this->pluckFtwo . '")->all()  @endphp' . "\n";
         $out .= "\t\t\t" . '@php  $' . $key . '_id = isset($item) ? $item->' . $this->pKey . '->pluck("id")->all() : [] @endphp' . "\n";
-        $out .= "\t\t\t" . '<select name="' . $key . '_id[]"  class="form-control" multiple>' . "\n";
+        $out .= "\t\t\t" . '<select name="' . $key . '_id[]"  class="form-control select2" multiple>' . "\n";
         $out .= "\t\t\t" . '@foreach( $' . str_plural($key) . ' as $key => $relatedItem)' . "\n";
         $out .= "\t\t\t" . '<option value="{{ $key }}"  {{ in_array($key ,$' . $key . '_id ) ? "selected" : "" }}> {{ is_json($relatedItem) ? getDefaultValueKey($relatedItem) :  $relatedItem}}</option>' . "\n";
         $out .= "\t\t\t" . '@endforeach' . "\n";
@@ -448,7 +448,7 @@ class MakeRelation extends GeneratorCommand
 
     protected function selectHtml()
     {
-        $out = "\t\t" . '<div class="form-group">' . "\n";
+        $out = "\t\t" . '<div class="form-group {{ $errors->has("'.$this->pKey.'") ? "has-error" : "" }}">' . "\n";
         $out .= "\t\t\t" . '<label for="' . $this->pKey . '">{{ trans( "' . $this->pKey . '.' . $this->pKey . '") }}</label>' . "\n";
         $out .= "\t\t\t" . '@php $' . str_plural($this->pKey) . ' = App\\Application\\Model\\' . ucfirst($this->pKey) . '::pluck("' . $this->pluckFone . '" ,"' . $this->pluckFtwo . '")->all()  @endphp' . "\n";
         $out .= "\t\t\t" . '@php  $' . $this->pKey . '_id = isset($item) ? $item->' . $this->pKey . '_id : null @endphp' . "\n";
@@ -457,7 +457,14 @@ class MakeRelation extends GeneratorCommand
         $out .= "\t\t\t" . '<option value="{{ $key }}"  {{ $key == $' . $this->pKey . '_id  ? "selected" : "" }}> {{ is_json($relatedItem) ? getDefaultValueKey($relatedItem) :  $relatedItem}}</option>' . "\n";
         $out .= "\t\t\t" . '@endforeach' . "\n";
         $out .= "\t\t\t" . '</select>' . "\n";
-        $out .= "\t\t" . '</div>' . "\n";
+        $out .= "\t\t\t" . '@if ($errors->has("'.$this->pKey.'"))'. "\n";
+        $out .= "\t\t\t\t" . '<div class="alert alert-danger">'. "\n";
+        $out .= "\t\t\t\t\t" . '<span class="help-block">'. "\n";
+        $out .= "\t\t\t\t\t\t" . '<strong>{{ $errors->first("'.$this->pKey.'") }}</strong>'. "\n";
+        $out .= "\t\t\t\t\t" . '</span>'. "\n";
+        $out .= "\t\t\t\t" . '</div>'. "\n";
+        $out .= "\t\t\t" . '@endif'. "\n";
+        $out .= "\t\t\t" . '</div>' . "\n";
         return $out;
     }
 
