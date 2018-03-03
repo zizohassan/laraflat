@@ -104,7 +104,8 @@ class MakeRelation extends GeneratorCommand
 
     protected function addToViews()
     {
-        $findAdminShowFile = '<table class="table table-bordered table-responsive table-striped">' . "\n";
+        $tableClass = env('THEME') == 'themeone' ? '' : 'table-responsive';
+        $findAdminShowFile = '<table class="table table-bordered '.$tableClass.' table-striped">' . "\n";
         $template = app_path('Application/views/website/' . $this->fKey . '/show.blade.php');
         $this->addLineToFile($template, $findAdminShowFile, '@include("website.' . $this->fKey . '.relation.' . $this->pKey . '.show")' . "\n");
         $this->createFile('Application/views/website/' . $this->fKey . '/relation/' . $this->pKey . '/show.blade.php', $this->getAdminTr($this->pKey, $this->fKey, $this->pluckFone, false));
@@ -416,7 +417,8 @@ class MakeRelation extends GeneratorCommand
         $this->addLineToFile($websiteEdit, $findAdminEditFile, '@include("website.' . $this->fKey . '.relation.' . $this->pKey . '.edit")' . "\n");
         $this->createFile('Application/views/website/' . $this->fKey . '/relation/' . $this->pKey . '/edit.blade.php', $this->selectHtml());
         //////admin view
-        $findAdminShowFile = '<table class="table table-bordered table-responsive table-striped">' . "\n";
+        $tableClass = env('THEME') == 'themeone' ? '' : 'table-responsive';
+        $findAdminShowFile = '<table class="table table-bordered '.$tableClass.' table-striped">' . "\n";
         $adminView = app_path('Application/views/admin/' . $this->fKey . '/show.blade.php');
         $this->addLineToFile($adminView, $findAdminShowFile, '@include("admin.' . $this->fKey . '.relation.' . $this->pKey . '.show")' . "\n");
         $this->createFile('Application/views/admin/' . $this->fKey . '/relation/' . $this->pKey . '/show.blade.php', $this->getTr());
