@@ -104,7 +104,7 @@ trait ControllerTrait
                         $out .= "\t\t\t\t\t\t\t" . '@php $files = returnFilesImages($item , "' . $key . '"); @endphp' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '<div class="row text-center">' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@foreach($files["image"] as $jsonimage )' . "\n";
-                        $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><img src="{{ small($jsonimage) }}" class="img-responsive" /><br>' . "\n";
+                        $out .= "\t\t\t\t\t\t\t\t" . '<div class="col-lg-2 text-center"><img src="{{ small($jsonimage) }}" width="100"  /><br>' . "\n";
                         $out .= "\t\t\t\t\t\t\t\t" . '<span class="btn btn-danger" onclick="deleteThisItem(this)" data-link="{{ url("deleteFile/' . strtolower($this->getNameInput()) . '/".$item->id."?name=".$jsonimage."&filed_name=' . $key . '") }}"><i class="fa fa-trash"></i></span></div>' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '@endforeach' . "\n";
                         $out .= "\t\t\t\t\t\t\t" . '</div>' . "\n";
@@ -124,7 +124,7 @@ trait ControllerTrait
                     }
                 }else if (!str_contains($k , '[]') && in_array($k , getImageFields()) ) {
                     $out .= "\t\t\t\t\t" . '<td>' . "\n";
-                    $out .= "\t\t\t\t\t" . '<img src="{{ small($item->' . $key . ') }}" class="img-responsive" />' . "\n";
+                    $out .= "\t\t\t\t\t" . '<img src="{{ small($item->' . $key . ') }}" width="100" />' . "\n";
                     $out .= "\t\t\t\t\t" . '</td>' . "\n";
                 }else if (!str_contains($k , '[]') && in_array($k , fileFields()) ) {
                     $out .= "\t\t\t\t\t" . '<td>' . "\n";
