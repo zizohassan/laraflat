@@ -76,7 +76,7 @@ trait ControllerTrait
                 $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
                 $k = $key;
                 $key = str_contains($key , '[]') ? str_replace('[]' , '' , $key) : $key;
-                $out .= "\t\t\t\t" . '<tr>' . "\n\t\t\t\t" . '<th>{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '") }}</th>' . "\n";
+                $out .= "\t\t\t\t" . '<tr>' . "\n\t\t\t\t" . '<th width="200">{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '") }}</th>' . "\n";
                 if ($k == 'youtube') {
                     $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
                     $out .= "\t\t\t\t\t" . '<td>' . "\n";
