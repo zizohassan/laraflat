@@ -178,16 +178,16 @@ class MakeRelation extends GeneratorCommand
     protected function addSaveToControllers()
     {
         ///admin
-        $findAdminEditFile = '$item =  $this->storeOrUpdate($request , null , true);' . "\n";
+        $findAdminEditFile = '$item = $this->storeOrUpdate($request, null, true);' . "\n";
         $adminEdit = app_path('Application/Controllers/Admin/' . ucfirst($this->fKey) . 'Controller.php');
         $this->addLineToFile($adminEdit, $findAdminEditFile, $this->addController($this->pKey, $this->fKey));
-        $findAdminEditFile = '$item =  $this->storeOrUpdate($request , $id , true);' . "\n";
+        $findAdminEditFile = '$item = $this->storeOrUpdate($request, $id, true);' . "\n";
         $this->addLineToFile($adminEdit, $findAdminEditFile, $this->addController($this->pKey, $this->fKey));
         ////website
-        $findwebsiteEditFile = '$item =  $this->storeOrUpdate($request , null , true);' . "\n";
+        $findwebsiteEditFile = '$item = $this->storeOrUpdate($request, null, true);' . "\n";
         $websiteEdit = app_path('Application/Controllers/Website/' . ucfirst($this->fKey) . 'Controller.php');
         $this->addLineToFile($websiteEdit, $findwebsiteEditFile, $this->addController($this->pKey, $this->fKey));
-        $findwebsiteEditFile = '$item =  $this->storeOrUpdate($request , $id , true);' . "\n";
+        $findwebsiteEditFile = '$item = $this->storeOrUpdate($request, $id, true);' . "\n";
         $this->addLineToFile($websiteEdit, $findwebsiteEditFile, $this->addController($this->pKey, $this->fKey));
     }
 
