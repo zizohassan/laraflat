@@ -193,7 +193,7 @@ class MakeRelation extends GeneratorCommand
 
     protected function addController($oKey, $key)
     {
-        $out = "\t\t" . 'if(count($request->' . $oKey . '_id) > 0){' . "\n";
+        $out = "\t\t" . 'if($request->' . $oKey . '_id){' . "\n";
         $out .= "\t\t\t" . '$item->' . $oKey . '()->sync($request->' . $oKey . '_id);' . "\n";
         $out .= "\t\t" . '}' . "\n";
         return $out;
