@@ -11,8 +11,8 @@ trait ControllerTrait
         $out = "\t\t\t\t" . '<div id="laraflat-' . $keyWithOutBrakets . '">' . "\n";
         if ($type == 'text') {
             $out .= "\t\t\t\t\t" . '@if(isset($item) || old("' . $keyWithOutBrakets . '"))' . "\n";
-            $out .= "\t\t\t\t\t\t" . '@if((isset($item->title) && json_decode($item->' . $keyWithOutBrakets . ') ) || old("' . $keyWithOutBrakets . '"))' . "\n";
-            $out .= "\t\t\t\t\t\t" . '@php $items = isset($item->title) && json_decode($item->' . $keyWithOutBrakets . ') ? json_decode($item->' . $keyWithOutBrakets . ')  : old("' . $keyWithOutBrakets . '") @endphp' . "\n";
+            $out .= "\t\t\t\t\t\t" . '@if((isset($item->'.$keyWithOutBrakets.') && json_decode($item->' . $keyWithOutBrakets . ') ) || old("' . $keyWithOutBrakets . '"))' . "\n";
+            $out .= "\t\t\t\t\t\t" . '@php $items = isset($item->'.$keyWithOutBrakets.') && json_decode($item->' . $keyWithOutBrakets . ') ? json_decode($item->' . $keyWithOutBrakets . ')  : old("' . $keyWithOutBrakets . '") @endphp' . "\n";
             $out .= "\t\t\t\t\t\t\t" . '@foreach($items as $json' . $keyWithOutBrakets . ')' . "\n";
             $out .= "\t\t\t\t\t\t\t\t" . '<div class="title form-inline" style="margin-top:5px;margin-bottom:5px"><input class="form-control" name="' . $keyWithOutBrakets . '[]"  value="{{ $json' . $keyWithOutBrakets . '}}" type="text" placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $keyWithOutBrakets . '")}}" ><span class="btn btn-warning" onclick="removetitle(this)"> <i class="fa fa-minus"></i></span></div>' . "\n";
             $out .= "\t\t\t\t\t\t\t" . '@endforeach' . "\n";
@@ -278,7 +278,6 @@ trait ControllerTrait
         }
         return $out;
     }
-
 
     protected function returnErrorLoop($key){
         $out = "\t\t\t".'@if ($errors->has("'.$key.'"))'."\n";
