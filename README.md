@@ -3,130 +3,24 @@ Advanced laravel system to build admin panel
 
 
 
-## Requirements
+# Full Docs
 
-Laravel => 5.5 , <br>
-PHP >= 7 ,   <br>
-PHP Curl extension   <br>
+<a href="http://laraflat.com/"> Laraflat </a>
 
 
-## Download The Files 
+# Support Us
 
-download all files
+for give project more work time
 
+## in egypt
 
+    - Etisalat flous `0201157764977`
+    - Vodafone Cash `0201017932113`
 
-## Install  The Dependencies
+## outside egypt
 
-now type this line on your console
+## PayPal
+<a href="https://www.paypal.com/sa/cgi-bin/webscr?cmd=_flow&SESSION=ORXmELO0nEXHcEsWTvL8Qn7dRQJI79n-QDriUnKB_5khhyQCS7i8y8a_8Si&dispatch=5885d80a13c0db1f8e263663d3faee8db8175432b4df92754f4b4adb5a123d61&rapidsState=Donation__DonationFlow___StateDonationLogin&rapidsStateSignature=6235fa7186190c600454ef8228093141aa956795">paypal</a>
 
-```
-composer install
-```
-```
-php artisan key:generate
-```
-
-
-# Or Install Form Composer
-
-```
-  composer create-project --prefer-dist laraflat/laraflat
-```
-
-## Migrate
-
-```
-  php artisan migrate
-```
-
-## Seed Database 
-
-```
-  php artisan db:seed
-```
-
-## Start Server
-
-
-```
-  php artisan serve
-```
-
-## Login
-
-```
-  email : admin@gmail.com
-  pass : admin
-```
-
-## Go To Admin Path
-
-```
-  http://127.0.0.1:8000/admin/home
-```
-
-## Form Bulider
-
-https://www.youtube.com/watch?v=vEck4fALX-I
-
-
-## Relation
-
-https://www.youtube.com/watch?v=1ES7gpIx6Yg
-
-
-## Translation
-
-https://www.youtube.com/watch?v=bEyU3wWoTCQ
- 
- 
-## Laravel Commands Adminer
-
-https://www.youtube.com/watch?v=TqAQilctSLI
-
-
-## Add Comment to any module
-
-https://www.youtube.com/watch?v=Fa229mEGyzc
-
-
-## File Manager
-
-https://www.youtube.com/watch?v=rjkAoVlAVdg
-
-
-## Theme Manager
-
-https://www.youtube.com/watch?v=vyZt1uhqtYM
-
-
-## Multi Upload Image Files
-
-https://www.youtube.com/watch?v=_SuOI5L7yLQ
-
-
-## Add Rate to any module
-
-https://www.youtube.com/watch?v=C9JAG7698XM
-
-
-## Icons Google Map
-
-https://www.youtube.com/watch?v=r-Xr8VCCeCE
-
-
-## Advanced Search 
-
-https://www.youtube.com/watch?v=xO58xgWSZLo
-
-
-## Export Import Modules
-
-https://www.youtube.com/watch?v=8wLgKAu3C-U
-
-
-## For More 
-see this videos 
-<a href="https://www.youtube.com/playlist?list=PLYp_Kd32XvcrdYfidiS1_vnHtUMa96VI2&disable_polymer=true">Youtube</a> or 
-<a href="https://5dmat-web.com">5dmat-web</a>
+## CIB BANK
+account number `100033247097` swift code `CIBEEGC` name `Abdel Aziz Hassan`
