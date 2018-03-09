@@ -14,6 +14,7 @@ use App\Application\Requests\Website\Categorie\ApiUpdateRequestCategorie;
 class CategorieApi extends Controller
 {
 
+    use ApiTrait;
     protected $request;
     protected $model;
 
