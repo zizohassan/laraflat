@@ -18,4 +18,6 @@ return [
     'Allow' => 'Allow',
     'NameSpace' => 'NameSpace',
     'Method Name' => 'Method Name',
+    'controller_name' => '',
+    'method_name' => '',
 ];

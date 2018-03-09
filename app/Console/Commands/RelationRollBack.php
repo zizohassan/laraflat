@@ -45,6 +45,7 @@ class RelationRollBack extends GeneratorCommand
     {
         $this->setCols();
 
+
         $name = ucfirst($this->getNameInput());
 
 //        $this->deleteFile(app_path('Application/Controllers/Admin/'.$name.'Controller.php'));
@@ -98,6 +99,19 @@ class RelationRollBack extends GeneratorCommand
                 });
             }
         }
+
+
+        $migrationPath = database_path('migrations');
+        foreach(scandir($migrationPath) as $file){
+            $migration =  explode('_' , $file);
+            if(isset($migration[4]) && isset($migration[5]) && isset($migration[6])&& isset($migration[7])){
+                $migration_name = $migration[4].'_'.$migration[5].'_'.$migration[6].'_table.php';
+                if($migration_name == 'create_'.strtolower($name).'_table.php'){
+                    $this->deleteFile(database_path('migrations/'.$file));
+                }
+            }
+        }
+        shell_exec('composer --working-dir='.app_path("/").' dumpautoload');
 
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists(strtolower($this->pKey . '_' . $this->fKey));

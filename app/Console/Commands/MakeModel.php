@@ -86,7 +86,29 @@ class MakeModel extends GeneratorCommand
         $stub = $this->files->get($this->getStub());
         return $this->replace( $stub, 'DummyTable',strtolower(class_basename($name)))
                     ->replace( $stub, 'DummyFillAbel',$this->appdenToFillable())
+                    ->replace( $stub, 'DummyMultiFiles',$this->putMultiLangFields())
                     ->replaceNamespace($stub, $name)->replaceClass($stub, $name);
+    }
+
+
+    protected function putMultiLangFields(){
+        $out = '';
+        if(count($this->multiLanguage) > 0){
+            foreach ($this->multiLanguage as $key => $lang){
+                if($lang === "true"){
+                    $out .= "\t".'public function get'.ucfirst($key).'LangAttribute(){'."\n";
+                    $out .= "\t\t".'return is_json($this->'.$key.') && is_object(json_decode($this->'.$key.')) ?  json_decode($this->'.$key.')->{getCurrentLang()}  : $this->'.$key.';'."\n";
+                    $out .= "\t".'}'."\n";
+                    foreach (getAvLang() as $k => $L){
+                        $out .= "\t".'public function get'.ucfirst($key).ucfirst($k).'Attribute(){'."\n";
+                        $out .= "\t\t".'return is_json($this->'.$key.') && is_object(json_decode($this->'.$key.')) ?  json_decode($this->'.$key.')->'.$k.'  : $this->'.$key.';'."\n";
+                        $out .= "\t".'}'."\n";
+                    
+                    }
+                }
+            }
+        }
+        return  $out ;
     }
 
     protected function replace(&$stub,$rep ,  $name)
@@ -109,7 +131,11 @@ class MakeModel extends GeneratorCommand
      protected function appdenToFillable()
     {
         if(count($this->colsArray) > 0){
-            return "'".implode("','" , array_keys($this->colsArray))."'";
+            $out =  "'".implode("','" , array_keys($this->colsArray))."'";
+            if(str_contains($out , '[]')){
+                $out = str_replace('[]' ,'' , $out);
+            }
+            return $out;
         }
         return ' ';
     }

@@ -44,4 +44,8 @@ class DummyClass extends AbstractController
     public function destroy($id){
         return $this->deleteItem($id , 'admin/DummyView')->with('sucess' , 'Done Delete DummyView From system');
     }
+
+    public function pluck(\Illuminate\Http\Request $request){
+        return $this->deleteItem($request->id , 'admin/DummyView')->with('sucess' , 'Done Delete DummyView From system');
+    }
 }

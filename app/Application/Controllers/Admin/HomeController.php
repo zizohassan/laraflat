@@ -32,4 +32,8 @@ class HomeController extends AbstractController
         return view('vendor.apidoc.index');
     }
 
+    public function fileManager(){
+        return view('admin.file-manager.index');
+    }
+
 }

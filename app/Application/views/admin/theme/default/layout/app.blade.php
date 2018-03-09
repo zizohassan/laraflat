@@ -29,13 +29,20 @@
     {{ Html::style('admin/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.min.css') }}
     {{ Html::style('css/sweetalert.css') }}
     {{ Html::style('admin/plugins/tinymce/plugins/elfinder/css/elfinder.full.css') }}
+    {{ Html::style('css/rate.css') }}
     @yield('style')
     <style>
         .card .header .header-dropdown{
             top:10px;
         }
     </style>
-
+    <link rel="stylesheet" href="{{ url('css/fontawesome-iconpicker.min.css') }}">
+    <link href="{{ url('/css/mainselec2.css') }}" rel="stylesheet" />
+    <link href="{{ url('/css/select2.css') }}" rel="stylesheet" />
+    <link href="{{ url('/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" />
+    <!-- if you not use map remove this -->
+    {{ Html::style('css/map.css') }}
+    <!-- if you not use map remove this -->
 </head>
 
 <body class="theme-red">
@@ -146,7 +153,7 @@
                 &copy; 2017 <a href="javascript:void(0);">{{ getSetting('siteTitle')  }}</a>.
             </div>
             <div class="version">
-                <b>Version: </b> 1.0
+                <b>Version: </b> 2.1
             </div>
         </div>
         <!-- #Footer -->
@@ -181,7 +188,45 @@
 {{ Html::script('admin/js/jquery.dataTables.min.js') }}
 {{ Html::script('admin/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.min.js') }}
 {{ Html::script('js/sweetalert.min.js') }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
+<script src="{{ url('js/select2.min.js') }}"></script>
+<script src="{{ url('js/moment.js') }}"></script>
+<script src="{{ url('js/bootstrap-datetimepicker.js') }}"></script>
 <script type="application/javascript">
+    $('.select2').select2({
+        theme: "bootstrap",
+        dir:"{{ getDirection() }}"
+    });
+    $('.datepicker').datetimepicker({
+        defaultDate: "{{ date('Y/m/d') }}",
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        },
+        format: 'Y/MM/DD'
+    });
+    $('.datepicker2').datetimepicker({
+        defaultDate: "",
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        },
+        format: 'Y/MM/DD'
+    });
+
+    $('.time').datetimepicker({
+        format: 'LT',
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        }
+    });
     function deleteThisItem(e){
         var link = $(e).data('link');
         swal({
@@ -197,9 +242,67 @@
                     window.location = link;
                 });
     }
+    $('#rate').barrating({
+        theme: 'fontawesome-stars',
+        onSelect:function(value, text, event){
+            $('#rate').closest('form').submit();
+        }
+    });
+
+    function checkAll() {
+        $('input[name="id[]"]').each(function () {
+            if (!$(this).prop('checked')) {
+                $(this).prop('checked' , true);
+            }
+        });
+    }
+
+    function unCheckAll() {
+        $('input[name="id[]"]').each(function () {
+            if ($(this).prop('checked')) {
+                $(this).prop('checked' , false);
+            }
+        });
+    }
+
+    function deleteThemAll(e) {
+        var link = $(e).data('link');
+        var check = [];
+        $('input[name="id[]"]').each(function () {
+            if ($(this).prop('checked')) {
+                check.push($(this).val());
+            }
+        });
+        if (check.length > 0) {
+            swal({
+                    title: "@lang('admin.Are you sure?')",
+                    text: "@lang('admin.You will not be able to recover this Item Again!')",
+                    type: "@lang('admin.warning')",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lang('admin.Yes, delete it!')",
+                    closeOnConfirm: false
+                },
+                function () {
+                    window.location = link + '?id[]=' + check;
+                });
+        } else {
+            alert("@lang('admin.Please Select Some items')");
+        }
+    }
 </script>
+<script src="{{ url('js/fontawesome-iconpicker.min.js') }}"></script>
+<script>
+    $('.icon-field').iconpicker();
+</script>
+<!-- if you not use map remove this -->
+<script src="{{ url('js/map.js') }}" ></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ getSetting('GOOGLE_API_MAP') }}&libraries=places&callback=initMap" async defer></script>
+<script src="{{ url('js/showMap.js') }}" async defer></script>
+<!-- if you not use map remove this -->
 @include('sweet::alert')
 @yield('script')
+@stack('js')
 </body>
 
 </html>

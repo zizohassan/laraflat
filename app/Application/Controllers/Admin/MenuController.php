@@ -65,6 +65,10 @@ class MenuController extends AbstractController
         return $this->menuInterface->updateOneMenuItem($request);
     }
 
+    public function pluck(\Illuminate\Http\Request $request){
+        return $this->deleteItem($request->id , 'admin/menu')->with('sucess' , 'Done Delete menu From system');
+    }
+
 
 
     public function deleteMenuItem($id){

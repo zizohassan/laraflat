@@ -15,12 +15,14 @@ class MenusDataTable extends DataTable
     public function ajax()
     {
         return $this->datatables
-             ->eloquent($this->query())
-             ->addColumn('edit', 'admin.menu.buttons.edit')
-             ->addColumn('delete', 'admin.menu.buttons.delete')
-             ->addColumn('view', 'admin.menu.buttons.view')
-             ->make(true);
+            ->eloquent($this->query())
+            ->addColumn('id', 'admin.menu.buttons.id')
+            ->addColumn('edit', 'admin.menu.buttons.edit')
+            ->addColumn('delete', 'admin.menu.buttons.delete')
+            ->addColumn('view', 'admin.menu.buttons.view')
+            ->make(true);
     }
+
     /**
      * Get the query object to be processed by dataTables.
      *
@@ -29,6 +31,19 @@ class MenusDataTable extends DataTable
     public function query()
     {
         $query = Menu::query();
+
+        if(request()->has('from') && request()->get('from') != ''){
+            $query = $query->whereDate('created_at' , '>=' , request()->get('from'));
+        }
+
+        if(request()->has('to') && request()->get('to') != ''){
+            $query = $query->whereDate('created_at' , '<=' , request()->get('to'));
+        }
+
+        if(request()->has('name') && request()->get('name') != ''){
+            $query = $query->where('name' , request()->get('name'));
+        }
+
 
         return $this->applyScopes($query);
     }
@@ -40,10 +55,10 @@ class MenusDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
             ->columns($this->getColumns())
             ->parameters(dataTableConfig());
-        if(getCurrentLang() == 'ar'){
+        if (getCurrentLang() == 'ar') {
             $html = $html->parameters([
                 'language' => [
                     'url' => url('/vendor/datatables/arabic.json')
@@ -52,6 +67,7 @@ class MenusDataTable extends DataTable
         }
         return $html;
     }
+
     /**
      * Get columns.
      *

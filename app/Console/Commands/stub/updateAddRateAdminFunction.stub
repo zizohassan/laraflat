@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Application\Controllers\Admin;
+
+use \App\Application\Requests\Admin\Dummy\AddRequestDummy;
+use \App\Application\Requests\Admin\Dummy\UpdateRequestDummy;
+use App\Application\Controllers\AbstractController;
+use App\Application\Model\Dummy;
+use App\Application\Model\DummyParent;
+use Yajra\Datatables\Request;
+use Alert;
+
+class DummyController extends AbstractController
+{
+
+   public function __construct(Dummy $model , DummyParent $parent)
+    {
+        parent::__construct($model);
+        $this->parent = $parent;
+    }
+
+    public function addRate($id , AddRequestDummy $request){
+        if($this->checkIfUserRateBefore($id)){
+            alert()->error(trans('admin.You have rate this before') , trans('admin.error'));
+            return redirect('admin/DummySmall/'.$id.'/view');
+        }
+        $array = [
+            'rate' => $request->rate,
+            'user_id' => auth()->user()->id,
+            'DummySmall_id' => $id
+        ];
+        $this->model->create($array);
+        return redirect('admin/DummySmall/'.$id.'/view');
+    }
+
+    public function checkIfUserRateBefore($id){
+        $item = $this->model->where('id' , $id)->where('user_id' , auth()->user()->id)->first();
+        return $item ? true : false;
+    }
+
+}

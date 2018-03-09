@@ -51,4 +51,8 @@ class UserController extends AbstractController
         return $this->deleteItem($id , 'admin/user');
     }
 
+    public function pluck(\Illuminate\Http\Request $request){
+        return $this->deleteItem($request->id , 'admin/user')->with('sucess' , 'Done Delete user From system');
+    }
+
 }

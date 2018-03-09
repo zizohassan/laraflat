@@ -10,4 +10,5 @@ return [
     'permission' => 'User Permission',
     'created_at' => 'Craeted At',
     'Laraflat Commands' => 'Laraflat Commands',
+    'Laraflat Model Name' => '',
 ];

@@ -6,3 +6,4 @@ Route::post('DummyRoute/item' , 'DummyViewController@store');
 Route::post('DummyRoute/item/{id}' , 'DummyViewController@update');
 Route::get('DummyRoute/{id}/delete' , 'DummyViewController@destroy');
 Route::get('DummyRoute/{id}/view' , 'DummyViewController@getById');
+Route::get('DummyRoute/pluck', 'DummyViewController@pluck');

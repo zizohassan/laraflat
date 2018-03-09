@@ -11,8 +11,8 @@
             <div class="">
                 <label for="">{{ trans('user.Laraflat Commands') }}</label>
                 <select name="commands" id="commands" class="form-control">
-                    @foreach($commands as $command)
-                        <option value="{{ $command }}">{{ $command }}</option>
+                    @foreach($commands as $keyCommandArray => $command)
+                        <option value="{{ $keyCommandArray }}">{{ $command }}</option>
                     @endforeach
                 </select>
             </div>
@@ -22,7 +22,6 @@
          <div class="form-group">
             <input type="submit" name="submit" value="{{ trans('admin.Execute') }}" class="btn btn-default" />
             <span class="btn btn-danger" onclick="$('#otherForm').slideToggle()">{{ trans('admin.Add Command') }}</span>
-
          </div>
     </form>
     <form action="{{ concatenateLangToUrl('admin/laravel/haveCommand') }}" method="post" id="otherForm" style="display: none">

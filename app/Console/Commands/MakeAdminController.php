@@ -6,12 +6,14 @@ namespace App\Console\Commands;
 use App\Application\Model\Group;
 use App\Application\Model\Item;
 use App\Application\Model\Permission;
+use App\Console\Commands\Helpers\ControllerTrait;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Support\Facades\File;
 
 class MakeAdminController extends GeneratorCommand
 {
+    use ControllerTrait;
     /**
      * The name and signature of the console command.
      *
@@ -28,8 +30,9 @@ class MakeAdminController extends GeneratorCommand
 
     protected $cols = [];
 
-    public function handle(){
-        $this->createController();
+    public function handle()
+    {
+
         if ($this->option('cols')) {
             $cols = $this->option('cols');
             $cols = explode(',', $cols);
@@ -41,25 +44,26 @@ class MakeAdminController extends GeneratorCommand
                             $value = $c;
                         } elseif ($key == 1) {
                             $this->cols[$value][] = $c;
-                        }elseif ($key == 2) {
+                        } elseif ($key == 2) {
                             $this->cols[$value][] = $c;
-                        }elseif($key == 3){
+                        } elseif ($key == 3) {
                             $this->cols[$value][] = $c;
                         }
                     }
                 }
             }
         }
-        if(count($this->cols) > 0 ){
-            $this->call('laraflat:admin_request' , ['name' => class_basename($this->getNameInput()) , '--cols' => $this->fillValidation()]);
+        $this->createController();
+        if (count($this->cols) > 0) {
+            $this->call('laraflat:admin_request', ['name' => class_basename($this->getNameInput()), '--cols' => $this->fillValidation()]);
             $this->call('laraflat:datatable', ['name' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
-            if(!file_exists(app_path('Application/Model/'.ucfirst($this->getNameInput())).'.php')) {
+            if (!file_exists(app_path('Application/Model/' . ucfirst($this->getNameInput())) . '.php')) {
                 $this->call('laraflat:model', ['name' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
             }
-        }else{
-            $this->call('laraflat:admin_request' , ['name' => class_basename($this->getNameInput())]);
+        } else {
+            $this->call('laraflat:admin_request', ['name' => class_basename($this->getNameInput())]);
             $this->call('laraflat:datatable', ['name' => class_basename($this->getNameInput())]);
-            if(!file_exists(app_path('Application/Model/'.ucfirst($this->getNameInput())).'.php')) {
+            if (!file_exists(app_path('Application/Model/' . ucfirst($this->getNameInput())) . '.php')) {
                 $this->call('laraflat:model', ['name' => class_basename($this->getNameInput())]);
             }
         }
@@ -69,31 +73,31 @@ class MakeAdminController extends GeneratorCommand
         $this->addPermissionToAdmin();
     }
 
-
     protected function createController()
     {
         $name = $this->qualifyClass(strtolower($this->getNameInput()));
-        $controllerName = $this->getNameInput().'Controller';
-        $dataTableName = $this->getNameInput().'sDataTable';
-        $modelName= $this->getNameInput();
+        $controllerName = $this->getNameInput() . 'Controller';
+        $dataTableName = $this->getNameInput() . 'sDataTable';
+        $modelName = $this->getNameInput();
         $viewName = strtolower($this->getNameInput());
-        $path = $this->getPath('Application\\Controllers\\Admin\\'.$this->getNameInput().'Controller');
-        $this->line('Done create Controller  at Application controller admin '.$this->getNameInput() .'Controller .');
-        $this->files->put($path, $this->buildClassController( $name , $controllerName , $dataTableName , $modelName , $viewName, __DIR__.'/stub/controller.stub'));
+        $path = $this->getPath('Application\\Controllers\\Admin\\' . $this->getNameInput() . 'Controller');
+        $this->line('Done create Controller  at Application controller admin ' . $this->getNameInput() . 'Controller .');
+        $this->files->put($path, $this->buildClassController($name, $controllerName, $dataTableName, $modelName, $viewName, __DIR__ . '/stub/controller.stub'));
 
     }
 
     protected function getStub()
     {
-        return  __DIR__.'/stub/admincontroller.stub';
+        return __DIR__ . '/stub/admincontroller.stub';
     }
 
-
-    protected function buildClassController($name ,$controllerName ,  $dataTableName , $modelName , $viewName, $stub){
+    protected function buildClassController($name, $controllerName, $dataTableName, $modelName, $viewName, $stub)
+    {
         $stub = $this->files->get($stub);
-        return $this->replace( $stub, 'DummyModel',$modelName)
-            ->replace( $stub,'DummyDataTable' ,  $dataTableName)
-            ->replace( $stub,'DummyView' ,  $viewName)
+        return $this->replace($stub, 'DummyModel', $modelName)
+            ->replace($stub, 'DummyDataTable', $dataTableName)
+            ->replace($stub, 'DummyView', $viewName)
+            ->replace($stub , 'DummyUpdateFunction' , $this->controllerUpdateImageBeforeStore())
             ->replaceNamespace($stub, $name)
             ->replaceClass($stub, $controllerName);
     }
@@ -115,6 +119,7 @@ class MakeAdminController extends GeneratorCommand
         $this->CreateButton('delete');
         $this->CreateButton('view');
         $this->CreateButton('langcol');
+        $this->CreateButton('id');
     }
 
     protected function CreateOnView($view)
@@ -123,11 +128,72 @@ class MakeAdminController extends GeneratorCommand
         $path = $this->getPath('Application\\views\\admin\\' . strtolower($this->getNameInput()) . '\\' . $view . '.blade');
         $this->line('Done create view at Application view admin .');
         if ($view == 'index') {
-            $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/adminViews/' . $view . '.stub'));
+            $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/adminViews/' . $view . '.stub' , $this->buildFilterForms() , 'index'));
         } elseif ($view == 'edit') {
             $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/adminViews/' . $view . '.stub', $this->renderForm($name)));
         } elseif ($view == 'show') {
             $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/adminViews/' . $view . '.stub', $this->renderShow($name)));
+        }
+    }
+
+    protected function buildFilterForms(){
+        if(count($this->cols) > 0){
+            $name = strtolower($this->getNameInput());
+            $out = '';
+            foreach ($this->cols as $key => $filter) {
+                if(!in_array($key ,notFilter() )){
+                    if($filter[0] != 'boolean'){
+                        if($key == 'date' || $filter[0] =='date'){
+                            $type = 'text';
+                            $class = 'datepicker2';
+                        }else if($key == 'url'){
+                            $type = 'url';
+                            $class = '';
+                        }else if($key == 'youtube'){
+                            $type = 'url';
+                            $class = '';
+                        }else if ($key == 'time') {
+                            $type = 'text';
+                            $class = 'time';
+                        }elseif( str_contains($key , '[]')){
+                            $key = str_replace('[]' , '' , $key);
+                            $type = 'text';
+                            $class = '';
+                        }else{
+                            $type = 'text';
+                            $class = '';
+                        }
+                        $out .="\t\t".'<div class="form-group">'."\n";
+                        $out .="\t\t\t".'<input type="'.$type.'" name="';
+                        $out .= $key;
+                        $out.='" class="form-control '.$class.'" placeholder="';
+                        $out .='{{ trans("'.$name.'.'.$key.'") }}';
+                        $out .= '" value="';
+                        $out .='{{ request()->has("'.$key.'") ? request()->get("'.$key.'") : "" }}';
+                        $out .='">'."\n";
+                        $out .="\t\t".'</div>'."\n";
+                    }else{
+                        $out .="\t\t".'<div class="form-group">'."\n";
+                        $out .="\t\t\t".'<select style="width:80px" name="';
+                        $out .= $key;
+                        $out.='" class="form-control select2" placeholder="';
+                        $out .='{{ trans("'.$name.'.'.$key.'") }}">'."\n";
+                        $out .= "\t\t\t\t".'<option value="1"';
+                        $out .='{{ request()->has("'.$key.'") &&  request()->get("'.$key.'") === 1 ? "selected" : "" }}';
+                        $out .= '>';
+                        $out .='{{ trans("'.$name.'.Yes") }}';
+                        $out .= '</option>'."\n";
+                        $out .= "\t\t\t\t".'<option value="0"';
+                        $out .='{{ request()->has("'.$key.'") &&  request()->get("'.$key.'") === 0 ? "selected" : "" }}';
+                        $out .= '>';
+                        $out .='{{ trans("'.$name.'.No") }}';
+                        $out .= '</option>'."\n";
+                        $out .="\t\t".'</select>'."\n";
+                        $out .= "\t\t".'</div>'."\n";
+                    }
+                }
+            }
+            return $out;
         }
     }
 
@@ -139,144 +205,144 @@ class MakeAdminController extends GeneratorCommand
         $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/adminViews/buttons/' . $view . '.stub'));
     }
 
-    protected function buildView($name, $stub, $table = null)
+    protected function buildView($name, $stub, $table = null , $viewAame = null)
     {
         $stub = $this->files->get($stub);
-        if ($table == null) {
-            return $this->replaceView($stub, 'DummyView', $name);
-        } else {
-            return $this->replace($stub, 'DummyTable', $table)
+        if($viewAame == null){
+            if ($table == null) {
+                return $this->replaceView($stub, 'DummyView', $name);
+            } else {
+                return $this->replace($stub, 'DummyTable', $table)
+                    ->replaceView($stub, 'DummyView', $name);
+            }
+        }else{
+            return $this->replace($stub, 'DummyFilterFields', $table)
                 ->replaceView($stub, 'DummyView', $name);
         }
+
     }
 
-    protected function renderForm($name)
-    {
-        $out = ' ';
-        if (count($this->cols) > 0) {
-            foreach ($this->cols as $key => $value) {
-                $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
-                $out .= "\t\t".'<div class="form-group">'."\n";
-                $out .= "\t\t\t".'<label for="' . $key . '">{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}</label>'."\n";
-                if(in_array($key , getFileFieldsName())) {
-                    $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
-                    $out .= "\t\t\t\t" . '<br>' . "\n";
-                    $out .= "\t\t\t\t" . '<img src="{{ url(env("UPLOAD_PATH")."/".$item->' . $key . ') }}" class="thumbnail" alt="" width="200">' . "\n";
-                    $out .= "\t\t\t\t" . '<br>' . "\n";
-                    $out .= "\t\t\t\t" . "@endif" . "\n";
-                    $out .= "\t\t\t\t" . '<input type="file" name="' . $key . '" >' . "\n";
-                }elseif($key == 'youtube'){
-                        $out .= "\t\t\t\t".'@if(isset($item) && $item->'.$key.' != "")'."\n";
-                        $out .= "\t\t\t\t".'<br>'."\n";
-                        $out .= "\t\t\t\t".'<iframe width="420" height="315" src="https://www.youtube.com/embed/{{ isset($item->'.$key.') ? getYouTubeId($item->'.$key.') : old("'.$key.'")  }}"></iframe>'."\n";
-                        $out .= "\t\t\t\t".'<br>'."\n";
-                        $out .= "\t\t\t\t"."@endif"."\n";
-                        $out .= "\t\t\t\t".'<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'")  }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
-                }else{
-                    if ($value[0] == 'string' && $isMultiLang) {
-                        $out .= "\t\t\t\t".'{!! extractFiled("'.$key.'" , isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") , "text" , "'.strtolower($this->getNameInput()).'") !!}'."\n";
-                    } elseif ($value[0]  == 'email' && $isMultiLang) {
-                        $out .= "\t\t\t\t".'{!! extractFiled("'.$key.'" , isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") , "email" , "'.strtolower($this->getNameInput()).'") !!}'."\n";
-                    } elseif ($value[0]  == 'date' && $isMultiLang) {
-                        $out .= "\t\t\t\t".'{!! extractFiled("'.$key.'" , isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") , "date" , "'.strtolower($this->getNameInput()).'") !!}'."\n";
-                    } elseif ($value[0]  == 'text' && $isMultiLang) {
-                        $out .= "\t\t\t\t".'{!! extractFiled("'.$key.'" , isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") , "textarea" , "'.strtolower($this->getNameInput()).'") !!}'."\n";
-                    } elseif ($value[0]  == 'boolean') {
-                        $out .= "\t\t\t\t".'<div class="form-check">'."\n";
-                        $out .= "\t\t\t\t\t".'<label class="form-check-label">'."\n";
-                        $out .= "\t\t\t\t\t".'<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . '  == 0 ? "checked" : "" }} type="radio" value="0">'."\n";
-                        $out .= "\t\t\t\t\t".'{{ trans("'.strtolower($this->getNameInput()).'.No")}}'."\n";
-                        $out .= "\t\t\t\t".'</label>'."\n";
-                        $out .= "\t\t\t\t".'</div>';
-                        $out .= "\t\t\t\t".'<div class="form-check">'."\n";
-                        $out .= "\t\t\t\t".'<label class="form-check-label">'."\n";
-                        $out .= "\t\t\t\t".'<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . '  == 1 ? "checked" : "" }} type="radio" value="1" >'."\n\t\t\t\t";
-                        $out .= "\t\t\t\t\t".'{{ trans("'.strtolower($this->getNameInput()).'.Yes")}}'."\n";
-                        $out .= "\t\t\t\t".'</label>'."\n";
-                        $out .= "\t\t\t\t".'</div>';
-                    }else{
-                        if ($value[0]  == 'string') {
-                            $out .= "\t\t\t\t".'<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'")  }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
-                        } elseif ($value[0] ==  'email') {
-                            $out .= "\t\t\t\t".'<input type="email" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'") }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
-                        } elseif ($value[0]  == 'date') {
-                            $out .= "\t\t\t\t".'<input type="date" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'")  }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
-                        } elseif ($value[0]  == 'text') {
-                            $out .= "\t\t\t\t".'<textarea name="' . $key . '" class="form-control" id="' . $key . '"   placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'")  }}</textarea>'."\n";
-                        }else{
-                            $out .= "\t\t\t\t".'<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->'.$key.') ? $item->'.$key.' : old("'.$key.'")  }}"  placeholder="{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '")}}">'."\n";
-                        }
-                    }
-                }
-                $out .= "\t\t\t".'</label>'."\n";
-                $out .= "\t\t".'</div>'."\n";
-            }
-        }
-        return $out;
-    }
+//    protected function renderForm($name)
+//    {
+//        $out = ' ';
+//        if (count($this->cols) > 0) {
+//            foreach ($this->cols as $key => $value) {
+//                $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
+//                $out .= "\t\t" . '<div class="form-group">' . "\n";
+//                $k = str_contains( $key , '[]') ? str_replace('[]' ,'', $key) : $key;
+//                $out .= "\t\t\t" . '<label for="' . $k . '">{{ trans("' . strtolower($this->getNameInput()) . '.' . $k . '")}}</label>' . "\n";
+//                if (in_array($key, getFileFieldsName())) {
+//                    if(str_contains($key , '[]')){
+//                        $out .= $this->inputAsArray($key , 'file');
+//                    }else{
+//                        $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
+//                        $out .= "\t\t\t\t" . '<br>' . "\n";
+//                        $out .= "\t\t\t\t" . '<img src="{{ url(env("SMALL_IMAGE_PATH")."/".$item->' . $key . ') }}" class="thumbnail" alt="" width="200">' . "\n";
+//                        $out .= "\t\t\t\t" . '<br>' . "\n";
+//                        $out .= "\t\t\t\t" . "@endif" . "\n";
+//                        $out .= "\t\t\t\t" . '<input type="file" name="' . $key . '" >' . "\n";
+//                    }
+//                } elseif ($key == 'youtube') {
+//                    $out .= "\t\t\t\t" . '@if(isset($item) && $item->' . $key . ' != "")' . "\n";
+//                    $out .= "\t\t\t\t" . '<br>' . "\n";
+//                    $out .= "\t\t\t\t" . '<iframe width="420" height="315" src="https://www.youtube.com/embed/{{ isset($item->' . $key . ') ? getYouTubeId($item->' . $key . ') : old("' . $key . '")  }}"></iframe>' . "\n";
+//                    $out .= "\t\t\t\t" . '<br>' . "\n";
+//                    $out .= "\t\t\t\t" . "@endif" . "\n";
+//                    $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                } elseif ($key == 'icon') {
+//                    $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control icon-field" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                } elseif ($key == 'url') {
+//                    $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                } elseif ($key == 'date') {
+//                    $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control datepicker" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                } elseif ($key == 'time') {
+//                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control time" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+//                }elseif ($key == 'lat') {
+//                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lat" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+//                    $out .= $this->map();
+//                }elseif ($key == 'lng') {
+//                    $out .= "\t\t\t\t" . ' <input type="text" name="' . $key . '" class="form-control lng" style="display:none" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}" > ' . "\n";
+//                }elseif (str_contains($key , '[]')) {
+//                    $out .= $this->inputAsArray($key);
+//                } else {
+//                    if ($value[0] == 'string' && $isMultiLang) {
+//                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "text" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+//                    } elseif ($value[0] == 'email' && $isMultiLang) {
+//                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "email" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+//                    } elseif ($value[0] == 'date' && $isMultiLang) {
+//                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "date" , "' . strtolower($this->getNameInput()) . '" , "datepicker") !!}' . "\n";
+//                    } elseif ($value[0] == 'text' && $isMultiLang) {
+//                        $out .= "\t\t\t\t" . '{!! extractFiled(isset($item) ? $item : null , "' . $key . '" , isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") , "textarea" , "' . strtolower($this->getNameInput()) . '") !!}' . "\n";
+//                    } elseif ($value[0] == 'boolean') {
+//                        $out .= "\t\t\t\t" . '<div class="form-check">' . "\n";
+//                        $out .= "\t\t\t\t\t" . '<label class="form-check-label">' . "\n";
+//                        $out .= "\t\t\t\t\t" . '<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . '  == 0 ? "checked" : "" }} type="radio" value="0">' . "\n";
+//                        $out .= "\t\t\t\t\t" . '{{ trans("' . strtolower($this->getNameInput()) . '.No")}}' . "\n";
+//                        $out .= "\t\t\t\t" . '</label>' . "\n";
+//                        $out .= "\t\t\t\t" . '<label class="form-check-label">' . "\n";
+//                        $out .= "\t\t\t\t" . '<input class="form-check-input" name="' . $key . '" {{ isset($item->' . $key . ') && $item->' . $key . '  == 1 ? "checked" : "" }} type="radio" value="1" >' . "\n\t\t\t\t";
+//                        $out .= "\t\t\t\t\t" . '{{ trans("' . strtolower($this->getNameInput()) . '.Yes")}}' . "\n";
+//                        $out .= "\t\t\t\t" . '</label>' . "\n";
+//                        $out .= "\t\t\t\t" . '</div>';
+//                    } else {
+//                        if ($value[0] == 'string') {
+//                            $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                        } elseif ($value[0] == 'email') {
+//                            $out .= "\t\t\t\t" . '<input type="email" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                        } elseif ($value[0] == 'youtube') {
+//                            $out .= "\t\t\t\t" . '<input type="url" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '") }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                        } elseif ($value[0] == 'text') {
+//                            $out .= "\t\t\t\t" . '<textarea name="' . $key . '" class="form-control" id="' . $key . '"   placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}</textarea>' . "\n";
+//                        } else {
+//                            $out .= "\t\t\t\t" . '<input type="text" name="' . $key . '" class="form-control" id="' . $key . '" value="{{ isset($item->' . $key . ') ? $item->' . $key . ' : old("' . $key . '")  }}"  placeholder="{{ trans("' . strtolower($this->getNameInput()) . '.' . $key . '")}}">' . "\n";
+//                        }
+//                    }
+//                }
+//                $out .= "\t\t" . '</div>' . "\n";
+//            }
+//        }
+//        return $out;
+//    }
 
-    protected function renderShow($name){
-        $out = '';
+    protected function controllerUpdateImageBeforeStore(){
+        $out ='';
         if (count($this->cols) > 0) {
-            $out .= "\t\t".'<table class="table table-bordered table-responsive table-striped">'."\n";
-            $out .= "\t\t\t".'</tr>'."\n";
-            foreach ($this->cols as $key => $value) {
-                $isMultiLang = isset($value[2]) && $value[2] == 'true' ? true : false;
-                $out .=  "\t\t\t\t".'<tr><th>{{ trans("'.strtolower($this->getNameInput()).'.' . $key . '") }}</th>'."\n";
-                $out .=  "\t\t\t\t".'@php $type =  getFileType("'.$key.'" , $item->'.$key.') @endphp'."\n";
-                $out .= "\t\t\t\t".'@if($type == "File")'."\n";
-                $out .= "\t\t\t\t\t".'<td> <a href="{{ url(env("UPLOAD_PATH")."/".$item->'.$key.') }}">{{ $item->'.$key.' }}</a></td>'."\n";
-                $out .= "\t\t\t\t".'@elseif($type == "Image")'."\n";
-                $out .= "\t\t\t\t\t".'<td> <img src="{{ url(env("UPLOAD_PATH")."/".$item->'.$key.') }}" /></td>'."\n";
-                $out .= "\t\t\t\t".'@else'."\n";
-                if($key == 'youtube'){
-                    $out .= "\t\t\t\t".'@if(isset($item) && $item->'.$key.' != "")'."\n";
-                    $out .= "\t\t\t\t\t".'<td>'."\n";
-                    $out .= "\t\t\t\t".'<iframe width="420" height="315" src="https://www.youtube.com/embed/{{ isset($item->'.$key.') ? getYouTubeId($item->'.$key.') : old("'.$key.'")  }}"></iframe>'."\n";
-                    $out .= "\t\t\t\t\t".'</td>'."\n";
-                    $out .= "\t\t\t\t"."@endif"."\n";
-                }else if($value[0] == 'boolean'){
-                    $out .= "\t\t\t\t\t".'<td>'."\n";
-                    $out .= "\t\t\t\t".'{{ $item->'.$key.' == 1 ? trans("'.strtolower($this->getNameInput()).'.Yes") : trans("'.strtolower($this->getNameInput()).'.No")  }}'."\n";
-                    $out .= "\t\t\t\t\t".'</td>'."\n";
-                }else{
-                    if($isMultiLang){
-                        $out .=  "\t\t\t\t\t".'<td>{{ getDefaultValueKey(nl2br($item->'.$key.')) }}</td>'."\n";
-                    }else{
-                        $out .=  "\t\t\t\t\t".'<td>{{ nl2br($item->'.$key.') }}</td>'."\n";
+            $files = array_intersect_key($this->cols, getFileFieldsName());
+            if(count($files) > 0){
+                foreach($files as $key => $file){
+                    if(str_contains($key , '[]')){
+                        $key  = str_replace('[]' , '' , $key);
+                        $out .=  'if ($request->has("oldFiles_'.$key.'") && $request->oldFiles_'.$key.' != "") {
+                                        $oldImage_'.$key.' = $request->oldFiles_'.$key.';
+                                        $request->request->remove("oldFiles_'.$key.'");
+                                    } else {
+                                        $oldImage_'.$key.' = json_encode([]);
+                                    }'."\n";
                     }
                 }
-                $out .= "\t\t\t\t".'@endif</tr>'."\n";
             }
-            $out .= "\t\t\t".'</tr>'."\n";
-            $out .= "\t\t".'</table>'."\n";
+            $out .='$item = $this->storeOrUpdate($request, $id, true);'."\n";
+            if(count($files) > 0){
+                foreach($files as $key => $file) {
+                    if(str_contains($key , '[]')){
+                        $key  = str_replace('[]' , '' , $key);
+                        $out .='if ($item) {
+                                    $image = json_decode($item->'.$key.') ?? [];
+                                    $newIamge = json_decode($oldImage_'.$key.') ?? [];
+                                    $item_image = array_unique(array_merge($image, $newIamge));
+                                    $item->'.$key.' = json_encode($item_image);
+                                    $item->save();
+                                }'."\n";
+                    }
+                }
+            }
         }else{
-            $out .= "\t\t".'<table class="table table-bordered table-responsive table-striped">'."\n";
-            $out .= "\t\t".'@php'."\n";
-            $out .= "\t\t".'$fields = rename_keys('."\n";
-            $out .= "\t\t".'removeFromArray($item["fields"] , ["updated_at"]) ,'."\n";
-            $out .= "\t\t".'["UserName"]'."\n";
-            $out .= "\t\t".');'."\n";
-            $out .= "\t\t".'@endphp'."\n";
-            $out .= "\t\t".'@foreach($fields as $key =>  $field)'."\n";
-            $out .= "\t\t\t".'<tr>'."\n";
-            $out .= "\t\t\t\t".'<th>{{ $key }}</th>'."\n";
-            $out .= "\t\t\t\t".'@php $type =  getFileType($field , $item[$field]) @endphp'."\n";
-            $out .= "\t\t\t\t".'@if($type == "File")'."\n";
-            $out .= "\t\t\t\t\t".'<td> <a href="{{ url(env("UPLOAD_PATH")."/".$item[$field]) }}">{{ $item[$field] }}</a></td>'."\n";
-            $out .= "\t\t\t\t".'@elseif($type == "Image")'."\n";
-            $out .= "\t\t\t\t\t".'<td> <img src="{{ url(env("UPLOAD_PATH")."/".$item[$field]) }}" /></td>'."\n";
-            $out .= "\t\t\t\t".'@else'."\n";
-            $out .= "\t\t\t\t\t".' <td>{!!  getDefaultValueKey(nl2br($item[$field]))  !!}</td>'."\n";
-            $out .= "\t\t\t\t".'@endif'."\n";
-            $out .= "\t\t\t".'</tr>'."\n";
-            $out .= "\t\t".'@endforeach'."\n";
-            $out .= "\t\t".'</table>'."\n";
+            $out .='$item = $this->storeOrUpdate($request, $id, true);'."\n";
         }
+        $out .='return redirect()->back();'."\n";
         return $out;
 
     }
-
 
     protected function replace(&$stub, $rep, $name)
     {
@@ -305,14 +371,15 @@ class MakeAdminController extends GeneratorCommand
         ];
     }
 
-    protected function fillValidation(){
+    protected function fillValidation()
+    {
         $result = '';
         $i = 0;
-        foreach($this->cols as $key => $value){
+        foreach ($this->cols as $key => $value) {
             $i++;
             $isMultiLang = isset($value[2]) && $value[2] == 'true' ? '.*' : '';
-            $result .= $key.$isMultiLang.':'.str_replace('|' , '_' ,str_replace(':' , '-' , $value[1]));
-            $result .=count($this->cols)  != $i ? ',':'';
+            $result .= $key . $isMultiLang . ':' . str_replace('|', '_', str_replace(':', '-', $value[1]));
+            $result .= count($this->cols) != $i ? ',' : '';
         }
         return $result;
     }
@@ -336,26 +403,27 @@ class MakeAdminController extends GeneratorCommand
         $menu->order = $order + 1;
         $menu->type = '';
         $menu->icon = $icon;
+        $menu->controller_path = json_encode(["App\Application\Controllers\Admin\\" . $this->getNameInput() . "Controller"]);
         $menu->save();
     }
 
     protected function addPermissionToAdmin()
     {
         $name = $this->getNameInput();
-        $methods = ['index' , 'show' , 'store' , 'update' , 'getById' , 'destroy'];
+        $methods = ['index', 'show', 'store', 'update', 'getById', 'destroy' , 'pluck'];
         $id = [];
-        foreach($methods as $method){
+        foreach ($methods as $method) {
             $array = [
-                'name' => $method."-".$name."Controller",
-                'slug' => "App-Application-Admin-".$name."-Controller".'-'.$method,
-                'description' => "Allow admin on ". $method." in controller ". $name ." Controller",
-                'controller_name' => $name.'Controller',
+                'name' => $method . "-" . $name . "Controller",
+                'slug' => "App-Application-Admin-" . $name . "-Controller" . '-' . $method,
+                'description' => "Allow admin on " . $method . " in controller " . $name . " Controller",
+                'controller_name' => $name . 'Controller',
                 'method_name' => $method,
                 'controller_type' => 'admin',
-                'namespace' => "App\\Application\\Controllers\\Admin\\".$name."Controller",
+                'namespace' => "App\\Application\\Controllers\\Admin\\" . $name . "Controller",
                 'permission' => 1
             ];
-           $item =  \App\Application\Model\Permission::create($array);
+            $item = \App\Application\Model\Permission::create($array);
             $id[] = $item->id;
         }
         $group = Group::find(1);
@@ -377,5 +445,38 @@ class MakeAdminController extends GeneratorCommand
             ->replaceView($stub, 'DummyView', ucfirst($name));
     }
 
+    protected function map(){
+        $out = "\t\t\t\t".'<div class="pac-card" id="pac-card">'. "\n\t\t\t\t\t";
+        $out .= '<div>'. "\n\t\t\t\t\t\t";
+        $out .= '<div id="title">'. "\n\t\t\t\t\t\t\t";
+        $out .= '{{ trans("admin.Autocomplete search") }}'. "\n\t\t\t\t\t\t";
+        $out .= '</div>'. "\n\t\t\t\t\t\t";
+        $out .= '<div id="type-selector" class="pac-controls">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<input type="radio" name="type" id="changetype-all" checked="checked">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<label for="changetype-all">{{ trans("admin.All") }}</label>'. "\n\t\t\t\t\t\t\t";
+        $out .= '<input type="radio" name="type" id="changetype-establishment">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<label for="changetype-establishment">{{ trans("admin.Establishments") }}</label>'. "\n\t\t\t\t\t\t\t";
+        $out .= '<input type="radio" name="type" id="changetype-address">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<label for="changetype-address">{{ trans("admin.Addresses") }}</label>'. "\n\t\t\t\t\t\t\t";
+        $out .= '<input type="radio" name="type" id="changetype-geocode">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<label for="changetype-geocode">{{ trans("admin.Geocodes") }}</label>'. "\n\t\t\t\t\t\t";
+        $out .= '</div>'. "\n\t\t\t\t\t\t";
+        $out .= ' <div id="strict-bounds-selector" class="pac-controls" > '. "\n\t\t\t\t\t\t\t";
+        $out .= '<input type="checkbox" id="use-strict-bounds" value ="" > '. "\n\t\t\t\t\t\t\t";
+        $out .= '<label for="use-strict-bounds" > {{ trans("admin.Strict Bounds") }} </label > '. "\n\t\t\t\t\t\t";
+        $out .= '</div>'. "\n\t\t\t\t\t\t";
+        $out .= '</div>'. "\n\t\t\t\t\t\t";
+        $out .= '<div id="pac-container">'. "\n\t\t\t\t\t\t\t";
+        $out .= '<input id="pac-input" type="text" placeholder="{{ trans("admin.Enter a location") }}">'."\n\t\t\t\t\t\t";
+        $out .= '</div> '."\n\t\t\t\t\t\t";
+        $out .= '</div> '."\n\t\t\t\t\t\t";
+        $out .= '<div id="map" style="width: 100%;height: 500px;"></div>'."\n\t\t\t\t\t\t";
+        $out .= '<div id="infowindow-content">'."\n\t\t\t\t\t\t";
+        $out .= ' <img src="" width ="16" height ="16" id="place-icon">'."\n\t\t\t\t\t\t";
+        $out .= '<span id="place-name"  class="title"></span><br> '."\n\t\t\t\t\t\t";
+        $out .= '<span id="place-address"></span> '."\n\t\t\t\t";
+        $out .= '</div>';
+        return $out;
+    }
 
 }

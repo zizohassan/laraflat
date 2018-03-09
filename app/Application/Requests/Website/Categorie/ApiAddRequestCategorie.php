@@ -2,14 +2,14 @@
 
 namespace App\Application\Requests\Website\Categorie;
 
-use Illuminate\Foundation\Http\FormRequest;
 
 class ApiAddRequestCategorie
 {
     public function rules()
     {
         return [
-            'name' => 'required'
+            "title.*" => "min:1|max:80|required",
+			
         ];
     }
 }

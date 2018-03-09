@@ -23,12 +23,18 @@
             $.get("{{ concatenateLangToUrl('admin/getItemInfo/') }}/"+id , function(result){
                 var json = JSON.parse(result);
                 var names = JSON.parse(json.name);
-                console.log(names);
                 @foreach(getAvLang() as $K => $L)
                     $('#{{ 'name_'.$K }}').val(names.{{ $K }});
                 @endforeach
                 $('#itemIcon').val(json.icon);
                 $('#itemLink').val(json.link);
+                if(json.controller_path != undefined && json.controller_path != ''){
+                    var controller_path = JSON.parse(json.controller_path);
+                    $.each(controller_path , function (key , value) {
+                        addNewControllerPath(value);
+                    });
+                }
+
                 $("#type").val(json.type == undefined || json.type ==  '' ? 'self' : json.type).change();
                 $('#menu_id').val(json.id);
                 $('#actionBtn').attr('onclick' , 'UpdateItem();return false;');
@@ -42,6 +48,7 @@
         }
     });
     function clearFields(){
+        $('.controller_path').html('');
         $('#itemName , #itemLink , #itemIcon').val('');
     }
     function UpdateItem(){
@@ -64,5 +71,16 @@
             },
             newest_on_top: true
         });
+    }
+    
+    function addNewControllerPath(value) {
+        if(value == undefined || value == null){
+            value = '';
+        }
+        $('.controller_path').append('<div class="item_controller_path form-inline" style="margin-top:5px;margin-bottom:5px"><input type="text" name="controller_path[]"  placeholder="{{ trans('menu.Controller Path') }}" class="form-control" value="'+value+'" /><span onclick="removeControllerPath(this)" class="btn btn-danger"><i class="fa fa-trash"></i></span></div>');
+    }
+    
+    function removeControllerPath(e) {
+        $(e).closest('div .item_controller_path').remove();
     }
 </script>

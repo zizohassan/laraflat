@@ -31,15 +31,15 @@
     <link rel="stylesheet" href="{{ url('style') }}/vendor/PACE/themes/blue/pace-theme-minimal.css"/>
     <link rel="stylesheet" href="{{ url('style') }}/vendor/font-awesome/css/font-awesome.css"/>
     <link rel="stylesheet" href="{{ url('style') }}/vendor/animate.css/animate.css"/>
-@if(getDir() == 'rtl')
-    <link rel="stylesheet" href="{{ url('style') }}/styles/app-rtl.css" id="load_styles_before"/>
-    <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins-rtl.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
-@else
-    <link rel="stylesheet" href="{{ url('style') }}/styles/app.css" id="load_styles_before"/>
-    <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins.css"/>
-@endif
-    <!-- endbuild -->
+    @if(getDir() == 'rtl')
+        <link rel="stylesheet" href="{{ url('style') }}/styles/app-rtl.css" id="load_styles_before"/>
+        <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins-rtl.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
+    @else
+        <link rel="stylesheet" href="{{ url('style') }}/styles/app.css" id="load_styles_before"/>
+        <link rel="stylesheet" href="{{ url('style') }}/styles/app.skins.css"/>
+    @endif
+<!-- endbuild -->
 
     {{ Html::style('admin/plugins/multi-select/css/multi-select.css') }}
     {{ Html::style('admin/plugins/bootstrap-select/css/bootstrap-select.css') }}
@@ -48,12 +48,23 @@
 
     {{ Html::style('css/sweetalert.css') }}
     {{ Html::style('admin/plugins/tinymce/plugins/elfinder/css/elfinder.full.css') }}
+    {{ Html::style('css/rate.css') }}
+    <link rel="stylesheet" href="{{ url('css/fontawesome-iconpicker.min.css') }}">
     @yield('style')
     <style>
-        .img-responsive{
-            width:100%
+        .img-responsive {
+            width: 100%
+        }
+        .search input{
+            width:140px !important;
         }
     </style>
+    <link href="{{ url('/css/mainselec2.css') }}" rel="stylesheet" />
+    <link href="{{ url('/css/select2.css') }}" rel="stylesheet" />
+    <link href="{{ url('/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" />
+    <!-- if you not use map remove this -->
+    {{ Html::style('css/map.css') }}
+    <!-- if you not use map remove this -->
 </head>
 <body>
 
@@ -85,17 +96,20 @@
             </a>
             <div class="dropdown-menu">
                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                        <a class="dropdown-item" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
-                            {{ $properties['native'] }}
-                        </a>
+                    <a class="dropdown-item" hreflang="{{$localeCode}}"
+                       href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                        {{ $properties['native'] }}
+                    </a>
                 @endforeach
                 <div class="dropdown-divider"></div>
 
-                <a href="{{ url('/admin/user/item/'.auth()->user()->id) }}"><i class="material-icons">person</i>{{ trans('home.profile') }}</a>
+                <a href="{{ url('/admin/user/item/'.auth()->user()->id) }}"><i
+                            class="material-icons">person</i>{{ trans('home.profile') }}</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="material-icons">input</i>{{ trans('home.sign_out') }}</a>
+                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i
+                            class="material-icons">input</i>{{ trans('home.sign_out') }}</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{ csrf_field() }}
                 </form>
@@ -165,15 +179,15 @@
 </div>
 
 {{--<script type="text/javascript">--}}
-    {{--window.paceOptions = {--}}
-        {{--document: true,--}}
-        {{--eventLag: true,--}}
-        {{--restartOnPushState: true,--}}
-        {{--restartOnRequestAfter: true,--}}
-        {{--ajax: {--}}
-            {{--trackMethods: [ 'POST','GET']--}}
-        {{--}--}}
-    {{--};--}}
+{{--window.paceOptions = {--}}
+{{--document: true,--}}
+{{--eventLag: true,--}}
+{{--restartOnPushState: true,--}}
+{{--restartOnRequestAfter: true,--}}
+{{--ajax: {--}}
+{{--trackMethods: [ 'POST','GET']--}}
+{{--}--}}
+{{--};--}}
 {{--</script>--}}
 
 <!-- build:js({.tmp,app}) scripts/app.min.js -->
@@ -196,6 +210,7 @@
 <script src="{{ url('style') }}/vendor/jquery.easy-pie-chart/dist/jquery.easypiechart.js"></script>
 <script src="{{ url('style') }}/vendor/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 <script src="{{ url('style') }}/scripts/helpers/noty-defaults.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
 <!-- end page scripts -->
 
 <!-- initialize page scripts -->
@@ -206,36 +221,134 @@
 <script src="{{ url('style') }}/vendor/datatables/media/js/dataTables.bootstrap4.js"></script>
 
 {{ Html::script('js/sweetalert.min.js') }}
+
+<script src="{{ url('js/select2.min.js') }}"></script>
+<script src="{{ url('js/moment.js') }}"></script>
+<script src="{{ url('js/bootstrap-datetimepicker.js') }}"></script>
+
 <script type="application/javascript">
-    function deleteThisItem(e){
+    $('.select2').select2({
+        theme: "bootstrap",
+        dir:"{{ getDirection() }}"
+    });
+    $('.datepicker').datetimepicker({
+        defaultDate: "{{ date('Y/m/d') }}",
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        },
+        format: 'Y/MM/DD'
+    });
+    $('.datepicker2').datetimepicker({
+        defaultDate: "",
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        },
+        format: 'Y/MM/DD'
+    });
+
+    $('.time').datetimepicker({
+        format: 'LT',
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+        }
+    });
+    function deleteThisItem(e) {
         var link = $(e).data('link');
         swal({
-                    title: "Are you sure?",
-                    text: "You will not be able to recover this Item Again!",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false
-                },
-                function(){
-                    window.location = link;
-                });
+                title: "Are you sure?",
+                text: "You will not be able to recover this Item Again!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function () {
+                window.location = link;
+            });
     }
 
-    $('.nav-item').on('click' , function(e){
+    function checkAll() {
+        $('input[name="id[]"]').each(function () {
+            if (!$(this).prop('checked')) {
+                $(this).prop('checked' , true);
+            }
+        });
+    }
+
+    function unCheckAll() {
+        $('input[name="id[]"]').each(function () {
+            if ($(this).prop('checked')) {
+                $(this).prop('checked' , false);
+            }
+        });
+    }
+
+    function deleteThemAll(e) {
+        var link = $(e).data('link');
+        var check = [];
+        $('input[name="id[]"]').each(function () {
+            if ($(this).prop('checked')) {
+                check.push($(this).val());
+            }
+        });
+        if (check.length > 0) {
+            swal({
+                    title: "@lang('admin.Are you sure?')",
+                    text: "@lang('admin.You will not be able to recover this Item Again!')",
+                    type: "@lang('admin.warning')",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "@lang('admin.Yes, delete it!')",
+                    closeOnConfirm: false
+                },
+                function () {
+                    window.location = link + '?id[]=' + check;
+                });
+        } else {
+            alert("@lang('admin.Please Select Some items')");
+        }
+    }
+
+    $('.nav-item').on('click', function (e) {
         $(this).siblings().removeClass('active');
         $(this).siblings().find('a').removeClass('active');
         $(this).addClass('active');
         $(this).find('a').addClass('active');
-       $(this).closest('ul.nav').next('.tab-content').children('.tab-pane').each(function(){
+        $(this).closest('ul.nav').next('.tab-content').children('.tab-pane').each(function () {
             $(this).removeClass('active');
         });
         var id = $(this).find('a').attr('href');
         $(id).addClass('active');
     });
+    $('#rate').barrating({
+        theme: 'fontawesome-stars',
+        onSelect: function (value, text, event) {
+            $('#rate').closest('form').submit();
+        }
+    });
+
+</script>
+<script src="{{ url('js/fontawesome-iconpicker.min.js') }}"></script>
+<!-- if you not use map remove this -->
+<script src="{{ url('js/map.js') }}" ></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ getSetting('GOOGLE_API_MAP') }}&libraries=places&callback=initMap" async defer></script>
+<script src="{{ url('js/showMap.js') }}" async defer></script>
+<!-- if you not use map remove this -->
+<script>
+    $('.icon-field').iconpicker();
 </script>
 @include('sweet::alert')
 @yield('script')
+@stack('js')
 </body>
 </html>

@@ -15,11 +15,13 @@ class LogsDataTable extends DataTable
     public function ajax()
     {
         return $this->datatables
-             ->eloquent($this->query())
-             ->addColumn('delete', 'admin.log.buttons.delete')
-             ->addColumn('view', 'admin.log.buttons.view')
-             ->make(true);
+            ->eloquent($this->query())
+            ->addColumn('id', 'admin.log.buttons.id')
+            ->addColumn('delete', 'admin.log.buttons.delete')
+            ->addColumn('view', 'admin.log.buttons.view')
+            ->make(true);
     }
+
     /**
      * Get the query object to be processed by dataTables.
      *
@@ -28,6 +30,22 @@ class LogsDataTable extends DataTable
     public function query()
     {
         $query = Log::query();
+
+        if(request()->has('from') && request()->get('from') != ''){
+            $query = $query->whereDate('created_at' , '>=' , request()->get('from'));
+        }
+
+        if(request()->has('to') && request()->get('to') != ''){
+            $query = $query->whereDate('created_at' , '<=' , request()->get('to'));
+        }
+
+        if(request()->has('action') && request()->get('action') != ''){
+            $query = $query->where('action' , request()->get('action'));
+        }
+
+        if(request()->has('model') && request()->get('model') != ''){
+            $query = $query->where('model' , request()->get('model'));
+        }
 
         return $this->applyScopes($query);
     }
@@ -39,10 +57,10 @@ class LogsDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        $html = $this->builder()
             ->columns($this->getColumns())
             ->parameters(dataTableConfig());
-        if(getCurrentLang() == 'ar'){
+        if (getCurrentLang() == 'ar') {
             $html = $html->parameters([
                 'language' => [
                     'url' => url('/vendor/datatables/arabic.json')
@@ -51,6 +69,7 @@ class LogsDataTable extends DataTable
         }
         return $html;
     }
+
     /**
      * Get columns.
      *

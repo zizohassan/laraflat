@@ -1,0 +1,3 @@
+<h2>{{ ucfirst(trans('admin.Random'))}} {{ ucfirst('DUMMYHEADER') }}</h2>
+<hr>
+DUMMYCONTENT

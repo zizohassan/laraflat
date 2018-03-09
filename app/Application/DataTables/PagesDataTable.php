@@ -15,13 +15,15 @@ class PagesDataTable extends DataTable
     public function ajax()
     {
         return $this->datatables
-             ->eloquent($this->query())
-             ->addColumn('edit', 'admin.page.buttons.edit')
-             ->addColumn('delete', 'admin.page.buttons.delete')
-             ->addColumn('view', 'admin.page.buttons.view')
-            ->addColumn('title', 'admin.page.buttons.langcol')
-             ->make(true);
+            ->eloquent($this->query())
+            ->addColumn('id', 'admin.page.buttons.id')
+            ->addColumn('edit', 'admin.page.buttons.edit')
+            ->addColumn('delete', 'admin.page.buttons.delete')
+            ->addColumn('view', 'admin.page.buttons.view')
+            ->addColumn('name', 'admin.page.buttons.langcol')
+            ->make(true);
     }
+
     /**
      * Get the query object to be processed by dataTables.
      *
@@ -30,6 +32,18 @@ class PagesDataTable extends DataTable
     public function query()
     {
         $query = Page::query();
+
+        if(request()->has('from') && request()->get('from') != ''){
+            $query = $query->whereDate('created_at' , '>=' , request()->get('from'));
+        }
+
+        if(request()->has('to') && request()->get('to') != ''){
+            $query = $query->whereDate('created_at' , '<=' , request()->get('to'));
+        }
+
+        if(request()->has('title') && request()->get('title') != ''){
+            $query = $query->where('title' , 'like' ,"%".request()->get('title')."%");
+        }
 
         return $this->applyScopes($query);
     }
@@ -41,18 +55,11 @@ class PagesDataTable extends DataTable
      */
     public function html()
     {
-        $html =  $this->builder()
+        return $this->builder()
             ->columns($this->getColumns())
             ->parameters(dataTableConfig());
-        if(getCurrentLang() == 'ar'){
-            $html = $html->parameters([
-                'language' => [
-                    'url' => url('/vendor/datatables/arabic.json')
-                ]
-            ]);
-        }
-        return $html;
     }
+
     /**
      * Get columns.
      *
@@ -67,22 +74,15 @@ class PagesDataTable extends DataTable
                 'title' => trans('curd.id'),
             ],
             [
-                'name' => "title",
+                'name' => 'title',
                 'data' => 'title',
-                'title' => trans('page.title'),
+                'title' => trans("page.title"),
+                'render' => 'function(){
+                        return JSON.parse(this.title).' . getCurrentLang() . ';
+                    }',
             ],
             [
-                'name' => "status",
-                'data' => 'status',
-                'title' => trans('page.status'),
-            ],
-            [
-                'name' => "date",
-                'data' => 'date',
-                'title' => trans('page.date'),
-            ],
-            [
-                'name' => "view",
+                'name' => 'view',
                 'data' => 'view',
                 'title' => trans('curd.view'),
                 'exportable' => false,
