@@ -37,7 +37,7 @@ class CategorieController extends AbstractController
 
 
     public function getById($id){
-        $fields = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
+        $fields = $this->model->findOrFail($id);
         return $this->createOrEdit('admin.categorie.show' , $id , ['fields' =>  $fields]);
     }
 

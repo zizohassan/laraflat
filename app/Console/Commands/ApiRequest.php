@@ -82,6 +82,39 @@ class ApiRequest extends GeneratorCommand
 
     }
 
+    protected function reFormatRequest()
+    {
+        if ($this->colsValidation) {
+            $result = '';
+            $images = [];
+
+            foreach ($this->colsValidation as $key => $cols) {
+                $key = str_replace('.*' , '' , $key);
+                if (in_array($key, getImageFields())) {
+                    $cols = str_replace(['|nullable', '|required'], '', $cols);
+                    $getDimensions = explode(':', $cols);
+                    if(isset($getDimensions[1])){
+                        $images[$getDimensions[1]] = $key;
+                    }else{
+                        $images[env('SMALL_IAMGE_WIDTH').'X'.env('SMALL_IAMGE_HEIGHT')] = $key;
+                    }
+                    if (str_contains($key, '[]')) {
+                        $key = str_replace('[]', '', $key).'.*';
+                    }
+                    $result .= '"' . $key . '" => "' . $getDimensions[0] . '",' . "\n\t\t\t";
+                } else {
+                    if (str_contains($key, '[]')) {
+                        $key = str_replace('[]', '', $key).'.*';
+                    }
+                    $result .= '"' . $key . '" => "' . $cols . '",' . "\n\t\t\t";
+                }
+            }
+            $this->createConfigFile($images);
+            return $result;
+        }
+        return ' ';
+    }
+
     protected function getOptions()
     {
         return [
