@@ -22,3 +22,11 @@ Route::get('categorie/delete/{id}', 'CategorieApi@delete');
 Route::post('categorie/add', 'CategorieApi@add');
 Route::post('categorie/update/{id}', 'CategorieApi@update');
 Route::get('categorie/{limit?}/{offset?}', 'CategorieApi@index');
+
+
+
+
+
+
+
+

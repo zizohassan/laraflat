@@ -34,7 +34,7 @@ trait ApiTrait{
 
     protected function checkRequestType()
     {
-        return $this->request->getContentType() == "json" ? extractJsonInfo($this->request->getContent()) : $this->request->all();
+        return request()->getContentType() == "json" ? extractJsonInfo(request()->getContent()) : request()->all();
     }
 
     protected function validateRequest($validation){
@@ -46,6 +46,26 @@ trait ApiTrait{
         return $request;
     }
 
+    protected function updateItem($id , $validation){
+        $request = $this->validateRequest($validation);
+        if(!is_array($request)){
+            return $request;
+        }
+        $data = $this->model->find($id);
+        if($data){
+            $data->update(transformArray(checkApiHaveImage($request)));
+            return $this->checkLanguageBeforeReturn($data , 201);
+        }
+        return response(apiReturn('' , 'error' , 'Not Found !'), 404);
+    }
 
+    protected function addItem($validation){
+        $request = $this->validateRequest($validation);
+        if(!is_array($request)){
+            return $request;
+        }
+        $data = $this->model->create(transformArray(checkApiHaveImage($request)));
+        return $this->checkLanguageBeforeReturn($data , 201);
+    }
 
 }
