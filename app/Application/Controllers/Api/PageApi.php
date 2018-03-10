@@ -32,12 +32,12 @@ class PageApi extends Controller
     }
 
 
-    protected function checkLanguageBeforeReturn($data ,$status_code = 200)
+    protected function checkLanguageBeforeReturn($data ,$status_code = 200 ,  $paginate = [])
     {
         if (request()->has('lang') && request()->get('lang') == 'ar') {
-            return response(apiReturn(PageTransformers::transformAr($data)), $status_code);
+            return response(apiReturn(PageTransformers::transformAr($data) + $paginate), $status_code);
         }
-        return response(apiReturn(PageTransformers::transform($data)), $status_code);
+        return response(apiReturn(PageTransformers::transform($data) + $paginate), $status_code);
     }
 
 }

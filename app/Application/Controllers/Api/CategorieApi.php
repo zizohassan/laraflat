@@ -30,12 +30,12 @@ class CategorieApi extends Controller
         return $this->updateItem($id , $validation);
     }
 
-    protected function checkLanguageBeforeReturn($data , $status_code = 200)
+    protected function checkLanguageBeforeReturn($data , $status_code = 200 , $paginate = [])
     {
         if (request()->has('lang') && request()->get('lang') == 'ar') {
-            return response(apiReturn(CategorieTransformers::transformAr($data)), $status_code);
+            return response(apiReturn(CategorieTransformers::transformAr($data) + $paginate), $status_code);
         }
-        return response(apiReturn(CategorieTransformers::transform($data)), $status_code);
+        return response(apiReturn(CategorieTransformers::transform($data)+ $paginate), $status_code);
     }
 
 }

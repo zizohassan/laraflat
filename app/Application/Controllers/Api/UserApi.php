@@ -77,12 +77,12 @@ class UserApi extends Controller
        return str_random(60);
     }
 
-    protected function checkLanguageBeforeReturn($data , $status_code = 200)
+    protected function checkLanguageBeforeReturn($data , $status_code = 200,  $paginate = [])
     {
         if (request()->has('lang') && request()->get('lang') == 'ar') {
-            return response(apiReturn(UsersTransformers::transformAr($data)), $status_code);
+            return response(apiReturn(UsersTransformers::transformAr($data) + $paginate), $status_code);
         }
-        return response(apiReturn(UsersTransformers::transform($data)), $status_code);
+        return response(apiReturn(UsersTransformers::transform($data) + $paginate), $status_code);
     }
 
 }

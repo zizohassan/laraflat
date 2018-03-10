@@ -29,12 +29,12 @@ class DummyClassApi extends Controller
         return $this->updateItem($id , $validation);
     }
 
-    protected function checkLanguageBeforeReturn($data , $status_code = 200)
+    protected function checkLanguageBeforeReturn($data , $status_code = 200, $paginate = [])
     {
        if (request()->has('lang') && request()->get('lang') == 'ar') {
-            return response(apiReturn(DummyClassTransformers::transformAr($data)), $status_code);
+            return response(apiReturn(DummyClassTransformers::transformAr($data) + $paginate), $status_code);
         }
-        return response(apiReturn(DummyClassTransformers::transform($data)), $status_code);
+        return response(apiReturn(DummyClassTransformers::transform($data) + $paginate), $status_code);
     }
 
 }
