@@ -29,34 +29,35 @@ class CategorieApi extends Controller
 
     public function add(ApiAddRequestCategorie $validation)
     {
-        $request = $this->checkRequestType();
-        $v = Validator::make($this->request->all(), $validation->rules());
-        if ($v->fails()) {
-            return response(apiReturn('', 'error', $v->errors()), 200);
+        $request = $this->validateRequest($validation);
+        if(!is_array($request)){
+            return $request;
         }
         $data = $this->model->create(transformArray(checkApiHaveImage($request)));
-        return $this->checkLanguageBeforeReturn($data);
-
+        return $this->checkLanguageBeforeReturn($data , 201);
     }
 
     public function update($id, ApiUpdateRequestCategorie $validation)
     {
-        $request = $this->checkRequestType();
-        $v = Validator::make($this->request->all(), $validation->rules());
-        if ($v->fails()) {
-            return response(apiReturn('', 'error', $v->errors()), 200);
+        $request = $this->validateRequest($validation);
+        if(!is_array($request)){
+            return $request;
         }
-        $data = $this->model->find($id)->update(transformArray(checkApiHaveImage($request)));
-        return response(apiReturn($data), 200);
+        $data = $this->model->find($id);
+        if($data){
+            $data->update(transformArray(checkApiHaveImage($request)));
+            return $this->checkLanguageBeforeReturn($data , 201);
+        }
+        return response(apiReturn('' , 'error' , 'Not Found !'), 404);
     }
 
 
-    protected function checkLanguageBeforeReturn($data)
+    protected function checkLanguageBeforeReturn($data , $status_code = 200)
     {
         if (request()->has('lang') && request()->get('lang') == 'ar') {
-            return response(apiReturn(CategorieTransformers::transformAr($data)), 200);
+            return response(apiReturn(CategorieTransformers::transformAr($data)), $status_code);
         }
-        return response(apiReturn(CategorieTransformers::transform($data)), 200);
+        return response(apiReturn(CategorieTransformers::transform($data)), $status_code);
     }
 
 }

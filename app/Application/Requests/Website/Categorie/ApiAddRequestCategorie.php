@@ -9,7 +9,6 @@ class ApiAddRequestCategorie
     {
         return [
             "title.*" => "min:1|max:80|required",
-			
         ];
     }
 }

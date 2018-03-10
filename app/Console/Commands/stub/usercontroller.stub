@@ -12,31 +12,30 @@ class DummyClassController extends AbstractController
 {
 
      public function __construct(DummyClass $model)
-        {
-            parent::__construct($model);
+     {
+        parent::__construct($model);
+     }
+
+     public function index(){
+        $items = $this->model;
+
+        if(request()->has('from') && request()->get('from') != ''){
+            $items = $items->whereDate('created_at' , '>=' , request()->get('from'));
         }
 
-        public function index(){
-            $items = $this->model;
-
-            if(request()->has('from') && request()->get('from') != ''){
-                $items = $items->whereDate('created_at' , '>=' , request()->get('from'));
-            }
-
-            if(request()->has('to') && request()->get('to') != ''){
-                $items = $items->whereDate('created_at' , '<=' , request()->get('to'));
-            }
+        if(request()->has('to') && request()->get('to') != ''){
+            $items = $items->whereDate('created_at' , '<=' , request()->get('to'));
+        }
 
 DummyRequestFilter
 
-            $items = $items->paginate(env('PAGINATE'));
-            return view('website.DummyView.index' , compact('items'));
-        }
+        $items = $items->paginate(env('PAGINATE'));
+        return view('website.DummyView.index' , compact('items'));
+     }
 
-        public function show($id = null){
-            return $this->createOrEdit('website.DummyView.edit' , $id);
-        }
-
+     public function show($id = null){
+         return $this->createOrEdit('website.DummyView.edit' , $id);
+     }
 
      public function store(AddRequestDummyClass $request){
           $item =  $this->storeOrUpdate($request , null , true);
@@ -47,15 +46,14 @@ DummyRequestFilter
           DummyUpdateFunction
      }
 
+     public function getById($id){
+         $fields = $this->model->findOrFail($id);
+         return $this->createOrEdit('website.DummyView.show' , $id , ['fields' =>  $fields]);
+     }
 
-        public function getById($id){
-            $fields = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
-            return $this->createOrEdit('website.DummyView.show' , $id , ['fields' =>  $fields]);
-        }
-
-        public function destroy($id){
-            return $this->deleteItem($id , 'DummyView')->with('sucess' , 'Done Delete DummyClass From system');
-        }
+     public function destroy($id){
+         return $this->deleteItem($id , 'DummyView')->with('sucess' , 'Done Delete DummyClass From system');
+     }
 
 
 }
