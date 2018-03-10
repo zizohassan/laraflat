@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Validator;
 trait ApiTrait{
 
 
-    public function index($limit = 10, $offset = 0)
+    public function index()
     {
-        $data = $this->model->limit($limit)->offset($offset)->get();
+        $limit = request()->has('limit') &&  (int) request()->get('limit') != 0 && (int) request()->get('limit') < 30 ? request()->get('limit') : env('PAGINATE');
+        $data = $this->model->orderBy('id' , 'desc')->paginate($limit);
         if ($data) {
-            return $this->checkLanguageBeforeReturn($data);
+            return $this->checkLanguageBeforeReturn($data , 200 , $this->paginateArray($data));
         }
         return response(apiReturn('', '', 'No Data Found'), 200);
     }
@@ -66,6 +67,16 @@ trait ApiTrait{
         }
         $data = $this->model->create(transformArray(checkApiHaveImage($request)));
         return $this->checkLanguageBeforeReturn($data , 201);
+    }
+
+
+    protected function paginateArray($data){
+        return [
+            "total_count" => $data->total(),
+            "total_pages" => ceil($data->total() / $data->perPage()),
+            "current_page" => $data->currentPage(),
+            "limit" => $data->perPage()
+        ];
     }
 
 }

@@ -4,6 +4,8 @@ namespace App\Application\Transformers;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 abstract class AbstractTransformer
 {
     protected $options;
@@ -27,9 +29,15 @@ abstract class AbstractTransformer
     static function transform($modelOrCollection, $options = [])
     {
         $static = new static($options);
+
         if ($modelOrCollection instanceof Collection) {
             return $modelOrCollection->map([$static, 'transformModel'])->toArray();
         }
+
+        if ($modelOrCollection instanceof LengthAwarePaginator) {
+            return $modelOrCollection->map([$static, 'transformModel'])->toArray();
+        }
+
         return $static->transformModel($modelOrCollection);
     }
 
@@ -39,6 +47,11 @@ abstract class AbstractTransformer
         if ($modelOrCollection instanceof Collection) {
             return $modelOrCollection->map([$static, 'transformModelAr'])->toArray();
         }
+
+        if ($modelOrCollection instanceof LengthAwarePaginator) {
+            return $modelOrCollection->map([$static, 'transformModelAr'])->toArray();
+        }
+
         return $static->transformModelAr($modelOrCollection);
     }
     /**
