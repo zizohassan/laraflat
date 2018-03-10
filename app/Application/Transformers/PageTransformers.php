@@ -11,9 +11,9 @@ class PageTransformers extends AbstractTransformer
     {
         return [
             "id" => $modelOrCollection->id,
-			"title" => getLangValue($modelOrCollection->title , "en"),
-			"body" => getLangValue($modelOrCollection->body , "en"),
-			"active" => $modelOrCollection->active
+			"title" => $modelOrCollection->title_en ,
+			"body" => $modelOrCollection->body_en,
+			"active" => (bool) $modelOrCollection->active
 
         ];
     }
@@ -22,9 +22,9 @@ class PageTransformers extends AbstractTransformer
     {
         return [
            "id" => $modelOrCollection->id,
-			"title" => getLangValue($modelOrCollection->title , "ar"),
-			"body" => getLangValue($modelOrCollection->body , "ar"),
-			"active" => $modelOrCollection->active
+            "title" => $modelOrCollection->title_ar ,
+            "body" => $modelOrCollection->body_ar,
+			"active" => (bool) $modelOrCollection->active
 
         ];
     }

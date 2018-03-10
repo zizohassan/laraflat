@@ -30,9 +30,9 @@ class UserApi extends Controller
 
     public function login(ApiLoginRequest $validation)
     {
-        $v = Validator::make($this->request->all(), $validation->rules());
-        if ($v->fails()) {
-            return response(apiReturn('' , 'error' , $v->errors())  , 200 );
+        $request = $this->validateRequest($validation);
+        if(!is_array($request)){
+            return $request;
         }
         if (! $token = auth()->attempt($this->request->only(['email' , 'password']))) {
            return response(apiReturn('' , 'error' , 'invalid_credentials')  , 200 );
@@ -44,22 +44,22 @@ class UserApi extends Controller
     }
 
     public function add(ApiAddRequestUser $validation){
-        $v = Validator::make($this->request->all(), $validation->rules());
-        if ($v->fails()) {
-            return response(apiReturn('' , 'error' , $v->errors())  , 200 );
+        $request = $this->validateRequest($validation);
+        if(!is_array($request)){
+            return $request;
         }
         $request = $this->request->all();
         $request['group_id'] = env('DEFAULT_GROUP');
         $request['password'] = bcrypt($this->request->password);
         $request['api_token'] = $this->generateToken();
         $data = $this->model->create(checkApiHaveImage($request));
-        return $this->checkLanguageBeforeReturn($data);
+        return $this->checkLanguageBeforeReturn($data , 201);
     }
 
     public function update(ApiUpdateRequestUser $validation){
-        $v = Validator::make($this->request->all(), $validation->updateValidation());
-        if ($v->fails()) {
-            return response(apiReturn('' , 'error' , $v->errors())  , 200 );
+        $request = $this->validateRequest($validation);
+        if(!is_array($request)){
+            return $request;
         }
         $user = auth()->guard('api')->user();
         $request = $this->request->all();
@@ -77,12 +77,12 @@ class UserApi extends Controller
        return str_random(60);
     }
 
-    protected function checkLanguageBeforeReturn($data)
+    protected function checkLanguageBeforeReturn($data , $status_code = 200,  $paginate = [])
     {
         if (request()->has('lang') && request()->get('lang') == 'ar') {
-            return response(apiReturn(UsersTransformers::transformAr($data)), 200);
+            return response(apiReturn(UsersTransformers::transformAr($data) + $paginate), $status_code);
         }
-        return response(apiReturn(UsersTransformers::transform($data)), 200);
+        return response(apiReturn(UsersTransformers::transform($data) + $paginate), $status_code);
     }
 
 }
