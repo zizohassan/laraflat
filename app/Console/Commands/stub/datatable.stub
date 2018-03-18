@@ -16,10 +16,11 @@ class DummyDatatable extends DataTable
     {
         return $this->datatables
              ->eloquent($this->query())
+              ->addColumn('id', 'admin.DummyModelSmall.buttons.id')
              ->addColumn('edit', 'admin.DummyModelSmall.buttons.edit')
              ->addColumn('delete', 'admin.DummyModelSmall.buttons.delete')
              ->addColumn('view', 'admin.DummyModelSmall.buttons.view')
-             ->addColumn('name', 'admin.DummyModelSmall.buttons.langcol')
+             /*->addColumn('name', 'admin.DummyModelSmall.buttons.langcol')*/
              ->make(true);
     }
     /**
@@ -30,6 +31,16 @@ class DummyDatatable extends DataTable
     public function query()
     {
         $query = DummyModel::query();
+
+        if(request()->has('from') && request()->get('from') != ''){
+            $query = $query->whereDate('created_at' , '>=' , request()->get('from'));
+        }
+
+        if(request()->has('to') && request()->get('to') != ''){
+            $query = $query->whereDate('created_at' , '<=' , request()->get('to'));
+        }
+
+DummyRequestFilter
 
         return $this->applyScopes($query);
     }

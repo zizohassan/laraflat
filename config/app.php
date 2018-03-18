@@ -184,6 +184,7 @@ return [
          Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         Themsaid\Langman\LangmanServiceProvider::class,
+        Chumper\Zipper\ZipperServiceProvider::class,
 
 
 
@@ -255,6 +256,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Links' => ConsoleTVs\Links\Facades\Links::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+        'Zipper' => Chumper\Zipper\Zipper::class,
 
 
 

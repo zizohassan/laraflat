@@ -41,4 +41,8 @@ class SettingController extends AbstractController
     public function destroy($id){
         return $this->deleteItem($id , 'admin/setting')->with('sucess' , 'Done Delete setting From system');
     }
+
+    public function pluck(\Illuminate\Http\Request $request){
+        return $this->deleteItem($request->id , 'admin/setting')->with('sucess' , 'Done Delete setting From system');
+    }
 }

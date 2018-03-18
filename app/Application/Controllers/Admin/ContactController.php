@@ -51,5 +51,9 @@ class ContactController extends AbstractController
         return $this->deleteItem($id , 'admin/contact')->with('sucess' , 'Done Delete contact From system');
     }
 
+    public function pluck(\Illuminate\Http\Request $request){
+        return $this->deleteItem($request->id , 'admin/contact')->with('sucess' , 'Done Delete contact From system');
+    }
+
 
 }

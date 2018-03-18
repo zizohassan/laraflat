@@ -51,4 +51,8 @@ class GroupController extends AbstractController
     public function destroy($id){
         return $this->deleteItem($id , 'admin/group')->with('sucess' , 'Done Delete group From system');
     }
+
+    public function pluck(\Illuminate\Http\Request $request){
+        return $this->deleteItem($request->id , 'admin/group')->with('sucess' , 'Done Delete group From system');
+    }
 }

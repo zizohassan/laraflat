@@ -10,16 +10,18 @@ class CategorieTransformers extends AbstractTransformer
     public function transformModel(Model $modelOrCollection)
     {
         return [
-            'id' => $modelOrCollection->id,
-            'name' => getLangValue($modelOrCollection->name , 'en'),
+            "id" => $modelOrCollection->id,
+			"title" => $modelOrCollection->title
+
         ];
     }
 
     public function transformModelAr(Model $modelOrCollection)
     {
         return [
-            'id' => $modelOrCollection->id,
-            'name' => getLangValue($modelOrCollection->name , 'ar'),
+           "id" => $modelOrCollection->id,
+			"title" => $modelOrCollection->title
+
         ];
     }
 

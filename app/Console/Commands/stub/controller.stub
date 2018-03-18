@@ -31,17 +31,21 @@ class DummyClass extends AbstractController
      }
 
      public function update($id , UpdateRequestDummyModel $request){
-          $item =  $this->storeOrUpdate($request , $id , true);
-          return redirect()->back();
+          DummyUpdateFunction
      }
 
 
     public function getById($id){
-        $fields = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
+        $fields = $this->model->findOrFail($id);
         return $this->createOrEdit('admin.DummyView.show' , $id , ['fields' =>  $fields]);
     }
 
     public function destroy($id){
         return $this->deleteItem($id , 'admin/DummyView')->with('sucess' , 'Done Delete DummyView From system');
     }
+
+    public function pluck(\Illuminate\Http\Request $request){
+        return $this->deleteItem($request->id , 'admin/DummyView')->with('sucess' , 'Done Delete DummyView From system');
+    }
+
 }

@@ -19,7 +19,7 @@
                 <td>{{ end($path) }}</td>
                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                     <td>
-                        <a href="{{ url('admin/translation/readFile/'.$localeCode.'_'.end($path)) }}">{{ trans('admin.Edit') }} </a>
+	                    <a href="{{ url('admin/translation/readFile/') }}/{{$localeCode.'_'.end($path) }}">{{ trans('admin.Edit') }} </a>
                     </td>
                 @endforeach
                 <td><a href="{{ url('admin/translation/getAllContent/'.end($path)) }}">{{ trans('admin.Edit All Language') }}</a></td>

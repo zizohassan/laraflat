@@ -1,6 +1,6 @@
 {
     "name": "laraflat/laraflat",
-    "description": "The easy laravel admin panel",
+    "description": "The easy laravel admin panel version 3.0.0",
     "keywords": ["adminpanel", "laravel" , "laraflat"],
     "license": "MIT",
     "type": "project",
@@ -18,7 +18,8 @@
         "mpociot/laravel-apidoc-generator": "^2.0",
         "themsaid/laravel-langman": "dev-master",
         "uxweb/sweet-alert": "^1.4",
-        "yajra/laravel-datatables-oracle": "~6.0"
+        "yajra/laravel-datatables-oracle": "~6.0",
+        "chumper/zipper": "1.0.x"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -45,7 +46,8 @@
             "app/Application/Helpers/adminTheme.php",
             "app/Application/Helpers/api.php",
             "app/Application/Helpers/website.php",
-            "app/Application/Helpers/controllers.php"
+            "app/Application/Helpers/controllers.php",
+            "app/Application/Helpers/widget.php"
         ]
     },
     "autoload-dev": {

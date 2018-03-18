@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 class UserApi extends Controller
 {
 
+    use ApiTrait;
     protected $request;
     protected $model;
 
@@ -26,54 +27,39 @@ class UserApi extends Controller
         $this->middleware('authApi')->only('update' , 'getUserByToken');
     }
 
-    public function index($limit = 10 , $offset = 0){
-       $data =  $this->model->limit($limit)->offset($offset)->get();
-        if($data){
-            return response(apiReturn(UsersTransformers::transform($data)) , 200 );
-        }
-        return response(apiReturn('' , '' , 'No Data Found')  , 200 );
-    }
-
-    public function getById($id){
-        $data =  $this->model->find($id);
-        if($data){
-            return response(apiReturn(UsersTransformers::transform($data)) , 200 );
-        }
-        return response(apiReturn('' , '' , 'No Data Found')  , 200 );
-    }
 
     public function login(ApiLoginRequest $validation)
     {
-        $v = Validator::make($this->request->all(), $validation->rules());
-        if ($v->fails()) {
-            return response(apiReturn('' , 'error' , $v->errors())  , 401 );
+        $request = $this->validateRequest($validation);
+        if(!is_array($request)){
+            return $request;
         }
         if (! $token = auth()->attempt($this->request->only(['email' , 'password']))) {
-           return response(apiReturn('' , 'error' , 'invalid_credentials')  , 401 );
+           return response(apiReturn('' , 'error' , 'invalid_credentials')  , 200 );
         }
         $user = $this->model->where('email' , $this->request->email)->first();
         $user->api_token = $this->generateToken();
         $user->save();
-        return response(apiReturn($user)  , 200 );
+        return $this->checkLanguageBeforeReturn($user);
     }
 
     public function add(ApiAddRequestUser $validation){
-        $v = Validator::make($this->request->all(), $validation->rules());
-        if ($v->fails()) {
-            return response(apiReturn('' , 'error' , $v->errors())  , 401 );
+        $request = $this->validateRequest($validation);
+        if(!is_array($request)){
+            return $request;
         }
         $request = $this->request->all();
         $request['group_id'] = env('DEFAULT_GROUP');
         $request['password'] = bcrypt($this->request->password);
         $request['api_token'] = $this->generateToken();
         $data = $this->model->create(checkApiHaveImage($request));
-        return response(apiReturn(UsersTransformers::transform($data))  , 200 );
+        return $this->checkLanguageBeforeReturn($data , 201);
     }
 
     public function update(ApiUpdateRequestUser $validation){
-        $v = Validator::make($this->request->all(), $validation->updateValidation());
-        if ($v->fails()) {
-            return response(apiReturn('' , 'error' , $v->errors())  , 401 );
+        $request = $this->validateRequest($validation);
+        if(!is_array($request)){
+            return $request;
         }
         $user = auth()->guard('api')->user();
         $request = $this->request->all();
@@ -87,13 +73,16 @@ class UserApi extends Controller
         return response(apiReturn(UsersTransformers::transform($user))  , 200 );
     }
 
-    public function delete($id){
-        $data = $this->model->find($id)->delete();
-        return response(apiReturn($data)  , 200 );
-    }
-
     public function generateToken(){
        return str_random(60);
+    }
+
+    protected function checkLanguageBeforeReturn($data , $status_code = 200,  $paginate = [])
+    {
+        if (request()->has('lang') && request()->get('lang') == 'ar') {
+            return response(apiReturn(UsersTransformers::transformAr($data) + $paginate), $status_code);
+        }
+        return response(apiReturn(UsersTransformers::transform($data) + $paginate), $status_code);
     }
 
 }

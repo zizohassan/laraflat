@@ -10,26 +10,22 @@ class PageTransformers extends AbstractTransformer
     public function transformModel(Model $modelOrCollection)
     {
         return [
-            'id' => $modelOrCollection->id,
-            'name' => getLangValue($modelOrCollection->title , 'en'),
-            'slug' => $modelOrCollection->slug,
-            'body' => getLangValue($modelOrCollection->body , 'en'),
-            'status' => $modelOrCollection->status,
-            'date' => $modelOrCollection->date,
-            'image' => url(env('UPLOAD_PATH').'/'.$modelOrCollection->image),
+            "id" => $modelOrCollection->id,
+			"title" => $modelOrCollection->title_en ,
+			"body" => $modelOrCollection->body_en,
+			"active" => (bool) $modelOrCollection->active
+
         ];
     }
 
     public function transformModelAr(Model $modelOrCollection)
     {
         return [
-            'id' => $modelOrCollection->id,
-            'name' => getLangValue($modelOrCollection->title , 'ar'),
-            'slug' => $modelOrCollection->slug,
-            'body' => getLangValue($modelOrCollection->body , 'ar'),
-            'status' => $modelOrCollection->status,
-            'date' => $modelOrCollection->date,
-            'image' => url(env('UPLOAD_PATH').'/'.$modelOrCollection->image),
+           "id" => $modelOrCollection->id,
+            "title" => $modelOrCollection->title_ar ,
+            "body" => $modelOrCollection->body_ar,
+			"active" => (bool) $modelOrCollection->active
+
         ];
     }
 

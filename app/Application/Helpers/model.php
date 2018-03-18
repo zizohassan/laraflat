@@ -4,12 +4,24 @@ function getAllTables(){
 }
 
 function getModels(){
-    $array  = getListOfFiles(app_path()."/Application/Model");
-    $array = removeFromArray($array , removeNotPermissionTable());
-    return rename_keys($array , $array);
+//    $array  = getListOfFiles(app_path()."/Application/Model");
+//    $array = removeFromArray($array , removeNotPermissionTable());
+//    return rename_keys($array , $array);
+        $array = [];
+        $models = \App\Application\Model\Command::where('command' ,'laraflat:admin_model')->plucK('name')->all();
+        foreach ($models as $model){
+            $array[mb_strtolower($model)] = mb_strtolower($model);
+        }
+        return $array + appendModelsArray();
+
 //    $array = array_map("getTableName" , getAllTables());
 //    $array = removeFromArray($array , removeNotPermissionTable());
 //    return rename_keys($array ,$array);
+}
+function appendModelsArray(){
+    return [
+       'user' => 'user'
+    ];
 }
 function removeNotPermissionTable(){
     return [

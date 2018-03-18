@@ -9,7 +9,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    {!! extractFiled('name' , null , $type = 'text' , 'ItemName') !!}
+                    {!! extractFiled(null,'name' , null , $type = 'text' , 'ItemName') !!}
 
                     <div class="form-group">
                         <div class="form-line">
@@ -19,6 +19,15 @@
                     <div class="form-group">
                         <div class="form-line">
                             <input type="text" name="icon" id="itemIcon" placeholder="{{ trans('menu.item_icon') }}" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-line">
+                           <div class="controller_path">
+
+                           </div>
+                            <span  onclick="addNewControllerPath()" class="btn btn-success"> <i class="fa fa-plus"></i></span>
+
                         </div>
                     </div>
                     <div class="form-group">

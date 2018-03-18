@@ -1,0 +1,3 @@
+
+#### DummyRoute Rate
+Route::post('DummyRoute/add/rate/{id}' , 'DummyController@addRate');

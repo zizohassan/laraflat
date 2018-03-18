@@ -10,7 +10,7 @@ class ApiUpdateRequestCategorie
     {
         $id = Route::input('id');
         return [
-            'name' => 'required'
+            "title.*" => "min:1|max:80|required",
         ];
     }
 }

@@ -43,12 +43,16 @@ class UserController extends AbstractController
     }
 
     public function getById($id){
-        $fields = $this->model->getConnection()->getSchemaBuilder()->getColumnListing($this->model->getTable());
+        $fields = $this->model->findOrFail($id);
         return $this->createOrEdit('admin.user.show' , $id , ['fields' =>  $fields]);
     }
 
     public function destroy($id){
         return $this->deleteItem($id , 'admin/user');
+    }
+
+    public function pluck(\Illuminate\Http\Request $request){
+        return $this->deleteItem($request->id , 'admin/user')->with('sucess' , 'Done Delete user From system');
     }
 
 }

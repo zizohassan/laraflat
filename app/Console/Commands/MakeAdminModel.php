@@ -45,21 +45,39 @@ class MakeAdminModel extends GeneratorCommand
         $this->call('laraflat:admin_controller', ['name' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
         $this->call('laraflat:controller', ['name' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
         $this->call('laraflat:api_controller', ['name' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
-//  $this->ImportMenuTable();
-//      $this->createModel();
-//        $this->makeRequest();
-//        $this->makeRequest('UpdateRequest');
-//      $this->addItemtoMenue();
-        // $this->createModel();
-//  $this->createMigration();
-//  $this->call('make:laraflat_request' , ['name' => class_basename($this->getNameInput())]);
-//  $this->createController();
-//  $this->createViews();
-//        $this->makeApiClass();
-//        $this->routeApi();
-//        $this->makeTransformer();
-        //        $this->createDataTable();
     }
+
+
+    protected function addlanguageFile()
+    {
+        $name = strtolower($this->getNameInput());
+        $locales = LaravelLocalization::getSupportedLocales();
+        foreach ($locales as $key => $locale) {
+            $this->line('Create  ' . $locale['name'] . ' Language file .');
+            $path = base_path('resources/lang/' . $key . '/' . $name . '.php');
+            $this->files->put($path, $this->buildlang($name, __DIR__ . '/stub/lang.stub'));
+        }
+        return 'Done';
+    }
+
+
+    protected function buildlang($name, $stub)
+    {
+        $stub = $this->files->get($stub);
+        return $this->replaceView($stub, 'DUMMYKEY', $name);
+    }
+
+
+    protected function replaceView(&$stub, $rep, $name)
+    {
+        $stub = str_replace(
+            [$rep],
+            $name,
+            $stub
+        );
+        return $stub;
+    }
+
 
 
     /*
@@ -136,24 +154,8 @@ class MakeAdminModel extends GeneratorCommand
     }
 
 
-    protected function addlanguageFile()
-    {
-        $name = strtolower($this->getNameInput());
-        $locales = LaravelLocalization::getSupportedLocales();
-        foreach ($locales as $key => $locale) {
-            $this->line('Create  ' . $locale['name'] . ' Language file .');
-            $path = base_path('resources/lang/' . $key . '/' . $name . '.php');
-            $this->files->put($path, $this->buildlang($name, __DIR__ . '/stub/lang.stub'));
-        }
-        return 'Done';
-    }
 
 
-    protected function buildlang($name, $stub)
-    {
-        $stub = $this->files->get($stub);
-        return $this->replaceView($stub, 'DUMMYKEY', $name);
-    }
 
 
     protected function buildDataTable($name, $nameDatatable, $stub)
@@ -280,15 +282,6 @@ class MakeAdminModel extends GeneratorCommand
         return $this->replaceView($stub, 'DummyView', $name);
     }
 
-    protected function replaceView(&$stub, $rep, $name)
-    {
-        $stub = str_replace(
-            [$rep],
-            $name,
-            $stub
-        );
-        return $stub;
-    }
 
     ////api
     protected function makeApiClass()
