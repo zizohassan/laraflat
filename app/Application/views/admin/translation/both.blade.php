@@ -10,7 +10,7 @@
         <div class="form-group">
             <input type="submit" name="submit" value="{{ trans('admin.Save') }}" class="btn btn-default" />
             <span class="btn btn-success" onclick="addNewRow()"><i class="fa fa-plus"></i></span>
-            <a class="btn btn-warning" href="{{url('admin/translation')}}"><i class="fa fa-arrow-circle-{{ getDirection() }}"></i></a>
+            <a class="btn btn-warning" href="{{ url('admin/translation') }}"><i class="fa fa-arrow-circle-{{ getDirection() }}"></i></a>
         </div>
         <table class="table table-bordered  table-striped">
             <tr>
@@ -40,7 +40,7 @@
         <div class="form-group">
             <input type="submit" name="submit" value="{{ trans('admin.Save') }}" class="btn btn-default" />
             <span class="btn btn-success" onclick="addNewRow()"><i class="fa fa-plus"></i></span>
-            <a class="btn btn-warning" href="{{url('admin/translation')}}"><i class="fa fa-arrow-circle-{{ getDirection() }}"></i></a>
+            <a class="btn btn-warning" href="{{ url('admin/translation') }}"><i class="fa fa-arrow-circle-{{ getDirection() }}"></i></a>
         </div>
     </form>
 @endsection
