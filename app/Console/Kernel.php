@@ -32,6 +32,7 @@ class Kernel extends ConsoleKernel
         Commands\RelationRollBack::class,
         Commands\AddComment::class,
         Commands\AddRate::class,
+        Commands\AddSeed::class,
     ];
 
 
