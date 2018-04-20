@@ -54,7 +54,7 @@
     function UpdateItem(){
         $(this).preventDefault;
         var data = $('.saveMenus').serialize();
-        $.post("{{ concatenateLangToUrl('admin/updateOneMenuItem/') }}/",data, function(result){
+        $.post("{{ concatenateLangToUrl('admin/updateOneMenuItem/') }}",data, function(result){
             showNotification('<strong>Saving</strong> You have been update this item!');
             $('#defaultModal').modal('hide');
         });
