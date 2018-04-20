@@ -1,0 +1,7 @@
+
+		$array = [
+			'name' => 'DummyName',
+			'options' => 'DummyOptions',
+			'command' => 'laraflat:admin_model',
+		];
+		\App\Application\Model\Command::create($array);
