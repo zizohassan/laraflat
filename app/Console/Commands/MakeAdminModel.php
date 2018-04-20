@@ -45,6 +45,7 @@ class MakeAdminModel extends GeneratorCommand
         $this->call('laraflat:admin_controller', ['name' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
         $this->call('laraflat:controller', ['name' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
         $this->call('laraflat:api_controller', ['name' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
+        $this->call('laraflat:add_seed', ['name' => 'CommandPage', '--model' => class_basename($this->getNameInput()), '--cols' => $this->option('cols')]);
     }
 
 
