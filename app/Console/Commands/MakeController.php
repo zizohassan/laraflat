@@ -30,6 +30,12 @@ class MakeController extends GeneratorCommand
 
     protected $cols = [];
 
+    //Color line 
+    public function colorize( $txt , $front = 'black' , $back='green')
+    {
+        $this->line( Colors::getColors()->getColoredString( $txt , $front , $back  ) );
+    }
+
     public function handle()
     {
         if ($this->option('cols')) {
@@ -119,7 +125,7 @@ class MakeController extends GeneratorCommand
         $controllerName = $this->getNameInput();
         $modelName = strtolower($this->getNameInput());
         $path = $this->getPath('Application\\Controllers\\Website\\' . $this->getNameInput() . 'Controller');
-        $this->line('Done create Controller at Application controller website ' . $this->getNameInput() . 'Controller .');
+        $this->colorize('Done create Controller at Application controller website ' . $this->getNameInput() . 'Controller .');
         $this->files->put($path, $this->buildClassController($name, $controllerName, $this->getStub(), $modelName));
 
     }
@@ -170,7 +176,7 @@ class MakeController extends GeneratorCommand
     {
         $name = strtolower($this->getNameInput());
         $path = $this->getPath('Application\\routes\\appendWebsite');
-        $this->line('Done append routes to route file at Application route  .');
+        $this->colorize('Done append routes to route file at Application route  .');
         $this->files->append($path, $this->websiteRoute($name, __DIR__ . '/stub/routeWebsite.stub'));
     }
 
@@ -205,7 +211,7 @@ class MakeController extends GeneratorCommand
     {
         $name = strtolower($this->getNameInput());
         $path = $this->getPath('Application\\views\\website\\' . strtolower($this->getNameInput()) . '\\' . $view . '.blade');
-        $this->line('Done create view at Application view website .');
+        $this->colorize('Done create view at Application view website .');
         if ($view == 'index') {
             $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/views/' . $view . '.stub', $this->renderTable($name)));
         } elseif ($view == 'edit') {
@@ -425,7 +431,7 @@ class MakeController extends GeneratorCommand
     {
         $name = strtolower($this->getNameInput());
         $path = $this->getPath('Application\\views\\website\\' . strtolower($this->getNameInput()) . '\\buttons\\' . $view . '.blade');
-        $this->line('Done create action button view at Application view website ' . $this->getNameInput() . 'button');
+        $this->colorize('Done create action button view at Application view website ' . $this->getNameInput() . 'button');
         $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/views/buttons/' . $view . '.stub'));
     }
 

@@ -34,6 +34,13 @@ class MakeAdminModel extends GeneratorCommand
      */
     protected $type = 'Model';
 
+
+    //Color line 
+    public function colorize( $txt , $front = 'black' , $back='green')
+    {
+        $this->line( Colors::getColors()->getColoredString( $txt , $front , $back  ) );
+    }
+
     /**
      * Execute the console command.
      *
@@ -53,7 +60,7 @@ class MakeAdminModel extends GeneratorCommand
         $name = strtolower($this->getNameInput());
         $locales = LaravelLocalization::getSupportedLocales();
         foreach ($locales as $key => $locale) {
-            $this->line('Create  ' . $locale['name'] . ' Language file .');
+            $this->colorize('Create  ' . $locale['name'] . ' Language file .'  ,'black','green');
             $path = base_path('resources/lang/' . $key . '/' . $name . '.php');
             $this->files->put($path, $this->buildlang($name, __DIR__ . '/stub/lang.stub'));
         }
@@ -100,7 +107,7 @@ class MakeAdminModel extends GeneratorCommand
             $file = __DIR__ . '/stub/updaterequest.stub';
         }
         $path = $this->getPath('Application\\Requests\\Admin\\' . $folderName . '\\' . $requestType . $name);
-        $this->line('Done create Request class  at Application   ' . $requestType . $this->getNameInput());
+        $this->colorize('Done create Request class  at Application   ' . $requestType . $this->getNameInput() , 'black','green');
         $this->files->put($path, $this->buildRequest($name, 'Admin\\' . $folderName, $file));
     }
 
