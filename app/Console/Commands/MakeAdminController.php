@@ -30,6 +30,12 @@ class MakeAdminController extends GeneratorCommand
 
     protected $cols = [];
 
+    //Color line 
+    public function colorize( $txt , $front = 'black' , $back='green')
+    {
+        $this->line( Colors::getColors()->getColoredString( $txt , $front , $back  ) );
+    }
+
     public function handle()
     {
 
@@ -81,7 +87,7 @@ class MakeAdminController extends GeneratorCommand
         $modelName = $this->getNameInput();
         $viewName = strtolower($this->getNameInput());
         $path = $this->getPath('Application\\Controllers\\Admin\\' . $this->getNameInput() . 'Controller');
-        $this->line('Done create Controller  at Application controller admin ' . $this->getNameInput() . 'Controller .');
+        $this->colorize('Done create Controller  at Application controller admin ' . $this->getNameInput() . 'Controller .');
         $this->files->put($path, $this->buildClassController($name, $controllerName, $dataTableName, $modelName, $viewName, __DIR__ . '/stub/controller.stub'));
 
     }
@@ -126,7 +132,7 @@ class MakeAdminController extends GeneratorCommand
     {
         $name = strtolower($this->getNameInput());
         $path = $this->getPath('Application\\views\\admin\\' . strtolower($this->getNameInput()) . '\\' . $view . '.blade');
-        $this->line('Done create view at Application view admin .');
+        $this->colorize('Done create view at Application view admin .');
         if ($view == 'index') {
             $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/adminViews/' . $view . '.stub' , $this->buildFilterForms() , 'index'));
         } elseif ($view == 'edit') {
@@ -201,7 +207,7 @@ class MakeAdminController extends GeneratorCommand
     {
         $name = strtolower($this->getNameInput());
         $path = $this->getPath('Application\\views\\admin\\' . strtolower($this->getNameInput()) . '\\buttons\\' . $view . '.blade');
-        $this->line('Done create action button view at Application view admin ' . $this->getNameInput() . ' button');
+        $this->colorize('Done create action button view at Application view admin ' . $this->getNameInput() . ' button');
         $this->files->put($path, $this->buildView($name, __DIR__ . '/stub/adminViews/buttons/' . $view . '.stub'));
     }
 
@@ -389,7 +395,7 @@ class MakeAdminController extends GeneratorCommand
         $name = $this->getNameInput();
         $this->insertItem($name, 1, '/admin/' . strtolower($name));
         $this->insertItem($name, 3, strtolower($name), '<i class="fa fa-plus-square-o" aria-hidden="true"></i> ');
-        $this->line('Done Add Item to menu table  .');
+        $this->colorize('Done Add Item to menu table  .');
     }
 
     protected function insertItem($name, $menu_id, $link, $icon = '<i class="material-icons">control_point</i>')
@@ -434,7 +440,7 @@ class MakeAdminController extends GeneratorCommand
     {
         $name = strtolower($this->getNameInput());
         $path = $this->getPath('Application\\routes\\admin');
-        $this->line('Done append routes to route file at Application route  admin .');
+        $this->colorize('Done append routes to route file at Application route  admin .');
         $this->files->append($path, $this->buildRoute($name, __DIR__ . '/stub/routes.stub'));
     }
 
