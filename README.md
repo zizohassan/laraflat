@@ -15,10 +15,6 @@ Can't write image data to path <a href="https://5dmat-web.com/ar/video/939/%D8%A
 
 for give project more work time
 
-## in egypt
-
-    - Etisalat flous `0201157764977`
-    - Vodafone Cash `0201017932113`
 
 ## outside egypt
 
